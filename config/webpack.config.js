@@ -109,7 +109,7 @@ const config = {
                 })
             },
             {
-                test: /\.scss$/,
+                test: /\.less$/,
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: [
@@ -131,7 +131,7 @@ const config = {
                             }
                         },
                         {
-                            loader: 'sass-loader',
+                            loader: 'less-loader',
                             options: {
                                 sourceMap: isDev
                                
