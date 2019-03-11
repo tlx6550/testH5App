@@ -1,0 +1,34 @@
+.btn-warning {
+    .tap-color(@btn-warning-bg);
+    color: @btn-default-color;
+  }
+.btn-primary {
+    .tap-color(@btn-primary-bg);
+    color: @btn-default-color;
+  }
+
+  .btn-disabled {
+    background-color: #CCC;
+    color: #F0F0F0;
+    pointer-events: none;
+}  
+  .btn-danger {
+   .tap-color(@btn-danger-bg);
+    color: @btn-default-color;
+  }    
+  .btn-variant() {
+    text-align: center;
+    position: relative;
+    border: none;
+    pointer-events: auto;
+  }
+  
+  .btn {
+    .btn-variant();
+    height: @btn-height;
+    line-height: @btn-height;
+    font-size: @btn-fontsize;
+    display: inline-block;
+    padding: 0 .2rem;
+    border-radius: .1rem;
+  }

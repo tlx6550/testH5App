@@ -171,7 +171,7 @@ import $ from '../../assets/js/jquery.min.js';
  * Dialog
  */
 !function (window, ydui) {
-    "use strict";
+    'use strict';
 
     var dialog = ydui.dialog = ydui.dialog || {},
         $body = $(window.document.body);
@@ -183,7 +183,7 @@ import $ from '../../assets/js/jquery.min.js';
      * @param opts  按钮们Array 或 “确定按钮”回调函数Function 【必填】
      * @constructor
      */
-    dialog.confirm = function (title, mes, opts) {
+    dialog.confirmSour = function (title, mes, opts) {
         var ID = 'YDUI_CONFRIM';
 
         $('#' + ID).remove();
@@ -194,7 +194,7 @@ import $ from '../../assets/js/jquery.min.js';
             return;
         }
 
-        if (typeof arguments[1] != 'function' && args == 2 && !arguments[1] instanceof Array) {
+        if (typeof arguments[1] != 'function' && args == 2 && !(arguments[1] instanceof Array)) {
             console.error('From YDUI\'s confirm: The second parameter must be a function or array!!!');
             return;
         }
@@ -263,7 +263,87 @@ import $ from '../../assets/js/jquery.min.js';
 
         $body.append($dom);
     };
+    dialog.confirm = function (title, mes, opts) {
+        var ID = 'YDUI_CONFRIM';
 
+        $('#' + ID).remove();
+
+        var args = arguments.length;
+        if (args < 2) {
+            console.error('From YDUI\'s confirm: Please set two or three parameters!!!');
+            return;
+        }
+
+        if (typeof arguments[1] != 'function' && args == 2 && !(arguments[1] instanceof Array)) {
+            console.error('From YDUI\'s confirm: The second parameter must be a function or array!!!');
+            return;
+        }
+
+        if (args == 2) {
+            opts = mes;
+            mes = title;
+            title = '提示';
+        }
+
+        var btnArr = opts;
+        if (typeof opts === 'function') {
+            btnArr = [{
+                txt: '取消',
+                color: false
+            }, {
+                txt: '确定',
+                color: true,
+                callback: function () {
+                    opts && opts();
+                }
+            }];
+        }
+
+        var $dom = $('' +
+            '<div class="mask-black-dialog" id="' + ID + '">' +
+            '   <div class="m-confirm">' +
+            '       <div class="confirm-hd">' +
+            '<strong class="confirm-title">' + title + '</strong></div>' +
+            '       <div class="confirm-bd">' + mes + '</div>' +
+            '   </div>' +
+            '</div>');
+
+        // 遍历按钮数组
+        var $btnBox = $('<div class="confirm-ft"></div>');
+
+        $.each(btnArr, function (i, val) {
+            var $btn;
+            // 指定按钮颜色
+            if (typeof val.color == 'boolean') {
+                $btn = $('<a href="javascript:;" class="' + 'confirm-btn ' + (val.color ? 'primary' : 'default') + '">' + (val.txt || '') + '</a>');
+            } else if (typeof val.color == 'string') {
+                $btn = $('<a href="javascript:;" style="color: ' + val.color + '">' + (val.txt || '') + '</a>');
+            }
+
+            // 给对应按钮添加点击事件
+            (function (p) {
+                $btn.on('click', function (e) {
+                    e.stopPropagation();
+
+                    // 是否保留弹窗
+                    if (!btnArr[p].stay) {
+                        // 释放页面滚动
+                        ydui.util.pageScroll.unlock();
+                        $dom.remove();
+                    }
+                    btnArr[p].callback && btnArr[p].callback();
+                });
+            })(i);
+            $btnBox.append($btn);
+        });
+
+        $dom.find('.m-confirm').append($btnBox);
+
+        // 禁止滚动屏幕【移动端】
+        ydui.util.pageScroll.lock();
+
+        $body.append($dom);
+    };
     /**
      * 弹出警示框
      * @param mes       提示文字String 【必填】
@@ -297,7 +377,34 @@ import $ from '../../assets/js/jquery.min.js';
             typeof callback === 'function' && callback();
         });
     };
+    dialog.alert = function (mes, callback) {
 
+        var ID = 'YDUI_ALERT';
+
+        $('#' + ID).remove();
+
+        var $dom = $('' +
+            '<div id="' + ID + '">' +
+            '   <div class="mask-black-dialog">' +
+            '       <div class="m-confirm m-alert">' +
+            '           <div class="confirm-bd">' + (mes || 'YDUI Touch') + '</div>' +
+            '           <div class="confirm-ft">' +
+            '               <a href="javascript:;" class="confirm-btn primary">确定</a>' +
+            '           </div>' +
+            '       </div>' +
+            '   </div>' +
+            '</div>');
+
+        ydui.util.pageScroll.lock();
+
+        $body.append($dom);
+
+        $dom.find('a').on('click', function () {
+            $dom.remove();
+            ydui.util.pageScroll.unlock();
+            typeof callback === 'function' && callback();
+        });
+    };
     /**
      * 弹出提示层
      */
@@ -349,7 +456,7 @@ import $ from '../../assets/js/jquery.min.js';
                 ydui.util.pageScroll.unlock();
                 $dom.remove();
                 typeof callback === 'function' && callback();
-            }, (~~timeout || 2000) + 100);//100为动画时间
+            }, (~~timeout || 2000) + 100);// 100为动画时间
         };
     }();
 
@@ -394,7 +501,7 @@ import $ from '../../assets/js/jquery.min.js';
             if (~~timeout > 0) {
                 timer = setTimeout(closeNotify, timeout + 200);
             }
-        }
+        };
     }();
 
     /**
@@ -433,3 +540,83 @@ import $ from '../../assets/js/jquery.min.js';
         };
     }();
 }(window, YDUI);
+/**
+ * SendCode Plugin
+ */
+!function () {
+    'use strict';
+
+    function SendCode (element, options) {
+        this.$btn = $(element);
+        this.options = $.extend({}, SendCode.DEFAULTS, options || {});
+    }
+
+    SendCode.DEFAULTS = {
+        run: false, // 是否自动倒计时
+        secs: 60, // 倒计时时长（秒）
+        disClass: '', // 禁用按钮样式
+        runStr: '{%s}秒后重新获取', // 倒计时显示文本
+        resetStr: '重新获取验证码' // 倒计时结束后按钮显示文本
+    };
+
+    SendCode.timer = null;
+
+    /**
+     * 开始倒计时
+     */
+    SendCode.prototype.start = function () {
+        var _this = this,
+            options = _this.options,
+            secs = options.secs;
+
+        _this.$btn.html(_this.getStr(secs)).css('pointer-events', 'none').addClass(options.disClass);
+
+        _this.timer = setInterval(function () {
+            secs--;
+            _this.$btn.html(_this.getStr(secs));
+            if (secs <= 0) {
+                _this.resetBtn();
+                clearInterval(_this.timer);
+            }
+        }, 1000);
+    };
+
+    /**
+     * 获取倒计时显示文本
+     * @param secs
+     * @returns {string}
+     */
+    SendCode.prototype.getStr = function (secs) {
+        return this.options.runStr.replace(/\{([^{]*?)%s(.*?)\}/g, secs);
+    };
+
+    /**
+     * 重置按钮
+     */
+    SendCode.prototype.resetBtn = function () {
+        var _this = this,
+            options = _this.options;
+        _this.$btn.html(options.resetStr).css('pointer-events', 'auto').removeClass(options.disClass);
+    };
+
+    function Plugin (option) {
+        var args = Array.prototype.slice.call(arguments, 1);
+        return this.each(function () {
+            var $this = $(this),
+                sendcode = $this.data('ydui.sendcode');
+                
+            if (!sendcode) {
+                $this.data('ydui.sendcode', (sendcode = new SendCode(this, option)));
+                if (typeof option == 'object' && option.run) {
+                    sendcode.start();
+                }
+            }
+           
+            if (typeof option == 'string') {
+                sendcode[option] && sendcode[option].apply(sendcode, args);
+            }
+        });
+    }
+
+    $.fn.sendCode = Plugin;
+}();
