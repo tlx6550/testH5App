@@ -1,5 +1,6 @@
 @import "./components/dialog.less";
 @import "./components/button.less";
+@import "./components/swiper.min.css";
 .line-clamp(@line: 2, @line-height: .38rem) {
   overflow: hidden;
   display: -webkit-box;
@@ -114,8 +115,10 @@
         .line-clamp(2,0.6rem);
         line-height:normal;
         margin:.3rem 0;
+        text-align: left;
       }
       .sub-title{
+        text-align: left;
         font-size: 0;
         color:#999999;
       }
@@ -172,4 +175,97 @@
     background: url("../img/reflesh.png")no-repeat;
     background-size: cover;
   }
+}
+// tab
+.tab-pannel-wrap {
+top: 1.84rem;
+bottom: 0;
+left: 0;
+right: 0;
+overflow: hidden;
+}
+.tab-header {
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: space-around;
+position: relative;
+box-shadow:0.02rem -0.03rem 0.2rem rgba(153, 153, 153, 0.4);
+background: #fff;
+width: 100%;
+height: 1.42rem;
+font-size: .42rem;
+border-top-left-radius: .2rem;
+border-top-right-radius: .2rem;
+overflow: hidden;
+& div{
+  line-height: 1.42rem;
+  height: 100%;
+}
+.active{
+  display: flex;
+  position: relative;
+  color:#2e7ff7;
+  font-weight: 800;
+  &::before{
+    content: '';
+    width: .74rem;
+    height: .07rem;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    //margin-left: -35%;
+    transform: translate(-50%);
+    z-index: 4;
+    background-color:rgba(128, 76, 250, 1);;
+    border-radius: .2rem;
+  }
+}
+}
+.header:after {
+content: "";
+position: absolute;
+left: 0;
+right: 0;
+bottom: 0;
+height: 1px;
+transform: scaleY(0.5);
+border-bottom: 1px solid #333;
+}
+
+.bar {
+position: absolute;
+width: .74rem;
+height: .07rem;
+border-radius: .04rem;
+background-color: rgba(128, 76, 250, 1);
+left: 0;
+bottom: 0;
+}
+// .swiper-container {
+//   width: 100%;
+//   height: 100%;
+// }
+// .swiper-slide {
+//   text-align: center;
+//   font-size: 18px;
+//   background: #fff;
+
+//   /* Center slide text vertically */
+//   display: -webkit-box;
+//   display: -ms-flexbox;
+//   display: -webkit-flex;
+//   display: flex;
+//   -webkit-box-pack: center;
+//   -ms-flex-pack: center;
+//   -webkit-justify-content: center;
+//   justify-content: center;
+//   -webkit-box-align: center;
+//   -ms-flex-align: center;
+//   -webkit-align-items: center;
+//   align-items: center;
+// }
+.flexiframe{
+  position:relative;
+  z-index:-1;
 }

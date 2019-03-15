@@ -6,6 +6,9 @@ import $ from '../assets/js/jquery.min.js';
 /* import  '../assets/js/mmapp.js'; */
 import '../assets/js/flexible.js';
 import '../components/dialog/dialog.js';
+import Fmover from '../assets/js/finger-mover.js';
+import fmoverSlideX from '../assets/js/fmover-slide-x.js';
+import swiper from '../assets/js/swiper.min.js';
 // app download
 
 /* import '../js/mmdl.js';
@@ -76,6 +79,53 @@ import '../js/mmapp.js'; */
         }, 500);
     });
 }(window);
+!function (window) {
+    // tabl逻辑
+    var $header = $('.tab-header');
+    var headers = Array.prototype.slice.call(document.querySelectorAll('.tab-header div'));
+    var mySwiper = new Swiper('.out-webview-container', {
+        observer: true,//修改swiper自己或子元素时，自动初始化swiper
+        observeParents: true,//修改swiper的父元素时，自动初始化swiper
+        onSlideChangeEnd: function (swiper) {
+            // 切换结束时，告诉我现在是第几个slide
+            var index = swiper.activeIndex;
+            $header.children('div').removeClass('active');
+            $header.children('div').eq(index).addClass('active');
+        }
+    });
+    var innerBannerSwiper = new Swiper('.inner-swiper', {
+        loop: true,
+        autoplay : 1000,
+        speed:1100,
+    });
+    headers.forEach(function (o, i) {
+        o.addEventListener('touchend', function () {
+            console.log(i);
+            var index = i;
+            $header.children('div').removeClass('active');
+            $header.children('div').eq(index).addClass('active');
+            mySwiper.slideTo(index);
+        });
+    });
+    !function initIframH(){
+        var bodyH = document.body.clientHeight;
+        var headerH = $('.tab-header').height()
+        var iframH = Math.floor(bodyH-headerH)
+        $('.flexiframe').css('height',iframH + 'px')
+    }()
+    $(".flexiframe").on("touchstart", function(e) {
+        // 判断默认行为是否可以被禁用
+        if (e.cancelable) {
+            // 判断默认行为是否已经被禁用
+            if (!e.defaultPrevented) {
+                e.preventDefault();
+            }
+        }   
+        startX = e.originalEvent.changedTouches[0].pageX,
+        startY = e.originalEvent.changedTouches[0].pageY;
+        console.log(startX)
+    });
 
+}(window);
 
 
