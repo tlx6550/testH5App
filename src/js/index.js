@@ -29,7 +29,7 @@ import '../js/mmapp.js'; */
     /* 普通确认框 */
     var dialog = window.YDUI.dialog;
     // title 没有就不传
-    // dialog.confirm('', '您（13911111111）已订购免费5G流量包，无需重复订购', [
+    // dialog.confirm('', '您已成功提交MM任我装流浪包订购申请，成功受理信息请以中国移动下发短信为准，目前由于订购用户较多，短信可能有延时，请耐心等待。', [
     //     {
     //         txt: '确定',
     //         color: false, /* false:黑色  true:绿色 或 使用颜色值 */
@@ -42,8 +42,8 @@ import '../js/mmapp.js'; */
     // setTimeout(function(){
     //     $('#YDUI_CONFRIM').remove();
     // },5000)
-    $('.mflq-btn').click(function () {
-        dialog.confirm('抱歉，订购失败', '抱歉，因网络原因<br/>您本次订购出现错误，请重新领取。', [
+    $('.lklq-btn').click(function () {
+        dialog.confirm('', '抱歉，因网络原因<br/>您本次订购出现错误，请重新领取。', [
             {
                 txt: '确定',
                 color: false, /* false:黑色  true:绿色 或 使用颜色值 */
