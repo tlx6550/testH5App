@@ -48,12 +48,29 @@
 .confirm-hd {
   position: relative;
   text-align: center;
-  padding: .4rem .4rem .2rem .4rem;
+}
+
+.confirm-hd .confirm-title {
+  display: inline-block;
+  margin-bottom: .2rem;
+  font-weight: normal;
+  color: @btn-primary-bg;
+  word-break: break-all;
+}
+.confirm-bd {
+  position: relative;
+  margin-top: .1rem;
+  text-align: center;
+  padding: 0 20px;
+  font-size: 14px;
+  color: #888;
+  line-height: 20px;
+  word-break: break-all;
   &:after{
     content: '';
     position: absolute;
     z-index: 0;
-    top: 1.1rem;
+    bottom: -.2rem;
     left: 0;
     width: 100%;
     height: 1px;
@@ -65,23 +82,6 @@
   }
 }
 
-.confirm-hd .confirm-title {
-  display: inline-block;
-  margin-bottom: .2rem;
-  font-weight: normal;
-  color: @btn-primary-bg;
-  word-break: break-all;
-}
-.confirm-bd {
-  margin-top: .1rem;
-  text-align: center;
-  padding: 0 20px;
-  font-size: 14px;
-  color: #888;
-  line-height: 20px;
-  word-break: break-all;
-}
-
 .confirm-ft {
   position: relative;
   line-height: 40px;
@@ -91,7 +91,8 @@
   display: -ms-flexbox;
   display: flex;
   justify-content: center;
-  padding-bottom: .4rem;
+  padding-bottom: .3rem;
+  padding-top: .1rem;
 }
 
 .confirm-ft > a {
@@ -102,7 +103,7 @@
   width: 2rem;
   height: .6rem;
   line-height: .6rem;
-  background: @btn-primary-bg;
+  background: #22beff;
   border-radius: .2rem;
   color:#fff;
 }

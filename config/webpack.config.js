@@ -73,6 +73,7 @@ const config = {
         'index': './js/index.js',
         'myPrize': './js/myPrize.js',
         'rules': './js/rules.js',
+        'share': './js/index.js',
     },
     output: {
         filename: isDev ? '[name].js' : '[name].js',
@@ -205,6 +206,12 @@ const config = {
                 chunks: ['rules'],
                 template: './rules.html',
                 filename: 'rules.html'
+            }
+        ),
+        new HtmlWebpackPlugin({
+                chunks: ['share'],
+                template: './share.html',
+                filename: 'share.html'
             }
         ),
         new LodashModuleReplacementPlugin,
