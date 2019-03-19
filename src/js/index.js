@@ -96,6 +96,7 @@ import '../js/mmapp.js'; */
     var innerBannerSwiper = new Swiper('.inner-swiper', {
         loop: true,
         autoplay : 1000,
+        autoplayDisableOnInteraction : false,
         speed:1100,
     });
     headers.forEach(function (o, i) {
@@ -113,18 +114,52 @@ import '../js/mmapp.js'; */
         var iframH = Math.floor(bodyH-headerH)
         $('.flexiframe').css('height',iframH + 'px')
     }()
-    $(".flexiframe").on("touchstart", function(e) {
-        // 判断默认行为是否可以被禁用
-        if (e.cancelable) {
-            // 判断默认行为是否已经被禁用
-            if (!e.defaultPrevented) {
-                e.preventDefault();
-            }
-        }   
-        startX = e.originalEvent.changedTouches[0].pageX,
-        startY = e.originalEvent.changedTouches[0].pageY;
-        console.log(startX)
-    });
+    // var startX,startY,moveEndX,moveEndY,X,Y;
+    // $("body").on("touchstart", function(e) {
+    //     // 判断默认行为是否可以被禁用
+    //     if (e.cancelable) {
+    //         // 判断默认行为是否已经被禁用
+    //         if (!e.defaultPrevented) {
+    //             e.preventDefault();
+    //         }
+    //     }   
+    //     startX = e.originalEvent.changedTouches[0].pageX;
+    //     startY = e.originalEvent.changedTouches[0].pageY;
+    // });
+    // $("body").on("touchend", function(e) {         
+    //     // 判断默认行为是否可以被禁用
+    //     if (e.cancelable) {
+    //         // 判断默认行为是否已经被禁用
+    //         if (!e.defaultPrevented) {
+    //             e.preventDefault();
+    //         }
+    //     }               
+    //     moveEndX = e.originalEvent.changedTouches[0].pageX,
+    //     moveEndY = e.originalEvent.changedTouches[0].pageY,
+    //     X = moveEndX - startX,
+    //     Y = moveEndY - startY;
+    //     //左滑
+    //     if ( X > 0 ) {
+    //         alert('左滑');                
+    //     }
+    //     //右滑
+    //     else if ( X < 0 ) {
+    //         alert('右滑');    
+    //     }
+    //     //下滑
+    //     else if ( Y > 0) {
+    //         alert('下滑');    
+    //     }
+    //     //上滑
+    //     else if ( Y < 0 ) {
+    //         alert('上滑');    
+    //     }
+    //     //单击
+    //     else{
+    //         alert('单击');    
+    //     }
+    // });
+
 
 }(window);
 
