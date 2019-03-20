@@ -95,8 +95,8 @@ import '../js/mmapp.js'; */
         loop: true,
         autoplay : 4000,
         autoplayDisableOnInteraction : false,
-        spaceBetween: 10,
-        slidesPerView: 1.2,
+        spaceBetween: 8,
+        slidesPerView: 1.15,
         centeredSlides: true,
         onSlideChangeEnd: function(swiper) {
             var index = swiper.activeIndex;
