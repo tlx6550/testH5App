@@ -93,12 +93,27 @@ import '../js/mmapp.js'; */
     });
     var innerBannerSwiper = new Swiper('.inner-swiper', {
         loop: true,
-        autoplay : 1000,
+        autoplay : 4000,
         autoplayDisableOnInteraction : false,
-        speed:1100,
         spaceBetween: 10,
         slidesPerView: 1.2,
         centeredSlides: true,
+        onSlideChangeEnd: function(swiper) {
+            var index = swiper.activeIndex;
+            var len = $('.inner-swiper .banner-wrap').length;
+            console.log(len)
+            if(index == 0) {  // 如果是第一张，就滑动到第二张
+                innerBannerSwiper.slideTo(1, 250); // 滑动时间250毫秒
+            }
+            if(index == len-2){   // 如果是倒数第二张，就回到第二张
+                setTimeout(function(){
+                    innerBannerSwiper.slideTo(1,250);   
+                },4000);
+            }
+            if(index== len-1){  // 如果是倒数第一张，就回到倒数第二张
+                innerBannerSwiper.slideTo(len-2,250);   
+            }
+        }
     });
     headers.forEach(function (o, i) {
         o.addEventListener('touchend', function () {
