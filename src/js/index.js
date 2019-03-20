@@ -6,8 +6,6 @@ import $ from '../assets/js/jquery.min.js';
 /* import  '../assets/js/mmapp.js'; */
 import '../assets/js/flexible.js';
 import '../components/dialog/dialog.js';
-import Fmover from '../assets/js/finger-mover.js';
-import fmoverSlideX from '../assets/js/fmover-slide-x.js';
 import swiper from '../assets/js/swiper.min.js';
 // app download
 
@@ -84,8 +82,8 @@ import '../js/mmapp.js'; */
     var $header = $('.tab-header');
     var headers = Array.prototype.slice.call(document.querySelectorAll('.tab-header div'));
     var mySwiper = new Swiper('.out-webview-container', {
-        observer: true,//修改swiper自己或子元素时，自动初始化swiper
-        observeParents: true,//修改swiper的父元素时，自动初始化swiper
+        observer: true,// 修改swiper自己或子元素时，自动初始化swiper
+        observeParents: true,// 修改swiper的父元素时，自动初始化swiper
         onSlideChangeEnd: function (swiper) {
             // 切换结束时，告诉我现在是第几个slide
             var index = swiper.activeIndex;
@@ -98,6 +96,9 @@ import '../js/mmapp.js'; */
         autoplay : 1000,
         autoplayDisableOnInteraction : false,
         speed:1100,
+        spaceBetween: 10,
+        slidesPerView: 1.2,
+        centeredSlides: true,
     });
     headers.forEach(function (o, i) {
         o.addEventListener('touchend', function () {
@@ -110,10 +111,10 @@ import '../js/mmapp.js'; */
     });
     !function initIframH(){
         var bodyH = document.body.clientHeight;
-        var headerH = $('.tab-header').height()
-        var iframH = Math.floor(bodyH-headerH)
-        $('.flexiframe').css('height',iframH + 'px')
-    }()
+        var headerH = $('.tab-header').height();
+        var iframH = Math.floor(bodyH-headerH);
+        $('.flexiframe').css('height',iframH + 'px');
+    }();
     // var startX,startY,moveEndX,moveEndY,X,Y;
     // $("body").on("touchstart", function(e) {
     //     // 判断默认行为是否可以被禁用
