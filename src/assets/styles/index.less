@@ -172,166 +172,17 @@
       color: #6759ce;
     }
   }
+  .rule-prize-detail-2{
+    margin-top: .5rem;
+  }
+  .rule-prize-detail{
+    margin-top: 0;
+  }
 }
-.app-list-wrap{
+.rule-prize-content{
   padding-top: .3rem;
-  background-color: #fff;
-  font-size: 0;
-  .head{
-    position: relative;
-    text-align: center;
-    .title{
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate3d(-50%,-50%,0);
-      font-size: .28rem;
-      color:#323232;
-      font-weight: bold;
-    }
-  }
-  .title-bg{
-    height: .24rem;
-    width:100%;
-  }
-  .app-box{
-    display: flex;
-    background-color: #fff;
-    padding: .35rem .75rem;
-  }
-  .app-item{
-    flex: 1;
-    text-align: center;
-  }
-  .app-text{
-    margin-top: .15rem;
-    color:#666666;
-    font-size: .18rem;
-  }
-  .app-icon{
-    width: .8rem;
-    height: .8rem;
-  }
 }
-.user-section{
-  margin-top: @gap-height;
-  background-color: #fff;
-  padding:.4rem .6rem;
-  .phone-wrap{
-    height: 1rem;
-  }
-  .el-input{
-    display: flex;
-    justify-content: space-around;
-    .phone{
-      white-space: nowrap;
-      font-size: .32rem;
-      color:#666666;
-     
-    }
-    .phone-number{
-      position: relative;
-      min-width: 2rem;
-      min-height: .42rem;
-      font-size: .48rem;
-      color:@btn-danger-bg;
-    }
-    .renzheng{
-      position: absolute;
-      right: 0;
-      font-size: .2rem;
-      padding:0.05rem;
-      white-space: nowrap;
-      color:#bdbdbd;
-      border:1px solid #e5e5e5;
-    }
-    .qiehuan{
-      position: relative;
-      font-weight: bold;
-      font-size: .32rem;
-      color:@btn-primary-bg;
-      &::after{
-        position: absolute;
-        content: '';
-        width: 100%;
-        height: .01rem;
-        border-bottom:1px solid @btn-primary-bg;
-      }
-    }
-    .error{
-      padding:.1rem 0;
-      color:red;
-    }
-  }
-  .btn{
-    flex: 0 1 2.5rem;
-    width: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content:center;
-    .icon{
-      display: inline-block;
-      width: .27rem;
-      height: .27rem;
-      margin-right: .1rem;
-      background: url(../img/right-icon.png)no-repeat;
-      background-size: cover;
-    }
-  }
-  .el-input-inner{
-    flex: 1
-  }
-  .bt-wrap{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    .btn{
-      flex: 0 1 4rem;
-    }
 
-  }
-  .mflq-btn{
-    margin-top: .2rem;
-    width: 4rem;
-  }
-}
-.el-input{
-  .el-input-inner{
-    -webkit-appearance: none;
-    background-color: #fff;
-    background-image: none;
-    border: 1px solid #dcdfe6;
-    box-sizing: border-box;
-    color: #606266;
-    display: inline-block;
-    font-size: inherit;
-    height: @btn-height;
-    line-height: @btn-height;
-    outline: none;
-    padding: 0 15px;
-    border-radius: .1rem;
-    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-    width: 100%;
-    margin-right: .18rem;
-    &:focus {
-      outline: none;
-      border-color: #409eff;
-  }
-  }
-  .yanzheng-code{
-    margin-top: .2rem;
-    margin-right: 0;
-  }
-}
-.orange{
-  color:@btn-danger-bg;
-  font-weight: bold;
-}
-.tab-settion{
-  text-align: center;
-  margin: @gap-height 0;
-  color: @btn-primary-bg;
-}
 .rule-detail{
   background-color: #fff;
   padding:.45rem .6rem;
@@ -357,5 +208,51 @@
     margin-top: .5rem;
     font-size: .28rem;
     color:#666666;
+  }
+}
+.rule-prize-detail{
+  padding: 0.3rem 0.2rem;
+  .my-prize-wrap {
+    padding: .4rem 0 0 0;
+    .prize-box {
+      border: 1px solid #61aeef;
+      border-bottom: none;
+   }
+   .head {
+    display: flex;
+    background-color: #61aeef;
+    font-size: .24rem;
+    color: #fff;
+    padding: .2rem;
+    .item{
+      flex: 1;
+    }
+}
+
+}
+.prize-content {
+  display: flex;
+  background-color: #ebebff;
+  font-size: .24rem;
+  border-bottom: 1px solid #61aeef;
+  color: #6759ce;
+  padding: .2rem;
+  .item {
+    flex: 1;
+}
+}
+}
+.rule-content {
+  .item {
+    margin: .2rem;
+    text-align: left;
+}
+  .button{
+    .set-bg("../../img/rule-ti-bg.png");
+    color: #fff;
+    text-align: center;
+    width: 1.87rem;
+    height: .48rem;
+    line-height: .48rem;
   }
 }
