@@ -27,12 +27,23 @@
   }
 }
 .m-confirm {
-  width: 85%;
+  position: relative;
+  width: 100%;
   background-color: #fff;
   border-radius: .2rem;
   font-size: 15px;
   -webkit-animation: zoomIn .15s ease forwards;
   animation: zoomIn .15s ease forwards;
+  height: 5.49rem;
+  background: url(../../img/pop-bg.png) no-repeat;
+  background-size: 100% 100%;
+  transform-origin: 50% 50%;
+  .confirm-ft-wrap{
+    position: absolute;
+    left: 50%;
+    bottom: .4rem;
+    transform: translate3d(-50%,0,0);
+  }
 }
 .m-alert {
   -webkit-animation: zoomIn .15s ease forwards;
@@ -46,40 +57,30 @@
   margin-top: 14px;
 }
 .confirm-hd {
+  margin-top: .44rem;
   position: relative;
   text-align: center;
   padding: .4rem .4rem .2rem .4rem;
-  &:after{
-    content: '';
-    position: absolute;
-    z-index: 0;
-    top: 1.1rem;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    border-bottom: 1px dashed #D9D9D9;
-    -webkit-transform: scaleY(0.5);
-    transform: scaleY(0.5);
-    -webkit-transform-origin: 0 0;
-    transform-origin: 0 0;
-  }
 }
 
 .confirm-hd .confirm-title {
   display: inline-block;
   margin-bottom: .2rem;
   font-weight: normal;
-  color: @btn-primary-bg;
+  color: #fff;
   word-break: break-all;
 }
 .confirm-bd {
   margin-top: .1rem;
   text-align: center;
-  padding: 0 20px;
-  font-size: 14px;
-  color: #888;
-  line-height: 20px;
+  padding: 0 .8rem;
+  font-size: .3rem;
+  color: #f0763a;
   word-break: break-all;
+  .look-me{
+    color:#f03a3a;
+    font-weight: bold;
+  }
 }
 
 .confirm-ft {
@@ -100,33 +101,29 @@
   display: block;
   flex: 0 1 2rem;
   width: 2rem;
-  height: .6rem;
-  line-height: .6rem;
-  background: @btn-primary-bg;
+  height: .68rem;
+  line-height: .68rem;
+  background: url(../../img/pop-q-bg.png) no-repeat;
+  background-size: 100% 100%;
   border-radius: .2rem;
   color:#fff;
+  &:first-child{
+    margin-right: .45rem;
+  }
 }
 confirm-ft > a.confirm-btn.default {
-    color: #fff;
+  height: .68rem;
+  width: 2.02rem;
+  color: #fff;
+
 }
-.confirm-ft > a:not(:last-child):after {
-  content: '';
-  position: absolute;
-  z-index: 0;
-  top: 0;
-  right: 0;
-  height: 100%;
-  border-right: 1px solid #D9D9D9;
-  -webkit-transform: scaleX(0.5);
-  transform: scaleX(0.5);
-  -webkit-transform-origin: 100% 0;
-  transform-origin: 100% 0;
-}
+
 .confirm-ft > a.confirm-btn.default {
   color: #fff;
 }
-.confirm-ft > a.confirm-btn.hide-btn {
-  display: none;
+.confirm-ft > a.confirm-btn.cancle-btn {
+  background: url(../../img/pop-c-bg.png) no-repeat;
+  background-size: 100% 100%;
 }
 .confirm-ft > a.confirm-btn.primary {
   color: #0BB20C;

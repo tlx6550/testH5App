@@ -310,12 +310,13 @@ import $ from '../../assets/js/jquery.min.js';
 
         // 遍历按钮数组
         var $btnBox = $('<div class="confirm-ft"></div>');
+        var $btnBoxWrap = $('<div class="confirm-ft-wrap"></div>');
         $.each(btnArr, function (i, val) {
             var $btn;
             // 指定按钮颜色
             if (typeof val.color == 'boolean') {
-                if(!val.txt){
-                    $btn = $('<a href="javascript:;" class="' + 'confirm-btn hide-btn ' + (val.color ? 'primary' : 'default') + '">' + (val.txt || '') + '</a>');
+                if(val.txt==='取消'){
+                    $btn = $('<a href="javascript:;" class="' + 'confirm-btn cancle-btn ' + (val.color ? 'primary' : 'default') + '">' + (val.txt || '') + '</a>');
                 }else{
                     $btn = $('<a href="javascript:;" class="' + 'confirm-btn ' + (val.color ? 'primary' : 'default') + '">' + (val.txt || '') + '</a>');
                 }
@@ -337,9 +338,11 @@ import $ from '../../assets/js/jquery.min.js';
                     btnArr[p].callback && btnArr[p].callback();
                 });
             })(i);
+            
             $btnBox.append($btn);
+            $btnBoxWrap.append($btnBox)
         });
-        $dom.find('.m-confirm').append($btnBox);
+        $dom.find('.m-confirm').append($btnBoxWrap);
         // 禁止滚动屏幕【移动端】
         ydui.util.pageScroll.lock();
 

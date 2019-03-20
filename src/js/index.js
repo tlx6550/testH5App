@@ -29,19 +29,24 @@ import '../js/mmapp.js'; */
     /* 普通确认框 */
     var dialog = window.YDUI.dialog;
 
-    // dialog.confirm('您的订单已受理', '您已成功提交MM任我装流浪包订购申请，成功受理信息请以中国移动下发短信为准，目前由于订购用户较多，短信可能有延时，请耐心等待。', [
-    //     {
-    //         txt: '',
-    //         color: false, /* false:黑色  true:绿色 或 使用颜色值 */
-    //         callback: function () {
-    //             dialog.toast('你点了取消', 'none', 1000);
-    //         }
-    //     }
+    dialog.confirm('温馨提示', '您已成功提交MM任我装<span class="look-me">爱奇艺黄金VIP会员月卡</span>流浪包订购申请，请耐心等待。', [
+        {
+            txt: '取消',
+            color: false, /* false:黑色  true:绿色 或 使用颜色值 */
+            callback: function () {
+                dialog.toast('你点了取消', 'none', 1000);
+            }
+        },
+        {
+            txt: '确定',
+            color: false, /* false:黑色  true:绿色 或 使用颜色值 */
+            callback: function () {
+                dialog.toast('你点了取消', 'none', 1000);
+            }
+        }
 
-    // ]);
-    // setTimeout(function(){
-    //     $('#YDUI_CONFRIM').remove();
-    // },5000)
+    ]);
+
     $('.mflq-btn').click(function () {
         dialog.confirm('抱歉，订购失败', '抱歉，因网络原因<br/>您本次订购出现错误，请重新领取。', [
             {
@@ -54,57 +59,6 @@ import '../js/mmapp.js'; */
 
         ]);
     });
-    // 获取验证码逻辑
-    var $getCode = $('#J_GetCode');
-
-    /* 定义参数 */
-    $getCode.sendCode({
-        disClass: 'btn-disabled',
-        secs: 10,
-        run: false,
-        runStr: '{%s}秒后重新获取',
-        resetStr: '重新获取验证码'
-    });
-
-    $getCode.on('click', function () {
-        /* ajax 成功发送验证码后调用【start】 */
-        YDUI.dialog.loading.open('发送中');
-        setTimeout(function () {
-
-            YDUI.dialog.loading.close();
-
-            $getCode.sendCode('start');
-            YDUI.dialog.toast('已发送', 'success', 500);
-
-        }, 500);
-    });
-
-    // !function initClick() {
-    //     var tag = false;
-    //     if (tag) {
-    //         $('.dom').click(function () {
-    //             alert(1)
-    //         })
-    //     } else {
-    //         $('.dom').click(function () {
-    //             alert(2)
-    //         })
-    //     }
-    // }()
-
-    // !function initClick() {
-    //     var tag = false;
-    //     $('.dom').click(function () {
-    //         if (tag) {
-    //             alert(1)
-    //         } else {
-    //             alert(2)
-    //         }
-
-    //     })
-
-    // }()
-
 
 }(window);
 
