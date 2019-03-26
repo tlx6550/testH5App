@@ -1,271 +1,282 @@
 @import "./common/mixins.less";
 @import "./components/dialog.less";
 @import "./components/button.less";
-.flex-box{
-  display: flex;
-  align-items: center;
-}
-.flex-box-bet{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content:space-between;
-}
-.no-wrap{
-  flex-wrap: nowrap
-}
-.flex-center{
-  align-items:center;
-}
-.flex-item{
-  flex: 1;
-}
-.swiper-slide{
-  text-align: inherit;
+.flex-box {
+    display: flex;
+    align-items: center;
 }
 
-.text-over{
-  overflow: hidden;
-  text-overflow:ellipsis;
-  white-space: nowrap;
+.flex-box-bet {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
-.text-ellipsis{
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+
+.no-wrap {
+    flex-wrap: nowrap
+}
+
+.flex-center {
+    align-items: center;
+}
+
+.flex-item {
+    flex: 1;
+}
+
+.swiper-slide {
+    text-align: inherit;
+}
+
+.text-over {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.text-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
 }
 
 .clearfix:after {
-  display: block;
-  content: ".";
-  height: 0;
-  line-height: 0;
-  clear: both;
-  visibility: hidden;
-}
-.home-bg{
-  background-color: #f0f0f0;
-}
-.banner{
-  position: relative;
-  font-size: 0;
-  .rule-icon{
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: .2rem;
-    margin-right: .1rem;
-    width: .28rem;
-    height: .28rem;
-  }
-  .info-text{
-    vertical-align: middle;
-  }
-  img.banner{
-    display: inline-block;
-    height: 6.54rem;
-    width: 100%;
-  }
-
-  .rule-tag{
-    display: flex;
-    align-items: center;
-    position: absolute;
-    z-index: 9;
-    right: 0;
-    top:.25rem;
-    width: 1.18rem;
-    height: .48rem;
-    color:#fff;
-    font-size: .24rem;
-    border-top-left-radius: .2rem;
-    border-bottom-left-radius: .2rem;
-    background-color: #2e79bb;
-  }
-  .prize-tag{
-    top:.8rem;
-  }
-}
-.content{
-  padding: 0 .5rem .5rem .5rem;
-  .set-bg("../../img/ct-bg.png");
-  .title{
-    text-align: center;
-    font-size: .24rem;
-    color:#fff;
-    padding:.3rem 0;
-  }
-  .app-card{
-    display: flex;
-    justify-content: center;
-  }
-  .item-card{
-    position: relative;
-    flex: 0 0 auto;
-    width: 2.87rem;
-    height: 2.21rem;
-    .set-bg("../../img/new-card-bg.png");
-    .app-name{
-      margin-top: .4rem;
-      text-align: center;
-      font-size: .24rem;
-      color:#686868;
-      .icon{
-        vertical-align: text-bottom;
-        width: .31rem;
-        height: .31rem;
-      }
-    }
-    .app-text{
-      text-align: center;
-      font-weight: bold;
-      margin-top: .09rem;
-      color: #f0763a;
-      font-size: .3rem;
-    }
-    .btn{
-      position: absolute;
-      width: 1.87rem;
-      height: .41rem;
-      left: 50%;
-      transform: translate3d(-50%,0,0);
-      color: #fff;
-      line-height: .41rem;
-      bottom: .15rem;
-      .set-bg("../../img/new-card-btn-bg.png");
-    }
-    .has-active{
-      color:#feca26;
-      .set-bg("../../img/new-card-btn-has-bg.png");
-    }
-    .no-active{
-      .set-bg("../../img/new-card-btn-no-bg.png");
-    }
-    &:first-child{
-      margin-right: .3rem;
-    }
-  }
-  .h-more{
-    img{
-      margin: .3rem 0;
-      width: 100%;
-      height: 1.75rem;
-    }
-  }
-  .rule-detail{
-    margin-top: .3rem;
-    position: relative;
-    .set-bg("../../img/h-rule-bg.png");
-    &.rule-prize-detail{
-      .set-bg("../../img/h-rule-big-bg.png");
-      
-    }
-    .title{
-      position: absolute;
-      top:-.27rem;
-      left: 50%;
-      transform: translate3d(-50%,0,0);
-      width: 3.51rem;
-      height: .7rem;
-      line-height: .2rem;
-      .set-bg("../../img/h-rule-title-bg.png");
-    }
-    .text{
-      margin-top: .5rem;
-      font-size: .24rem;
-      color: #6759ce;
-    }
-  }
-  .rule-prize-detail-2{
-    margin-top: .5rem;
-  }
-  .rule-prize-detail{
-    margin-top: 0;
-    .rule-content{
-      margin-top: .35rem;
-      .text {
-        margin-top: .1rem;
-      }
-      .item{
-        margin-bottom: .5rem;
-      }
-    }
-  }
-}
-.rule-prize-content{
-  padding-top: .3rem;
+    display: block;
+    content: ".";
+    height: 0;
+    line-height: 0;
+    clear: both;
+    visibility: hidden;
 }
 
-.rule-detail{
-  background-color: #fff;
-  padding:.45rem .6rem;
-  margin-bottom: .2rem;
-  .head{
-    position: relative;
-    text-align: center;
-    .title{
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate3d(-50%,-50%,0);
-      font-size: .28rem;
-      color:#323232;
-      font-weight: bold
-    }
-  }
-  .title-bg{
-    height: .24rem;
-    width:100%;
-  }
-  .content{
-    margin-top: .5rem;
-    font-size: .28rem;
-    color:#666666;
-  }
+.home-bg {
+    background-color: #f0f0f0;
 }
-.rule-prize-detail{
-  padding: 0.3rem 0.2rem;
-  .my-prize-wrap {
-    padding: .4rem 0 0 0;
-    .prize-box {
-      border: 1px solid #61aeef;
-      border-bottom: none;
-   }
-   .head {
-    display: flex;
-    background-color: #61aeef;
-    font-size: .24rem;
-    color: #fff;
-    padding: .2rem;
-    .item{
-      flex: 1;
+
+.banner {
+    position: relative;
+    font-size: 0;
+    .rule-icon {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: .2rem;
+        margin-right: .1rem;
+        width: .28rem;
+        height: .28rem;
+    }
+    .info-text {
+        vertical-align: middle;
+    }
+    img.banner {
+        display: inline-block;
+        height: 6.54rem;
+        width: 100%;
+    }
+    .rule-tag {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        z-index: 9;
+        right: 0;
+        top: .25rem;
+        width: 1.18rem;
+        height: .48rem;
+        color: #fff;
+        font-size: .24rem;
+        border-top-left-radius: .2rem;
+        border-bottom-left-radius: .2rem;
+        background-color: #2e79bb;
+    }
+    .prize-tag {
+        top: .8rem;
     }
 }
 
+.content {
+    padding: 0 .5rem .5rem .5rem;
+    .set-bg("../../img/ct-bg.png");
+    .title {
+        text-align: center;
+        font-size: .24rem;
+        color: #fff;
+        padding: .3rem 0;
+    }
+    .app-card {
+        display: flex;
+        justify-content: center;
+    }
+    .item-card {
+        position: relative;
+        flex: 0 0 auto;
+        width: 2.87rem;
+        height: 2.21rem;
+        .set-bg("../../img/new-card-bg.png");
+        .app-name {
+            margin-top: .4rem;
+            text-align: center;
+            font-size: .24rem;
+            color: #686868;
+            .icon {
+                vertical-align: text-bottom;
+                width: .31rem;
+                height: .31rem;
+            }
+        }
+        .app-text {
+            text-align: center;
+            font-weight: bold;
+            margin-top: .09rem;
+            color: #f0763a;
+            font-size: .3rem;
+        }
+        .btn {
+            position: absolute;
+            width: 1.87rem;
+            height: .41rem;
+            left: 50%;
+            transform: translate3d(-50%, 0, 0);
+            color: #fff;
+            line-height: .41rem;
+            bottom: .15rem;
+            .set-bg("../../img/new-card-btn-bg.png");
+        }
+        .has-active {
+            color: #feca26;
+            .set-bg("../../img/new-card-btn-has-bg.png");
+        }
+        .no-active {
+            .set-bg("../../img/new-card-btn-no-bg.png");
+        }
+        &:first-child {
+            margin-right: .3rem;
+        }
+    }
+    .h-more {
+        img {
+            margin: .3rem 0;
+            width: 100%;
+            height: 1.75rem;
+        }
+    }
+    .rule-detail {
+        margin-top: .3rem;
+        position: relative;
+        border-radius: .4rem;
+        background: url(../img/h-rule-big-bg.png)repeat-x;
+        background-size: 100% 100%;
+        &.rule-prize-detail {
+        }
+        .title {
+            position: absolute;
+            top: -.27rem;
+            left: 50%;
+            transform: translate3d(-50%, 0, 0);
+            width: 3.51rem;
+            height: .7rem;
+            line-height: .2rem;
+            .set-bg("../../img/h-rule-title-bg.png");
+        }
+        .text {
+            margin-top: .5rem;
+            font-size: .24rem;
+            color: #6759ce;
+        }
+    }
+    .rule-prize-detail-2 {
+        margin-top: .5rem;
+    }
+    .rule-prize-detail {
+        margin-top: 0;
+        .rule-content {
+            margin-top: .35rem;
+            .text {
+                margin-top: .1rem;
+            }
+            .item {
+                margin-bottom: .5rem;
+            }
+        }
+    }
 }
-.prize-content {
-  display: flex;
-  background-color: #ebebff;
-  font-size: .24rem;
-  border-bottom: 1px solid #61aeef;
-  color: #6759ce;
-  padding: .2rem;
-  .item {
-    flex: 1;
+
+.rule-prize-content {
+    padding-top: .3rem;
 }
+
+.rule-detail {
+    background-color: #fff;
+    padding: .45rem .6rem;
+    margin-bottom: .2rem;
+    .head {
+        position: relative;
+        text-align: center;
+        .title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate3d(-50%, -50%, 0);
+            font-size: .28rem;
+            color: #323232;
+            font-weight: bold
+        }
+    }
+    .title-bg {
+        height: .24rem;
+        width: 100%;
+    }
+    .content {
+        margin-top: .5rem;
+        font-size: .28rem;
+        color: #666666;
+    }
 }
+
+.rule-prize-detail {
+    padding: 0.3rem 0.2rem;
+    .my-prize-wrap {
+        padding: .4rem 0 0 0;
+        .prize-box {
+            border: 1px solid #61aeef;
+            border-bottom: none;
+        }
+        .head {
+            display: flex;
+            background-color: #61aeef;
+            font-size: .24rem;
+            color: #fff;
+            padding: .2rem;
+            .item {
+                flex: 1;
+            }
+        }
+    }
+    .prize-content {
+        display: flex;
+        background-color: #ebebff;
+        font-size: .24rem;
+        border-bottom: 1px solid #61aeef;
+        color: #6759ce;
+        padding: .2rem;
+        text-align: center;
+        .item {
+            flex: 1;
+        }
+    }
 }
+
 .rule-content {
-  .item {
-    margin: .2rem;
-    text-align: left;
-}
-  .button{
-    .set-bg("../../img/rule-ti-bg.png");
-    color: #fff;
-    text-align: center;
-    width: 1.87rem;
-    height: .48rem;
-    line-height: .48rem;
-  }
+    .item {
+        margin: .2rem;
+        text-align: left;
+    }
+    .button {
+        .set-bg("../../img/rule-ti-bg.png");
+        color: #fff;
+        text-align: center;
+        width: 1.87rem;
+        height: .48rem;
+        line-height: .48rem;
+    }
 }
