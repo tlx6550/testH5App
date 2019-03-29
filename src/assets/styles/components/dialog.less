@@ -319,3 +319,28 @@ confirm-ft > a.confirm-btn.default {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+.m-confirm-simple{
+    position: relative;
+    z-index: 1;
+    .confirm-title-simple{
+        font-weight: bold;
+    }
+    .confirm-ft-simple{
+        position: absolute;
+        z-index: 9;
+        right: .45rem;
+        top:0.029rem;
+    }
+    .confirm-bd-simple{
+        padding-bottom: 0.75rem;
+    }
+    a.confirm-btn.default{
+        font-size: 0;
+        display: inline-block;
+        width: .38rem;
+        height: .38rem;
+        color:rgb(102,102,102);
+        background: url(../../img/close-icon.jpg)no-repeat;
+        background-size: 100% 100%;
+    }
+}
