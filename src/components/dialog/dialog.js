@@ -298,10 +298,15 @@ import $ from '../../assets/js/jquery.min.js';
                 }
             }];
         }
-
+        var htmlCom;
+        if(title==='good' || !title){
+            htmlCom =  '<div class="m-confirm">'
+        }else{
+            htmlCom =  '<div class="m-confirm m-confirm-sad">'
+        }
         var $dom = $('' +
             '<div class="mask-black-dialog" id="' + ID + '">' +
-            '   <div class="m-confirm">' +
+            htmlCom +
             '       <div class="confirm-hd">' +
             '<strong class="confirm-title">' + title + '</strong></div>' +
             '       <div class="confirm-bd">' + mes + '</div>' +
@@ -315,10 +320,10 @@ import $ from '../../assets/js/jquery.min.js';
             var $btn;
             // 指定按钮颜色
             if (typeof val.color == 'boolean') {
-                if(val.txt==='取消'){
-                    $btn = $('<a href="javascript:;" class="' + 'confirm-btn cancle-btn ' + (val.color ? 'primary' : 'default') + '">' + (val.txt || '') + '</a>');
+                if(val.txt==='取消' || val.txt==='回首页'){
+                    $btn = $('<a href="javascript:;" class="' + 'yd-btn-block yd-btn-danger cancle-btn ' + (val.color ? 'primary' : 'default') + '">' + (val.txt || '') + '</a>');
                 }else{
-                    $btn = $('<a href="javascript:;" class="' + 'confirm-btn ' + (val.color ? 'primary' : 'default') + '">' + (val.txt || '') + '</a>');
+                    $btn = $('<a href="javascript:;" class="' + 'yd-btn-block yd-btn-danger ' + (val.color ? 'primary' : 'default') + '">' + (val.txt || '') + '</a>');
                 }
                 
             } else if (typeof val.color == 'string') {

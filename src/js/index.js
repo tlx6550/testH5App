@@ -28,24 +28,24 @@ import '../js/mmapp.js'; */
 
     /* 普通确认框 */
     var dialog = window.YDUI.dialog;
+    // 弹窗背景表情变化，title传‘sad’是未中奖表情，传good或者不传是高兴表情
+    dialog.confirm('good', '恭喜您，获得<span class="look-me">爱奇艺月卡</span><br><span class="sad-text">去首页看看更多精彩内容吧～</span>', [
+        {
+            txt: '回首页',
+            color: false, /* false:黑色  true:绿色 或 使用颜色值 */
+            callback: function () {
+                dialog.toast('你点了取消', 'none', 1000);
+            }
+        },
+        {
+            txt: '确定',
+            color: false, /* false:黑色  true:绿色 或 使用颜色值 */
+            callback: function () {
+                dialog.toast('你点了取消', 'none', 1000);
+            }
+        }
 
-    // dialog.confirm('温馨提示', '您已成功提交MM任我装<span class="look-me">爱奇艺黄金VIP会员月卡</span>流浪包订购申请，请耐心等待。', [
-    //     {
-    //         txt: '取消',
-    //         color: false, /* false:黑色  true:绿色 或 使用颜色值 */
-    //         callback: function () {
-    //             dialog.toast('你点了取消', 'none', 1000);
-    //         }
-    //     },
-    //     {
-    //         txt: '确定',
-    //         color: false, /* false:黑色  true:绿色 或 使用颜色值 */
-    //         callback: function () {
-    //             dialog.toast('你点了取消', 'none', 1000);
-    //         }
-    //     }
-
-    // ]);
+    ]);
 
     $('.mflq-btn').click(function () {
         dialog.confirm('抱歉，订购失败', '抱歉，因网络原因<br/>您本次订购出现错误，请重新领取。', [

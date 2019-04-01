@@ -28,21 +28,25 @@
 }
 .m-confirm {
   position: relative;
-  width: 100%;
+  width: 6.5rem;
   background-color: #fff;
   border-radius: .2rem;
   font-size: 15px;
   -webkit-animation: zoomIn .15s ease forwards;
   animation: zoomIn .15s ease forwards;
-  height: 5.49rem;
+  height: 5.44rem;
   background: url(../../img/pop-bg.png) no-repeat;
   background-size: 100% 100%;
   transform-origin: 50% 50%;
   .confirm-ft-wrap{
     position: absolute;
     left: 50%;
-    bottom: .4rem;
+    bottom: 0;
     transform: translate3d(-50%,0,0);
+  }
+  &.m-confirm-sad{
+    background: url(../../img/pop-bg-sad.png) no-repeat;
+    background-size: 100% 100%;
   }
 }
 .m-alert {
@@ -57,13 +61,14 @@
   margin-top: 14px;
 }
 .confirm-hd {
-  margin-top: .44rem;
+  margin-top: 1.4rem;
   position: relative;
   text-align: center;
   padding: .4rem .4rem .2rem .4rem;
 }
 
 .confirm-hd .confirm-title {
+  font-size: 0;
   display: inline-block;
   margin-bottom: .2rem;
   font-weight: normal;
@@ -71,15 +76,21 @@
   word-break: break-all;
 }
 .confirm-bd {
-  margin-top: .1rem;
+  margin-top: .15rem;
   text-align: center;
   padding: 0 .8rem;
-  font-size: .3rem;
-  color: #f0763a;
+  font-size: .36rem;
+  color: #f53e39;
   word-break: break-all;
   .look-me{
-    color:#f03a3a;
+    color:#f53e39;
     font-weight: bold;
+  }
+  .sad-text{
+    display: inline-block;
+    margin-top: .2rem;
+    color:#979797;
+    font-size: .3rem;
   }
 }
 
@@ -99,16 +110,19 @@
   position: relative;
   text-align: center;
   display: block;
-  flex: 0 1 2rem;
-  width: 2rem;
-  height: .68rem;
-  line-height: .68rem;
-  background: url(../../img/pop-q-bg.png) no-repeat;
+  flex: 0 1 2.74rem;
+  width: 2.74rem;
+  height: .89rem;
+  line-height: .89rem;
   background-size: 100% 100%;
-  border-radius: .2rem;
+  border-radius: .1rem;
+  padding:0 .3rem;
   color:#fff;
-  &:first-child{
-    margin-right: .45rem;
+  margin: 0 .225rem;
+  &.cancle-btn{
+    background: none;
+    border:1px solid #f53e39;
+    color:#f53e39;
   }
 }
 confirm-ft > a.confirm-btn.default {
