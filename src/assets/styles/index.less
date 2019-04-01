@@ -52,7 +52,7 @@
 }
 
 .home-bg {
-    background-color: #f0f0f0;
+    background-color: #f53e39;
 }
 
 .banner {
@@ -71,7 +71,7 @@
     }
     img.banner {
         display: inline-block;
-        height: 6.54rem;
+        height: 2.79rem;
         width: 100%;
     }
     .rule-tag {
@@ -87,13 +87,144 @@
         font-size: .24rem;
         border-top-left-radius: .2rem;
         border-bottom-left-radius: .2rem;
-        background-color: #2e79bb;
+        background-color: #5354548a;
     }
     .prize-tag {
         top: .8rem;
     }
 }
-
+.second-banner{
+   width: 100%;
+   height: 5.85rem;
+  .set-bg("../../img/mengzhu_02.png");
+  .step-wrap{
+      padding:2.8rem .3rem 0 .3rem;
+      display: flex;
+      justify-content: center;
+      .item{
+          flex: 1;
+          color:#fff;
+          font-weight: bold;
+          text-align: center;
+          img{
+              width: 1.19rem;
+              height: auto;
+          }
+          .title{
+              font-size: .24rem;
+          }
+      }
+  }  
+  .rule-link{
+      margin-top: .3rem;
+      margin-right: .8rem;
+      float: right;
+      color:#544100;
+      font-size: .24rem;
+      border-bottom: 1px solid #544100;
+  }
+}
+.third-banner{
+   position: relative; 
+   width: 100%;
+   height: 5.83rem;
+  .set-bg("../../img/mengzhu_03.png");
+  .gua-jiang {
+    text-align: center;
+    padding-top: 2rem;
+    .gua-jiang-img {
+        position: relative;
+        display: inline-block;
+        width: 5.94rem;
+        height: 2.04rem;
+        .set-bg("../../img/guajiang.png");
+        button {
+            position: absolute;
+            width: 3.7rem;
+            height: .8rem;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+            background-color: #ca322e;
+            font-weight: 700;
+            color: #fff;
+            margin: 0;
+        }
+    }
+    
+  }
+  .has-opertunity{
+    position: absolute;
+    left: 50%;
+    transform: translate3d(-50%,0,0);
+    bottom: .6rem;
+    text-align: center;
+    font-size: .3rem;
+    color:#a4302c;
+    font-weight: bold;
+     span{
+        color:#ff4a45;
+     }
+    }
+}
+.app-list-wrap {
+    padding: .2rem .2rem .68rem;
+    .contain {
+        margin: 0 .05rem;
+        .list-title {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAqsAAAB4CAYAAADVLrtZAAAGt0lEQ…EASEusAgCQllgFACAtsQoAQFpiFQCAtMQqAABpiVUAANL6BzuM/A3IMcXLAAAAAElFTkSuQmCC) no-repeat;
+            background-size: 100% 100%;
+            width: 100%;
+            height: 1.2rem;
+            .title-box {
+                padding: 0 .2rem;
+                color: #fff;
+                height: 100%;
+                font-size: .3rem;
+            }
+            .sub-title {
+                color: #fad44e;
+                font-size: .24rem;
+            }
+        }
+        .list {
+            position: relative;
+            padding: .3rem .2rem .3rem .35rem;
+            border-bottom: 1px solid #eee;
+            background-color: #fff;
+            .pic-1 {
+                margin-top: .1rem;
+                margin-right: .3rem;
+                float: left;
+                img {
+                    width: 1.15rem;
+                    height: 1.15rem;
+                }
+            }
+            .app-content {
+                float: left;
+                text-align: left;
+                .title-p {
+                    font-weight: bold;
+                    margin-top: 0;
+                    font-size: .36rem;
+                    color: #333;
+                }
+                p {
+                    margin: .1rem 0;
+                    font-size: .24rem;
+                    color: #999;
+                }
+                .sub-title {
+                    color: red;
+                }
+            }
+            
+        }
+    }
+}
 .content {
     padding: 0 .5rem .5rem .5rem;
     .set-bg("../../img/ct-bg.png");
