@@ -58,10 +58,10 @@ if (isBrowserSync) {
             },
             tunnel,
         }, {
-            // prevent BrowserSync from reloading the page
-            // and let Webpack Dev Server take care of this
-            reload: false
-        })
+                // prevent BrowserSync from reloading the page
+                // and let Webpack Dev Server take care of this
+                reload: false
+            })
     );
 }
 
@@ -71,8 +71,9 @@ const config = {
     // 左边是chuncks名称，右边是入口地址
     entry: {
         'index': './js/index.js',
-        'myPrize': './js/myPrize.js',
-        'rules': './js/rules.js',
+        'myPrize': './js/index.js',
+        'rules': './js/index.js',
+        'share': './js/index.js',
     },
     output: {
         filename: isDev ? '[name].js' : '[name].js',
@@ -127,24 +128,24 @@ const config = {
                                     path: postcssConfig,
                                 },
                                 sourceMap: isDev ? 'inline' : false
-                               
+
                             }
                         },
                         {
                             loader: 'less-loader',
                             options: {
                                 sourceMap: isDev
-                               
+
                             },
 
                         }
                     ],
                 })
             },
-/*            {
-                test: /\.(png|jpeg|jpg|gif|woff|woff2|eot|otf|ttf|svg)$/,
-                use: 'file-loader?name=assets/[name].[ext]',
-            },*/
+            /*            {
+                            test: /\.(png|jpeg|jpg|gif|woff|woff2|eot|otf|ttf|svg)$/,
+                            use: 'file-loader?name=assets/[name].[ext]',
+                        },*/
             // 以下图片loader和上面注释功能一样 但是更灵活指定现网后台地址
             // 此外 打包后 还另外保存了 所有图片，目录结构为 assets/img, 未被转为为base64格式的图片则按要求存放在指定目录了
             {
@@ -152,8 +153,8 @@ const config = {
                 loader: 'url-loader',
                 options: {
                     limit: 10240, //base64格式限制最大时候进行转换
-                   /* name: 'assets/[name].[ext]'*/
-                   name:'./defaultSite/images/a/320x480/activity/930/assets/[name].[ext]' //线上正式地址
+                    /* name: 'assets/[name].[ext]'*/
+                    name: './defaultSite/images/a/320x480/activity/930/assets/[name].[ext]' //线上正式地址
                 }
             },
             {
@@ -172,7 +173,7 @@ const config = {
         // 开发环境跨域问题https://blog.csdn.net/qq_39083004/article/details/80860675
         proxy: {
             '**': {
-                target:'https://api.douban.com',
+                target: 'https://api.douban.com',
                 changeOrigin: true,
                 secure: false,
             }
@@ -195,17 +196,23 @@ const config = {
             template: './index.html',
             filename: 'index.html'
         }),
-       new HtmlWebpackPlugin({
+        new HtmlWebpackPlugin({
             chunks: ['myPrize'],
             template: './myPrize.html',
             filename: 'myPrize.html'
         }
         ),
         new HtmlWebpackPlugin({
-                chunks: ['rules'],
-                template: './rules.html',
-                filename: 'rules.html'
-            }
+            chunks: ['rules'],
+            template: './rules.html',
+            filename: 'rules.html'
+        }
+        ),
+        new HtmlWebpackPlugin({
+            chunks: ['share'],
+            template: './share.html',
+            filename: 'share.html'
+        }
         ),
         new LodashModuleReplacementPlugin,
         new CopyWebpackPlugin([
@@ -214,18 +221,18 @@ const config = {
                 /*'to': '',*/ // 打包后图片输出的目标路径
                 // 以下图片loader和上面注释功能一样 但是更灵活指定现网后台地址
                 // 此外 打包后 还另外保存了 所有图片，目录结构为 assets/img, 未被转为为base64格式的图片则按要求存放在指定目录了
-                'to':'',
+                'to': '',
                 'from': {
                     'glob': 'assets/img/**/*',
                     'dot': true
                 }
             },
         ], {
-            'ignore': [
-                '.gitkeep'
-            ],
-            'debug': 'warning'
-        }),
+                'ignore': [
+                    '.gitkeep'
+                ],
+                'debug': 'warning'
+            }),
         ...additionalPlugins
     ],
 

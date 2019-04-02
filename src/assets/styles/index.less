@@ -427,8 +427,10 @@
 .rule-prize-detail {
     padding: 0.3rem 0.2rem;
     .my-prize-wrap {
-        padding: .4rem 0 0 0;
+        padding: .9rem 0 0 0;
         .prize-box {
+            overflow: hidden;
+            border-radius: .2rem;
             border: 1px solid #f53e39;
             border-bottom: none;
         }
@@ -437,9 +439,16 @@
             background-color: #f53e39;
             font-size: .24rem;
             color: #fff;
-            padding: .2rem;
             .item {
                 flex: 1;
+                border-right: 1px solid #ffffff8a;
+                span{
+                    display: inline-block;
+                    padding:.2rem;  
+                }
+                &:last-child{
+                    border-right: none;
+                  }
             }
         }
     }
@@ -457,6 +466,9 @@
                 display: inline-block;
                 padding:.2rem;
             }
+            &:last-child{
+                border-right: none;
+              }
         }
         &:not(:last-child){
           border-bottom: 1px solid #f53e3957
