@@ -54,6 +54,9 @@
 
 .home-bg {
     background-color: #f53e39;
+    &.rule-home-bg{
+        background-color: #df3426;
+    }
 }
 
 .banner {
@@ -74,6 +77,11 @@
         display: inline-block;
         height: 2.79rem;
         width: 100%;
+        &.rule-banner-img{
+            position: relative;
+            z-index: 99;
+            height: 4.51rem;  
+        }
     }
     .rule-tag {
         display: flex;
@@ -267,9 +275,8 @@
         }
     }
 }
-.content {
-    padding: 0 .5rem .5rem .5rem;
-    .set-bg("../../img/ct-bg.png");
+.rule-prize-content {
+    padding: 0 .2rem .5rem .2rem;
     .title {
         text-align: center;
         font-size: .24rem;
@@ -336,25 +343,26 @@
     .rule-detail {
         margin-top: .3rem;
         position: relative;
-        border-radius: .4rem;
-        background: url(../img/h-rule-big-bg.png)repeat-x;
-        background-size: 100% 100%;
+        border-radius: .2rem;
+        background: linear-gradient(#ffe423, #ffb924); /* 标准的语法（必须放在最后） */
         &.rule-prize-detail {
         }
         .title {
             position: absolute;
-            top: -.27rem;
+            top: 0.15rem;
             left: 50%;
             transform: translate3d(-50%, 0, 0);
-            width: 3.51rem;
-            height: .7rem;
-            line-height: .2rem;
+            width: 2.46rem;
+            height: .94rem;
+            line-height: .3rem;
+            color:#f53e39;
+            font-weight: bold;
             .set-bg("../../img/h-rule-title-bg.png");
         }
         .text {
             margin-top: .5rem;
             font-size: .24rem;
-            color: #6759ce;
+            color: #666666;
         }
     }
     .rule-prize-detail-2 {
@@ -375,13 +383,23 @@
 }
 
 .rule-prize-content {
-    padding-top: .3rem;
+    margin-top: -.13rem;
 }
 
 .rule-detail {
     background-color: #fff;
     padding: .45rem .6rem;
     margin-bottom: .2rem;
+    position: relative;
+    overflow: hidden;
+    .pig-nose{
+        position: absolute;
+        z-index: 99;
+        top: 0;
+        right: -.3rem;
+        width: 1.5rem;
+        height: 1.08rem;
+    }
     .head {
         position: relative;
         text-align: center;
@@ -411,12 +429,12 @@
     .my-prize-wrap {
         padding: .4rem 0 0 0;
         .prize-box {
-            border: 1px solid #61aeef;
+            border: 1px solid #f53e39;
             border-bottom: none;
         }
         .head {
             display: flex;
-            background-color: #61aeef;
+            background-color: #f53e39;
             font-size: .24rem;
             color: #fff;
             padding: .2rem;
@@ -427,14 +445,21 @@
     }
     .prize-content {
         display: flex;
-        background-color: #ebebff;
+        background-color: #fff;
         font-size: .24rem;
-        border-bottom: 1px solid #61aeef;
-        color: #6759ce;
-        padding: .2rem;
+        border-bottom: 1px solid #f53e39;
+        color: #f53e39;
         text-align: center;
         .item {
             flex: 1;
+            border-right: 1px solid #f53e3957;
+            span{
+                display: inline-block;
+                padding:.2rem;
+            }
+        }
+        &:not(:last-child){
+          border-bottom: 1px solid #f53e3957
         }
     }
 }
@@ -448,8 +473,8 @@
         .set-bg("../../img/rule-ti-bg.png");
         color: #fff;
         text-align: center;
-        width: 1.87rem;
-        height: .48rem;
-        line-height: .48rem;
+        width: 1.66rem;
+        height: .73rem;
+        line-height: .73rem;
     }
 }
