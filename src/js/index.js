@@ -6,6 +6,7 @@ import $ from '../assets/js/jquery.min.js';
 /* import  '../assets/js/mmapp.js'; */
 import '../assets/js/flexible.js';
 import '../components/dialog/dialog.js';
+import LotteryCard from '../assets/js/card.js';
 // app download
 
 /* import '../js/mmdl.js';
@@ -84,5 +85,57 @@ import '../js/mmapp.js'; */
 
 }(window);
 
+!function (window) {
+    function changeResultPigImg(tag){
+        if(tag){
+            $('.result-pig').removeClass('result-bad').addClass('result-good')
+        }else{
+            $('.result-pig').removeClass('result-good').addClass('result-bad')
+        }
+    }
+    // 刮刮乐
+    function initGuaGuaLe() {
+        var canvas = $('.canvas_lottery')[0];
+        var ctx = canvas.getContext('2d');
+        var img = new Image();
+        var urlImg = $('.guauga-bg-img').attr('src');
+        console.log('src=' + urlImg);
+        img.src = urlImg;
+
+        img.onload = function () {
+
+            var html = $('html')[0].style;
+            var baseSize = parseFloat(html.fontSize);
+            // console.log(baseSize);
+            // console.log('img=' + img);
+            // console.log('baseSize=' + baseSize);
+            var bgImgW = Math.floor(5.6 * baseSize);
+            var bgImgH = Math.floor(1.6 * baseSize);
+            var $hideDom = $('.info-text');
+            var lottery = new LotteryCard(document.getElementById('js_lottery'), { // eslint-disable-line
+                size: 20, // 滑动区域大小
+                percent: 90, // 激活百分比到谋个值 就全显示
+                resize: true, // canvas的大小是否是可变的
+                cover: img,
+                bgImgH: bgImgH,
+                bgImgW: bgImgW,
+                hideDom:$hideDom
+            });
+            lottery.on('start', function () {
+                lottery.setResult('');
+            });
+            lottery.on('end', function () {
+
+            });
+            window.lottery = lottery;
+        };
+    }
+    try {
+        initGuaGuaLe();
+    } catch (error) {
+        console.log(error)
+    }
+   
+}(window);
 
 
