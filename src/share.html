@@ -15,124 +15,36 @@
 
 <body class="home-bg">
     <div class="banner">
-        <a class="rule-tag prize-tag">
-            <img src="./assets/img/right-icon.png" alt="" class="rule-icon">
+        <a class="rule-tag prize-tag wai-tou-rule-tag">
             <span class="info-text">活动规则</span>
         </a>
     </div>
     <div class="second-banner waitou-banner">
-    </div>
-    <div class="third-banner">
-        <div class="gua-jiang">
-            <div class="gua-jiang-img">
-                <button type="button" class="yd-btn-block yd-btn-circle show-guagua-le">
-                    <span>刮卡中大奖</span>
-                </button>
-            </div>
+        <div class="wai-tou-guagua">
+            <span class="text">马上去刮奖</span>
         </div>
-        <div class="has-opertunity">
-            您有
-            <span>1</span>次刮奖机会
+        <img class="waitou-pig-img" src="./assets/img/tai-tou-pig.png" alt="">
+    </div>
+    <div class="wai-contet-section">
+        <div class="title">
+            奖品说明
         </div>
     </div>
-    <div class="app-list-wrap">
-        <div class="contain">
-            <div class="list-title">
-                <div class="title-box flex-box-bet flex-center">
-                    <div class="title">下载应用获刮奖机会</div>
-                    <div class="sub-title">*活动期间重复下载不计机会</div>
-                </div>
-            </div>
-            <div class="list clearfix">
-                <div class="pic-1">
-                    <img src="./assets/img/app-icon.png">
-                </div>
-                <div class="app-content">
-                    <p class="title-p">MM应用商场</p>
-                    <p>
-                        <span>1000万+下载</span>
-                        <span>10.27m</span>
-                    </p>
-                    <p class="sub-title">体验新版本，赢吐槽大奖</p>
-                </div>
-                <div class="js-button ing">
-                    <div class="js-label"> 下载 </div>
-                    <div class="btn-wrapper">
-                        <div class="js-progress"></div>
+    <div class="rule-prize-content waitou-rule-prize-content">
+        <div class="rule-detail rule-prize-detail">
+            <img src="data:image/png;base64,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"
+                alt="" class="pig-nose">
+            <div class="rule-content">
+                <div class="item">
+                    <div class="text">
+                        <div class="p-item">
+                            1、奖品下发将直接提取用户获奖手机号码进行开通，如原本已有会员，将直接进行充值；若无会员，则以用户获奖手机号码为账号进行开通、充值。请用户留意开通短信、充值信息；或，可直接登录优酷/爱奇艺/喜马拉雅查询。具体到账情况请以优酷/爱奇艺/喜马拉雅个人中心的会员信息为准，使用有效期和使用范围请以各官方通知为准。
+                           <br><br> 2、若未收到奖品，请于活动结束后7个工作日内致电10086反馈情况，逾期未反馈者视为自动弃奖，不予补发奖品。 3、爱奇艺视频客服热线电话：400-923-7171；优酷视频客服热线电话：400-810-3568；喜马拉雅会员客服热线电话：020-89053381。
+                        </div>
                     </div>
                 </div>
-                <script>
-                    apps1[index] = {
-                        packagename: "com.aspire.mm",
-                        url: "http://ota.fr18.mmarket.com/downloadAppForCMNET?id=300000863435&device=525&msisdn=U90809161365&TID=18101800606031537539&SCode=C5025648FF12B92B431BCB44A4231452&OndemandType=8&ChannelSourceID=0000000001&hjid=100001205",
-                        contentId: "300000863435",
-                        price: "免费",
-                        ver: "81140",
-                        size: "10.27M",
-                        title: "MM应用商场"
-                    }, index++
-                </script>
             </div>
-            <div class="list clearfix">
-                <div class="pic-1">
-                    <img src="./assets/img/app-icon.png">
-                </div>
-                <div class="app-content">
-                    <p class="title-p">MM应用商场</p>
-                    <p>
-                        <span>1000万+下载</span>
-                        <span>10.27m</span>
-                    </p>
-                    <p class="sub-title">体验新版本，赢吐槽大奖</p>
-                </div>
-                <div class="js-button ing">
-                    <div class="js-label"> 下载 </div>
-                    <div class="btn-wrapper">
-                        <div class="js-progress"></div>
-                    </div>
-                </div>
-                <script>
-                    apps1[index] = {
-                        packagename: "com.aspire.mm",
-                        url: "http://ota.fr18.mmarket.com/downloadAppForCMNET?id=300000863435&device=525&msisdn=U90809161365&TID=18101800606031537539&SCode=C5025648FF12B92B431BCB44A4231452&OndemandType=8&ChannelSourceID=0000000001&hjid=100001205",
-                        contentId: "300000863435",
-                        price: "免费",
-                        ver: "81140",
-                        size: "10.27M",
-                        title: "MM应用商场"
-                    }, index++
-                </script>
-            </div>
-            <div class="list clearfix">
-                <div class="pic-1">
-                    <img src="./assets/img/app-icon.png">
-                </div>
-                <div class="app-content">
-                    <p class="title-p">MM应用商场</p>
-                    <p>
-                        <span>1000万+下载</span>
-                        <span>10.27m</span>
-                    </p>
-                    <p class="sub-title">体验新版本，赢吐槽大奖</p>
-                </div>
-                <div class="js-button ing">
-                    <div class="js-label"> 下载 </div>
-                    <div class="btn-wrapper">
-                        <div class="js-progress"></div>
-                    </div>
-                </div>
-                <script>
-                    apps1[index] = {
-                        packagename: "com.aspire.mm",
-                        url: "http://ota.fr18.mmarket.com/downloadAppForCMNET?id=300000863435&device=525&msisdn=U90809161365&TID=18101800606031537539&SCode=C5025648FF12B92B431BCB44A4231452&OndemandType=8&ChannelSourceID=0000000001&hjid=100001205",
-                        contentId: "300000863435",
-                        price: "免费",
-                        ver: "81140",
-                        size: "10.27M",
-                        title: "MM应用商场"
-                    }, index++
-                </script>
-            </div>
+
         </div>
     </div>
 </body>
