@@ -57,6 +57,20 @@ h5内嵌安卓 按钮文字当字体小于12px的时候 会出现偏上
 hack方案
 设置图片盒模型宽度:box-size:border-box;同时原有img padding 清除
 
+中兴ZTE U9180
+发现父元素为弹性盒模型的时候，子元素的margin-top无效
+https://www.cnblogs.com/chaozhang/p/4711282.html
+//https://blog.csdn.net/qq_40744490/article/details/81070630
+hack 方案：用父容器box的padding-top代替margin-top
+解决方法：
+1、设置父元素或者自身的display:inline-block;
+2、设置父元素的border:1px aqua solid;(>0)
+3、设置父元素的padding:1px;(>0)
+4、给父元素设置overflow:hidden;
+5、给父元素或者自身设置position:absolute;
+6、设置父元素非空，填充一定的内容。
+
+
 下载按钮样式
 
 速度数字样式
