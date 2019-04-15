@@ -53,7 +53,7 @@
 }
 
 .home-bg {
-    background-color: #f53e39;
+    background-color: #e64265;
     &.rule-home-bg{
         background-color: #df3426;
     }
@@ -62,10 +62,17 @@
 .banner {
     position: relative;
     font-size: 0;
+    padding:4.7rem .3rem 0 .3rem;
+    .set-bg('../../img/home-bg.png');
+    &.waitou{
+        .set-bg('../../img/home-wt-bg.png');
+        height:11.36rem;
+    }
+    height: 8.5rem;
     .rule-icon {
         display: inline-block;
         vertical-align: middle;
-        margin-left: .2rem;
+        margin-left: .14rem;
         margin-right: .1rem;
         width: .28rem;
         height: .28rem;
@@ -74,9 +81,6 @@
         vertical-align: middle;
     }
     img.banner {
-        display: inline-block;
-        height: 2.79rem;
-        width: 100%;
         &.rule-banner-img{
             position: relative;
             z-index: 99;
@@ -96,11 +100,11 @@
         font-size: .24rem;
         border-top-left-radius: .2rem;
         border-bottom-left-radius: .2rem;
-        background-color: #5354548a;
+        background-color: #248bce;
         &.wai-tou-rule-tag{
-            width: 1.4rem;
+            width: 1.2rem;
             .info-text{
-                margin-left: .2rem;
+                white-space: nowrap;
             }
         }
     }
@@ -110,8 +114,77 @@
 }
 .second-banner{
    width: 100%;
-   height: 5.85rem;
+   height: 2.42rem;
   .set-bg("../../img/mengzhu_02.png");
+  border-radius: .3rem;
+  margin-bottom: .2rem;
+  &.card-wrap{
+      position: relative;
+      height: auto;
+      overflow: hidden;
+      text-align: center;
+      .duihuan{
+        display: inline-block;  
+        margin-top: .4rem;
+        padding-top:.1rem;
+        width:6.4rem;
+        height: 1.8rem;   
+        .set-bg("../../img/duihuan-shou-bg.png");
+        .titel{
+            font-size: .36rem;
+            color:#fff354;
+            font-weight: bold;
+        }
+        .info{
+            font-size: .22rem;
+            color:#fff354;
+        }
+        .content{
+            font-weight: bold;
+            margin-top: .2rem;
+            font-size: .3rem;
+            color:#000;
+        }
+        .text{
+            font-size: .36rem;
+            color:#ff5737;
+        }  
+      }
+  }
+  .head-box{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: .3rem;
+      &.second-card{
+        justify-content:start;
+      }
+      .item{
+        font-weight: bold;
+          font-size: .28rem;
+          color:#666666;
+      }
+      .canyu{
+        width: 1.81rem;
+        height: .52rem;
+        line-height: .52rem;
+        text-align: center;
+       .set-bg("../../img/can-yu-liu-c-bg.png")
+      }
+      .text{
+          margin-left: .2rem;
+          text-align: left;
+          font-size: .22rem;
+      }
+      .rule-link{
+        margin-right: .3rem;  
+        color:#1d5fd6;
+        font-size: .24rem;
+        border-bottom: 1px solid #1d5fd6;
+    }
+      
+  }
+
   &.waitou-banner{
      position: relative; 
      height: 8.64rem;
@@ -141,20 +214,20 @@
     }
   }
   .step-wrap{
-      padding:2.8rem .3rem 0 .3rem;
+      padding:.18rem .27rem;
       display: flex;
       justify-content: center;
       .item{
           position: relative;
           z-index: 9;
           flex: 1;
-          color:#fff;
+          color:#666;
           font-weight: bold;
           text-align: center;
           img{
               position: relative;
               z-index: 9;
-              width: 1.19rem;
+              width: .43rem;
               height: auto;
           }
           .title{
@@ -166,11 +239,11 @@
           &:before {
             content: '';
             width: 90%;
-            border-bottom: 1px dashed #fff;
+            border-bottom: 1px solid #fdbf62;
             position: absolute;
             z-index: 1;
             left: 50%;
-            bottom: 70%;
+            top: .22rem;
             margin-left: 0;
         }
         &:last-child:before {
@@ -178,98 +251,30 @@
         }
       }
   }  
-  .rule-link{
-      margin-top: .3rem;
-      margin-right: .8rem;
-      float: right;
-      color:#544100;
-      font-size: .24rem;
-      border-bottom: 1px solid #544100;
-  }
+  
 }
-.third-banner{
-   position: relative; 
-   width: 100%;
-   height: 5.83rem;
-  .set-bg("../../img/mengzhu_03.png");
-  .gua-jiang {
-    position: relative;  
-    text-align: center;
-    padding-top: 2rem;
-    .canvas-wrap{
-        margin-top: .14rem;
-        position: relative;
-        z-index: 999;
+.rule-content-wrap{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2.2rem;
+    padding:0 .3rem;
+    color:#fff;
+    .item{
+        font-size: .28rem;
     }
-    .info-text{
-        position: absolute;
-        top: .6rem;
-        left: 50%;
-        transform: translate(-50%, 0);
-        font-weight: bold;
-        color: #f53e39;
-        font-size: 0.28rem; 
+    .text{
+      position: relative;  
+      font-size: .22rem;
+      border-left: 1px solid #ffffff4d;
+      padding-left: .2rem;
+      &::before{
+          position: absolute;
+
       }
-    .result-text {
-        position: absolute;
-        background-color: #fff;
-        .set-bg('../../img/guajiang_no.png');
-        padding:.25rem .25rem .38rem .25rem;
-        z-index: 99;
-        top: 3rem;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 6.06rem;
-        height: 2.2rem;
-        font-size: .26rem;
-        color: #c30;
-        .info{
-            background-color: #f2dab6;
-            display: flex;
-            .result-pig{
-                flex: 0 0 1.57rem;
-                width: 1.57rem;
-                height: 1.54rem;
-                &.result-good{
-                    .set-bg('../../img/pig-small-good.png');
-                }
-                &.result-bad{
-                    .set-bg('../../img/pig-small-bad.png');
-                }
-            }
-            .detail{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-                flex: 1;
-                .title{
-                    font-weight: bold;
-                    color:#f53e3a;
-                    font-size: .28rem;
-                }
-                .info-detail{
-                    color:#666666;
-                    font-size: .24rem;
-                }
-            }
-        }
-    } 
-  }
-  .has-opertunity{
-    position: absolute;
-    left: 50%;
-    transform: translate3d(-50%,0,0);
-    bottom: .6rem;
-    text-align: center;
-    font-size: .3rem;
-    color:#a4302c;
-    font-weight: bold;
-     span{
-        color:#ff4a45;
-     }
     }
 }
+
 .app-list-wrap {
     padding: .2rem .2rem .68rem;
     .contain {
@@ -297,6 +302,8 @@
             padding: .3rem .2rem .3rem .35rem;
             border-bottom: 1px solid #eee;
             background-color: #fff;
+            margin-bottom: .1rem;
+            border-radius: .3rem;
             .pic-1 {
                 margin-top: .1rem;
                 margin-right: .3rem;
@@ -335,7 +342,7 @@
                     text-align: justify;
                 }
                 .sub-title {
-                    color: red;
+                    color: #999;
                 }
             }
             .js-button {
@@ -363,22 +370,7 @@
         }
     }
 }
-.wai-contet-section{
-    position: relative;
-    .title{
-        position: absolute;
-        left: 50%;
-        transform: translate3d(-50%,0,0);
-        width: 2.46rem;
-        height: 1.18rem;
-        text-align: center;
-        line-height: 1.4rem;
-        font-size: 0.3rem;
-        color:#f53e39;
-        font-weight: bold;
-        .set-bg("../../img/wt-title-bg.png");  
-    }
-}
+
 .rule-prize-content {
     padding: 0 .2rem .5rem .2rem;
     .title {
@@ -448,18 +440,19 @@
         margin-top: .3rem;
         position: relative;
         border-radius: .2rem;
-        background: linear-gradient(#ffe423, #ffb924); /* 标准的语法（必须放在最后） */
+        // .set-bg('../../img/mengzhu_02.png')
+        box-shadow:0 0 .2rem #e64265 inset; 
         &.rule-prize-detail {
         }
         .title {
             position: absolute;
-            top: 0.15rem;
+            top: -.3rem;
             left: 50%;
             transform: translate3d(-50%, 0, 0);
-            width: 2.46rem;
-            height: .94rem;
-            line-height: .3rem;
-            color:#f53e39;
+            width: 3.15rem;
+            height: .47rem;
+            line-height: .08rem;
+            color:#fff;
             font-weight: bold;
             .set-bg("../../img/h-rule-title-bg.png");
         }
@@ -508,7 +501,6 @@
     padding: .45rem .6rem;
     margin-bottom: .2rem;
     position: relative;
-    overflow: hidden;
     .pig-nose{
         position: absolute;
         z-index: 99;
@@ -535,57 +527,53 @@
         width: 100%;
     }
     .content {
-        margin-top: .5rem;
+        margin-top: .1rem;
         font-size: .28rem;
         color: #666666;
     }
 }
 
 .rule-prize-detail {
-    padding: 0.3rem 0.2rem;
+    padding: 0.3rem 0.3rem;
+    margin-bottom: .6rem;
     .my-prize-wrap {
-        padding: .9rem 0 0 0;
+        padding: .3rem 0 0 0;
         .prize-box {
             overflow: hidden;
-            border-radius: .2rem;
-            border: 1px solid #f53e39;
+            border: 1px solid #fbc9d4;
             border-bottom: none;
         }
         .head {
             display: flex;
-            background-color: #f53e39;
+            background-color: #fbc9d4;
             font-size: .24rem;
-            color: #fff;
+            color: #666666;
             .item {
                 flex: 1;
-                border-right: 1px solid #ffffff8a;
                 span{
                     display: inline-block;
                     padding:.2rem;  
                 }
-                &:last-child{
-                    border-right: none;
-                  }
             }
         }
+    }
+    .content{
+        color:#666;
+        font-size: .24rem;
     }
     .prize-content {
         display: flex;
         background-color: #fff;
         font-size: .24rem;
-        border-bottom: 1px solid #f53e39;
-        color: #f53e39;
+        border-bottom: 1px solid #fbc9d4;
+        color: #666;
         text-align: center;
         .item {
             flex: 1;
-            border-right: 1px solid #f53e3957;
             span{
                 display: inline-block;
                 padding:.2rem;
             }
-            &:last-child{
-                border-right: none;
-              }
         }
         &:not(:last-child){
           border-bottom: 1px solid #f53e3957
@@ -600,10 +588,24 @@
     }
     .button {
         .set-bg("../../img/rule-ti-bg.png");
-        color: #fff;
+        color: #666;
+        font-weight: bold;
         text-align: center;
-        width: 1.66rem;
-        height: .73rem;
-        line-height: .73rem;
+        width: 1.43rem;
+        height: .45rem;
+        line-height: .45rem;
+    }
+}
+.waitou-wrap{
+    .btn-wrap{
+        display: block;
+        position: fixed;
+        z-index: 99;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 1.2rem;
+      width: 5.86rem;
+      height: 1.15rem;
+     .set-bg('../../img/ma-shan-btn.png');
     }
 }
