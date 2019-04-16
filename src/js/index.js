@@ -30,22 +30,22 @@ import '../js/mmapp.js'; */
     // [ ]);
 
     //第一次提示
-    dialog.fisrtStep('提示',
-        '<span>下载应用后，一定要在本活动页面</span><br>' +
-        '<span>【打开】</span>' +
-        '<span>应用，才能获得金币。</span>'
-    );
-    setTimeout(function () {
-        $('#YDUI_CONFRIM').remove();
-        dialog.shareOnWeb('good', 
-        '<div class="share-on-web"><span>1.微信不支持下载，请点击<br>右上角按钮</span></div>'+
-        '<div class="share-on-web"><span>2.在菜单中点击<br></span><span class="look-me">【在浏览器中打开】</span>'+
-        '</div>', 
-        [ ]);
-        setTimeout(function () {
-            $('#YDUI_CONFRIM').remove();
-        }, 2000)
-    }, 2000)
+    // dialog.fisrtStep('提示',
+    //     '<span>下载应用后，一定要在本活动页面</span><br>' +
+    //     '<span>【打开】</span>' +
+    //     '<span>应用，才能获得金币。</span>'
+    // );
+    // setTimeout(function () {
+    //     $('#YDUI_CONFRIM').remove();
+    //     dialog.shareOnWeb('good', 
+    //     '<div class="share-on-web"><span>1.微信不支持下载，请点击<br>右上角按钮</span></div>'+
+    //     '<div class="share-on-web"><span>2.在菜单中点击<br></span><span class="look-me">【在浏览器中打开】</span>'+
+    //     '</div>', 
+    //     [ ]);
+    //     setTimeout(function () {
+    //         $('#YDUI_CONFRIM').remove();
+    //     }, 2000)
+    // }, 2000)
 
 }(window);
 
