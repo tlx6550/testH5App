@@ -78,7 +78,11 @@ import '../js/mmapp.js'; */
 
         }, 500);
     });
-
+    var $picture = $('.slide-container');
+    $picture.picture({
+        touchEndCallBack:function(){console.log(1)}
+    });
+    console.log($picture)
     // !function initClick() {
     //     var tag = false;
     //     if (tag) {
