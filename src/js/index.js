@@ -78,11 +78,15 @@ import '../js/mmapp.js'; */
 
         }, 500);
     });
-    var $picture = $('.slide-container');
-    $picture.picture({
-        touchEndCallBack:function(){console.log(1)}
+
+    var arr = ['https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1555914501706&di=31ef8b3d17eb52482c7c40f50ae806c3&imgtype=0&src=http%3A%2F%2Fattachments.gfan.com%2Fforum%2F201504%2F02%2F1926233rxf3rz7q3cchfm8.jpg', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1555914501706&di=31ef8b3d17eb52482c7c40f50ae806c3&imgtype=0&src=http%3A%2F%2Fattachments.gfan.com%2Fforum%2F201504%2F02%2F1926233rxf3rz7q3cchfm8.jpg'];
+    $('.slide-container').picture({
+        run:true,
+        initBlockPosi:[0,50],
+        slideImg:arr[0],
+        blockImg:arr[1]
     });
-    console.log($picture)
+    // $('.slide-container').picture('initMoveBlock');
     // !function initClick() {
     //     var tag = false;
     //     if (tag) {

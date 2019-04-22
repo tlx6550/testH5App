@@ -627,45 +627,50 @@ import $ from '../../assets/js/jquery.min.js';
 !function () {
     'use strict';
 
-    function Picture(element, options) {
-        this.$slider = $(element);
+    function Picture(options) {
+        var DEFAULTS = {
+            run: true, //初始化就执行
+            slideImg: 'data:img/png;base64,',// 背景图
+            $slideBg: $('.slide-bg'),
+            $slideContainer: $('.slide-container'),// 拼图容器
+            DomSlider: $('.slider')[0],
+            DomBlock: $('.slide-block')[0],
+            $slideBlock: $('.slide-block'),
+            initImgWidth: 574,// 拼图最大宽度
+            Domdocument:window.document,
+            slideWidth: $('.slider').width(),
+            slideBarWidth: $('.sliderContainer').width(),
+            slideBgWidth: $('.slide-bg').width(),
+            blockImgWidth: $('.slide-block').width(),
+    
+            originX: 0,
+            originY: 0,
+            startTime: 0,
+            isTouchStart: false,
+            touchEndCallBack: null,
+            initBlockPosi:[],
+            slideImg:"",
+            blockImg:""
+        };
         this.gloableLockOnTouchend = false;
-        this.options = $.extend({}, Picture.DEFAULTS, options || {});
+        this.options = $.extend({},DEFAULTS, options || {});
     }
 
-    Picture.DEFAULTS = {
-        run: true, //初始化就执行
-        slideImg: 'data:img/png;base64,',// 背景图
-        $slideBg: $('.slide-bg'),
-        blockImg: 'data:img/png;base64,',// 展示的滑块图
-        $slideContainer: $('.slide-container'),// 拼图容器
-        DomSlider: $('.slider')[0],
-        DomBlock: $('.slide-block')[0],
-        $slideBlock: $('.slide-block'),
-        initImgWidth: 574,// 拼图最大宽度
-        Domdocument: $('document')[0],
-        slideWidth: $('.slider').width(),
-        slideBarWidth: $('.sliderContainer').width(),
-        slideBgWidth: $('.slide-bg').width(),
-        blockImgWidth: $('.slide-block').width(),
 
-        originX: 0,
-        originY: 0,
-        startTime: 0,
-        isTouchStart: false,
-        touchEndCallBack: null
-
-    };
 
     Picture.timer = null;
 
     /**
      * 开始倒计时
      */
-    Picture.prototype.initMoveBlock = function (initBlockPosi, slideImg, blockImg) {
-        var that = this,
-            options = that.options,
+    Picture.prototype.initMoveBlock = function () {
+        var that = this;
+         var  options = that.options,
+            initBlockPosi = options.initBlockPosi,
+            slideImg = options.slideImg,
+            blockImg = options.blockImg,
             document = options.Domdocument;
+            $('.slide-container').show()
         that.canMoveWidth = options.slideBarWidth - options.slideWidth / 2;
         that.canMoveWidth2 = options.slideBarWidth - options.blockImgWidth / 2;
         that.radioMov = that.canMoveWidth2 / that.canMoveWidth;
@@ -748,6 +753,10 @@ import $ from '../../assets/js/jquery.min.js';
 
             if (!picture) {
                 $this.data('ydui.picture', (picture = new Picture(this, option)));
+                var tag = typeof option == 'object' && option.run;
+                if (tag) {
+                    picture.initMoveBlock();
+                }
             }
 
             if (typeof option == 'string') {
