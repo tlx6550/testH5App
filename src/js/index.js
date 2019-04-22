@@ -78,40 +78,52 @@ import '../js/mmapp.js'; */
 
         }, 500);
     });
-
-    var arr = ['https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1555914501706&di=31ef8b3d17eb52482c7c40f50ae806c3&imgtype=0&src=http%3A%2F%2Fattachments.gfan.com%2Fforum%2F201504%2F02%2F1926233rxf3rz7q3cchfm8.jpg', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1555914501706&di=31ef8b3d17eb52482c7c40f50ae806c3&imgtype=0&src=http%3A%2F%2Fattachments.gfan.com%2Fforum%2F201504%2F02%2F1926233rxf3rz7q3cchfm8.jpg'];
+    //移动完的回调函数
+    var touchEndCallBack = function (x) {
+        if (x >= 220 && x <= 240) {
+            $(".slide-msg").removeClass("error");
+            $(".slide-msg").addClass("success");
+            $(".slide-msg").html("验证成功!");
+        } else {
+            $(".slide-msg").removeClass("success");
+            $(".slide-msg").addClass("error");
+            $(".slide-msg").html("验证失败！请重新再试～");
+        }
+    }
+    var arr = ['https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1555924994965&di=1cad779bb2d4b340234448effdfe37a3&imgtype=0&src=http%3A%2F%2Fimg4.duitang.com%2Fuploads%2Fitem%2F201406%2F09%2F20140609125318_3vkCu.thumb.700_0.jpeg', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1555924994965&di=1cad779bb2d4b340234448effdfe37a3&imgtype=0&src=http%3A%2F%2Fimg4.duitang.com%2Fuploads%2Fitem%2F201406%2F09%2F20140609125318_3vkCu.thumb.700_0.jpeg'];
+    //初始化拼图
     $('.slide-container').picture({
-        run:true,
-        initBlockPosi:[0,50],
-        slideImg:arr[0],
-        blockImg:arr[1]
+        run: true,
+        initBlockPosi: [10, 50],
+        slideImg: arr[0],
+        blockImg: arr[1],
+        touchEndCallBack: touchEndCallBack
     });
-    // $('.slide-container').picture('initMoveBlock');
-    // !function initClick() {
-    //     var tag = false;
-    //     if (tag) {
-    //         $('.dom').click(function () {
-    //             alert(1)
-    //         })
-    //     } else {
-    //         $('.dom').click(function () {
-    //             alert(2)
-    //         })
-    //     }
-    // }()
-
-    // !function initClick() {
-    //     var tag = false;
-    //     $('.dom').click(function () {
-    //         if (tag) {
-    //             alert(1)
-    //         } else {
-    //             alert(2)
-    //         }
-
-    //     })
-
-    // }()
+    //刷新
+    $(".refreshIcon").click(function () {
+        var arr = ['https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1555922961&di=4ef1dc7735ac683fe34ea6cadb39924c&src=http://cdn.lizhi.fm/radio_cover/2014/08/18/13784961166699780.jpg', 'https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1555922961&di=4ef1dc7735ac683fe34ea6cadb39924c&src=http://cdn.lizhi.fm/radio_cover/2014/08/18/13784961166699780.jpg'];
+        //传入新的构造参数即可刷新
+        $('.slide-container').picture({
+            run: true,
+            initBlockPosi: [26, 66],
+            slideImg: arr[0],
+            blockImg: arr[1],
+            touchEndCallBack: touchEndCallBack
+        });
+    })
+    $(".canvas-close").click(function () {
+        $('.slide-container').picture('hidePop');
+    });
+    $('.app-box').on('click', 'a', function (e) {
+        e.preventDefault();
+        $('.slide-container').picture({
+            run: true,
+            initBlockPosi: [10, 50],
+            slideImg: arr[0],
+            blockImg: arr[1],
+            touchEndCallBack: touchEndCallBack
+        });
+    })
 
 
 }(window);
