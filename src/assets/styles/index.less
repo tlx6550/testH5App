@@ -53,22 +53,21 @@
 }
 
 .home-bg {
-    background-color: #e64265;
+    background-color: #3b5ad7;
     &.rule-home-bg{
-        background-color: #df3426;
+        background-color: #3b5ad7;
     }
 }
 
 .banner {
     position: relative;
     font-size: 0;
-    padding:4.7rem .3rem 0 .3rem;
+    padding:0 .3rem 0 .3rem;
     .set-bg('../../img/home-bg.png');
     &.waitou{
-        .set-bg('../../img/home-wt-bg.png');
-        height:11.36rem;
+      .set-bg('../../img/home-wt-bg.png');
     }
-    height: 8.5rem;
+    height: 8.64rem;
     .rule-icon {
         display: inline-block;
         vertical-align: middle;
@@ -109,273 +108,47 @@
         }
     }
     .prize-tag {
-        top: .8rem;
+        top: .45rem;
     }
-}
-.second-banner{
-   width: 100%;
-   height: 2.42rem;
-  .set-bg("../../img/mengzhu_02.png");
-  border-radius: .3rem;
-  margin-bottom: .2rem;
-  &.card-wrap{
-      position: relative;
-      height: auto;
-      overflow: hidden;
-      text-align: center;
-      .duihuan{
-        display: inline-block;  
-        margin-top: .4rem;
-        padding-top:.1rem;
-        width:6.4rem;
-        height: 1.8rem;   
-        .set-bg("../../img/duihuan-shou-bg.png");
-        .titel{
-            font-size: .36rem;
-            color:#fff354;
-            font-weight: bold;
-        }
-        .info{
-            font-size: .22rem;
-            color:#fff354;
-        }
-        .content{
-            font-weight: bold;
-            margin-top: .2rem;
-            font-size: .3rem;
-            color:#000;
-        }
-        .text{
-            font-size: .36rem;
-            color:#ff5737;
-        }  
-      }
-  }
-  .head-box{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: .3rem;
-      &.second-card{
-        justify-content:start;
-      }
-      .item{
-        font-weight: bold;
-          font-size: .28rem;
-          color:#666666;
-      }
-      .canyu{
-        width: 1.81rem;
-        height: .52rem;
-        line-height: .52rem;
-        text-align: center;
-       .set-bg("../../img/can-yu-liu-c-bg.png")
-      }
-      .text{
-          margin-left: .2rem;
-          text-align: left;
-          font-size: .22rem;
-      }
-      .rule-link{
-        margin-right: .3rem;  
-        color:#1d5fd6;
-        font-size: .24rem;
-        border-bottom: 1px solid #1d5fd6;
-    }
-      
-  }
-
-  &.waitou-banner{
-     position: relative; 
-     height: 8.64rem;
-    .set-bg("../../img/wai-tou-banner.png");
-    .wai-tou-guagua{
+    .home-btn-c{
         position: absolute;
-        left: 50%;
-        transform: translate3d(-50%,0,0);
-        width: 5.94rem;
-        height: 2.08rem;
+        left:50%;
         bottom: 1rem;
+        transform: translateX(-50%);
+        img{
+            display: block;
+            width: 5.52rem;
+            height: 1.19rem;
+        }
+    }
+    
+}
+.rule-info-text{
+    position: relative;
+    z-index: 99;
+    margin-top:-1rem;
+    text-align: center;
+    color: #d4e0f7;
+    font-size: .22rem;
+    padding:0 .6rem;
+}
+.h-section{
+    &.lkbl-btn{
+        margin-top: .3rem;
         text-align: center;
-        line-height: 2.04rem;
-        .set-bg("../../img/wai-guajiang.png");
-        .text{
-            font-weight: bold;
-            font-size: .36rem;
-            color:#fff;
-        }
-    }
-    .waitou-pig-img{
-        position: absolute;
-        right: .2rem;
-        bottom: .1rem;
-        width:1.67rem;
-        height: 1.48rem;
-    }
-  }
-  .step-wrap{
-      padding:.18rem .27rem;
-      display: flex;
-      justify-content: center;
-      .item{
-          position: relative;
-          z-index: 9;
-          flex: 1;
-          color:#666;
-          font-weight: bold;
-          text-align: center;
-          img{
-              position: relative;
-              z-index: 9;
-              width: .43rem;
-              height: auto;
-          }
-          .title{
-              font-size: .24rem;
-          }
-          .red-title{
-              color:#dc2b2d;
-          }
-          &:before {
-            content: '';
-            width: 90%;
-            border-bottom: 1px solid #fdbf62;
-            position: absolute;
-            z-index: 1;
-            left: 50%;
-            top: .22rem;
-            margin-left: 0;
-        }
-        &:last-child:before {
-            width: 0;
-        }
-      }
-  }  
-  
-}
-.rule-content-wrap{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 2.2rem;
-    padding:0 .3rem;
-    color:#fff;
-    .item{
-        font-size: .28rem;
-    }
-    .text{
-      position: relative;  
-      font-size: .22rem;
-      border-left: 1px solid rgba(255,255,255,0.5);
-      padding-left: .2rem;
-      &::before{
-          position: absolute;
-
-      }
-    }
-}
-
-.app-list-wrap {
-    padding: .2rem .2rem .68rem;
-    .contain {
-        margin: 0 .05rem;
-        .list-title {
-            background: url(../img/app-list-bg.png)no-repeat;
-            background-size: 100% 100%;
-            width: 100%;
-            height: 1.2rem;
-            border-top-right-radius: .1rem;
-            border-top-left-radius: .1rem;
-            .title-box {
-                padding: 0 .2rem;
-                color: #fff;
-                height: 100%;
-                font-size: .3rem;
-            }
-            .sub-title {
-                margin-bottom: 0;
-                color: #fad44e;
-                font-size: .24rem;
-            }
-        }
-        .list {
-            
-            position: relative;
-            padding: .25rem .3rem;
-            border-bottom: 1px solid #eee;
-            background-color: #fff;
-            margin-bottom: .1rem;
-            border-radius: .3rem;
-            .pic-1 {
-                margin-top: .1rem;
-                margin-right: .3rem;
-                float: left;
-                img {
-                    width: 1.15rem;
-                    height: 1.15rem;
-                }
-            }
-            .app-content {
-                float: left;
-                text-align: left;
-                .title-p {
-                    max-width:3rem;
-                    word-wrap: normal;
-                    -o-text-overflow: ellipsis;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-align: justify;
-                    font-weight: bold;
-                    margin-top: 0;
-                    font-size: .36rem;
-                    color: #333;
-                }
-                p {
-                    margin: .1rem 0;
-                    font-size: .24rem;
-                    color: #999;
-                    max-width:3rem;
-                    word-wrap: normal;
-                    -o-text-overflow: ellipsis;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-align: justify;
-                }
-                .sub-title {
-                    margin-bottom: 0;
-                    color: #999;
-                }
-            }
-            .js-button {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                right: .3rem;
-                width: 1.2rem;
-                height: .59rem;
-                border: none;
-                border-radius: .2rem;
-            }
-            .js-label {
-                position: relative;
-                z-index: 9;
-                text-align: center;
-                font-size: .28rem;
-                color: #23beff;
-                line-height: .69rem;
-                height: .59rem;
-            }
-            .btn-wrapper {
-                border-width: .03rem;
-            }
-            
+        margin-bottom: 1.6rem;
+        img{
+            width:6.44rem;
+            height: 1.56rem;
         }
     }
 }
 
 .rule-prize-content {
+    &.h-section{
+        background-color: #4970ea;
+        padding-top: 1.35rem;
+    }
     padding: 0 .2rem .5rem .2rem;
     .title {
         text-align: center;
@@ -386,52 +159,6 @@
     .app-card {
         display: flex;
         justify-content: center;
-    }
-    .item-card {
-        position: relative;
-        flex: 0 0 auto;
-        width: 2.87rem;
-        height: 2.21rem;
-        .set-bg("../../img/new-card-bg.png");
-        .app-name {
-            margin-top: .4rem;
-            text-align: center;
-            font-size: .24rem;
-            color: #686868;
-            .icon {
-                vertical-align: text-bottom;
-                width: .31rem;
-                height: .31rem;
-            }
-        }
-        .app-text {
-            text-align: center;
-            font-weight: bold;
-            margin-top: .09rem;
-            color: #f0763a;
-            font-size: .3rem;
-        }
-        .btn {
-            position: absolute;
-            width: 1.87rem;
-            height: .41rem;
-            left: 50%;
-            transform: translate3d(-50%, 0, 0);
-            color: #fff;
-            line-height: .41rem;
-            bottom: .15rem;
-            .set-bg("../../img/new-card-btn-bg.png");
-        }
-        .has-active {
-            color: #feca26;
-            .set-bg("../../img/new-card-btn-has-bg.png");
-        }
-        .no-active {
-            .set-bg("../../img/new-card-btn-no-bg.png");
-        }
-        &:first-child {
-            margin-right: .3rem;
-        }
     }
     .h-more {
         img {
@@ -444,21 +171,22 @@
         margin-top: .3rem;
         position: relative;
         border-radius: .2rem;
-        // .set-bg('../../img/mengzhu_02.png')
-        box-shadow:0 0 .2rem #e64265 inset; 
         &.rule-prize-detail {
         }
         .title {
             position: absolute;
-            top: -.3rem;
+            top: -.8rem;
             left: 50%;
             transform: translate3d(-50%, 0, 0);
-            width: 3.15rem;
-            height: .47rem;
+            width:5.86rem;
+            height: .69rem;
             line-height:0;
             color:#fff;
             font-weight: bold;
             .set-bg("../../img/h-rule-title-bg.png");
+            &.my-prize{
+                .set-bg("../../img/my-prize-title-bg.png");
+            }
         }
         .text {
             margin-top: .5rem;
@@ -488,7 +216,7 @@
 }
 
 .rule-prize-content {
-    margin-top: -.13rem;
+    margin-top: -1.4rem;
     &.waitou-rule-prize-content{
         margin-top: 1.2rem;
         .rule-content {
@@ -509,14 +237,6 @@
     padding: .45rem .6rem;
     margin-bottom: .2rem;
     position: relative;
-    .pig-nose{
-        position: absolute;
-        z-index: 99;
-        top: 0;
-        right: -.3rem;
-        width: 1.5rem;
-        height: 1.08rem;
-    }
     .head {
         position: relative;
         text-align: center;
@@ -548,19 +268,23 @@
         padding: .3rem 0 0 0;
         .prize-box {
             overflow: hidden;
-            border: 1px solid #fbc9d4;
+            border: 1px solid #8da9ea;
             border-bottom: none;
         }
         .head {
             display: flex;
-            background-color: #fbc9d4;
+            background-color: #8da9ea;
             font-size: .24rem;
-            color: #666666;
+            color: #fff;
             .item {
                 flex: 1;
                 span{
                     display: inline-block;
                     padding:.2rem;  
+                }
+                border-right: 1px solid #fff;
+                &:last-child{
+                    border:none;
                 }
             }
         }
@@ -573,8 +297,8 @@
         display: flex;
         background-color: #fff;
         font-size: .24rem;
-        border-bottom: 1px solid #fbc9d4;
-        color: #666;
+        border-bottom: 1px solid #8da9ea;
+        color: #8da9ea;
         text-align: center;
         .item {
             flex: 1;
@@ -582,9 +306,13 @@
                 display: inline-block;
                 padding:.2rem;
             }
+            border-right: 1px solid #8da9ea;
+            &:last-child{
+                border:none;
+            }
         }
         &:not(:last-child){
-          border-bottom: 1px solid #f53e3957
+          border-bottom: 1px solid #8da9ea
         }
     }
 }
@@ -596,7 +324,7 @@
     }
     .button {
         .set-bg("../../img/rule-ti-bg.png");
-        color: #666;
+        color: #fff;
         font-weight: bold;
         text-align: center;
         width: 1.43rem;
