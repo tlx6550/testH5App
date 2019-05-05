@@ -115,6 +115,7 @@
         left:50%;
         bottom: 1rem;
         transform: translateX(-50%);
+        z-index: 199;
         img{
             display: block;
             width: 5.52rem;
@@ -129,10 +130,14 @@
 .rule-info-text{
     position: relative;
     z-index: 99;
+    line-height: .4rem;
     text-align: left;
     color: #d4e0f7;
     font-size: .22rem;
-    padding:0 .6rem;
+    padding:0 .4rem;
+    &.share{
+       top:-0.6rem;
+    }
 }
 .h-section{
     &.lkbl-btn{
@@ -177,7 +182,7 @@
         }
         .title {
             position: absolute;
-            top: -.8rem;
+            top: -.9rem;
             left: 50%;
             transform: translate3d(-50%, 0, 0);
             width:5.86rem;
@@ -193,7 +198,7 @@
         .text {
             margin-top: .5rem;
             font-size: .24rem;
-            color: #666666;
+            color: #4970ea;
         }
     }
     .rule-prize-detail-2 {
