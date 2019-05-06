@@ -345,6 +345,37 @@ import $ from '../../assets/js/jquery.min.js';
 
         $body.append($dom);
     };
+    dialog.simpleConfirm = function (title,mes, callback) {
+        var ID = 'YDUI_CONFRIM';
+
+        $('#' + ID).remove();
+
+        var args = arguments.length;
+        if (args < 2) {
+            console.error('From YDUI\'s confirm: Please three parameters!!!');
+            return;
+        }
+
+       var $dom = $('' +
+            '<div class="mask-black-dialog simple" id="' + ID + '">' +
+            '   <div class="m-confirm simple">' +
+            '       <div class="confirm-hd">' +
+            '<strong class="confirm-title simple">' + title + '</strong></div>' +
+            '       <div class="confirm-bd-simple">' + mes + '</div>' +
+            '   </div>' +
+            '</div>');
+        // 禁止滚动屏幕【移动端】
+        ydui.util.pageScroll.lock();
+        (function ($dom) {
+            $dom.on('click', function (e) {
+                e.stopPropagation();
+                if(typeof callback === "function"){
+                    callback()
+                } 
+            });
+        })($dom);
+        $body.append($dom);
+    };
     /**
      * 弹出警示框
      * @param mes       提示文字String 【必填】

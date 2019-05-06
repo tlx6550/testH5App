@@ -167,6 +167,9 @@ import '../js/mmapp.js'; */
     // setTimeout(function(){
     //     $('#YDUI_CONFRIM').remove();
     // },5000)
+    dialog.simpleConfirm('领取免流量包、下载MM应用商场', '快来帮好友获得视频会员卡吧',function () {
+        $('#YDUI_CONFRIM').remove();
+    });
     $('.lklq-btn').click(function () {
         dialog.confirm('', '抱歉，因网络原因<br/>您本次订购出现错误，请重新领取。', [
             {
@@ -224,12 +227,12 @@ import '../js/mmapp.js'; */
     //初始化拼图
     
     var pic;
-    pic =  new Picture({
-        initBlockPosi: [10, 50],
-        slideImg: arr[0],
-        blockImg: arr[1],
-        touchEndCallBack: touchEndCallBack
-    });
+    // pic =  new Picture({
+    //     initBlockPosi: [10, 50],
+    //     slideImg: arr[0],
+    //     blockImg: arr[1],
+    //     touchEndCallBack: touchEndCallBack
+    // });
     //刷新
     $(".refreshIcon").click(function () {
         var arr = ['https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1555922961&di=4ef1dc7735ac683fe34ea6cadb39924c&src=http://cdn.lizhi.fm/radio_cover/2014/08/18/13784961166699780.jpg', 'https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1555922961&di=4ef1dc7735ac683fe34ea6cadb39924c&src=http://cdn.lizhi.fm/radio_cover/2014/08/18/13784961166699780.jpg'];
@@ -240,17 +243,6 @@ import '../js/mmapp.js'; */
     $(".canvas-close").click(function () {
         $('.slide-container').picture('hidePop');
     });
-    $('.app-box').on('click', 'a', function (e) {
-        e.preventDefault();
-        $('.slide-container').picture({
-            run: true,
-            initBlockPosi: [10, 50],
-            slideImg: arr[0],
-            blockImg: arr[1],
-            touchEndCallBack: touchEndCallBack
-        });
-    })
-
 
 }(window);
 
