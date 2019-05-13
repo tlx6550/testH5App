@@ -167,9 +167,9 @@ import '../js/mmapp.js'; */
     // setTimeout(function(){
     //     $('#YDUI_CONFRIM').remove();
     // },5000)
-    dialog.simpleConfirm('领取免流量包、下载MM应用商场', '快来帮好友获得视频会员卡吧',function () {
-        $('#YDUI_CONFRIM').remove();
-    });
+//  dialog.simpleConfirm('领取免流量包、下载MM应用商场', '快来帮好友获得视频会员卡吧',function () {
+//      $('#YDUI_CONFRIM').remove();
+//  });
     $('.lklq-btn').click(function () {
         dialog.confirm('', '抱歉，因网络原因<br/>您本次订购出现错误，请重新领取。', [
             {
