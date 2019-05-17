@@ -70,6 +70,8 @@
      border-bottom: 1px solid #dfdfdf;
      margin-bottom: .2rem;
     .title {
+         position: relative;
+            left:.2rem;
         color: @titleColor;
         font-size: .3rem;
         font-weight: bold;
@@ -79,8 +81,10 @@
         margin-bottom: .4rem;
     }
     .item {
+        display: block;
         position: relative;
         flex: 1;
+        text-align: center;
         .app-icon {
             width: 1.2rem;
             height: 1.2rem;
@@ -107,13 +111,15 @@
         border-radius: .2rem;
     }
     .js-label {
-        position: relative;
+        position: absolute;
         z-index: 9;
-        text-align: center;
+        left:50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        width: 1.2rem;
         font-size: .28rem;
-        color: #23beff;
-        line-height: .69rem;
-        height: .59rem;
+        color: #5191FE;
+
     }
     .btn-wrapper {
         border-width: .03rem;
@@ -122,7 +128,7 @@
         z-index: 2;
         display: block;
         background-color: #fff;
-        border: .04rem solid #22beff;
+        border: .02rem solid #5191FE;
         border-radius: .2rem;
     }
 }
