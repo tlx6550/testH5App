@@ -346,6 +346,80 @@ import $ from '../../assets/js/jquery.min.js';
 
         $body.append($dom);
     };
+    dialog.orderConfirm = function (obj, opts) {
+        var title = obj['title'],
+        phone = obj['phone'],
+        mes =  obj['mes'];
+        var ID = 'YDUI_CONFRIM';
+
+        $('#' + ID).remove();
+
+        var btnArr = opts;
+        if (typeof opts === 'function') {
+            btnArr = [{
+                txt: '取消',
+                color: false
+            }, {
+                txt: '确定',
+                color: true,
+                callback: function () {
+                    opts && opts();
+                }
+            }];
+        }
+
+        var $dom = $('' +
+            '<div class="mask-black-dialog" id="' + ID + '">' +
+            '   <div class="m-confirm order-confirm">' +
+            '       <div class="confirm-hd">' +
+            '       <strong class="confirm-title">' + title + '</strong></div>' +
+            '       <div class="confirm-bd">' +
+            '          <div class="phone-title">您的手机号码' + '<span class="phone-num">' +phone+ '</span>' +
+            '          </div>' +  mes +
+            '   </div>' +
+            '   </div>' +
+            '</div>');
+
+        // 遍历按钮数组
+        var $btnBox = $('<div class="confirm-ft"></div>');
+        $.each(btnArr, function (i, val) {
+            var $btn;
+            // 指定按钮颜色
+            if (typeof val.color == 'boolean') {
+                if(!val.txt){
+                    $btn = $('<a href="javascript:;" class="' + 'confirm-btn hide-btn ' + (val.color ? 'primary' : 'default ') + (val.fade ? 'need-fade' : '') + '">' + (val.txt || '') + '</a>');
+                }else if(val.txt.indexOf('关闭')>-1){
+                    $btn = $('<a href="javascript:;" class="' + 'close-icon  ' + (val.color ? 'primary' : '' ) + (val.fade ? 'need-fade' : '') + '">' + (val.txt || '') + '</a>');
+                }else{
+                    $btn = $('<a href="javascript:;" class="' + 'confirm-btn ' + (val.color ? 'primary' : 'default ') + (val.fade ? 'need-fade' : '') + '">' + (val.txt || '') + '</a>');
+                }
+                
+            } else if (typeof val.color == 'string') {
+                $btn = $('<a href="javascript:;" style="color: ' + val.color + '">' + (val.txt || '') + '</a>');
+            }
+            // 给对应按钮添加点击事件
+            (function (p) {
+                $btn.on('click', function (e) {
+                    e.stopPropagation();
+
+                    // 是否保留弹窗
+                    if (!btnArr[p].stay) {
+                        // 释放页面滚动
+                        ydui.util.pageScroll.unlock();
+                        $dom.remove();
+                       
+                    }
+                    btnArr[p].callback && btnArr[p].callback();
+                });
+            })(i);
+            $btnBox.append($btn);
+        });
+        $dom.find('.m-confirm').append($btnBox);
+        // 禁止滚动屏幕【移动端】
+        ydui.util.pageScroll.lock();
+
+        $body.append($dom);
+    };
     dialog.getPhoneConfirm = function (obj, opts) {
         var argsObj = {
             fade:true,
@@ -539,6 +613,165 @@ import $ from '../../assets/js/jquery.min.js';
                             $dom.remove();
                         },1000);
                        
+                    }
+                    btnArr[p].callback && btnArr[p].callback();
+                });
+            })(i);
+            $btnBox.append($btn);
+        });
+        $dom.find('.m-confirm').append($btnBox);
+        // 禁止滚动屏幕【移动端】
+        ydui.util.pageScroll.lock();
+
+        $body.append($dom);
+    };
+    dialog.guide3Confirm = function (title, mes, opts) {
+        var ID = 'YDUI_CONFRIM';
+
+        $('#' + ID).remove();
+
+        var args = arguments.length;
+        if (args < 2) {
+            console.error('From YDUI\'s confirm: Please set two or three parameters!!!');
+            return;
+        }
+
+        if (typeof arguments[1] != 'function' && args == 2 && !(arguments[1] instanceof Array)) {
+            console.error('From YDUI\'s confirm: The second parameter must be a function or array!!!');
+            return;
+        }
+
+        if (args == 2) {
+            opts = mes;
+            mes = title;
+            title = '提示';
+        }
+
+        var btnArr = opts;
+        if (typeof opts === 'function') {
+            btnArr = [{
+                txt: '取消',
+                color: false
+            }, {
+                txt: '确定',
+                color: true,
+                callback: function () {
+                    opts && opts();
+                }
+            }];
+        }
+
+        var $dom = $('' +
+            '<div class="mask-black-dialog m-confirm-guide-3-mask" id="' + ID + '">' +
+            '   <div class="m-confirm m-confirm-guide-3">' +
+            '       <div class="confirm-hd ">' +
+            '    <div class="confirm-hd-guide-3-top">'+
+            '    </div>'+
+            '    <div class="confirm-bd confirm-bd-simple">' + mes + '</div>' +
+            '   </div>' +
+            '</div>');
+
+        // 遍历按钮数组
+        var $btnBox = $('<div class="confirm-ft confirm-ft-guid3 confirm-ft-simple"></div>');
+        $.each(btnArr, function (i, val) {
+            var $btn;
+            // 指定按钮颜色
+            if (typeof val.color == 'boolean') {
+                if(!val.txt){
+                    $btn = $('<a href="javascript:;" class="' + 'confirm-btn hide-btn ' + (val.color ? 'primary' : 'default') + '">' + (val.txt || '') + '</a>');
+                }else if(val.txt.indexOf('马上安装')>-1){
+                    $btn = $('<a href="javascript:;" class="' + 'confirm-btn install-btn ' + (val.color ? 'primary' : 'default ') + (val.fade ? 'need-fade' : '') +'">' + (val.txt || '') + '</a>');
+                }else if(val.txt.indexOf('关闭')>-1){
+                    $btn = $('<a href="javascript:;" class="' + 'close-icon  ' + (val.color ? 'primary' : '') + (val.fade ? 'need-fade' : '') +'">' + (val.txt || '') + '</a>');
+                }else if(val.txt.indexOf('应用')>-1){
+                    $btn = $('<div" class="' + 'app' + (val.color ? 'primary ' : '') +  (val.fade ? 'need-fade' : '') +'">' + '<div class="app-name">'+ (val.txt || '')+'</div>' +'</div>');
+                }
+                
+            } else if (typeof val.color == 'string') {
+                $btn = $('<a href="javascript:;" style="color: ' + val.color + '">' + (val.txt || '') + '</a>');
+            }
+            // 给对应按钮添加点击事件
+            (function (p) {
+                $btn.on('click', function (e) {
+                    e.stopPropagation();
+                    var tag = $(this).find('.app-name').text().indexOf('应用')>-1;
+                    if(tag)return
+                    // 是否保留弹窗
+                    if (!btnArr[p].stay) {
+                        // 释放页面滚动
+                        ydui.util.pageScroll.unlock();
+                        $dom.remove();
+                    }
+                   
+                    btnArr[p].callback && btnArr[p].callback();
+                });
+            })(i);
+            $btnBox.append($btn);
+        });
+        $dom.find('.m-confirm').append($btnBox);
+        // 禁止滚动屏幕【移动端】
+        ydui.util.pageScroll.lock();
+
+        $body.append($dom);
+    };
+    dialog.guide1Confirm = function (title, opts) {
+        var ID = 'YDUI_CONFRIM';
+
+        $('#' + ID).remove();
+
+       var btnArr = opts;
+        if (typeof opts === 'function') {
+            btnArr = [{
+                txt: '取消',
+                color: false
+            }, {
+                txt: '确定',
+                color: true,
+                callback: function () {
+                    opts && opts();
+                }
+            }];
+        }
+
+        var $dom = $('' +
+            '<div class="mask-black-dialog m-confirm-guide-1-mask" id="' + ID + '">' +
+            '<i class="guid1-arrow"></i>'+
+            '   <div class="m-confirm">' +
+            '       <div class="confirm-hd ">' +
+            '  <div class="confirm-title">'+
+            '   <div class="info">点按</div>'+
+            '   <div class="info simple">...</div>'+
+            '   <div class="info">' + title +'</div>'+
+            '  </div>'+
+            '</div>' +
+            '   </div>' +
+            '</div>');
+
+        // 遍历按钮数组
+        var $btnBox = $('<div class="confirm-ft confirm-ft-simple"></div>');
+        $.each(btnArr, function (i, val) {
+            var $btn;
+            // 指定按钮颜色
+            if (typeof val.color == 'boolean') {
+                if(!val.txt){
+                    $btn = $('<a href="javascript:;" class="' + 'confirm-btn hide-btn ' + (val.color ? 'primary' : 'default') + '">' + (val.txt || '') + '</a>');
+                }else{
+                    $btn = $('<a href="javascript:;" class="' + 'confirm-btn ' + (val.color ? 'primary' : 'default') + '">' + (val.txt || '') + '</a>');
+                }
+                
+            } else if (typeof val.color == 'string') {
+                $btn = $('<a href="javascript:;" style="color: ' + val.color + '">' + (val.txt || '') + '</a>');
+            }
+            // 给对应按钮添加点击事件
+            (function (p) {
+                $btn.on('click', function (e) {
+                    e.stopPropagation();
+
+                    // 是否保留弹窗
+                    if (!btnArr[p].stay) {
+                        // 释放页面滚动
+                        ydui.util.pageScroll.unlock();
+                        $dom.remove();
                     }
                     btnArr[p].callback && btnArr[p].callback();
                 });

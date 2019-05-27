@@ -7,22 +7,22 @@ import $ from '../assets/js/jquery.min.js';
 import '../assets/js/flexible.js';
 import '../components/dialog/dialog.js';
 import axios from '../assets/js/axios.min.js';
-var baseUrl = 'http://221.179.8.170:8080/s.do';
+// var baseUrl = 'http://221.179.8.170:8080/s.do';
 var baseUrlApi = 'http://221.179.8.170:8080';
-var apiUrl = '/s.do';
+var interfaceUrl = '/s.do';
 var request = axios.create({
     baseURL: baseUrlApi,
     timeout: 5000
 });
-request.get(apiUrl, {
-    params: {
-        requestid: 'queryFreePlan',
-        mobile: 15112395842,
-        channelId: '5210527525'
-    }
-}).then(function (res) {
-    console.log(res);
-});
+// request.get(interfaceUrl, {
+//     params: {
+//         requestid: 'queryFreePlan',
+//         mobile: 15112395842,
+//         channelId: '5210527525'
+//     }
+// }).then(function (res) {
+//     console.log(res);
+// });
 
 // app download
 
@@ -53,44 +53,62 @@ import '../js/mmapp.js'; */
     var obj = {
         title: '温馨提示',
         phoneNum: '13417586550',
-        mes: '抱歉，因网络原因您本次订购出现错误，请重新领取。抱歉，因网络原因您本次订购出现错误，请重新领取。<br><a href="www.baidu.com" class="goto-detail">查看详细活动说明></a>',
+        mes: '0元5GB/月定向流量，任性下应用！现在免费领取0元套餐，获得连续6个月每月5G定向流量，到期自动取消。<br><a href="www.baidu.com" class="goto-detail">查看详细活动说明></a>',
     };
 
-    dialog.loginConfirm(obj, [
-        {
-            txt: '登陆',
-            color: false,
-            fade: true,
-            callback: function () {
+    // dialog.loginConfirm(obj, [
+    //     {
+    //         txt: '登陆',
+    //         color: false,
+    //         fade: true,
+    //         callback: function () {
+    //             dialog.orderConfirm(orderObj, [
+    //                 {
+    //                     txt: '确定',
+    //                     color: false,
+    //                     fade:false,
+    //                     callback: function () {
+    //                         dialog.toast('你点了取消', 'none', 1000);
+    //                     }
+    //                 },
+    //                 {
+    //                     txt: '关闭',
+    //                     color: false, 
+    //                     fade:false,
+    //                     callback: function () {
+    //                         dialog.toast('你点了取消', 'none', 1000);
+    //                     }
+    //                 }
+        
+    //             ]);
+    //         }
+    //     },
+    //     {
+    //         txt: '我已领取',
+    //         color: false,
+    //         fade: false,
+    //         callback: function () {
 
-            }
-        },
-        {
-            txt: '我已领取',
-            color: false,
-            fade: false,
-            callback: function () {
+    //         }
+    //     },
+    //     {
+    //         txt: '残忍拒绝',
+    //         color: false,
+    //         fade: true,
+    //         callback: function () {
+    //             dialog.toast('你点了取消', 'none', 1000);
+    //         }
+    //     },
+    //     {
+    //         txt: '关闭',
+    //         color: false,
+    //         fade: false,
+    //         callback: function () {
+    //             dialog.toast('你点了取消', 'none', 1000);
+    //         }
+    //     }
 
-            }
-        },
-        {
-            txt: '残忍拒绝',
-            color: false,
-            fade: true,
-            callback: function () {
-                dialog.toast('你点了取消', 'none', 1000);
-            }
-        },
-        {
-            txt: '关闭',
-            color: false,
-            fade: false,
-            callback: function () {
-                dialog.toast('你点了取消', 'none', 1000);
-            }
-        }
-
-    ]);
+    // ]);
     // dialog.getPhoneConfirm(obj, [
     //     {
     //         txt: '确定',
@@ -99,7 +117,7 @@ import '../js/mmapp.js'; */
     //         callback: function () {
     //             dialog.confirm('抱歉，订购失败', '抱歉，因网络原因<br/>您本次订购出现错误，请重新领取。', [
     //                 {
-    //                     txt: '确定',
+    //                     txt: '免费领取',
     //                     color: false, 
     //                     callback: function () {
     //                         dialog.toast('你点了取消', 'none', 1000);
@@ -127,6 +145,16 @@ import '../js/mmapp.js'; */
     //     }
 
     // ]);
+        dialog.guide1Confirm('选择“在浏览器打开”后开始下载', [
+             {
+                 txt: '我知道了',
+                 color: false,
+                 callback: function () {
+                     dialog.toast('你点了取消', 'none', 1000);
+                 }
+             }
+    
+         ]);
 
     //   dialog.simpleConfirm('抱歉，订购失败', '抱歉，因网络原因<br/>您本次订购出现错误，请重新领取。', [
     //          {
@@ -136,19 +164,58 @@ import '../js/mmapp.js'; */
     //                  dialog.toast('你点了取消', 'none', 1000);
     //              }
     //          }
-    //
+    
     //      ]);
-    // $('.mflq-btn').click(function () {
-    //     dialog.confirm('抱歉，订购失败', '抱歉，因网络原因<br/>您本次订购出现错误，请重新领取。', [
-    //         {
-    //             txt: '确定',
-    //             color: false, /* false:黑色  true:绿色 或 使用颜色值 */
-    //             callback: function () {
-    //                 dialog.toast('你点了取消', 'none', 1000);
-    //             }
+    
+    // dialog.guide3Confirm('抱歉，订购失败', '安装MM应用商场手机客户端后，可以获得更丰富的内容，更高速、更稳定的下载服务。', [
+    //     {
+    //         txt: '关闭',
+    //         color: false,
+    //         callback: function () {
+    //             dialog.toast('你点了取消', 'none', 1000);
     //         }
+    //     },
+    //     {
+    //         txt: 'MM应用商场',
+    //         color: false,
+    //         callback: function () {
+             
+    //         }
+    //     },
+    //     {
+    //         txt: '马上安装',
+    //         color: false,
+    //         callback: function () {
+    //             dialog.toast('你点了取消', 'none', 1000);
+    //         }
+    //     }
 
-    //     ]);
+    // ]);
+    // $('.mflq-btn').click(function () {
+        var orderObj = {
+            title:'您的订单已受理',
+            phone:'1341758650',
+            mes:'【MM任我装流量包】订购申请已受理，办理成功通知以中国移动10086短信为准，请耐心等候。'
+        }
+        // dialog.orderConfirm(orderObj, [
+        //     {
+        //         txt: '开始下载',
+        //         color: false,
+        //         fade:false,
+        //         callback: function () {
+        //             dialog.toast('你点了取消', 'none', 1000);
+        //         }
+        //     },
+        //     {
+        //         txt: '关闭',
+        //         color: false, 
+        //         fade:false,
+        //         callback: function () {
+        //             dialog.toast('你点了取消', 'none', 1000);
+        //         }
+        //     }
+
+        // ]);
     // });
     // 获取验证码逻辑
     var $getCode = $('#J_GetCode');
