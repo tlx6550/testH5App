@@ -784,6 +784,71 @@ import $ from '../../assets/js/jquery.min.js';
 
         $body.append($dom);
     };
+    dialog.guide2Confirm = function (title, opts) {
+        var ID = 'YDUI_CONFRIM';
+
+        $('#' + ID).remove();
+
+       var btnArr = opts;
+        if (typeof opts === 'function') {
+            btnArr = [{
+                txt: '取消',
+                color: false
+            }, {
+                txt: '确定',
+                color: true,
+                callback: function () {
+                    opts && opts();
+                }
+            }];
+        }
+
+        var $dom = $('' +
+            '<div class="mask-black-dialog m-confirm-guide-2-mask" id="' + ID + '">' +
+            '   <div class="m-confirm">' +
+            '       <div class="confirm-hd ">' +
+            '  </div>'+
+            '</div>' +
+            '   </div>' +
+            '</div>');
+
+        // 遍历按钮数组
+        var $btnBox = $('<div class="confirm-ft confirm-ft-simple"></div>');
+        $.each(btnArr, function (i, val) {
+            var $btn;
+            // 指定按钮颜色
+            if (typeof val.color == 'boolean') {
+                if(!val.txt){
+                    $btn = $('<a href="javascript:;" class="' + 'confirm-btn hide-btn ' + (val.color ? 'primary' : 'default') + '">' + (val.txt || '') + '</a>');
+                }else{
+                    $btn = $('<a href="javascript:;" class="' + 'confirm-btn ' + (val.color ? 'primary' : 'default') + '">' + (val.txt || '') + '</a>');
+                }
+                
+            } else if (typeof val.color == 'string') {
+                $btn = $('<a href="javascript:;" style="color: ' + val.color + '">' + (val.txt || '') + '</a>');
+            }
+            // 给对应按钮添加点击事件
+            (function (p) {
+                $btn.on('click', function (e) {
+                    e.stopPropagation();
+
+                    // 是否保留弹窗
+                    if (!btnArr[p].stay) {
+                        // 释放页面滚动
+                        ydui.util.pageScroll.unlock();
+                        $dom.remove();
+                    }
+                    btnArr[p].callback && btnArr[p].callback();
+                });
+            })(i);
+            $btnBox.append($btn);
+        });
+        $dom.find('.m-confirm').append($btnBox);
+        // 禁止滚动屏幕【移动端】
+        ydui.util.pageScroll.lock();
+
+        $body.append($dom);
+    };
     dialog.simpleConfirm = function (title, mes, opts) {
         var ID = 'YDUI_CONFRIM';
 
