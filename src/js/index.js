@@ -109,42 +109,42 @@ import '../js/mmapp.js'; */
     //     }
 
     // ]);
-    // dialog.getPhoneConfirm(obj, [
-    //     {
-    //         txt: '确定',
-    //         color: false, 
-    //         fade:true,
-    //         callback: function () {
-    //             dialog.confirm('抱歉，订购失败', '抱歉，因网络原因<br/>您本次订购出现错误，请重新领取。', [
-    //                 {
-    //                     txt: '免费领取',
-    //                     color: false, 
-    //                     callback: function () {
-    //                         dialog.toast('你点了取消', 'none', 1000);
-    //                     }
-    //                 }
+    dialog.getPhoneConfirm(obj, [
+        {
+            txt: '确定',
+            color: false, 
+            fade:true,
+            callback: function () {
+                dialog.confirm('抱歉，订购失败', '抱歉，因网络原因<br/>您本次订购出现错误，请重新领取。', [
+                    {
+                        txt: '免费领取',
+                        color: false, 
+                        callback: function () {
+                            dialog.toast('你点了取消', 'none', 1000);
+                        }
+                    }
 
-    //             ]);
-    //         }
-    //     },
-    //     {
-    //         txt: '残忍拒绝',
-    //         color: false, 
-    //         fade:false,
-    //         callback: function () {
-    //             dialog.toast('你点了取消', 'none', 1000);
-    //         }
-    //     },
-    //     {
-    //         txt: '关闭',
-    //         color: false, 
-    //         fade:false,
-    //         callback: function () {
-    //             dialog.toast('你点了取消', 'none', 1000);
-    //         }
-    //     }
+                ]);
+            }
+        },
+        {
+            txt: '残忍拒绝',
+            color: false, 
+            fade:false,
+            callback: function () {
+                dialog.toast('你点了取消', 'none', 1000);
+            }
+        },
+        {
+            txt: '关闭',
+            color: false, 
+            fade:false,
+            callback: function () {
+                dialog.toast('你点了取消', 'none', 1000);
+            }
+        }
 
-    // ]);
+    ]);
         // dialog.guide1Confirm('选择“在浏览器打开”后开始下载', [
         //      {
         //          txt: '我知道了',

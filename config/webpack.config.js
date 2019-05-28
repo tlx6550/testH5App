@@ -152,7 +152,7 @@ const config = {
                 options: {
                     limit: 10240, //base64格式限制最大时候进行转换
                    /* name: 'assets/[name].[ext]'*/
-                   name:'./defaultSite/images/a/320x480/activity/930/assets/[name].[ext]' //线上正式地址
+                   name:'./defaultSite/images/a/320x480/zndxzh/[name].[ext]' //线上正式地址
                 }
             },
             {
