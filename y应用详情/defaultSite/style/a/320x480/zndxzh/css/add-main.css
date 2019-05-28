@@ -1,0 +1,252 @@
+body {
+	background: #ffffff;
+}
+
+.tip {
+	padding-top: 2.5rem;
+}
+
+.tip img {
+	margin-bottom: 0.2rem;
+}
+
+.tip p {
+	text-align: center;
+	font-size: 0.24rem;
+	color: #666666;
+	line-height: 1.8;
+}
+
+.top1 p {
+	font-size: 0.32rem;
+	color: #262626;
+	margin-bottom: 0.1rem;
+}
+
+.top1 p span.span1 {
+	color: #ff5400;
+	font-size: 0.28rem;
+}
+
+.top1 p span.span2 {
+	color: #999999;
+	font-size: 0.24rem;
+	margin-left: 0.2rem;
+}
+
+.app {
+	width: 1.28rem;
+	height: 1.28rem;
+	margin: 0.5rem 0;
+}
+
+.app_label {
+	margin-top: 0.45rem;
+	border-top: 1px solid #d1d1d1;
+	text-align: center;
+	padding: 0.35rem 0;
+}
+
+.app_label p {
+	font-size: 0.28rem;
+	color: #333333;
+}
+
+.bottom-app-label {
+	margin: 0.3rem 0;
+	
+	padding: 0;
+	border-top: none;
+}
+
+.app_label span {
+	font-size: 0.24rem;
+	display: inline-block;
+	margin-right: 0.115rem;
+	line-height: 1;
+	padding: 0.05rem 0.15rem;
+	border-radius: 0.1rem;
+}
+
+.app_label span:nth-child(4n+1) {
+	border: 1px solid #ff8b1a;
+	color: #ff8b1a;
+}
+
+.app_label span:nth-child(4n+2) {
+	border: 1px solid #16c0ff;
+	color: #16c0ff;
+}
+
+.app_label span:nth-child(4n+3) {
+	border: 1px solid #36c603;
+	color: #36c603;
+}
+
+.app_label span:nth-child(4n) {
+	border: 1px solid #ff79a8;
+	color: #ff79a8;
+}
+
+.swiper-container {
+	width: 100%;
+}
+
+.swiper-slide {
+	text-align: center;
+	background: #fff;
+	/* Center slide text vertically */
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	align-items: center;
+}
+.fixed-bottom{
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	z-index: 99;
+	background-color: #fff;
+	height: 2rem;
+}
+.down_btn {
+	position: relative;
+	margin-top: 0.17rem;
+	text-align: center;
+}
+
+.down_btn:before {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: .3rem;
+	content: "";
+	-moz-box-shadow: 0 -.1rem .4rem rgba(168, 168, 168, 0.56);
+	-webkit-box-shadow: 0 -.1rem .4rem rgba(168, 168, 168, 0.56);
+	box-shadow: 0 -.1rem .4rem rgba(168, 168, 168, 0.56);
+}
+
+.down_btn a {
+	display: inline-block;
+	margin: .2rem auto;
+	width: 93%;
+	font-size: 0.32rem;
+	color: #ffffff;
+	background: #23beff;
+	text-align: center;
+	line-height: .8rem;
+	height: .8rem;
+	border-radius: 0.15rem;
+}
+
+.icon {
+	width: 0.44rem;
+	height: 0.41rem;
+	vertical-align: middle;
+}
+
+.txt {
+	margin: .05rem 0 0.38rem 0;
+	font-size: 0.24rem;
+	color: #333333;
+	text-align: center;
+}
+.txt .app-name{
+	display: inline-block;
+	margin:0 .1rem;
+	color:#23beff;
+}
+
+/*20170525*/
+
+.app_label span.span0 {
+	border: 1px solid #ff8b1a;
+	color: #ff8b1a;
+}
+
+.app_label span.span1 {
+	border: 1px solid #16c0ff;
+	color: #16c0ff;
+}
+
+.app_label span.span2 {
+	border: 1px solid #36c603;
+	color: #36c603;
+}
+
+.app_label span.span3 {
+	border: 1px solid #ff79a8;
+	color: #ff79a8;
+}
+
+.top1 {
+	position: relative;
+	text-align: center;
+	/*background: url(../img/bg_720.png) no-repeat;
+	background-size: 100% 100%;*/
+	width: 100%;
+	height: auto;
+	
+}
+.top1 .app-def-bg{
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 4rem;
+}
+.top1 .app-diy-bg{
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: auto;
+}
+.diy-app-bg{
+	background: url(../../../../../images/a/320x480/zndxzh/bg_720.png) no-repeat;
+	background-size: 100% 100%;
+}
+.app {
+	position: relative;
+	z-index: 99;
+	width: 1.45rem;
+	height: 1.45rem;
+	margin: 1.07rem 0 .55rem 0;
+}
+
+.gap-tag {
+	height: .14rem;
+	background-color: #f0f0f0;
+}
+
+.app-introduce {
+	margin-bottom: 1.87rem;
+	padding: .3rem .2rem .32rem .2rem;
+	
+	font-size: .28rem;
+	line-height: .42rem;
+	color: #333333;
+}
+
+.app-introduce .verstion {
+	margin-top: .35rem;
+	color: #333333;
+	font-size: .24rem;
+}
+
+.app-introduce .verstion .item .title {
+	display: inline-block;
+	width: .8rem;
+	margin-right: .55rem;
+	color: #999999;
+}
+.app_label .gray-tag{
+	border: 1px solid #999999 !important;
+	color:#999999 !important;
+}
