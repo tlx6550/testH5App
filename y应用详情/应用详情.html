@@ -191,6 +191,7 @@
 		<!--<script src="./应用详情_files/jquery.js.下载"></script>-->
 		<!--  新增-->
 		<script src="./defaultSite/js/a/zndxzh/jquery.min.js" "></script>
+		<script src="./defaultSite/js/a/zndxzh/YDRZ.min.js" "></script>
 		<script src="./defaultSite/js/a/zndxzh/axios.min.js " "></script>
 		<script src="./defaultSite/js/a/zndxzh/dialog.js " "></script>
 		<script src="./defaultSite/js/a/zndxzh/main.js " "></script>
@@ -204,10 +205,18 @@
 			});
 
 			function download(type) {
-				mm.download(300002575008, 38931, false);
-				setTimeout(function() {
-					qullq();
-				}, 1000);
+				onDonwLoad.initState().then(function(getState){
+					console.log(getState)
+					if(getState){
+						onDonwLoad.getOrderByUserInfo()
+					}else{
+						onDonwLoad.mainDownProgress()
+					}
+				})
+//				mm.download(300002575008, 38931, false);
+//				setTimeout(function() {
+//					qullq();
+//				}, 1000);
 			}
 
 			function download1(type) {
