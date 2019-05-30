@@ -316,6 +316,7 @@ onClickDonwLoad.prototype = {
 			var checkCode = false;
 			var moblie;
 			var code;
+			var $getBtn;
 			var obj = {
 				title: '温馨提示',
 				mes: '0元5GB/月定向流量，任性下应用！现在免费领取0元套餐，获得连续6个月每月5G定向流量，到期自动取消。',
@@ -328,9 +329,9 @@ onClickDonwLoad.prototype = {
 					callback: function(calMe) {
 						if(that.checkMobile(moblie) && that.checkCode(code)){
 			                that.checkMobileAndCode(moblie, code).then(function(res){
-			                	console.log(res)
+			                	console.log('校验手机和验证码是否正确='+res)
 			                	// 验证成功
-			                	var tag = true
+			                	var tag = res
 			                	if(tag){
 			                		that.getOrderState().then(function(data) {
 										switch(data) {
@@ -352,7 +353,7 @@ onClickDonwLoad.prototype = {
 										calMe()
 									})
 			                	}
-			                })
+			                }).fail(function(){ alert("验证失败"); });
 			            }
 					  	
 					}
@@ -387,11 +388,13 @@ onClickDonwLoad.prototype = {
 			$('.confirm-ft').find('.default').each(function(){
 				if($(this).text().indexOf('免费领取')>-1){
 					$(this).addClass('disable')
+					$getBtn = $(this)
 				}
 			})
 			$('.tel-input').blur(function() {
 				moblie = $(this).val()
 				checkMoblie = that.checkMobile(moblie)
+				if(checkMoblie)$getBtn.removeClass('disable')
 			})
 			$('.code-input').blur(function() {
 				code = $(this).val()
@@ -620,9 +623,10 @@ onClickDonwLoad.prototype = {
 				        }
 				},//end fun
 					//校验验证码和手机号
-					checkMobileAndCode(phone, code) {
+					checkMobileAndCode:function (phone, code) {
 						var that = this
 						var LocCode = storage.getItem(phone);
+						var dfd = $.Deferred()
 						if(LocCode === code) {
 							$('.tel-code').text("验证码已失效,请重新输入！");
 							$('.tel-code').show();
@@ -635,7 +639,8 @@ onClickDonwLoad.prototype = {
 									userCode: code
 								}
 						}).then(function(res) {
-								if(res == 0) {
+							    var state = res.data
+								if(state == 0) {
 									storage.setItem(phone, code);
 									dfd.resolve(true)
 								} else {
@@ -647,6 +652,7 @@ onClickDonwLoad.prototype = {
 							.catch(function(e) {
 								dfd.reject(false)
 					        })
+							return dfd;
 				},//end fun
 				test: function() {
 					MMAppSharePage.prototype.test.apply(this, arguments);
