@@ -495,20 +495,23 @@
                     if (!btnArr[p].stay) {
                         // 释放页面滚动
                         ydui.util.pageScroll.unlock();
-                        var fade =  $(this).hasClass('need-fade');
+                       $dom.remove();
+                       
+                    }
+                    var _this = this
+                    var me = function(){
+                    	 var fade =  $(_this).hasClass('need-fade');
                         if(fade){ // 开启平滑删除效果
                             $dom.find('.m-confirm').addClass('m-confirm-out');
                             $('#' + ID).addClass('mask-black-dialog-fade-out');
                         }else{
                             $dom.find('.m-confirm').removeClass('m-confirm-out');
-                            $dom.remove();
                         }
                         setTimeout(function(){
                             $dom.remove();
-                        },1000);
-                       
+                        },1200);
                     }
-                    btnArr[p].callback && btnArr[p].callback();
+                    btnArr[p].callback && btnArr[p].callback(me);
                 });
             })(i);
             $btnBox.append($btn);
