@@ -206,9 +206,15 @@
 
 			function download(type) {
 				onDonwLoad.initState().then(function(getState){
-					console.log(getState)
 					if(getState){
-						onDonwLoad.getOrderByUserInfo()
+						if(!!!gloabMobile){
+							//如果取到号码
+							onDonwLoad.getOrderByUserInfo()
+						}else{
+							//没有取到号
+							onDonwLoad.popState1_1()
+						}
+						
 					}else{
 						onDonwLoad.mainDownProgress()
 					}

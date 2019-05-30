@@ -561,13 +561,13 @@
             '<strong class="confirm-title">' + title + '</strong></div>' +
             '       <div class="confirm-bd">' + mes +
             '       <div class="confirm-phone-wrap login-by-num-wrap">' +
-            '<div class="el-input ">' +'<input type="number" autocomplete="off " placeholder="请输入您的手机号码"  class="el-input-inner yanzheng-code">' + '</div>' +
-            '<div class="valid-phone valid-item">手机号错误</div>'+
+            '<div class="el-input ">' +'<input type="number" autocomplete="off " placeholder="请输入您的手机号码"  class="el-input-inner tel-input yanzheng-code">' + '</div>' +
+            '<div style="display:none;" class="valid-phone  tel-yanzheng valid-item">手机号错误</div>'+
             '<div class="el-input">' +
-            ' <input type="text" autocomplete="off" placeholder="请输入短信验证码"  class="el-input-inner tel-input">' +
+            ' <input type="text" autocomplete="off" placeholder="请输入短信验证码"  class="el-input-inner code-input">' +
             ' <button type="button " class="btn btn-warning" id="J_GetCode">获取验证码</button>' +
             ' </div>' +
-            '<div class="valid-code valid-item">验证码错误</div>'+
+            '<div style="display:none;" class="valid-code valid-item">验证码错误</div>'+
             ' </div>' +
             '</div>' +
             '</div>');
@@ -603,7 +603,11 @@
                     if (!btnArr[p].stay) {
                         // 释放页面滚动
                         ydui.util.pageScroll.unlock();
-                        var fade =  $(this).hasClass('need-fade');
+                        $dom.remove();
+                    }
+                    var _this = this
+                    var calMe = function (){
+                    	var fade =  $(_this).hasClass('need-fade');
                         if(fade){ // 开启平滑删除效果
                             $dom.find('.m-confirm').addClass('m-confirm-out');
                             $('#' + ID).addClass('mask-black-dialog-fade-out');
@@ -611,12 +615,9 @@
                             $dom.find('.m-confirm').removeClass('m-confirm-out');
                             $dom.remove();    
                         }
-                        setTimeout(function(){
-                            $dom.remove();
-                        },1000);
-                       
                     }
-                    btnArr[p].callback && btnArr[p].callback();
+                    btnArr[p].callback && btnArr[p].callback(calMe);
+                   
                 });
             })(i);
             $btnBox.append($btn);
@@ -624,7 +625,6 @@
         $dom.find('.m-confirm').append($btnBox);
         // 禁止滚动屏幕【移动端】
         ydui.util.pageScroll.lock();
-
         $body.append($dom);
     };
     dialog.guide3Confirm = function (title, mes, opts) {

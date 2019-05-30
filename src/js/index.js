@@ -56,59 +56,59 @@ import '../js/mmapp.js'; */
         mes: '0元5GB/月定向流量，任性下应用！现在免费领取0元套餐，获得连续6个月每月5G定向流量，到期自动取消。<br><a href="www.baidu.com" class="goto-detail">查看详细活动说明></a>',
     };
 
-    // dialog.loginConfirm(obj, [
-    //     {
-    //         txt: '登陆',
-    //         color: false,
-    //         fade: true,
-    //         callback: function () {
-    //             dialog.orderConfirm(orderObj, [
-    //                 {
-    //                     txt: '确定',
-    //                     color: false,
-    //                     fade:false,
-    //                     callback: function () {
-    //                         dialog.toast('你点了取消', 'none', 1000);
-    //                     }
-    //                 },
-    //                 {
-    //                     txt: '关闭',
-    //                     color: false, 
-    //                     fade:false,
-    //                     callback: function () {
-    //                         dialog.toast('你点了取消', 'none', 1000);
-    //                     }
-    //                 }
-        
-    //             ]);
-    //         }
-    //     },
-    //     {
-    //         txt: '我已领取',
-    //         color: false,
-    //         fade: false,
-    //         callback: function () {
-
-    //         }
-    //     },
-    //     {
-    //         txt: '残忍拒绝',
-    //         color: false,
-    //         fade: true,
-    //         callback: function () {
-    //             dialog.toast('你点了取消', 'none', 1000);
-    //         }
-    //     },
-    //     {
-    //         txt: '关闭',
-    //         color: false,
-    //         fade: false,
-    //         callback: function () {
-    //             dialog.toast('你点了取消', 'none', 1000);
-    //         }
-    //     }
-
-    // ]);
+//     dialog.loginConfirm(obj, [
+//         {
+//             txt: '登陆',
+//             color: false,
+//             fade: true,
+//             callback: function () {
+//                 dialog.orderConfirm(orderObj, [
+//                     {
+//                         txt: '确定',
+//                         color: false,
+//                         fade:false,
+//                         callback: function () {
+//                             dialog.toast('你点了取消', 'none', 1000);
+//                         }
+//                     },
+//                     {
+//                         txt: '关闭',
+//                         color: false, 
+//                         fade:false,
+//                         callback: function () {
+//                             dialog.toast('你点了取消', 'none', 1000);
+//                         }
+//                     }
+//      
+//                 ]);
+//             }
+//         },
+//         {
+//             txt: '我已领取',
+//             color: false,
+//             fade: false,
+//             callback: function () {
+//
+//            }
+//        },
+//       {
+//             txt: '残忍拒绝',
+//             color: false,
+//             fade: true,
+//             callback: function () {
+//                 dialog.toast('你点了取消', 'none', 1000);
+//             }
+//         },
+//         {
+//             txt: '关闭',
+//             color: false,
+//             fade: false,
+//             callback: function () {
+//                 dialog.toast('你点了取消', 'none', 1000);
+//             }
+//        }
+//
+//    ]);
     dialog.getPhoneConfirm(obj, [
         {
             txt: '确定',
