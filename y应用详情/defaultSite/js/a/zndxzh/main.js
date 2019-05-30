@@ -192,25 +192,27 @@ MMAppSharePage.prototype = {
      return dfd
 	}
 	}
-var mmApp  = new MMAppSharePage()
-mmApp.initState().then(function(getState){
-if(getState==='true'){ // 在线
-	// 网关取号
-//	mmApp.authent().then(function(res){
-//	console.log(res)
-//	var mobile = 15112395842
-//	mmApp.getOrderByUserInfo:function(mobile)
-//	})
-setTimeout(function(){
-	gloabMobile = 13417586550;
-},1000)
-var mobile = 15112395842
-	mmApp.getOrderByUserInfo(mobile)
+	var mmApp  = new MMAppSharePage()
+	mmApp.initState().then(function(getState){
+	if(getState==='true'){ // 在线
+		// 网关取号
+//		mmApp.authent().then(function(res){
+//		console.log(res)
+//
+//			})
+		var mobile = 15112395842
+			setTimeout(function(){
+				gloabMobile = 13417586550;
+				 mmApp.getOrderByUserInfo(gloabMobile)
+			},300)
+//		  var mobile = 15112395842
+		
+		
 	}else{
-	// 下线
-	mmApp.offBusiness()
-}
-})
+			// 下线
+			mmApp.offBusiness()
+		}
+	})
 
 
 // 点击下载按钮
