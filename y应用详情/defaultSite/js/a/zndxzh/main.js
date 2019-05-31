@@ -15,7 +15,7 @@ var gloabMobile;
 var dialog = window.YDUI.dialog;
 // 访问分享页/外投页
 function MMAppSharePage(options) {
-	this.mobile = 15112395842;
+	this.mobile = '';
 	this.channelId = 5410527503;
 	this.queryFreePlan = 'queryFreePlan',
 		this.subscribeFreePlan = 'subscribeFreePlan', //订购接口
@@ -23,49 +23,26 @@ function MMAppSharePage(options) {
 		this.authentInterFaceUrl = 'http://localhost:3000' //授权测试
 	this.AllFreeFlag = 'AllFreeFlag' // 业务开关
 	this.send_code = 'send_code', //验证码
-		this
-	// 获取免流业务开关状态
-	this.initState = function() {
-		var that = this
-		var state = false;
-		var dfd = $.Deferred()
-		request.get(interfaceUrl, {
-			params: {
-				requestid: that.AllFreeFlag
-			}
-		}).then(function(res) {
-			//console.log(res.data.flag)
-			state = res.data.flag
-			dfd.resolve(state);
-		});
-		return dfd
-	}
+		// 获取免流业务开关状态
+		this.initState = function() {
+			var that = this
+			var state = false;
+			var dfd = $.Deferred()
+			request.get(interfaceUrl, {
+				params: {
+					requestid: that.AllFreeFlag
+				}
+			}).then(function(res) {
+				//console.log(res.data.flag)
+				state = res.data.flag
+				dfd.resolve(state);
+			});
+			return dfd
+		}
 	//  this.authentInterFaceUrl = 'http://221.179.8.170:8080' //授权测试准现网
 
 }
 MMAppSharePage.prototype = {
-	test: function() {
-		alert(1)
-	},
-	// 获取免流业务开关状态
-	//	initState: function() {
-	//		var that = this
-	//		var state = false;
-	//		var dfd = $.Deferred()	
-	//		request.get(interfaceUrl, {
-	//			params: {
-	//				requestid: that.AllFreeFlag
-	//			}
-	//		}).then(function(res) {
-	//			//console.log(res.data.flag)
-	//			state = res.data.flag
-	//			dfd.resolve(state);
-	//		});
-	//		return dfd
-	//	},
-	sayName: function() {
-		alert('fuffu')
-	},
 	//业务下线-状态1  不提示免流
 	offBusiness: function() {
 		//显示状态1
@@ -177,7 +154,7 @@ MMAppSharePage.prototype = {
 										success: function(data) {
 											var datas = JSON.stringify(data);
 											var jsonObj = eval('(' + datas + ')');
-											console.log('取号结果='+data)
+											console.log('取号结果=' + data)
 											dfd.resolve(jsonObj);
 										}
 									});
@@ -204,15 +181,15 @@ var mmApp = new MMAppSharePage()
 mmApp.initState().then(function(getState) {
 	if(getState === 'true') { // 在线
 		// 网关取号
-		try{
-			mmApp.authent().then(function(res){
+		try {
+			mmApp.authent().then(function(res) {
 				console.log(res)
-		
+
 			})
-		}catch(e){
+		} catch(e) {
 			console.log(e)
 		}
-				
+
 		var mobile = 15112395842
 		setTimeout(function() {
 			gloabMobile = 13417586550;
@@ -229,577 +206,572 @@ mmApp.initState().then(function(getState) {
 // 点击下载按钮
 function onClickDonwLoad() {
 	MMAppSharePage.call(this)
-	this.mobile = '99999999'
-	this.onc = 'jjjjj'
 }
 onClickDonwLoad.prototype = mmApp;
 onClickDonwLoad.prototype.constructor = onClickDonwLoad;
 onClickDonwLoad.prototype = {
-		//	initState:function(){
-		//		 MMAppSharePage.prototype.initState.apply(this, arguments);
-		//	},
-		getOrderByUserInfo: function() {
-			var that = this
-			request.get(interfaceUrl, {
+	//	initState:function(){
+	//		 MMAppSharePage.prototype.initState.apply(this, arguments);
+	//	},
+	getOrderByUserInfo: function() {
+		var that = this
+		request.get(interfaceUrl, {
+			params: {
+				requestid: that.queryFreePlan,
+				mobile: gloabMobile,
+				channelId: that.channelId
+			}
+		}).then(function(res) {
+			var datas = JSON.stringify(res);
+			var state = res.data.freeUser
+			var isLeft = res.data.isLeft // 没余量时为false
+			//          var jsonObj = eval('(' + datas + ')');
+			//          var state = JSON.parse(jsonObj).freeUser;
+
+			switch(state) {
+				case 0:
+					//未办理
+					that.popState1_2()
+					console.log('state=' + state)
+					break;
+				case 1:
+					//已办理
+					if(isLeft) {
+						that.mainDownProgress()
+					}
+					console.log('state=' + state)
+					break;
+				case 2:
+					//已退订
+					that.mainDownProgress()
+					console.log('state=' + state)
+					break;
+				case 3:
+					//不该省份不支持
+					that.mainDownProgress()
+					console.log('state=' + state)
+					break;
+				case 4:
+					//已下线
+					console.log('state=' + state)
+					that.mainDownProgress()
+					break;
+				default:
+					that.mainDownProgress()
+			}
+		}).catch(function(error) {
+			// that.offBusiness()
+		});
+	},
+	// 下载主流程
+	mainDownProgress: function() {
+		var that = this
+		console.log('进入主流程')
+		if(userAgent.weixin || userAgent.qq) { //如果是在微信或者qq内
+			that.popOnlyOnWeb();
+		} else if(userAgent.ios) {
+			that.popOnlyOnAndroid();
+		} else {
+			that.h5CallApp()
+		}
+	},
+	h5CallApp: function() {
+		var that = this
+		// https://github.com/suanmei/callapp-lib
+		var option = {
+			scheme: {
+				protocol: 'mm://',
+			},
+			timeout: 3000,
+		};
+		var lib = new CallApp(option);
+		lib.open({
+			path: 'index', //唤起mm 首页
+			callback: function() {
+				that.popInstallImmediately()
+			}
+		})
+	},
+	popOnlyOnWeb: function() {
+		dialog.guide1Confirm('选择“在浏览器打开”后开始下载', [{
+				txt: '我知道了',
+				color: false,
+				callback: function() {
+
+				}
+			}
+
+		]);
+	},
+	popOnlyOnAndroid: function() {
+		dialog.guide2Confirm('选择“在浏览器打开”后开始下载', [{
+				txt: '我知道了',
+				color: false,
+				callback: function() {
+
+				}
+			}
+
+		]);
+	},
+	popInstallImmediately: function() {
+		var that = this
+		dialog.guide3Confirm('抱歉，订购失败', '安装MM应用商场手机客户端后，可以获得更丰富的内容，更高速、更稳定的下载服务。', [{
+				txt: '关闭',
+				color: false,
+				callback: function() {
+
+				}
+			},
+			{
+				txt: 'MM应用商场',
+				color: false,
+				callback: function() {
+
+				}
+			},
+			{
+				txt: '马上安装',
+				color: false,
+				callback: function() {
+					that.downLoadMMApp()
+				}
+			}
+
+		]);
+	},
+	downLoadMMApp: function() {
+		window.location.href = 'http://ota.fr18.mmarket.com:38080/rs/res1/mmclient/MM_online_channel_5210527624.apk'
+	},
+	//请求订购状态
+	getOrderState: function() {
+		var dfd = $.Deferred()
+		var that = this
+		request.get(interfaceUrl, {
 				params: {
-					requestid: that.queryFreePlan,
+					requestid: that.subscribeFreePlan,
 					mobile: gloabMobile,
-					channelId: that.channelId
+					channelId: that.channelId,
+					channel: that.channel
 				}
 			}).then(function(res) {
-				var datas = JSON.stringify(res);
-				var state = res.data.freeUser
-				var isLeft = res.data.isLeft // 没余量时为false
-				//          var jsonObj = eval('(' + datas + ')');
-				//          var state = JSON.parse(jsonObj).freeUser;
-
-				switch(state) {
-					case 0:
-						//未办理
-						that.popState1_2()
-						console.log('state=' + state)
-						break;
-					case 1:
-						//已办理
-						if(isLeft) {
-							that.mainDownProgress()
-						}
-						console.log('state=' + state)
-						break;
-					case 2:
-						//已退订
-						that.mainDownProgress()
-						console.log('state=' + state)
-						break;
-					case 3:
-						//不该省份不支持
-						that.mainDownProgress()
-						console.log('state=' + state)
-						break;
-					case 4:
-						//已下线
-						console.log('state=' + state)
-						that.mainDownProgress()
-						break;
-					default:
-						that.mainDownProgress()
-				}
-			}).catch(function(error) {
-				// that.offBusiness()
+				var state = res.data.result
+				dfd.resolve(state)
+			})
+			.catch(function(e) {
+				dfd.reject(e)
 			});
-		},
-		// 下载主流程
-		mainDownProgress: function() {
-			var that = this
-			console.log('进入主流程')
-			if(userAgent.weixin || userAgent.qq) { //如果是在微信或者qq内
-		        that.popOnlyOnWeb();
-		    }else if (userAgent.ios){
-		    	that.popOnlyOnAndroid();
-		    }else{
-		    	that.h5CallApp()
-		    }
-		},
-		h5CallApp:function(){
-			var that = this
-			// https://github.com/suanmei/callapp-lib
-			var option = {
-		      scheme: {
-		        protocol: 'mm://',
-		      },
-		      timeout: 3000,
-		    };
-		     var lib = new CallApp(option);
-		     lib.open({
-		     	path:'index',//唤起mm 首页
-		     	callback:function(){
-		     		that.popInstallImmediately()
-		     	}
-		     })
-		},
-		popOnlyOnWeb:function(){
-			 dialog.guide1Confirm('选择“在浏览器打开”后开始下载', [
-                {
-                    txt: '我知道了',
-                    color: false,
-                    callback: function () {
-                       
-                    }
-                }
-    
-            ]);
-		},
-		popOnlyOnAndroid:function(){
-			 dialog.guide2Confirm('选择“在浏览器打开”后开始下载', [
-                {
-                    txt: '我知道了',
-                    color: false,
-                    callback: function () {
-                       
-                    }
-                }
-    
-            ]);
-		},
-		popInstallImmediately:function(){
-			var that = this
-		 dialog.guide3Confirm('抱歉，订购失败', '安装MM应用商场手机客户端后，可以获得更丰富的内容，更高速、更稳定的下载服务。', [
-	           {
-	               txt: '关闭',
-	               color: false,
-	               callback: function () {
-	                  
-	               }
-	           },
-	           {
-	               txt: 'MM应用商场',
-	               color: false,
-	               callback: function () {
-	             
-	               }
-	           },
-	           {
-	               txt: '马上安装',
-	               color: false,
-	               callback: function () {
-	                  that.downLoadMMApp()
-	               }
-	        }
-	
-	       ]);
-		},
-		downLoadMMApp:function(){
-			window.location.href = 'http://ota.fr18.mmarket.com:38080/rs/res1/mmclient/MM_online_channel_5210527624.apk'
-		},
-		//请求订购状态
-		getOrderState: function() {
-			var dfd = $.Deferred()
-			var that = this
-			request.get(interfaceUrl, {
-					params: {
-						requestid: that.subscribeFreePlan,
-						mobile: gloabMobile,
-						channelId: that.channelId,
-						channel: that.channel
-					}
-				}).then(function(res) {
-					var state = res.data.result
-					dfd.resolve(state)
-				})
-				.catch(function(e) {
-					dfd.reject(e)
-				});
-			return dfd
-		},
-		// 弹窗取号
-		popState1_1: function() {
-			var that = this
-			var checkMoblie = false;
-			var checkCode = false;
-			var moblie;
-			var code;
-			var $getBtn;
-			var obj = {
-				title: '温馨提示',
-				mes: '0元5GB/月定向流量，任性下应用！现在免费领取0元套餐，获得连续6个月每月5G定向流量，到期自动取消。',
-			};
-			dialog.loginConfirm(obj, [{
-					txt: '免费领取',
-					color: false,
-					fade: true,
-					stay:true,
-					callback: function(calMe) {
-						if(that.checkMobile(moblie) && that.checkCode(code)){
-			                that.checkMobileAndCode(moblie, code).then(function(res){
-			                	console.log('校验手机和验证码是否正确='+res)
-			                	// 验证成功
-			                	var tag = res
-			                	if(tag){
-			                		// 校验成功 当前页面的手机号是输入框的手机号
-			                	  gloabMobile =  moblie
-			                		that.getOrderState().then(function(data) {
-										switch(data) {
-											case 0:
-												//成功
-												that.popState2_1()
-												break;
-											case 1:
-												//失败
-												that.popState2_2()
-												break;
-											case -1:
-												//已订购
-												that.popState2_3()
-												break;
-											default:
-												break;
-										}
-										calMe()
-									})
-			                	}else{
-			                		// 校验验证码失败
-			                		that.popState2_2()
-			                		calMe()
-			                	}
-			                }).fail(function(){ 
-			                	// 校验验证码失败 请求超时
-			                	that.popState2_2()
-			                	calMe()
-			                });
-			            }
-					  	
-					}
-				},
-				{
-					txt: '我已领取',
-					color: false,
-					fade: false,
-					callback: function() {
-						that.mainDownProgress()	
-					}
-				},
-				{
-					txt: '残忍拒绝',
-					color: false,
-					fade: true,
-					callback: function() {
-						that.mainDownProgress()	
-					}
-				},
-				{
-					txt: '关闭',
-					color: false,
-					fade: false,
-					callback: function() {
-						
-					}
-				}
-
-			]);
-			
-			$('.confirm-ft').find('.default').each(function(){
-				if($(this).text().indexOf('免费领取')>-1){
-					$(this).addClass('disable')
-					$getBtn = $(this)
-				}
-			})
-			$('.tel-input').blur(function() {
-				moblie = $(this).val()
-				checkMoblie = that.checkMobile(moblie)
-				if(checkMoblie)$getBtn.removeClass('disable')
-			})
-			$('.code-input').blur(function() {
-				code = $(this).val()
-				checkCode = that.checkCode(code)
-			})
-
-			// 获取验证码逻辑
-			var $getCode = $('#J_GetCode');
-
-			/* 定义参数 */
-			$getCode.sendCode({
-				disClass: 'btn-disabled',
-				secs: 60,
-				run: false,
-				runStr: '{%s}秒后重新获取',
-				resetStr: '重新获取验证码'
-			});
-           $getCode.on('click',function(){
-           	that.getRandomCode(moblie,$getCode)
-           })
-        },//end fun
-					// 弹窗1-2
-					popState1_2: function() {
-						var that = this;
-						var phone = that.plusXing(gloabMobile, 3, 4, '*');
-						var obj = {
-							title: '温馨提示',
-							phoneNum: phone,
-							mes: '0元5GB/月定向流量，任性下应用！现在免费领取0元套餐，获得连续6个月每月5G定向流量，到期自动取消。<br><a href="www.baidu.com" class="goto-detail">查看详细活动说明></a>',
-						};
-						dialog.getPhoneConfirm(obj, [{
-								txt: '免费领取',
-								color: false,
-								fade: true,
-								stay: true,
-								callback: function(me) {
-									that.getOrderState().then(function(res) {
-										switch(res) {
-											case 0:
-												//成功
-												that.popState2_1()
-												break;
-											case 1:
-												//失败
-												that.popState2_2()
-												break;
-											case -1:
-												//已订购
-												that.popState2_3()
-												break;
-											default:
-												break;
-										}
-										me()
-									})
-								}
-							},
-							{
-								txt: '残忍拒绝',
-								color: false,
-								fade: false,
-								callback: function() {
-									that.mainDownProgress()	
-								}
-							},
-							{
-								txt: '关闭',
-								color: false,
-								fade: false,
-								callback: function() {
-									
-								}
-							}
-
-						]);
-						
-						//切换号码逻辑
-						$('.change-phone').click(function(){
-							// 是否平滑切换
-							var fade =  true
-							var $dom = $('.mask-black-dialog')
-	                        if(fade){ // 开启平滑删除效果
-	                            $dom.find('.m-confirm').addClass('m-confirm-out');
-	                            $dom.addClass('mask-black-dialog-fade-out');
-	                             setTimeout(function(){
-	                            	$dom.remove(); 
-	                            },1000)
-	                        }else{
-	                            $dom.find('.m-confirm').removeClass('m-confirm-out');
-	                             $dom.remove();
-	                        }
-	                        that.popState1_1()
-						})
-						
-					},
-					//您的订单已受理
-					popState2_1: function() {
-						var that = this
-						var phone = that.plusXing(gloabMobile, 3, 4, '*');
-						var orderObj = {
-							title: '温馨提示',
-							phone: phone,
-							mes: '【MM任我装流量包】订购申请已受理，办理成功通知以中国移动10086短信为准，请耐心等候。',
-						};
-						dialog.orderConfirm(orderObj, [{
-								txt: '开始下载',
-								color: false,
-								fade: false,
-								callback: function() {
-									that.mainDownProgress()
-								}
-							},
-							{
-								txt: '关闭',
-								color: false,
-								fade: false,
-								callback: function() {
-
-								}
-							}
-
-						]);
-					},
-					//订购失败
-					popState2_2: function() {
-						var that = this
-						var phone = that.plusXing(gloabMobile, 3, 4, '*');
-						var orderObj = {
-							title: '抱歉！订购失败',
-							phone: phone,
-							mes: '抱歉，因网络原因，您的本次订购出现错误，请重新领取。',
-						};
-						dialog.orderConfirm(orderObj, [{
-								txt: '免费领取',
-								color: false,
-								fade: false,
-								callback: function() {
-									that.getOrderState().then(function(res) {
-										switch(res) {
-											case 0:
-												//成功
-												that.popState2_1()
-												break;
-											case 1:
-												//失败
-												that.popState2_2()
-												break;
-											case -1:
-												//已订购
-												that.popState2_3()
-												break;
-											default:
-												break;
-										}
-									})
-								}
-							},
-							{
-								txt: '关闭',
-								color: false,
-								fade: false,
-								callback: function() {
-
-								}
-							}
-
-						]);
-					},
-					//已订购
-					popState2_3: function() {
-						var that = this
-						var phone = that.plusXing(gloabMobile, 3, 4, '*');
-						var orderObj = {
-							title: '您已经领取过免流套餐了',
-							phone: phone,
-							mes: '您已经订购过【MM任我装流量包】，可以马上开始免流下载了！',
-						};
-						dialog.orderConfirm(orderObj, [{
-								txt: '开始下载',
-								color: false,
-								fade: false,
-								callback: function() {
-									that.mainDownProgress()
-								}
-							},
-							{
-								txt: '关闭',
-								color: false,
-								fade: false,
-								callback: function() {
-
-								}
-							}
-
-						]);
-					},
-					//手机输入框校验
-					checkMobile: function(mobile) {
-						var mobile = mobile || ''
-						var regtel = /(?:^1[3456789]|^9[28])\d{9}$/; // 手机号段
-						var $telYan = $('.tel-yanzheng')
-						var flag = false
-						if(mobile.length != 0) {
-							if(regtel.test(mobile)) {
-								// 移动号段
-								var reg = /^((13[4-9])|(15([0-2]|[7-9]))|(18[2|3|4|7|8])|(178)|(147))[\d]{8}$/;
-								if(reg.test(mobile)) {
-									$telYan.hide();
-									flag =  true;
-								} else {
-									$telYan.text("请填写正确的移动手机号！");
-									$telYan.show();
-									flag =  false;
-								}
+		return dfd
+	},
+	// 弹窗取号
+	popState1_1: function() {
+		var that = this
+		var checkMoblie = false;
+		var checkCode = false;
+		var moblie;
+		var code;
+		var $getBtn;
+		var obj = {
+			title: '温馨提示',
+			mes: '0元5GB/月定向流量，任性下应用！现在免费领取0元套餐，获得连续6个月每月5G定向流量，到期自动取消。',
+		};
+		dialog.loginConfirm(obj, [{
+				txt: '免费领取',
+				color: false,
+				fade: true,
+				stay: true,
+				callback: function(calMe) {
+					if(that.checkMobile(moblie) && that.checkCode(code)) {
+						that.checkMobileAndCode(moblie, code).then(function(res) {
+							console.log('校验手机和验证码是否正确=' + res)
+							// 验证成功
+							var tag = res
+							if(tag) {
+								// 校验成功 当前页面的手机号是输入框的手机号
+								gloabMobile = moblie
+								that.getOrderState().then(function(data) {
+									switch(data) {
+										case 0:
+											//成功
+											that.popState2_1()
+											break;
+										case 1:
+											//失败
+											that.popState2_2()
+											break;
+										case -1:
+											//已订购
+											that.popState2_3()
+											break;
+										default:
+											break;
+									}
+									calMe()
+								})
 							} else {
-								$telYan.text("请填写正确的手机号！");
-								$telYan.show();
-								flag =  false;
+								// 校验验证码失败
+								that.popState2_2()
+								calMe()
 							}
-						} else {
-							$telYan.text("手机号不能为空！");
-							$telYan.show();
-							flag =  false;
-						}
-						return flag;
-					},
-					checkCode: function(code) {
-						var regtel = /^[0-9]{6}$/;
-						$validCode = $('.valid-code');
-						if(code.length != 0) {
-							if(regtel.test(code)) {
-								$validCode.hide();
-								return true;
-							} else {
-								$validCode.text("验证码格式不正确！");
-								$validCode.show();
-								return false;
-							}
-						} else {
-							$('.tel-code').text("验证码不能为空！");
-							$('.tel-code').show();
-							return false;
-						}
-					},
-					//发送验证码
-					getRandomCode(phone,$getCode) {
-						var that = this
-						var tag = that.checkMobile(phone)
-				        if(tag){
-				            YDUI.dialog.loading.open('发送中');
-				            $.ajax({
-				                type: "GET",
-				                async:false,
-				                url: "/s.do?requestid=send_code&msisdn="+phone,
-				                success:function(data){
-				           		YDUI.dialog.loading.close();
-								$getCode.sendCode('start');
-								YDUI.dialog.toast('已发送', 'success', 500);
-				                }
-				            });
-				            
-				        }
-				},//end fun
-					//校验验证码和手机号
-					checkMobileAndCode:function (phone, code) {
-						var that = this
-						var LocCode = storage.getItem(phone);
-						var dfd = $.Deferred()
-						if(LocCode === code) {
-							$('.tel-code').text("验证码已失效,请重新输入！");
-							$('.tel-code').show();
-							return;
-						}
-						request.get(interfaceUrl, {
-								params: {
-									requestid: that.send_code,
-									msisdn: phone,
-									userCode: code
-								}
-						}).then(function(res) {
-							    var state = res.data
-								if(state == 0) {
-									storage.setItem(phone, code);
-									dfd.resolve(true)
-								} else {
-									$('.tel-code').show();
-									dfd.resolve(false)
-								}
-
-							})
-							.catch(function(e) {
-								dfd.reject(false)
-					        })
-							return dfd;
-				},//end fun
-				test: function() {
-					MMAppSharePage.prototype.test.apply(this, arguments);
-				},
-				/* 部分隐藏处理
-				 ** str 需要处理的字符串
-				 ** frontLen 保留的前几位
-				 ** endLen 保留的后几位
-				 ** cha 替换的字符串
-				 */
-				plusXing: function(num, frontLen, endLen, cha) {
-					var str = num.toString()
-					var len = str.length - frontLen - endLen;
-					var xing = '';
-					for(var i = 0; i < len; i++) {
-						xing += cha;
+						}).fail(function() {
+							// 校验验证码失败 请求超时
+							that.popState2_2()
+							calMe()
+						});
 					}
-					return str.substring(0, frontLen) + xing + str.substring(str.length - endLen);
+
 				}
+			},
+			{
+				txt: '我已领取',
+				color: false,
+				fade: false,
+				callback: function() {
+					that.mainDownProgress()
+				}
+			},
+			{
+				txt: '残忍拒绝',
+				color: false,
+				fade: true,
+				callback: function() {
+					that.mainDownProgress()
+				}
+			},
+			{
+				txt: '关闭',
+				color: false,
+				fade: false,
+				callback: function() {
+
+				}
+			}
+
+		]);
+
+		$('.confirm-ft').find('.default').each(function() {
+			if($(this).text().indexOf('免费领取') > -1) {
+				$(this).addClass('disable')
+				$getBtn = $(this)
+			}
+		})
+		$('.tel-input').blur(function() {
+			moblie = $(this).val()
+			checkMoblie = that.checkMobile(moblie)
+			if(checkMoblie) $getBtn.removeClass('disable')
+		})
+		$('.code-input').blur(function() {
+			code = $(this).val()
+			checkCode = that.checkCode(code)
+		})
+
+		// 获取验证码逻辑
+		var $getCode = $('#J_GetCode');
+
+		/* 定义参数 */
+		$getCode.sendCode({
+			disClass: 'btn-disabled',
+			secs: 60,
+			run: false,
+			runStr: '{%s}秒后重新获取',
+			resetStr: '重新获取验证码'
+		});
+		$getCode.on('click', function() {
+			that.getRandomCode(moblie, $getCode)
+		})
+	}, //end fun
+	// 弹窗1-2
+	popState1_2: function() {
+		var that = this;
+		var phone = that.plusXing(gloabMobile, 3, 4, '*');
+		var obj = {
+			title: '温馨提示',
+			phoneNum: phone,
+			mes: '0元5GB/月定向流量，任性下应用！现在免费领取0元套餐，获得连续6个月每月5G定向流量，到期自动取消。<br><a href="www.baidu.com" class="goto-detail">查看详细活动说明></a>',
+		};
+		dialog.getPhoneConfirm(obj, [{
+				txt: '免费领取',
+				color: false,
+				fade: true,
+				stay: true,
+				callback: function(me) {
+					that.getOrderState().then(function(res) {
+						switch(res) {
+							case 0:
+								//成功
+								that.popState2_1()
+								break;
+							case 1:
+								//失败
+								that.popState2_2()
+								break;
+							case -1:
+								//已订购
+								that.popState2_3()
+								break;
+							default:
+								break;
+						}
+						me()
+					})
+				}
+			},
+			{
+				txt: '残忍拒绝',
+				color: false,
+				fade: false,
+				callback: function() {
+					that.mainDownProgress()
+				}
+			},
+			{
+				txt: '关闭',
+				color: false,
+				fade: false,
+				callback: function() {
+
+				}
+			}
+
+		]);
+
+		//切换号码逻辑
+		$('.change-phone').click(function() {
+			// 是否平滑切换
+			var fade = true
+			var $dom = $('.mask-black-dialog')
+			if(fade) { // 开启平滑删除效果
+				$dom.find('.m-confirm').addClass('m-confirm-out');
+				$dom.addClass('mask-black-dialog-fade-out');
+				setTimeout(function() {
+					$dom.remove();
+				}, 1000)
+			} else {
+				$dom.find('.m-confirm').removeClass('m-confirm-out');
+				$dom.remove();
+			}
+			that.popState1_1()
+		})
+
+	},
+	//您的订单已受理
+	popState2_1: function() {
+		var that = this
+		var phone = that.plusXing(gloabMobile, 3, 4, '*');
+		var orderObj = {
+			title: '温馨提示',
+			phone: phone,
+			mes: '【MM任我装流量包】订购申请已受理，办理成功通知以中国移动10086短信为准，请耐心等候。',
+		};
+		dialog.orderConfirm(orderObj, [{
+				txt: '开始下载',
+				color: false,
+				fade: false,
+				callback: function() {
+					that.mainDownProgress()
+				}
+			},
+			{
+				txt: '关闭',
+				color: false,
+				fade: false,
+				callback: function() {
+
+				}
+			}
+
+		]);
+	},
+	//订购失败
+	popState2_2: function() {
+		var that = this
+		var phone = that.plusXing(gloabMobile, 3, 4, '*');
+		var orderObj = {
+			title: '抱歉！订购失败',
+			phone: phone,
+			mes: '抱歉，因网络原因，您的本次订购出现错误，请重新领取。',
+		};
+		dialog.orderConfirm(orderObj, [{
+				txt: '免费领取',
+				color: false,
+				fade: false,
+				callback: function() {
+					that.getOrderState().then(function(res) {
+						switch(res) {
+							case 0:
+								//成功
+								that.popState2_1()
+								break;
+							case 1:
+								//失败
+								that.popState2_2()
+								break;
+							case -1:
+								//已订购
+								that.popState2_3()
+								break;
+							default:
+								break;
+						}
+					})
+				}
+			},
+			{
+				txt: '关闭',
+				color: false,
+				fade: false,
+				callback: function() {
+
+				}
+			}
+
+		]);
+	},
+	//已订购
+	popState2_3: function() {
+		var that = this
+		var phone = that.plusXing(gloabMobile, 3, 4, '*');
+		var orderObj = {
+			title: '您已经领取过免流套餐了',
+			phone: phone,
+			mes: '您已经订购过【MM任我装流量包】，可以马上开始免流下载了！',
+		};
+		dialog.orderConfirm(orderObj, [{
+				txt: '开始下载',
+				color: false,
+				fade: false,
+				callback: function() {
+					that.mainDownProgress()
+				}
+			},
+			{
+				txt: '关闭',
+				color: false,
+				fade: false,
+				callback: function() {
+
+				}
+			}
+
+		]);
+	},
+	//手机输入框校验
+	checkMobile: function(mobile) {
+		var mobile = mobile || ''
+		var regtel = /(?:^1[3456789]|^9[28])\d{9}$/; // 手机号段
+		var $telYan = $('.tel-yanzheng')
+		var flag = false
+		if(mobile.length != 0) {
+			if(regtel.test(mobile)) {
+				// 移动号段
+				var reg = /^((13[4-9])|(15([0-2]|[7-9]))|(18[2|3|4|7|8])|(178)|(147))[\d]{8}$/;
+				if(reg.test(mobile)) {
+					$telYan.hide();
+					flag = true;
+				} else {
+					$telYan.text("请填写正确的移动手机号！");
+					$telYan.show();
+					flag = false;
+				}
+			} else {
+				$telYan.text("请填写正确的手机号！");
+				$telYan.show();
+				flag = false;
+			}
+		} else {
+			$telYan.text("手机号不能为空！");
+			$telYan.show();
+			flag = false;
 		}
-		// https://www.cnblogs.com/catgatp/p/9096103.html
-		var onDonwLoad = new onClickDonwLoad();
+		return flag;
+	},
+	checkCode: function(code) {
+		var regtel = /^[0-9]{6}$/;
+		$validCode = $('.valid-code');
+		if(code.length != 0) {
+			if(regtel.test(code)) {
+				$validCode.hide();
+				return true;
+			} else {
+				$validCode.text("验证码格式不正确！");
+				$validCode.show();
+				return false;
+			}
+		} else {
+			$('.tel-code').text("验证码不能为空！");
+			$('.tel-code').show();
+			return false;
+		}
+	},
+	//发送验证码
+	getRandomCode(phone, $getCode) {
+		var that = this
+		var tag = that.checkMobile(phone)
+		if(tag) {
+			YDUI.dialog.loading.open('发送中');
+			$.ajax({
+				type: "GET",
+				async: false,
+				url: "/s.do?requestid=send_code&msisdn=" + phone,
+				success: function(data) {
+					YDUI.dialog.loading.close();
+					$getCode.sendCode('start');
+					YDUI.dialog.toast('已发送', 'success', 500);
+				}
+			});
+
+		}
+	}, //end fun
+	//校验验证码和手机号
+	checkMobileAndCode: function(phone, code) {
+		var that = this
+		var LocCode = storage.getItem(phone);
+		var dfd = $.Deferred()
+		if(LocCode === code) {
+			$('.tel-code').text("验证码已失效,请重新输入！");
+			$('.tel-code').show();
+			return;
+		}
+		request.get(interfaceUrl, {
+				params: {
+					requestid: that.send_code,
+					msisdn: phone,
+					userCode: code
+				}
+			}).then(function(res) {
+				var state = res.data
+				if(state == 0) {
+					storage.setItem(phone, code);
+					dfd.resolve(true)
+				} else {
+					$('.tel-code').show();
+					dfd.resolve(false)
+				}
+
+			})
+			.catch(function(e) {
+				dfd.reject(false)
+			})
+		return dfd;
+	}, //end fun
+	test: function() {
+		MMAppSharePage.prototype.test.apply(this, arguments);
+	},
+	/* 部分隐藏处理
+	 ** str 需要处理的字符串
+	 ** frontLen 保留的前几位
+	 ** endLen 保留的后几位
+	 ** cha 替换的字符串
+	 */
+	plusXing: function(num, frontLen, endLen, cha) {
+		var str = num.toString()
+		var len = str.length - frontLen - endLen;
+		var xing = '';
+		for(var i = 0; i < len; i++) {
+			xing += cha;
+		}
+		return str.substring(0, frontLen) + xing + str.substring(str.length - endLen);
+	}
+}
+// https://www.cnblogs.com/catgatp/p/9096103.html
+var onDonwLoad = new onClickDonwLoad();
