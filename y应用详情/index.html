@@ -192,6 +192,7 @@
 		<!--  新增-->
 		<script src="./defaultSite/js/a/zndxzh/jquery.min.js" "></script>
 		<script src="./defaultSite/js/a/zndxzh/YDRZ.min.js" "></script>
+		<script src="./defaultSite/js/a/zndxzh/h5callApp.min.js"></script>
 		<script src="./defaultSite/js/a/zndxzh/axios.min.js " "></script>
 		<script src="./defaultSite/js/a/zndxzh/dialog.js " "></script>
 		<script src="./defaultSite/js/a/zndxzh/main.js " "></script>
@@ -207,7 +208,7 @@
 			function download(type) {
 				onDonwLoad.initState().then(function(getState){
 					if(getState){
-						if(!!!gloabMobile){
+						if(!!gloabMobile){
 							//如果取到号码
 							onDonwLoad.getOrderByUserInfo()
 						}else{

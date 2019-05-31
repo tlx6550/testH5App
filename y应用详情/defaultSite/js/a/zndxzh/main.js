@@ -7,6 +7,7 @@ var request = axios.create({
 	baseURL: baseUrlApi,
 	timeout: 5000
 });
+var userAgent = window.YDUI.util.userAgent
 var storage = window.localStorage;
 var gloabMobile;
 /* 普通确认框 */
@@ -287,7 +288,76 @@ onClickDonwLoad.prototype = {
 		},
 		// 下载主流程
 		mainDownProgress: function() {
-			alert('进入主流程')
+			var that = this
+			console.log('进入主流程')
+			if(userAgent.weixin || userAgent.qq) { //如果是在微信或者qq内
+		        that.popOnlyOnWeb();
+		    }else if (userAgent.ios){
+		    	that.popOnlyOnAndroid();
+		    }else{
+		    	that.h5CallApp()
+		    }
+		},
+		h5CallApp:function(){
+			//https://unpkg.com/callapp-lib@2.1.7/dist/index.umd.js
+			var option = {
+		      scheme: {
+		        protocol: 'mm://index',
+		      },
+		      fallback: 'http://ota.fr18.mmarket.com:38080/rs/res1/mmclient/MM_online_channel_5210527624.apk',//唤端失败跳转通用(下载)页
+		      timeout: 3000,
+		    };
+		     var lib = new CallApp(option);
+		},
+		popOnlyOnWeb:function(){
+			 dialog.guide1Confirm('选择“在浏览器打开”后开始下载', [
+                {
+                    txt: '我知道了',
+                    color: false,
+                    callback: function () {
+                       
+                    }
+                }
+    
+            ]);
+		},
+		popOnlyOnAndroid:function(){
+			 dialog.guide2Confirm('选择“在浏览器打开”后开始下载', [
+                {
+                    txt: '我知道了',
+                    color: false,
+                    callback: function () {
+                       
+                    }
+                }
+    
+            ]);
+		},
+		popInstallImmediately:function(){
+		 dialog.guide3Confirm('抱歉，订购失败', '安装MM应用商场手机客户端后，可以获得更丰富的内容，更高速、更稳定的下载服务。', [
+           {
+               txt: '关闭',
+               color: false,
+               callback: function () {
+                   dialog.toast('你点了取消', 'none', 1000);
+               }
+           },
+           {
+               txt: 'MM应用商场',
+               color: false,
+               callback: function () {
+             
+               }
+           },
+           {
+               txt: '马上安装',
+               color: false,
+               callback: function () {
+                   dialog.toast('你点了取消', 'none', 1000);
+               }
+        }
+
+       ]);
 		},
 		//请求订购状态
 		getOrderState: function() {
@@ -333,6 +403,8 @@ onClickDonwLoad.prototype = {
 			                	// 验证成功
 			                	var tag = res
 			                	if(tag){
+			                		// 校验成功 当前页面的手机号是输入框的手机号
+			                	  gloabMobile =  moblie
 			                		that.getOrderState().then(function(data) {
 										switch(data) {
 											case 0:
@@ -352,8 +424,16 @@ onClickDonwLoad.prototype = {
 										}
 										calMe()
 									})
+			                	}else{
+			                		// 校验验证码失败
+			                		that.popState2_2()
+			                		calMe()
 			                	}
-			                }).fail(function(){ alert("验证失败"); });
+			                }).fail(function(){ 
+			                	// 校验验证码失败 请求超时
+			                	that.popState2_2()
+			                	calMe()
+			                });
 			            }
 					  	
 					}
@@ -363,7 +443,7 @@ onClickDonwLoad.prototype = {
 					color: false,
 					fade: false,
 					callback: function() {
-
+						that.mainDownProgress()	
 					}
 				},
 				{
@@ -371,7 +451,7 @@ onClickDonwLoad.prototype = {
 					color: false,
 					fade: true,
 					callback: function() {
-						dialog.toast('你点了取消', 'none', 1000);
+						that.mainDownProgress()	
 					}
 				},
 				{
@@ -379,7 +459,7 @@ onClickDonwLoad.prototype = {
 					color: false,
 					fade: false,
 					callback: function() {
-						dialog.toast('你点了取消', 'none', 1000);
+						
 					}
 				}
 
@@ -457,7 +537,7 @@ onClickDonwLoad.prototype = {
 								color: false,
 								fade: false,
 								callback: function() {
-									dialog.toast('你点了取消', 'none', 1000);
+									that.mainDownProgress()	
 								}
 							},
 							{
@@ -465,11 +545,30 @@ onClickDonwLoad.prototype = {
 								color: false,
 								fade: false,
 								callback: function() {
-									dialog.toast('你点了取消', 'none', 1000);
+									
 								}
 							}
 
 						]);
+						
+						//切换号码逻辑
+						$('.change-phone').click(function(){
+							// 是否平滑切换
+							var fade =  true
+							var $dom = $('.mask-black-dialog')
+	                        if(fade){ // 开启平滑删除效果
+	                            $dom.find('.m-confirm').addClass('m-confirm-out');
+	                            $dom.addClass('mask-black-dialog-fade-out');
+	                             setTimeout(function(){
+	                            	$dom.remove(); 
+	                            },1000)
+	                        }else{
+	                            $dom.find('.m-confirm').removeClass('m-confirm-out');
+	                             $dom.remove();
+	                        }
+	                        that.popState1_1()
+						})
+						
 					},
 					//您的订单已受理
 					popState2_1: function() {
@@ -513,7 +612,24 @@ onClickDonwLoad.prototype = {
 								color: false,
 								fade: false,
 								callback: function() {
-
+									that.getOrderState().then(function(res) {
+										switch(res) {
+											case 0:
+												//成功
+												that.popState2_1()
+												break;
+											case 1:
+												//失败
+												that.popState2_2()
+												break;
+											case -1:
+												//已订购
+												that.popState2_3()
+												break;
+											default:
+												break;
+										}
+									})
 								}
 							},
 							{
@@ -541,7 +657,7 @@ onClickDonwLoad.prototype = {
 								color: false,
 								fade: false,
 								callback: function() {
-
+									that.mainDownProgress()
 								}
 							},
 							{
@@ -645,7 +761,7 @@ onClickDonwLoad.prototype = {
 									dfd.resolve(true)
 								} else {
 									$('.tel-code').show();
-									dfd.reject(false)
+									dfd.resolve(false)
 								}
 
 							})
