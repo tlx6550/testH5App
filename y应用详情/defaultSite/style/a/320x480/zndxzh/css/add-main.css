@@ -34,7 +34,7 @@ body {
 	margin-left: 0.2rem;
 }
 
-.app {
+.top1 .app {
 	width: 1.28rem;
 	height: 1.28rem;
 	margin: 0.5rem 0;
@@ -212,7 +212,7 @@ body {
 	background: url(../../../../../images/a/320x480/zndxzh/bg_720.png) no-repeat;
 	background-size: 100% 100%;
 }
-.app {
+.top1 .app {
 	position: relative;
 	z-index: 99;
 	width: 1.45rem;

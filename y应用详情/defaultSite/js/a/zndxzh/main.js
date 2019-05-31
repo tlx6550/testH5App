@@ -1,6 +1,7 @@
 // var baseUrl = 'http://221.179.8.170:8080/s.do';
 //var baseUrlApi = 'http://221.179.8.170:8080'; //准现网查询接口
 //var baseUrlApi = 'http://211.139.191.144:12634'; //测试网查询接口
+var vConsole = new VConsole();
 var baseUrlApi = 'http://localhost:3000'; //测试网查询接口
 var interfaceUrl = '/s.do';
 var request = axios.create({
@@ -176,8 +177,7 @@ MMAppSharePage.prototype = {
 										success: function(data) {
 											var datas = JSON.stringify(data);
 											var jsonObj = eval('(' + datas + ')');
-											$("body").html(jsonObj.data.msisdn);
-											console.log(jsonObj)
+											console.log('取号结果='+data)
 											dfd.resolve(jsonObj);
 										}
 									});
@@ -204,10 +204,15 @@ var mmApp = new MMAppSharePage()
 mmApp.initState().then(function(getState) {
 	if(getState === 'true') { // 在线
 		// 网关取号
-		//		mmApp.authent().then(function(res){
-		//		console.log(res)
-		//
-		//			})
+		try{
+			mmApp.authent().then(function(res){
+				console.log(res)
+		
+			})
+		}catch(e){
+			console.log(e)
+		}
+				
 		var mobile = 15112395842
 		setTimeout(function() {
 			gloabMobile = 13417586550;
@@ -226,9 +231,6 @@ function onClickDonwLoad() {
 	MMAppSharePage.call(this)
 	this.mobile = '99999999'
 	this.onc = 'jjjjj'
-	this.Name = function() {
-		alert(999)
-	}
 }
 onClickDonwLoad.prototype = mmApp;
 onClickDonwLoad.prototype.constructor = onClickDonwLoad;
@@ -299,15 +301,21 @@ onClickDonwLoad.prototype = {
 		    }
 		},
 		h5CallApp:function(){
-			//https://unpkg.com/callapp-lib@2.1.7/dist/index.umd.js
+			var that = this
+			// https://github.com/suanmei/callapp-lib
 			var option = {
 		      scheme: {
-		        protocol: 'mm://index',
+		        protocol: 'mm://',
 		      },
-		      fallback: 'http://ota.fr18.mmarket.com:38080/rs/res1/mmclient/MM_online_channel_5210527624.apk',//唤端失败跳转通用(下载)页
 		      timeout: 3000,
 		    };
 		     var lib = new CallApp(option);
+		     lib.open({
+		     	path:'index',//唤起mm 首页
+		     	callback:function(){
+		     		that.popInstallImmediately()
+		     	}
+		     })
 		},
 		popOnlyOnWeb:function(){
 			 dialog.guide1Confirm('选择“在浏览器打开”后开始下载', [
@@ -334,30 +342,34 @@ onClickDonwLoad.prototype = {
             ]);
 		},
 		popInstallImmediately:function(){
+			var that = this
 		 dialog.guide3Confirm('抱歉，订购失败', '安装MM应用商场手机客户端后，可以获得更丰富的内容，更高速、更稳定的下载服务。', [
-           {
-               txt: '关闭',
-               color: false,
-               callback: function () {
-                   dialog.toast('你点了取消', 'none', 1000);
-               }
-           },
-           {
-               txt: 'MM应用商场',
-               color: false,
-               callback: function () {
-             
-               }
-           },
-           {
-               txt: '马上安装',
-               color: false,
-               callback: function () {
-                   dialog.toast('你点了取消', 'none', 1000);
-               }
-        }
-
-       ]);
+	           {
+	               txt: '关闭',
+	               color: false,
+	               callback: function () {
+	                  
+	               }
+	           },
+	           {
+	               txt: 'MM应用商场',
+	               color: false,
+	               callback: function () {
+	             
+	               }
+	           },
+	           {
+	               txt: '马上安装',
+	               color: false,
+	               callback: function () {
+	                  that.downLoadMMApp()
+	               }
+	        }
+	
+	       ]);
+		},
+		downLoadMMApp:function(){
+			window.location.href = 'http://ota.fr18.mmarket.com:38080/rs/res1/mmclient/MM_online_channel_5210527624.apk'
 		},
 		//请求订购状态
 		getOrderState: function() {
