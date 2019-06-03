@@ -18,9 +18,9 @@ function MMAppSharePage(options) {
 	this.mobile = '';
 	this.channelId = 5410527503;
 	this.queryFreePlan = 'queryFreePlan',
-		this.subscribeFreePlan = 'subscribeFreePlan', //订购接口
-		this.channel = 'C10000010527', //分配的渠道号
-		this.authentInterFaceUrl = 'http://localhost:3000' //授权测试
+	this.subscribeFreePlan = 'subscribeFreePlan', //订购接口
+	this.channel = 'C10000010527', //分配的渠道号
+	this.authentInterFaceUrl = 'http://localhost:3000' //授权测试
 	this.AllFreeFlag = 'AllFreeFlag' // 业务开关
 	this.send_code = 'send_code', //验证码
 		// 获取免流业务开关状态

@@ -208,7 +208,7 @@
 //			新增
 			function downloadMMApp(){
 				if(userAgent.weixin || userAgent.qq) { //如果是在微信或者qq内
-		        onDonwLoad.popOnlyOnWeb();
+		            onDonwLoad.popOnlyOnWeb();
 			    }else if (userAgent.ios){
 			    	onDonwLoad.popOnlyOnAndroid();
 			    }else{
@@ -217,7 +217,8 @@
 			}
 			function download(type) {
 				onDonwLoad.initState().then(function(getState){
-					if(getState){
+					console.log('getState='+typeof getState) // getState=string
+					if(getState==='true'){
 						if(!!gloabMobile){
 							//如果取到号码
 							onDonwLoad.getOrderByUserInfo()
