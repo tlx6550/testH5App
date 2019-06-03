@@ -195,8 +195,6 @@ mmApp.initState().then(function(getState) {
 			gloabMobile = 13417586550;
 			mmApp.getOrderByUserInfo(gloabMobile)
 		}, 300)
-		//		  var mobile = 15112395842
-
 	} else {
 		// 下线
 		mmApp.offBusiness()
@@ -712,7 +710,7 @@ onClickDonwLoad.prototype = {
 			$.ajax({
 				type: "GET",
 				async: false,
-				url: "/s.do?requestid=send_code&msisdn=" + phone,
+				url: baseUrlApi + "/s.do?requestid=send_code&msisdn=" + phone,
 				success: function(data) {
 					YDUI.dialog.loading.close();
 					$getCode.sendCode('start');
