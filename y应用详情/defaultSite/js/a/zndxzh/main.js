@@ -8,7 +8,8 @@ var request = axios.create({
 	baseURL: baseUrlApi,
 	timeout: 5000
 });
-var userAgent = window.YDUI.util.userAgent
+var userAgentFun = window.YDUI.util.userAgent
+var userAgent = userAgentFun()
 var storage = window.localStorage;
 var gloabMobile;
 /* 普通确认框 */
@@ -234,9 +235,10 @@ onClickDonwLoad.prototype = {
 					break;
 				case 1:
 					//已办理
-					if(isLeft) {
-						that.mainDownProgress()
-					}
+//					if(isLeft) {
+//						that.mainDownProgress()
+//					}
+					that.mainDownProgress()
 					console.log('state=' + state)
 					break;
 				case 2:
