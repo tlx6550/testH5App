@@ -2,7 +2,7 @@
 //var baseUrlApi = 'http://221.179.8.170:8080'; //准现网查询接口
 //var baseUrlApi = 'http://211.139.191.144:12634'; //测试网查询接口
 var vConsole = new VConsole();
-var baseUrlApi = 'http://localhost:3000'; //测试网查询接口
+var baseUrlApi = ''; //测试网查询接口
 var interfaceUrl = '/s.do';
 var request = axios.create({
 	baseURL: baseUrlApi,
@@ -21,7 +21,7 @@ function MMAppSharePage(options) {
 	this.queryFreePlan = 'queryFreePlan',
 	this.subscribeFreePlan = 'subscribeFreePlan', //订购接口
 	this.channel = 'C10000010527', //分配的渠道号
-	this.authentInterFaceUrl = 'http://localhost:3000' //授权测试
+	this.authentInterFaceUrl = '' //授权测试
 	this.AllFreeFlag = 'AllFreeFlag' // 业务开关
 	this.send_code = 'send_code', //验证码
 		// 获取免流业务开关状态
@@ -80,7 +80,7 @@ MMAppSharePage.prototype = {
 					console.log('state=' + state)
 					break;
 				case 1:
-					//已办理
+					//已办理且有余量
 					if(isLeft) {
 						that.onLineBusiness()
 					}
@@ -110,10 +110,10 @@ MMAppSharePage.prototype = {
 	},
 	//网关取号认证
 	authent: function() {
-		dialog.loading.open('加载中...');
+		dialog.loading.open('加载中...')
 		var that = this
 		var dfd = $.Deferred()
-		var preSign = YDRZ.getSign("000185", "1.2");
+		var preSign = YDRZ.getSign("300011879751", "1.2");
 		var sign = null;
 		var RSAstartTime = Date.parse(new Date()); //获取当前时间
 		$.ajax({
@@ -132,11 +132,11 @@ MMAppSharePage.prototype = {
 						YDRZ.getTokenInfo({
 							data: { //请求的参数
 								version: '1.2', //接口版本号 （必填）
-								appId: '000185', //应用Id （必填）
+								appId: '300011879751', //应用Id （必填）
 								sign: sign, //RSA加密后的sign（必填）
 								openType: '1', //移动取号接口填写1,三网取号接口填写0 （必填，联调时必须填写为1）
-								expandParams: 'phoneNum=15112395842', //扩展参数  格式：参数名=值  多个时使用 | 分割（选填，联调环境只能模拟取号，联调时需填写phoneNum=188185*****手机号可以随便填写，生产可不填）
-								isTest: '0' //是否启用测试线地址（传0时为启用不为0或者不传时为不启用）
+								expandParams: '', //扩展参数  格式：参数名=值  多个时使用 | 分割（选填，联调环境只能模拟取号，联调时需填写phoneNum=188185*****手机号可以随便填写，生产可不填）
+								isTest: '' //是否启用测试线地址（传0时为启用不为0或者不传时为不启用）
 							},
 							success: function(res) { //成功回调
 								var TokenendTime = Date.parse(new Date()); //获取当前时间
@@ -154,17 +154,18 @@ MMAppSharePage.prototype = {
 										url: that.authentInterFaceUrl + "/s.do?requestid=getAuthent",
 										data: tokenJson,
 										success: function(data) {
-											 dialog.loading.close();/* 移除loading */
+											dialog.loading.close();/* 移除loading */
 											var datas = JSON.stringify(data);
 											var jsonObj = eval('(' + datas + ')');
-											console.log('取号结果=' + data)
+											console.log('取号结果=')
+											console.log(data)
 											dfd.resolve(jsonObj);
 										}
 									});
 								}
 							},
 							error: function(res) {
-								 dialog.loading.close();/* 移除loading */
+								dialog.loading.close();/* 移除loading */
 								dfd.reject()
 								console.log(res);
 							}
@@ -174,7 +175,7 @@ MMAppSharePage.prototype = {
 				}
 			},
 			error: function(res) { //错误回调
-				 dialog.loading.close();/* 移除loading */
+				dialog.loading.close();/* 移除loading */
 				dfd.reject()
 				console.log(res);
 			}
@@ -200,11 +201,6 @@ mmApp.initState().then(function(getState) {
 			console.log(e)
 		}
 
-		var mobile = 15112395842
-		setTimeout(function() {
-			gloabMobile = 13417586550;
-			mmApp.getOrderByUserInfo(gloabMobile)
-		}, 300)
 	} else {
 		// 下线
 		mmApp.offBusiness()
@@ -236,7 +232,7 @@ onClickDonwLoad.prototype = {
 			//          var jsonObj = eval('(' + datas + ')');
 			//          var state = JSON.parse(jsonObj).freeUser;
 
-			switch(state) {
+		switch(state) {
 				case 0:
 					//未办理
 					that.popState1_2()
@@ -244,9 +240,6 @@ onClickDonwLoad.prototype = {
 					break;
 				case 1:
 					//已办理
-//					if(isLeft) {
-//						that.mainDownProgress()
-//					}
 					that.mainDownProgress()
 					console.log('state=' + state)
 					break;
@@ -299,9 +292,6 @@ onClickDonwLoad.prototype = {
 			path: 'index', //唤起mm 首页
 			callback: function() {
 				that.downLoadLocalApp()
-				setTimeout(function(){
-					that.popInstallImmediately()
-				},300)
 			}
 		})
 	},
@@ -359,6 +349,14 @@ onClickDonwLoad.prototype = {
 	//下载本页应用
 	downLoadLocalApp:function(){
 		 mm.download(mmDowloadArguments.a,mmDowloadArguments.b, mmDowloadArguments.c);
+		 mm.error(function(){
+		  var ar = errorArguments.a;
+		  var br = errorArguments.b;
+	      window.location.href = baseUrlApi + "/s.do?requestid=jump302&cid="+ar+"&channelid="+br;
+	      setTimeout(function(){
+					that.popInstallImmediately()
+			},300)
+		 });
 	},
 	//请求订购状态
 	getOrderState: function() {
@@ -501,10 +499,11 @@ onClickDonwLoad.prototype = {
 	popState1_2: function() {
 		var that = this;
 		var phone = that.plusXing(gloabMobile, 3, 4, '*');
+		var ruleLink = baseUrlApi + '/s.do?requestid=zndxzh_rule'
 		var obj = {
 			title: '温馨提示',
 			phoneNum: phone,
-			mes: '0元5GB/月定向流量，任性下应用！现在免费领取0元套餐，获得连续6个月每月5G定向流量，到期自动取消。<br><a href="www.baidu.com" class="goto-detail">查看详细活动说明></a>',
+			mes: '0元5GB/月定向流量，任性下应用！现在免费领取0元套餐，获得连续6个月每月5G定向流量，到期自动取消。<br><a href="'+ruleLink+'" class="goto-detail">查看详细活动说明></a>',
 		};
 		dialog.getPhoneConfirm(obj, [{
 				txt: '免费领取',
@@ -729,7 +728,7 @@ onClickDonwLoad.prototype = {
 			$.ajax({
 				type: "GET",
 				async: false,
-				url: baseUrlApi + "/s.do?requestid=send_code&msisdn=" + phone,
+				url: "/s.do?requestid=send_code&msisdn=" + phone,
 				success: function(data) {
 					YDUI.dialog.loading.close();
 					$getCode.sendCode('start');

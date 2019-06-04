@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>应用详情</title>    
+    <link rel="stylesheet" href="/defaultSite/style/a/320x480/zndxzh/css/index.css" />
+    <link rel="stylesheet" href="/defaultSite/style/a/320x480/zndxzh/css/add-main.css" />
+    <link rel="stylesheet" href="/defaultSite/style/a/320x480/zndxzh/css/swiper.min.css">
+    <link rel="stylesheet" href="/defaultSite/style/a/320x480/zndxzh/css/common.css">
+    <link rel="stylesheet" href="/defaultSite/c/css/mmapp.css">
+  </head>
+  <body>
+    <div class="top1">
+        {if $zndxzh.datas.CONTENT_PIC != null && $zndxzh.datas.CONTENT_PIC != '' }
+            <img src="{$zndxzh.datas.CONTENT_PIC}" class="app-diy-bg"/>
+        {else}
+            <img src="/defaultSite/style/a/320x480/zndxzh/img/bg.png"  class="app-def-bg"/>
+        {/if}
+        <img src="{if $zndxzh.imageURL!=null}{$zndxzh.imageURL}{else}{$zndxzh.thirdImageURL}{/if}" class="app"/>
+        <p>{$zndxzh.datas.NAME}</p>
+        <p><span class="span1">{if $zndxzh.score!=null}{$zndxzh.score}分{/if}</span><span class="span2"{if $zndxzh.score==null}style="margin-left:0"{/if} id="span2">0K</span></p>
+    </div>
+    <div class="app_label">
+        <p>“{if $zndxzh.datas.APP_DESCRIPTION!=null}{$zndxzh.datas.APP_DESCRIPTION}{else}小编很忙，还没留下点评{/if}”</p>
+    </div>
+    <!-- swiper -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            {if $zndxzh.previews!=null}
+                {foreach from=$zndxzh.previews item=item name=foo}
+                  <div class="swiper-slide"><img src="{$item}"/></div>
+                {/foreach}
+            {/if}
+            {if $zndxzh.datas.SCREEN_URL1!=null}
+                <div class="swiper-slide"><img src="{$zndxzh.datas.SCREEN_URL1}"/></div>
+            {/if}
+            {if $zndxzh.datas.SCREEN_URL2!=null}
+                <div class="swiper-slide"><img src="{$zndxzh.datas.SCREEN_URL2}"/></div>
+            {/if}
+            {if $zndxzh.datas.SCREEN_URL3!=null}
+                <div class="swiper-slide"><img src="{$zndxzh.datas.SCREEN_URL3}"/></div>
+            {/if}
+            {if $zndxzh.datas.SCREEN_URL4!=null}
+                <div class="swiper-slide"><img src="{$zndxzh.datas.SCREEN_URL4}"/></div>
+            {/if}
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <div class="bottom-app-label app_label">
+        {if $labList!=null && $labList!=""}
+            <p>
+                {foreach from=$labList item=item name=foo}
+                    {if $smarty.foreach.foo.index<4 }
+                        <span>{$item.labelName}</span>
+                    {else}
+                        <span class="span{$smarty.foreach.foo.index mod 4}">{$item.labelName}</span>
+                    {/if}
+                {/foreach}
+            </p>
+        {/if}
+    </div>
+    <div class="gap-tag"></div>
+    <div class="app-introduce">
+        <div class="content">{$zndxzh.jsonIntroduction|replace:"\\r\\n":"<br/>"|replace:"\\n":"<br/>"|replace:"\\r":"<br/>"}
+        </div>
+        <div class="verstion">
+            <div class="item">
+                <span class="title">版&nbsp;本</span>
+                <span class="info">{$zndxzh.datas.VERSIONNAME}
+        </span>
+            </div>
+            <div class="item">
+                <span class="title">更&nbsp;新</span>
+                <span class="info">{$zndxzh.datas.LUPDDATE|truncate:10:"":true|strip_tags}</span>
+            </div>
+            <div class="item">
+                <span class="title">提供者</span>
+                <span class="info">{$zndxzh.datas.SPNAME}</span>
+            </div>
+        </div>
+    </div>
+    <div class="fixed-bottom">
+        <div class="down_btn">
+            <a href="javascript:download()">下载</a>
+        </div>
+        <div style="display: none;" class="page-state-item page-state-2" ">
+            <div class="txt">
+                下载服务由<img src="/defaultSite/images/a/320x480/zndxzh/icon.png" class="icon"><span class="app-name" onclick=downloadMMApp()>MM应用商场</span>提供
+            </div>
+        </div>
+        <div tyle="display: none;" class="page-state-item page-state-1"">
+            <div class="txt">
+                <img src="/defaultSite/images/a/320x480/zndxzh/icon.png" class="icon"><span class="app-name" onclick=downloadMMApp()>MM应用商场</span>支持免流量下载
+            </div>
+        </div>
+    </div>
+    <div class="pop2">
+        <img src="/defaultSite/images/a/320x480/zndxzh/tip2.png">
+    </div>
+  </body>
+<script src="/defaultSite/js/a/zndxzh/vConsole.js"></script>
+<script src="/defaultSite/c/js/mmapp.js"></script>
+<script src="/defaultSite/js/a/zndxzh/jquery.min.js" "></script>
+<script src="/defaultSite/js/a/zndxzh/YDRZ.min.js" "></script>
+<script src="/defaultSite/js/a/zndxzh/swiper.min.js"></script>
+<script src="/defaultSite/js/a/zndxzh/h5callApp.min.js"></script>
+<script src="/defaultSite/js/a/zndxzh/axios.min.js " "></script>
+<script src="/defaultSite/js/a/zndxzh/dialog.js " "></script>
+<script src="/defaultSite/js/a/zndxzh/main.js " "></script>
+<script src="/defaultSite/js/a/zndxzh/flexible.js"></script>
+<script>
+	 //本页面应用下载参数
+	 var mmDowloadArguments = {
+	 	a:{if $zndxzh.datas.CONTENTID!=null}{$zndxzh.datas.CONTENTID}{else}{$zndxzh.datas.searchcontentid}{/if},
+	 	b:{$zndxzh.applicationSize},
+	 	c:false
+	 }
+	  window.location.href = "/s.do?requestid=jump302&cid="+{if $zndxzh.datas.CONTENTID!=null}{$zndxzh.datas.CONTENTID}{else}{$zndxzh.datas.searchcontentid}{/if}+"&channelid="+{if $channelid!=null && $channelid!=''}{$channelid}{else}5410093632{/if};
+	 var errorArguments = {
+	 	a:{if $zndxzh.datas.CONTENTID!=null}{$zndxzh.datas.CONTENTID}{else}{$zndxzh.datas.searchcontentid}{/if},
+	 	b:{if $channelid!=null && $channelid!=''}{$channelid}{else}5410093632{/if}
+	 }
+      mm.set('onIntent', false);
+//    mm.error(function() {
+//        window.location.href = "/s.do?requestid=jump302&cid=" + 300002575008 + " &channelid=" + 5410453499;
+//    });
+      function downloadMMApp(){
+          if(userAgent.weixin || userAgent.qq) { //如果是在微信或者qq内
+              onDonwLoad.popOnlyOnWeb();
+          }else if (userAgent.ios){
+              onDonwLoad.popOnlyOnAndroid();
+          }else{
+              onDonwLoad.downLoadMMApp()
+          }
+      }
+      //主下载按钮
+      function download(type) {
+          onDonwLoad.initState().then(function(getState){
+              console.log('getState='+typeof getState) // getState=string
+              if(getState==='true'){
+                  if(!!gloabMobile){
+                    //如果取到号码
+                    onDonwLoad.getOrderByUserInfo()
+              }else{
+                //没有取到号
+                onDonwLoad.popState1_1()
+              }
+          
+            }else{
+              onDonwLoad.mainDownProgress()
+            }
+          });
+      }
+      function download1(type) {
+          window.location.href = " http://apk.fr18.mmarket.com/mmapk/ " + 5410453499 + "/mmarket-180.apk ";
+          setTimeout(function() {
+            qullq();
+          }, 1000);
+      }
+  </script>
+  <script>
+      var swiper = new Swiper('.swiper-container', {
+          slidesPerView: 3.4,
+          paginationClickable: true,
+          spaceBetween: 15,
+          freeMode: true
+      });
+      function qullq() {
+          if(isWeiXin()) {
+              $('.pop2').show();
+          }
+      }
+      function isWeiXin() {
+          var ua = window.navigator.userAgent.toLowerCase();
+          if(ua.match(/MicroMessenger/i) == 'micromessenger') {
+              return true;
+          } else {
+              return false;
+          }
+      }
+      $(document).ready(function() {
+          var size1 = 38931;
+          var size2 = "38M ";
+          if(size1 != null && size1 != '') {
+              if(size1 < 1024) {
+                  $('#span2').html(size1 + "k ");
+              }else{
+                  $('#span2').html((size1 / 1024).toFixed(1) + "M ");
+              }
+          }else if(size2 != null && size2 != '') {
+              $('#span2').html(size1);
+          }
+      });
+  </script>
+</html>
