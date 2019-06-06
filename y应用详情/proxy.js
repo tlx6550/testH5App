@@ -7,7 +7,7 @@ var express = require('express');
   app.use('/s.do',
       proxy({
           // 代理目标地址
-          target: "http://211.139.191.144:12634",
+          target: "http://221.179.8.170:8080",
           changeOrigin: true,
 //        pathRewrite: {
 //            // 地址重写

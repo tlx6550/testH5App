@@ -167,7 +167,7 @@ const config = {
     devServer: {
         contentBase: path.resolve(__dirname, 'build'),
         compress: true,
-        port: 3000,
+        port: 3008,
         // 开发环境跨域问题https://blog.csdn.net/qq_39083004/article/details/80860675
         proxy: {
             '**': {

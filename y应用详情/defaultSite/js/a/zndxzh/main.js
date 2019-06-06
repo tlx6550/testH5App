@@ -47,12 +47,14 @@ MMAppSharePage.prototype = {
 	//业务下线-状态1  不提示免流
 	offBusiness: function() {
 		//显示状态1
+		$('.down_btn').find('a').text('下载')
 		$('.page-state-item').hide()
 		$('.page-state-2').show()
 	},
 	//业务在线-状态2 提示免流
 	onLineBusiness: function() {
 		//显示状态1
+		$('.down_btn').find('a').text('免流量下载')
 		$('.page-state-item').hide()
 		$('.page-state-1').show()
 	},
@@ -200,11 +202,11 @@ mmApp.initState().then(function(getState) {
 			console.log(e)
 		}
 
-		var mobile = 15112395842
-		setTimeout(function() {
-			gloabMobile = 13417586550;
-			mmApp.getOrderByUserInfo(gloabMobile)
-		}, 300)
+//		var mobile = 15112395842
+//		setTimeout(function() {
+//			gloabMobile = 13417586550;
+//			mmApp.getOrderByUserInfo(gloabMobile)
+//		}, 300)
 	} else {
 		// 下线
 		mmApp.offBusiness()
@@ -306,7 +308,7 @@ onClickDonwLoad.prototype = {
 		})
 	},
 	popOnlyOnWeb: function() {
-		dialog.guide1Confirm('选择“在浏览器打开”后开始下载', [{
+		dialog.guide1Confirm('选择“在浏览器打开”', [{
 				txt: '我知道了',
 				color: false,
 				callback: function() {
@@ -329,7 +331,7 @@ onClickDonwLoad.prototype = {
 	},
 	popInstallImmediately: function() {
 		var that = this
-		dialog.guide3Confirm('抱歉，订购失败', '安装MM应用商场手机客户端后，可以获得更丰富的内容，更高速、更稳定的下载服务。', [{
+		dialog.guide3Confirm('抱歉，订购失败', '安装MM应用商场客户端，可以获得更丰富的内容，更高速、更稳定的下载服务。', [{
 				txt: '关闭',
 				color: false,
 				callback: function() {
@@ -358,7 +360,16 @@ onClickDonwLoad.prototype = {
 	},
 	//下载本页应用
 	downLoadLocalApp:function(){
+		 var that = this
 		 mm.download(mmDowloadArguments.a,mmDowloadArguments.b, mmDowloadArguments.c);
+		 mm.error(function(){
+		  var ar = errorArguments.a;
+		  var br = errorArguments.b;
+	      window.location.href = baseUrlApi + "/s.do?requestid=jump302&cid="+ar+"&channelid="+br;
+	      setTimeout(function(){
+					that.popInstallImmediately()
+			},300)
+		 });
 	},
 	//请求订购状态
 	getOrderState: function() {

@@ -47,12 +47,14 @@ MMAppSharePage.prototype = {
 	//业务下线-状态1  不提示免流
 	offBusiness: function() {
 		//显示状态1
+		$('.down_btn').find('a').text('下载')
 		$('.page-state-item').hide()
 		$('.page-state-2').show()
 	},
 	//业务在线-状态2 提示免流
 	onLineBusiness: function() {
 		//显示状态1
+		$('.down_btn').find('a').text('免流量下载')
 		$('.page-state-item').hide()
 		$('.page-state-1').show()
 	},
@@ -296,7 +298,7 @@ onClickDonwLoad.prototype = {
 		})
 	},
 	popOnlyOnWeb: function() {
-		dialog.guide1Confirm('选择“在浏览器打开”后开始下载', [{
+		dialog.guide1Confirm('选择“在浏览器打开”', [{
 				txt: '我知道了',
 				color: false,
 				callback: function() {
@@ -307,7 +309,7 @@ onClickDonwLoad.prototype = {
 		]);
 	},
 	popOnlyOnAndroid: function() {
-		dialog.guide2Confirm('选择“在浏览器打开”后开始下载', [{
+		dialog.guide2Confirm('选择“在浏览器打开”', [{
 				txt: '我知道了',
 				color: false,
 				callback: function() {
@@ -348,6 +350,7 @@ onClickDonwLoad.prototype = {
 	},
 	//下载本页应用
 	downLoadLocalApp:function(){
+		 var that = this
 		 mm.download(mmDowloadArguments.a,mmDowloadArguments.b, mmDowloadArguments.c);
 		 mm.error(function(){
 		  var ar = errorArguments.a;

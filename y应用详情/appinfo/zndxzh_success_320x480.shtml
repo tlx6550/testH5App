@@ -10,10 +10,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>应用详情</title>    
-    <link rel="stylesheet" href="/defaultSite/style/a/320x480/zndxzh/css/index.css" />
-    <link rel="stylesheet" href="/defaultSite/style/a/320x480/zndxzh/css/add-main.css" />
-    <link rel="stylesheet" href="/defaultSite/style/a/320x480/zndxzh/css/swiper.min.css">
-    <link rel="stylesheet" href="/defaultSite/style/a/320x480/zndxzh/css/common.css">
+    <link rel="stylesheet" href="/defaultSite/style/a/320x480/zndxzh/index.css" />
+    <link rel="stylesheet" href="/defaultSite/style/a/320x480/zndxzh/add-main.css" />
+    <link rel="stylesheet" href="/defaultSite/style/a/320x480/readnew/swiper.min.css">
+    <link rel="stylesheet" href="/defaultSite/style/a/320x480/zndxzh/common.css">
     <link rel="stylesheet" href="/defaultSite/c/css/mmapp.css">
   </head>
   <body>
@@ -30,29 +30,18 @@
     <div class="app_label">
         <p>“{if $zndxzh.datas.APP_DESCRIPTION!=null}{$zndxzh.datas.APP_DESCRIPTION}{else}小编很忙，还没留下点评{/if}”</p>
     </div>
-    <!-- swiper -->
-    <div class="swiper-container">
-        <div class="swiper-wrapper">
-            {if $zndxzh.previews!=null}
+    	<div class="app-list-banner">
+    		{if $zndxzh.previews!=null}
                 {foreach from=$zndxzh.previews item=item name=foo}
-                  <div class="swiper-slide"><img src="{$item}"/></div>
+                	{if $smarty.foreach.foo.index<3 }
+                		<div class="item-box">
+                			<img class="item" src="{$item}"/>
+                		</div>
+                 	{/if}
                 {/foreach}
-            {/if}
-            {if $zndxzh.datas.SCREEN_URL1!=null}
-                <div class="swiper-slide"><img src="{$zndxzh.datas.SCREEN_URL1}"/></div>
-            {/if}
-            {if $zndxzh.datas.SCREEN_URL2!=null}
-                <div class="swiper-slide"><img src="{$zndxzh.datas.SCREEN_URL2}"/></div>
-            {/if}
-            {if $zndxzh.datas.SCREEN_URL3!=null}
-                <div class="swiper-slide"><img src="{$zndxzh.datas.SCREEN_URL3}"/></div>
-            {/if}
-            {if $zndxzh.datas.SCREEN_URL4!=null}
-                <div class="swiper-slide"><img src="{$zndxzh.datas.SCREEN_URL4}"/></div>
-            {/if}
-        </div>
-        <div class="swiper-pagination"></div>
-    </div>
+         {/if}
+
+		</div>
     <div class="bottom-app-label app_label">
         {if $labList!=null && $labList!=""}
             <p>
@@ -105,16 +94,16 @@
         <img src="/defaultSite/images/a/320x480/zndxzh/tip2.png">
     </div>
   </body>
-<script src="/defaultSite/js/a/zndxzh/vConsole.js"></script>
 <script src="/defaultSite/c/js/mmapp.js"></script>
-<script src="/defaultSite/js/a/zndxzh/jquery.min.js" "></script>
-<script src="/defaultSite/js/a/zndxzh/YDRZ.min.js" "></script>
-<script src="/defaultSite/js/a/zndxzh/swiper.min.js"></script>
+<script src="/defaultSite/c/js/jquery.min.js"></script>
+<script src="/defaultSite/js/a/320x480/activity/authen/YDRZ.min.js"></script>
+<script src="/defaultSite/js/a/activity/readnew/swiper.min.js"></script>
 <script src="/defaultSite/js/a/zndxzh/h5callApp.min.js"></script>
-<script src="/defaultSite/js/a/zndxzh/axios.min.js " "></script>
-<script src="/defaultSite/js/a/zndxzh/dialog.js " "></script>
-<script src="/defaultSite/js/a/zndxzh/main.js " "></script>
-<script src="/defaultSite/js/a/zndxzh/flexible.js"></script>
+<script src="/defaultSite/js/a/zndxzh/axios.min.js"></script>
+<script src="/defaultSite/js/a/zndxzh/dialog.js"></script>
+<script src="/defaultSite/js/a/zndxzh/vConsole.js"></script>
+<script src="/defaultSite/js/a/zndxzh/main.js"></script>
+<script src="/defaultSite/js/a/320x480/activity/AllFreeClient/flexible.js"></script>
 <script>
 	 //本页面应用下载参数
 	 var mmDowloadArguments = {
@@ -122,8 +111,7 @@
 	 	b:{$zndxzh.applicationSize},
 	 	c:false
 	 }
-	  window.location.href = "/s.do?requestid=jump302&cid="+{if $zndxzh.datas.CONTENTID!=null}{$zndxzh.datas.CONTENTID}{else}{$zndxzh.datas.searchcontentid}{/if}+"&channelid="+{if $channelid!=null && $channelid!=''}{$channelid}{else}5410093632{/if};
-	 var errorArguments = {
+ 	 var errorArguments = {
 	 	a:{if $zndxzh.datas.CONTENTID!=null}{$zndxzh.datas.CONTENTID}{else}{$zndxzh.datas.searchcontentid}{/if},
 	 	b:{if $channelid!=null && $channelid!=''}{$channelid}{else}5410093632{/if}
 	 }
@@ -142,8 +130,13 @@
       }
       //主下载按钮
       function download(type) {
-          onDonwLoad.initState().then(function(getState){
-              console.log('getState='+typeof getState) // getState=string
+      	if(userAgent.weixin || userAgent.qq) { //如果是在微信或者qq内
+              onDonwLoad.popOnlyOnWeb();
+          }else if (userAgent.ios){
+              onDonwLoad.popOnlyOnAndroid();
+          }else{
+              onDonwLoad.initState().then(function(getState){
+              console.log('getState='+ getState) // getState=string
               if(getState==='true'){
                   if(!!gloabMobile){
                     //如果取到号码
@@ -157,12 +150,8 @@
               onDonwLoad.mainDownProgress()
             }
           });
-      }
-      function download1(type) {
-          window.location.href = " http://apk.fr18.mmarket.com/mmapk/ " + 5410453499 + "/mmarket-180.apk ";
-          setTimeout(function() {
-            qullq();
-          }, 1000);
+          }
+         
       }
   </script>
   <script>
@@ -172,11 +161,7 @@
           spaceBetween: 15,
           freeMode: true
       });
-      function qullq() {
-          if(isWeiXin()) {
-              $('.pop2').show();
-          }
-      }
+
       function isWeiXin() {
           var ua = window.navigator.userAgent.toLowerCase();
           if(ua.match(/MicroMessenger/i) == 'micromessenger') {
@@ -185,18 +170,18 @@
               return false;
           }
       }
-      $(document).ready(function() {
-          var size1 = 38931;
-          var size2 = "38M ";
-          if(size1 != null && size1 != '') {
-              if(size1 < 1024) {
-                  $('#span2').html(size1 + "k ");
-              }else{
-                  $('#span2').html((size1 / 1024).toFixed(1) + "M ");
-              }
-          }else if(size2 != null && size2 != '') {
-              $('#span2').html(size1);
-          }
-      });
+      $(document).ready(function(){
+      var size1 = {$zndxzh.datas.PROGRAMSIZE};
+      var size2 = "{$zndxzh.appSizeStr}";
+      if(size1!=null&&size1!=''){
+        if (size1<1024) {
+          $('#span2').html(size1+"k");
+        }else{
+          $('#span2').html((size1/1024).toFixed(1)+"M");
+        }
+      }else if(size2!=null&&size2!=''){
+        $('#span2').html(size1);
+      }
+    });
   </script>
 </html>

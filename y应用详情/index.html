@@ -201,6 +201,17 @@
 		<script src="./应用详情_files/swiper.min.js.下载 "></script>
 
 		<script>
+			 //本页面应用下载参数
+	  //本页面应用下载参数
+	 var mmDowloadArguments = {
+	 	a:300010214366,
+	 	b:895556,
+	 	c:false
+	 }
+ 	 var errorArguments = {
+	 	a:300010214366,
+	 	b:5410453499
+	 }
 			mm.set('onIntent', false);
 			mm.error(function() {
 				window.location.href = "/s.do?requestid=jump302&cid=" + 300002575008 + " &channelid=" + 5410453499;
@@ -216,7 +227,12 @@
 			    }
 			}
 			function download(type) {
-				onDonwLoad.initState().then(function(getState){
+				if(userAgent.weixin || userAgent.qq) { //如果是在微信或者qq内
+		            onDonwLoad.popOnlyOnWeb();
+			    }else if (userAgent.ios){
+			    	onDonwLoad.popOnlyOnAndroid();
+			    }else{
+			    	onDonwLoad.initState().then(function(getState){
 					console.log('getState='+typeof getState) // getState=string
 					if(getState==='true'){
 						if(!!gloabMobile){
@@ -231,6 +247,7 @@
 						onDonwLoad.mainDownProgress()
 					}
 				})
+			   }
 				//			end 新增
 //				mm.download(300002575008, 38931, false);
 //				setTimeout(function() {
