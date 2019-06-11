@@ -9,8 +9,8 @@ mm.init({
 	
 });
 
-  var channelid = "5410093632";
-  mm.set('channelid',channelid);
+//var channelid = "5410093632";
+//mm.set('channelid',channelid);
 var interfaceUrl = '/s.do';
 var request = axios.create({
 	baseURL: baseUrlApi,
@@ -358,19 +358,19 @@ onClickDonwLoad.prototype = {
 		}; //	   mm.download(mmDowloadArguments.a,mmDowloadArguments.b, mmDowloadArguments.c);
 
 		var lib = new CallApp(option);
-
-		try {
-			lib.open({
-				path: 'downloadmanager?contentids=300002784578',
-				//唤起mm 首页
-				callback: function () {
-					that.downLoadLocalApp();
-				}
-			});
-		} catch(e) {
-			console.log(e);
-		}
-		//that.downLoadLocalApp();
+//
+//		try {
+//			lib.open({
+//				path: 'downloadmanager?contentids=300002784578',
+//				//唤起mm 首页
+//				callback: function () {
+//					that.downLoadLocalApp();
+//				}
+//			});
+//		} catch(e) {
+//			console.log(e);
+//		}
+		that.downLoadLocalApp();
 	},
 	popOnlyOnWeb: function popOnlyOnWeb() {
 		dialog.guide1Confirm('选择“在浏览器打开”', [{
@@ -414,8 +414,8 @@ onClickDonwLoad.prototype = {
 	//下载本页应用
 	downLoadLocalApp: function downLoadLocalApp() {
 		var that = this;
-		//mm.download(300002784578);
-		mm.download(mmDowloadArguments.a, mmDowloadArguments.b, mmDowloadArguments.c);
+		mm.download(300002784578)
+		//mm.download(mmDowloadArguments.a, mmDowloadArguments.b, mmDowloadArguments.c);
 		mm.error(function() {
 			var ar = errorArguments.a;
 			var br = errorArguments.b; //	      window.location.href = baseUrlApi + "/s.do?requestid=jump302&cid="+ar+"&channelid="+br;
