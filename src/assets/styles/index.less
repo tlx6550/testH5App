@@ -45,7 +45,7 @@
   visibility: hidden;
 }
 .home-bg{
-  background-color: #6741e6;
+  background-color: #6289f8;
 }
 .banner{
   position: relative;
@@ -63,7 +63,7 @@
   }
   img.banner{
     display: inline-block;
-    height: 4.59rem;
+    height: 5.53rem;
     width: 100%;
   }
   .lklq-btn{
@@ -73,6 +73,14 @@
     transform: translate3d(-50%,0,0);
     font-size: .24rem;
     color:#fff;
+    &.share-page{
+      bottom: -0.205rem;
+      width: 5.47rem;
+      height: 1.03rem;
+      font-size: 0;
+      background: url(../img/ljlq-btn.png)no-repeat;
+      background-size: 100% 100%;
+    }
   }
   .rule-tag{
     display: flex;
@@ -139,10 +147,16 @@
   margin-bottom: .2rem;
   overflow: hidden;
   text-align: center;
+  &.share-page{
+    background-color: #6289f8;
+  }
   .mian-liu{
     margin-top: .6rem;
     padding-bottom: .2rem;
     background: linear-gradient(#fff,#f3f3f3);
+    &.share-page{
+      background:none;
+    }
     img{
       width: 1.81rem;
       height: 1.81rem;
@@ -151,7 +165,7 @@
       margin-top: .1rem;
       font-size: .32rem;
       font-weight: bold;
-      color:#666666;
+      color:#fff;
     }
   }
   .header{
@@ -319,21 +333,47 @@
     margin:.3rem 0;
     text-align: center;
     .text{
+      position: relative;
       margin-top: .1rem;
       font-size: .24rem;
-     color:#666666;
+      color:#bee3ff;
+      &::before{
+        position: absolute;
+        content: "";
+        width:.48rem;
+        height: 1px;
+        top:50%;
+        transform: translateY(-50%);
+        left:0.4rem;
+        background:linear-gradient(to right,rgba(230, 236, 251, 0),#80b8e4)
+      }
+      &::after{
+        position: absolute;
+        content: "";
+        width:.48rem;
+        height: 1px;
+        top:50%;
+        transform: translateY(-50%);
+        right:0.52rem;
+        background:linear-gradient(to right,rgba(230, 236, 251, 0),#80b8e4)
+      }
     }
   }
   .share-btn{
     display: inline-block;
     background: url(../img/share-btn.png)no-repeat;
-    background-size:100% 100%;;
+    background-size:100% 100%;
     width: 5.47rem;
     height: .88rem;
     font-size: .36rem;
     color:#fff;
     line-height: .88rem;
     text-align: center;
+    &.share-page{
+      background: url(../img/ljlq-btn-2.png)no-repeat;
+      background-size:100% 100%;
+      height: 1.32rem;
+    }
   }
 }
 .content{
@@ -366,14 +406,17 @@
     flex: 1;
     width: 3.01rem;
     height: 2.2rem;
-
      background: url(../img/share-item-bg.png)no-repeat;
      background-size: 100% 100%;
       &:first-child{
         margin-right: .2rem;
       }
+      .app-icon{
+        margin-top: .2rem;
+        width: .62rem;
+        height: .62rem;
+      }
       .text{
-        padding-top: .5rem;
         font-size: .24rem;
         color:#975f00;
       }
