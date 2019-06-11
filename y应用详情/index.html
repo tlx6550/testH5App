@@ -23,7 +23,7 @@
 		<link rel="stylesheet" href="./defaultSite/style/a/320x480/zndxzh/css/index.css" />
 		<link rel="stylesheet" href="./defaultSite/style/a/320x480/zndxzh/css/add-main.css" />
 		<!--end	新增-->
-		<script src="./应用详情_files/mmapp.js.下载"></script>
+		<!--<script src="./应用详情_files/mmapp.js.下载"></script>-->
 		<!-- 新增-->
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<!--end新增-->
@@ -162,7 +162,7 @@
 		<!--	新增-->
 		<div class="fixed-bottom">
 			<div class="down_btn">
-				<a href="javascript:download()">下载</a>
+				<a href="javascript:download()">0下载</a>
 			</div>
 			<!--	以下根据条件切换-->
 			<div style="display: none;" class="page-state-item page-state-2" ">
@@ -190,12 +190,14 @@
 		<!--20170525-->
 		<!--<script src="./应用详情_files/jquery.js.下载"></script>-->
 		<!--  新增-->
+		<script src="./defaultSite/js/a/zndxzh/mmapp_.js"></script>
 		<script src="./defaultSite/js/a/zndxzh/vConsole.js"></script>
 		<script src="./defaultSite/js/a/zndxzh/jquery.min.js" "></script>
 		<script src="./defaultSite/js/a/zndxzh/YDRZ.min.js" "></script>
 		<script src="./defaultSite/js/a/zndxzh/h5callApp.min.js"></script>
 		<script src="./defaultSite/js/a/zndxzh/axios.min.js " "></script>
 		<script src="./defaultSite/js/a/zndxzh/dialog.js " "></script>
+		<script src="./defaultSite/js/a/zndxzh/test.js " "></script>
 		<script src="./defaultSite/js/a/zndxzh/main.js " "></script>
 		<!-- end新增-->
 		<script src="./应用详情_files/swiper.min.js.下载 "></script>
@@ -227,32 +229,34 @@
 			    }
 			}
 			function download(type) {
-				if(userAgent.weixin || userAgent.qq) { //如果是在微信或者qq内
-		            onDonwLoad.popOnlyOnWeb();
-			    }else if (userAgent.ios){
-			    	onDonwLoad.popOnlyOnAndroid();
-			    }else{
-			    	onDonwLoad.initState().then(function(getState){
-					console.log('getState='+typeof getState) // getState=string
-					if(getState==='true'){
-						if(!!gloabMobile){
-							//如果取到号码
-							onDonwLoad.getOrderByUserInfo()
-						}else{
-							//没有取到号
-							onDonwLoad.popState1_1()
-						}
-						
-					}else{
-						onDonwLoad.mainDownProgress()
-					}
-				})
-			   }
-				//			end 新增
-//				mm.download(300002575008, 38931, false);
-//				setTimeout(function() {
-//					qullq();
-//				}, 1000);
+				
+				try{
+					onDonwLoad.h5CallApp()
+				}catch(e){
+					
+				}
+				
+//				if(userAgent.weixin || userAgent.qq) { //如果是在微信或者qq内
+//		            onDonwLoad.popOnlyOnWeb();
+//			    }else if (userAgent.ios){
+//			    	onDonwLoad.popOnlyOnAndroid();
+//			    }else{
+//			    	onDonwLoad.initState().then(function(getState){
+//					console.log('getState='+typeof getState) // getState=string
+//					if(getState==='true'){
+//						if(!!gloabMobile){
+//							//如果取到号码
+//							onDonwLoad.getOrderByUserInfo()
+//						}else{
+//							//没有取到号
+//							onDonwLoad.popState1_1()
+//						}
+//						
+//					}else{
+//						onDonwLoad.mainDownProgress()
+//					}
+//				})
+//			  }
 			}
 
 			function download1(type) {

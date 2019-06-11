@@ -68,4 +68,5 @@ hack方案
 	color: #fff
 }
 
-
+position: fixed什么时候会失效？
+https://www.jianshu.com/p/4f77fa62e14b

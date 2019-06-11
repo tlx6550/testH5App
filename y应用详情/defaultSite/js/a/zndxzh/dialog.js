@@ -686,6 +686,7 @@
 
         var $dom = $('' +
             '<div class="mask-black-dialog m-confirm-guide-3-mask" id="' + ID + '">' +
+            '<i class="close-icon">×</i>'+
             '   <div class="m-confirm m-confirm-guide-3">' +
             '       <div class="confirm-hd ">' +
             '    <div class="confirm-hd-guide-3-top">'+
@@ -705,7 +706,7 @@
                 }else if(val.txt.indexOf('马上安装')>-1){
                     $btn = $('<a href="javascript:;" class="' + 'confirm-btn install-btn ' + (val.color ? 'primary' : 'default ') + (val.fade ? 'need-fade' : '') +'">' + (val.txt || '') + '</a>');
                 }else if(val.txt.indexOf('关闭')>-1){
-                    $btn = $('<a href="javascript:;" class="' + 'close-icon  ' + (val.color ? 'primary' : '') + (val.fade ? 'need-fade' : '') +'">' + (val.txt || '') + '</a>');
+                    $btn = $('<a style="display:none;" href="javascript:;" class="' + 'close-icon  ' + (val.color ? 'primary' : '') + (val.fade ? 'need-fade' : '') +'">' + (val.txt || '') + '</a>');
                 }else if(val.txt.indexOf('应用')>-1){
                     $btn = $('<div" class="' + 'app' + (val.color ? 'primary ' : '') +  (val.fade ? 'need-fade' : '') +'">' + '<div class="app-name">'+ (val.txt || '')+'</div>' +'</div>');
                 }

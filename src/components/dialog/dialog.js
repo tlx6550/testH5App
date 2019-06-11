@@ -1,5 +1,5 @@
 import $ from '../../assets/js/jquery.min.js';
-!function (window) {
+!!function (window) {
     'use strict';
 
     var doc = window.document,
@@ -69,7 +69,24 @@ import $ from '../../assets/js/jquery.min.js';
                 return value || undefined;
             }
         },
-
+        userAgent: function(){
+        	var u = navigator.userAgent,
+        	app = navigator.appVersion;
+		    return {
+		        trident: u.indexOf('Trident') > -1, //IE内核
+		        presto: u.indexOf('Presto') > -1, //opera内核
+		        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+		        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+		        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+		        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+		        android: u.indexOf('Android') > -1 || u.indexOf('Adr') > -1, //android终端
+		        iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+		        iPad: u.indexOf('iPad') > -1, //是否iPad
+		        webApp: u.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
+		        weixin: u.indexOf('MicroMessenger') > -1, //是否微信
+		        qq: u.match(/\sQQ/i) == " qq" //是否QQ
+		    };
+        },
         setCookie: function (key, value, time) {
             // 默认保存时间
             var time = time || 60;
@@ -496,20 +513,24 @@ import $ from '../../assets/js/jquery.min.js';
                     if (!btnArr[p].stay) {
                         // 释放页面滚动
                         ydui.util.pageScroll.unlock();
-                        var fade =  $(this).hasClass('need-fade');
+                       $dom.remove();
+                       
+                    }
+                    var _this = this
+                    var me = function(){
+                    	 var fade =  $(_this).hasClass('need-fade');
                         if(fade){ // 开启平滑删除效果
                             $dom.find('.m-confirm').addClass('m-confirm-out');
                             $('#' + ID).addClass('mask-black-dialog-fade-out');
+                             setTimeout(function(){
+                            	$dom.remove(); 
+                            },1000)
                         }else{
                             $dom.find('.m-confirm').removeClass('m-confirm-out');
-                            $dom.remove();
+                             $dom.remove();
                         }
-                        setTimeout(function(){
-                            $dom.remove();
-                        },1000);
-                       
                     }
-                    btnArr[p].callback && btnArr[p].callback();
+                    btnArr[p].callback && btnArr[p].callback(me);
                 });
             })(i);
             $btnBox.append($btn);
@@ -559,13 +580,13 @@ import $ from '../../assets/js/jquery.min.js';
             '<strong class="confirm-title">' + title + '</strong></div>' +
             '       <div class="confirm-bd">' + mes +
             '       <div class="confirm-phone-wrap login-by-num-wrap">' +
-            '<div class="el-input ">' +'<input type="number" autocomplete="off " placeholder="请输入您的手机号码"  class="el-input-inner yanzheng-code">' + '</div>' +
-            '<div class="valid-phone valid-item">手机号错误</div>'+
+            '<div class="el-input ">' +'<input type="number" autocomplete="off " placeholder="请输入您的手机号码"  class="el-input-inner tel-input yanzheng-code">' + '</div>' +
+            '<div style="display:none;" class="valid-phone  tel-yanzheng valid-item">手机号错误</div>'+
             '<div class="el-input">' +
-            ' <input type="text" autocomplete="off" placeholder="请输入短信验证码"  class="el-input-inner tel-input">' +
+            ' <input type="text" autocomplete="off" placeholder="请输入短信验证码"  class="el-input-inner code-input">' +
             ' <button type="button " class="btn btn-warning" id="J_GetCode">获取验证码</button>' +
             ' </div>' +
-            '<div class="valid-code valid-item">验证码错误</div>'+
+            '<div style="display:none;" class="valid-code valid-item">验证码错误</div>'+
             ' </div>' +
             '</div>' +
             '</div>');
@@ -601,20 +622,24 @@ import $ from '../../assets/js/jquery.min.js';
                     if (!btnArr[p].stay) {
                         // 释放页面滚动
                         ydui.util.pageScroll.unlock();
-                        var fade =  $(this).hasClass('need-fade');
+                        $dom.remove();
+                    }
+                    var _this = this
+                    var calMe = function (){
+                    	var fade =  $(_this).hasClass('need-fade');
                         if(fade){ // 开启平滑删除效果
                             $dom.find('.m-confirm').addClass('m-confirm-out');
                             $('#' + ID).addClass('mask-black-dialog-fade-out');
+                            setTimeout(function(){
+                            	$dom.remove(); 
+                            },1000)
                         }else{
                             $dom.find('.m-confirm').removeClass('m-confirm-out');
                             $dom.remove();    
                         }
-                        setTimeout(function(){
-                            $dom.remove();
-                        },1000);
-                       
                     }
-                    btnArr[p].callback && btnArr[p].callback();
+                    btnArr[p].callback && btnArr[p].callback(calMe);
+                   
                 });
             })(i);
             $btnBox.append($btn);
@@ -622,7 +647,6 @@ import $ from '../../assets/js/jquery.min.js';
         $dom.find('.m-confirm').append($btnBox);
         // 禁止滚动屏幕【移动端】
         ydui.util.pageScroll.lock();
-
         $body.append($dom);
     };
     dialog.guide3Confirm = function (title, mes, opts) {
@@ -663,6 +687,7 @@ import $ from '../../assets/js/jquery.min.js';
 
         var $dom = $('' +
             '<div class="mask-black-dialog m-confirm-guide-3-mask" id="' + ID + '">' +
+            '<i class="close-icon">×</i>'+
             '   <div class="m-confirm m-confirm-guide-3">' +
             '       <div class="confirm-hd ">' +
             '    <div class="confirm-hd-guide-3-top">'+
@@ -682,7 +707,7 @@ import $ from '../../assets/js/jquery.min.js';
                 }else if(val.txt.indexOf('马上安装')>-1){
                     $btn = $('<a href="javascript:;" class="' + 'confirm-btn install-btn ' + (val.color ? 'primary' : 'default ') + (val.fade ? 'need-fade' : '') +'">' + (val.txt || '') + '</a>');
                 }else if(val.txt.indexOf('关闭')>-1){
-                    $btn = $('<a href="javascript:;" class="' + 'close-icon  ' + (val.color ? 'primary' : '') + (val.fade ? 'need-fade' : '') +'">' + (val.txt || '') + '</a>');
+                    $btn = $('<a style="display:none;" href="javascript:;" class="' + 'close-icon  ' + (val.color ? 'primary' : '') + (val.fade ? 'need-fade' : '') +'">' + (val.txt || '') + '</a>');
                 }else if(val.txt.indexOf('应用')>-1){
                     $btn = $('<div" class="' + 'app' + (val.color ? 'primary ' : '') +  (val.fade ? 'need-fade' : '') +'">' + '<div class="app-name">'+ (val.txt || '')+'</div>' +'</div>');
                 }
