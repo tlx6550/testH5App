@@ -21,7 +21,7 @@
         {if $zndxzh.datas.CONTENT_PIC != null && $zndxzh.datas.CONTENT_PIC != '' }
             <img src="{$zndxzh.datas.CONTENT_PIC}" class="app-diy-bg"/>
         {else}
-            <img src="/defaultSite/style/a/320x480/zndxzh/img/bg.png"  class="app-def-bg"/>
+            <img src="/defaultSite/images/a/320x480/zndxzh/bg_720.png"  class="app-def-bg"/>
         {/if}
         <img src="{if $zndxzh.imageURL!=null}{$zndxzh.imageURL}{else}{$zndxzh.thirdImageURL}{/if}" class="app"/>
         <p>{$zndxzh.datas.NAME}</p>
@@ -30,18 +30,18 @@
     <div class="app_label">
         <p>“{if $zndxzh.datas.APP_DESCRIPTION!=null}{$zndxzh.datas.APP_DESCRIPTION}{else}小编很忙，还没留下点评{/if}”</p>
     </div>
-    	<div class="app-list-banner">
-    		{if $zndxzh.previews!=null}
+      <div class="app-list-banner">
+        {if $zndxzh.previews!=null}
                 {foreach from=$zndxzh.previews item=item name=foo}
-                	{if $smarty.foreach.foo.index<3 }
-                		<div class="item-box">
-                			<img class="item" src="{$item}"/>
-                		</div>
-                 	{/if}
+                  {if $smarty.foreach.foo.index<3 }
+                    <div class="item-box">
+                      <img class="item" src="{$item}"/>
+                    </div>
+                  {/if}
                 {/foreach}
          {/if}
 
-		</div>
+    </div>
     <div class="bottom-app-label app_label">
         {if $labList!=null && $labList!=""}
             <p>
@@ -74,6 +74,7 @@
                 <span class="info">{$zndxzh.datas.SPNAME}</span>
             </div>
         </div>
+        <div  id="goodsid" style="display: none;">{$zndxzh.datas.GOODSID}</div>
     </div>
     <div class="fixed-bottom">
         <div class="down_btn">
@@ -101,24 +102,20 @@
 <script src="/defaultSite/js/a/zndxzh/h5callApp.min.js"></script>
 <script src="/defaultSite/js/a/zndxzh/axios.min.js"></script>
 <script src="/defaultSite/js/a/zndxzh/dialog.js"></script>
-<script src="/defaultSite/js/a/zndxzh/vConsole.js"></script>
 <script src="/defaultSite/js/a/zndxzh/main.js"></script>
 <script src="/defaultSite/js/a/320x480/activity/AllFreeClient/flexible.js"></script>
 <script>
-	 //本页面应用下载参数
-	 var mmDowloadArguments = {
-	 	a:{if $zndxzh.datas.CONTENTID!=null}{$zndxzh.datas.CONTENTID}{else}{$zndxzh.datas.searchcontentid}{/if},
-	 	b:{$zndxzh.applicationSize},
-	 	c:false
-	 }
- 	 var errorArguments = {
-	 	a:{if $zndxzh.datas.CONTENTID!=null}{$zndxzh.datas.CONTENTID}{else}{$zndxzh.datas.searchcontentid}{/if},
-	 	b:{if $channelid!=null && $channelid!=''}{$channelid}{else}5410093632{/if}
-	 }
+   //本页面应用下载参数
+   var mmDowloadArguments = {
+    a:{if $zndxzh.datas.CONTENTID!=null}{$zndxzh.datas.CONTENTID}{else}{$zndxzh.datas.searchcontentid}{/if},
+    b:{$zndxzh.applicationSize},
+    c:false
+   }
+   var errorArguments = {
+    a:{if $zndxzh.datas.CONTENTID!=null}{$zndxzh.datas.CONTENTID}{else}{$zndxzh.datas.searchcontentid}{/if},
+    b:{if $channelid!=null && $channelid!=''}{$channelid}{else}5410093632{/if}
+   }
       mm.set('onIntent', false);
-//    mm.error(function() {
-//        window.location.href = "/s.do?requestid=jump302&cid=" + 300002575008 + " &channelid=" + 5410453499;
-//    });
       function downloadMMApp(){
           if(userAgent.weixin || userAgent.qq) { //如果是在微信或者qq内
               onDonwLoad.popOnlyOnWeb();
@@ -130,7 +127,7 @@
       }
       //主下载按钮
       function download(type) {
-      	if(userAgent.weixin || userAgent.qq) { //如果是在微信或者qq内
+        if(userAgent.weixin || userAgent.qq) { //如果是在微信或者qq内
               onDonwLoad.popOnlyOnWeb();
           }else if (userAgent.ios){
               onDonwLoad.popOnlyOnAndroid();

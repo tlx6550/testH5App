@@ -5,9 +5,11 @@ var vConsole = new VConsole();
 var baseUrlApi = 'http://localhost:3000'; //测试网查询接口
 mm.set('downloadmm', 0)
 mm.init({
-	showtitle:false
-});
+			showtitle:false
+		});
 
+//var channelid = "5410093632";
+//mm.set('channelid',channelid);
 var interfaceUrl = '/s.do';
 var request = axios.create({
 	baseURL: baseUrlApi,
@@ -17,13 +19,11 @@ var userAgentFun = window.YDUI.util.userAgent;
 var userAgent = userAgentFun();
 var storage = window.localStorage;
 var gloabMobile;
-var GOODSID = $('#goodsid').text()
 /* 普通确认框 */
 
 var dialog = window.YDUI.dialog; // 访问分享页/外投页
 
 function MMAppSharePage(options) {
-	this.goodsid = GOODSID
 	this.mobile = '';
 	this.channelId = 5410527503;
 	this.queryFreePlan = 'queryFreePlan';
@@ -328,19 +328,44 @@ onClickDonwLoad.prototype = {
 	},
 	h5CallApp: function h5CallApp() {
 		var that = this; //		
+		//window.location.href='mm://downloadmanager?contentids='
+		// https://github.com/suanmei/callapp-lib
+//mm.batchDownload("/300002784578/300002457498")
+	//mm.download(mmDowloadArguments.a,mmDowloadArguments.b, mmDowloadArguments.c);
+//<iframe src="sinaweibo://qrcode">
+//var id = mmDowloadArguments.a
+//var $iframe = $('' +
+//          '<iframe style="display:none;" src="mm://downloadmanager?contentids=">');
+//var $body = $(window.document.body);
+// $body.append($iframe);
+//mm.batchDownload('300011857013');
+//mm.error(function() {
+//			var ar = errorArguments.a;
+//			var br = errorArguments.b; //	      window.location.href = baseUrlApi + "/s.do?requestid=jump302&cid="+ar+"&channelid="+br;
+//			console.log('进入error事件')
+//			console.log(mm)
+//			window.location.href = 'http://221.179.8.170:8080' + "/s.do?requestid=jump302&cid=" + ar + "&channelid=" + br;
+//			setTimeout(function() {
+//				that.popInstallImmediately();
+//			}, 300);
+//		});
 		var option = {
 			scheme: {
 				protocol: 'mm'
 			},
 			timeout: 3000
-		}; 
+		}; //	   mm.download(mmDowloadArguments.a,mmDowloadArguments.b, mmDowloadArguments.c);
+
 		var lib = new CallApp(option);
 		var contentId = mmDowloadArguments.a
 		var downloadUri = 'http://odp.mmarket.com/t.do?requestid=app_order&goodsid=999100007101377100001804714300002575008&payMode=1'
 		var  ddd = encodeURIComponent(downloadUri)
 		var download2 = 'mm://downloadmanager?url='+ddd
 		var  path = 'downloadmanager?url='+ddd
-
+//var $iframe = $('' +
+//          '<iframe style="display:none;" src="'+download2+'">');
+//var $body = $(window.document.body);
+// $body.append($iframe);
 		try {
 			lib.open({
 				path: path,
@@ -352,6 +377,10 @@ onClickDonwLoad.prototype = {
 		} catch(e) {
 			console.log(e);
 		}
+//setTimeout(function(){
+//	that.downLoadLocalApp();
+//},3000)
+		//that.downLoadLocalApp();
 	},
 	popOnlyOnWeb: function popOnlyOnWeb() {
 		dialog.guide1Confirm('选择“在浏览器打开”', [{
