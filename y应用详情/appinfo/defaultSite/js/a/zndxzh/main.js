@@ -35,6 +35,11 @@ function MMAppSharePage(options) {
 	this.initState = function() {
 		var that = this;
 		var state = false;
+		// 下载失败不首先默认下载mm
+		mm.set('downloadmm', 0);
+		mm.init({
+			showtitle:false
+		});
 		var dfd = $.Deferred();
 		request.get(interfaceUrl, {
 			params: {
@@ -323,21 +328,25 @@ onClickDonwLoad.prototype = {
 	},
 	h5CallApp: function h5CallApp() {
 		var that = this; // https://github.com/suanmei/callapp-lib
-
 		var option = {
 			scheme: {
 				protocol: 'mm'
 			},
 			timeout: 3000
 		};
-//		var lib = new CallApp(option);
-//		lib.open({
-//			path: 'index',
-//			//唤起mm 首页
-//			callback: function callback() {
-//				that.downLoadLocalApp();
-//			}
-//		});
+		var goodsid = that.goodsid
+		var lib = new CallApp(option)
+		var downloadUri = 'http://odp.mmarket.com/t.do?requestid=app_order&goodsid='+goodsid+'&payMode=1'
+		var encodeURI = encodeURIComponent(downloadUri)
+		var mmPath = 'downloadmanager?url='+encodeURI
+		var lib = new CallApp(option);
+		lib.open({
+			path: mmPath,
+			//通过mmscheme 唤起下载（mm进程被杀掉也可以）
+			callback: function callback() {
+				that.downLoadLocalApp();
+			}
+		});
         that.downLoadLocalApp()
 	},
 	popOnlyOnWeb: function popOnlyOnWeb() {
@@ -382,15 +391,12 @@ onClickDonwLoad.prototype = {
 	//下载本页应用
 	downLoadLocalApp: function downLoadLocalApp() {
 		var that = this;
-		mm.download(mmDowloadArguments.a, mmDowloadArguments.b, mmDowloadArguments.c);
-		mm.error(function() {
-			var ar = errorArguments.a;
-			var br = errorArguments.b;
-			window.location.href = baseUrlApi + "/s.do?requestid=jump302&cid=" + ar + "&channelid=" + br;
-			setTimeout(function() {
+		var ar = errorArguments.a;
+		var br = errorArguments.b;
+		window.location.href = baseUrlApi + "/s.do?requestid=jump302&cid=" + ar + "&channelid=" + br;
+		etTimeout(function() {
 				that.popInstallImmediately();
-			}, 300);
-		});
+		}, 100);
 	},
 	//请求订购状态
 	getOrderState: function getOrderState() {

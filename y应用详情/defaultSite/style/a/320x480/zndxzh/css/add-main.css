@@ -18,6 +18,7 @@ body {
 }
 
 .top1 p {
+	position: relative;
 	font-size: 0.32rem;
 	color: #262626;
 	margin-bottom: 0.1rem;
@@ -41,10 +42,8 @@ body {
 }
 
 .app_label {
-	margin-top: 0.45rem;
-	border-top: 1px solid #d1d1d1;
+	margin: 0.22rem 0;
 	text-align: center;
-	padding: 0.35rem 0;
 }
 
 .app_label p {
@@ -190,8 +189,6 @@ body {
 .top1 {
 	position: relative;
 	text-align: center;
-	/*background: url(../img/bg_720.png) no-repeat;
-	background-size: 100% 100%;*/
 	width: 100%;
 	height: auto;
 	
@@ -217,6 +214,7 @@ body {
 	z-index: 99;
 	width: 1.45rem;
 	height: 1.45rem;
+	border-radius: .25rem;
 	margin: 1.07rem 0 .55rem 0;
 }
 
@@ -249,4 +247,19 @@ body {
 .app_label .gray-tag{
 	border: 1px solid #999999 !important;
 	color:#999999 !important;
+}
+.pop2{
+	display: none;
+	z-index: 33;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background: rgba(0,0,0,0.7);
+	text-align: center;
+}
+.bottom-app-label p {
+	margin:auto; width:70%; 
+	line-height:2;
 }

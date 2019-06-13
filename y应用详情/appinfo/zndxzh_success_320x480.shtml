@@ -95,7 +95,8 @@
         <img src="/defaultSite/images/a/320x480/zndxzh/tip2.png">
     </div>
   </body>
-<script src="/defaultSite/c/js/mmapp.js"></script>
+<!--mmapp_.js添加通过scheme 唤起下载功能  -->
+<script src="/defaultSite/c/js/mmapp_.js"></script>
 <script src="/defaultSite/c/js/jquery.min.js"></script>
 <script src="/defaultSite/js/a/320x480/activity/authen/YDRZ.min.js"></script>
 <script src="/defaultSite/js/a/activity/readnew/swiper.min.js"></script>

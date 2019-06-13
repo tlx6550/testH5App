@@ -3,11 +3,6 @@
 //var baseUrlApi = 'http://211.139.191.144:12634'; //测试网查询接口
 var vConsole = new VConsole();
 var baseUrlApi = 'http://localhost:3000'; //测试网查询接口
-mm.set('downloadmm', 0)
-mm.init({
-	showtitle:false
-});
-
 var interfaceUrl = '/s.do';
 var request = axios.create({
 	baseURL: baseUrlApi,
@@ -38,6 +33,11 @@ function MMAppSharePage(options) {
 		this.initState = function() {
 			var that = this;
 			var state = false;
+			// 下载失败不首先默认下载mm
+//			mm.set('downloadmm', 0);
+//			mm.init({
+//				showtitle:false
+//			});
 			var dfd = $.Deferred();
 			request.get(interfaceUrl, {
 				params: {
@@ -334,17 +334,15 @@ onClickDonwLoad.prototype = {
 			},
 			timeout: 3000
 		}; 
-		var lib = new CallApp(option);
-		var contentId = mmDowloadArguments.a
-		var downloadUri = 'http://odp.mmarket.com/t.do?requestid=app_order&goodsid=999100007101377100001804714300002575008&payMode=1'
-		var  ddd = encodeURIComponent(downloadUri)
-		var download2 = 'mm://downloadmanager?url='+ddd
-		var  path = 'downloadmanager?url='+ddd
-
-		try {
+		var goodsid = that.goodsid
+		var lib = new CallApp(option)
+		var downloadUri = 'http://odp.mmarket.com/t.do?requestid=app_order&goodsid='+goodsid+'&payMode=1'
+		var encodeURI = encodeURIComponent(downloadUri)
+		var mmPath = 'downloadmanager?url='+encodeURI
+     	try {
 			lib.open({
-				path: path,
-				//唤起mm 首页
+				path: mmPath,
+				///通过mmscheme 唤起下载（mm进程被杀掉也可以）
 				callback: function () {
 					that.downLoadLocalApp();
 				}
@@ -395,18 +393,12 @@ onClickDonwLoad.prototype = {
 	//下载本页应用
 	downLoadLocalApp: function downLoadLocalApp() {
 		var that = this;
-		mm.download(300002784578)
-		//mm.download(mmDowloadArguments.a, mmDowloadArguments.b, mmDowloadArguments.c);
-		mm.error(function() {
-			var ar = errorArguments.a;
-			var br = errorArguments.b; //	      window.location.href = baseUrlApi + "/s.do?requestid=jump302&cid="+ar+"&channelid="+br;
-			console.log('进入error事件')
-			console.log(mm)
-			window.location.href = 'http://221.179.8.170:8080' + "/s.do?requestid=jump302&cid=" + ar + "&channelid=" + br;
-			setTimeout(function() {
-				that.popInstallImmediately();
-			}, 300);
-		});
+		var ar = errorArguments.a;
+		var br = errorArguments.b; //	      window.location.href = baseUrlApi + "/s.do?requestid=jump302&cid="+ar+"&channelid="+br;
+		window.location.href = 'http://221.179.8.170:8080' + "/s.do?requestid=jump302&cid=" + ar + "&channelid=" + br;
+		setTimeout(function() {
+			that.popInstallImmediately();
+		}, 100);
 	},
 	//请求订购状态
 	getOrderState: function getOrderState() {
