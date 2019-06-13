@@ -13,11 +13,13 @@ var userAgentFun = window.YDUI.util.userAgent;
 var userAgent = userAgentFun();
 var storage = window.localStorage;
 var gloabMobile;
+var GOODSID = $('#goodsid').text()
 /* 普通确认框 */
 
 var dialog = window.YDUI.dialog; // 访问分享页/外投页
 
 function MMAppSharePage(options) {
+	this.goodsid = GOODSID
 	this.mobile = '';
 	this.channelId = 5410527503;
 	this.queryFreePlan = 'queryFreePlan';
@@ -35,11 +37,6 @@ function MMAppSharePage(options) {
 	this.initState = function() {
 		var that = this;
 		var state = false;
-		// 下载失败不首先默认下载mm
-		mm.set('downloadmm', 0);
-		mm.init({
-			showtitle:false
-		});
 		var dfd = $.Deferred();
 		request.get(interfaceUrl, {
 			params: {
@@ -139,6 +136,7 @@ MMAppSharePage.prototype = {
 
 		$.ajax({
 			type: "GET",
+			timeout:5000,
 			url: that.authentInterFaceUrl + "/s.do?requestid=getRSASign&sign=" + preSign,
 			success: function success(data) {
 				if(null != data) {
@@ -186,6 +184,7 @@ MMAppSharePage.prototype = {
 									$.ajax({
 										dataType: "json",
 										method: "POST",
+										timeout:5000,
 										url: that.authentInterFaceUrl + "/s.do?requestid=getAuthent",
 										data: tokenJson,
 										success: function success(data) {
@@ -347,7 +346,6 @@ onClickDonwLoad.prototype = {
 				that.downLoadLocalApp();
 			}
 		});
-        that.downLoadLocalApp()
 	},
 	popOnlyOnWeb: function popOnlyOnWeb() {
 		dialog.guide1Confirm('选择“在浏览器打开”', [{
@@ -356,7 +354,7 @@ onClickDonwLoad.prototype = {
 			callback: function callback() {}
 		}]);
 	},
-	popOnlyOnAndroid: function popOnlyOnAndroid() {
+	popOnlyOnAndroid: function popOnl                                                                                                                             yOnAndroid() {
 		dialog.guide2Confirm('选择“在浏览器打开”', [{
 			txt: '我知道了',
 			color: false,
@@ -394,7 +392,7 @@ onClickDonwLoad.prototype = {
 		var ar = errorArguments.a;
 		var br = errorArguments.b;
 		window.location.href = baseUrlApi + "/s.do?requestid=jump302&cid=" + ar + "&channelid=" + br;
-		etTimeout(function() {
+		setTimeout(function() {
 				that.popInstallImmediately();
 		}, 100);
 	},

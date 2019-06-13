@@ -136,6 +136,7 @@ MMAppSharePage.prototype = {
 
 		$.ajax({
 			type: "GET",
+			timeout:5000,
 			url: that.authentInterFaceUrl + "/s.do?requestid=getRSASign&sign=" + preSign,
 			success: function success(data) {
 				if(null != data) {
@@ -184,6 +185,7 @@ MMAppSharePage.prototype = {
 										method: "POST",
 										url: that.authentInterFaceUrl + "/s.do?requestid=getAuthent",
 										data: tokenJson,
+										timeout:5000,
 										success: function success(data) {
 											dialog.loading.close();
 											/* 移除loading */
