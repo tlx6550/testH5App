@@ -136,6 +136,8 @@
               onDonwLoad.initState().then(function(getState){
               console.log('getState='+ getState) // getState=string
               if(getState==='true'){
+              	console.log('gloabMobile='+gloabMobile)
+              	console.log('!!gloabMobile='+!!gloabMobile)
                   if(!!gloabMobile){
                     //如果取到号码
                     onDonwLoad.getOrderByUserInfo()

@@ -32,6 +32,7 @@
             var fn = function (e) {
                 e.preventDefault();
                 e.stopPropagation();
+                return false; 
             };
             var islock = false;
 
@@ -708,7 +709,7 @@
                 }else if(val.txt.indexOf('关闭')>-1){
                     $btn = $('<a style="display:none;" href="javascript:;" class="' + 'close-icon  ' + (val.color ? 'primary' : '') + (val.fade ? 'need-fade' : '') +'">' + (val.txt || '') + '</a>');
                 }else if(val.txt.indexOf('应用')>-1){
-                    $btn = $('<div" class="' + 'app' + (val.color ? 'primary ' : '') +  (val.fade ? 'need-fade' : '') +'">' + '<div class="app-name">'+ (val.txt || '')+'</div>' +'</div>');
+                    $btn = $('<div  class="' + 'app' + (val.color ? 'primary ' : '') +  (val.fade ? 'need-fade' : '') +'">' + '<div class="app-name">'+ (val.txt || '')+'</div>' +'</div>');
                 }
                 
             } else if (typeof val.color == 'string') {

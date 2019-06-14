@@ -2,12 +2,15 @@
 //var baseUrlApi = 'http://221.179.8.170:8080'; //准现网查询接口
 //var baseUrlApi = 'http://211.139.191.144:12634'; //测试网查询接口
 var vConsole = new VConsole();
+//var Promise = window.Promise;
 var baseUrlApi = 'http://localhost:3000'; //测试网查询接口
 var interfaceUrl = '/s.do';
 var request = axios.create({
 	baseURL: baseUrlApi,
 	timeout: 5000
 });
+
+
 var userAgentFun = window.YDUI.util.userAgent;
 var userAgent = userAgentFun();
 var storage = window.localStorage;
@@ -133,7 +136,9 @@ MMAppSharePage.prototype = {
 		var preSign = YDRZ.getSign("000185", "1.2");
 		var sign = null;
 		var RSAstartTime = Date.parse(new Date()); //获取当前时间
-
+		setTimeout(function(){
+			dialog.loading.close();
+		},1000 * 5)
 		$.ajax({
 			type: "GET",
 			timeout:5000,
@@ -173,8 +178,8 @@ MMAppSharePage.prototype = {
 
 								var tokenTime = parseInt(TokenendTime) - parseInt(TokenstartTime);
 								console.log("tokenTime " + tokenTime);
-								var resCode = 00000;
-								if(resCode == res.code) {
+								var resCode = '000000';
+								if(resCode === res.code) {
 									var tokenJson = {};
 									tokenJson.token = res.token;
 									tokenJson.userInformation = res.userInformation;
@@ -238,11 +243,7 @@ mmApp.initState().then(function(getState) {
 			//取号失败
 			mmApp.onLineBusiness();
 			console.log(e);
-		} //		var mobile = 15112395842
-		//		setTimeout(function() {
-		//			gloabMobile = 13417586550;
-		//			mmApp.getOrderByUserInfo(gloabMobile)
-		//		}, 300)
+		} 
 
 	} else {
 		// 下线
@@ -429,9 +430,10 @@ onClickDonwLoad.prototype = {
 		var moblie;
 		var code;
 		var $getBtn;
+		var ruleLink = baseUrlApi + '/s.do?requestid=zndxzh_rule';
 		var obj = {
 			title: '温馨提示',
-			mes: '0元5GB/月定向流量，任性下应用！现在免费领取0元套餐，获得连续6个月每月5G定向流量，到期自动取消。'
+			mes: '0元5GB/月定向流量，任性下应用！现在免费领取0元套餐，获得连续6个月每月5G定向流量，到期自动取消。<br><a href="' + ruleLink + '" class="goto-detail">查看详细活动说明></a>'
 		};
 		dialog.loginConfirm(obj, [{
 			txt: '免费领取',
@@ -538,10 +540,10 @@ onClickDonwLoad.prototype = {
 	popState1_2: function popState1_2() {
 		var that = this;
 		var phone = that.plusXing(gloabMobile, 3, 4, '*');
+		var ruleLink = baseUrlApi + '/s.do?requestid=zndxzh_rule';
 		var obj = {
 			title: '温馨提示',
-			phoneNum: phone,
-			mes: '0元5GB/月定向流量，任性下应用！现在免费领取0元套餐，获得连续6个月每月5G定向流量，到期自动取消。<br><a href="www.baidu.com" class="goto-detail">查看详细活动说明></a>'
+			mes: '0元5GB/月定向流量，任性下应用！现在免费领取0元套餐，获得连续6个月每月5G定向流量，到期自动取消。<br><a href="' + ruleLink + '" class="goto-detail">查看详细活动说明></a>'
 		};
 		dialog.getPhoneConfirm(obj, [{
 			txt: '免费领取',
@@ -814,6 +816,7 @@ onClickDonwLoad.prototype = {
 	 ** cha 替换的字符串
 	 */
 	plusXing: function plusXing(num, frontLen, endLen, cha) {
+		var num = num || "";
 		var str = num.toString();
 		var len = str.length - frontLen - endLen;
 		var xing = '';

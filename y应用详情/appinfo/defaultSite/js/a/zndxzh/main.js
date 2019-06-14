@@ -1,7 +1,7 @@
 // var baseUrl = 'http://221.179.8.170:8080/s.do';
 //var baseUrlApi = 'http://221.179.8.170:8080'; //准现网查询接口
 //var baseUrlApi = 'http://211.139.191.144:12634'; //测试网查询接口
-var vConsole = new VConsole();
+//var vConsole = new VConsole();
 var baseUrlApi = ''; //测试网查询接口
 
 var interfaceUrl = '/s.do';
@@ -133,7 +133,9 @@ MMAppSharePage.prototype = {
 		var preSign = YDRZ.getSign("300011879751", "1.2");
 		var sign = null;
 		var RSAstartTime = Date.parse(new Date()); //获取当前时间
-
+		setTimeout(function(){
+			dialog.loading.close();
+		},1000 * 5)
 		$.ajax({
 			type: "GET",
 			timeout:5000,
@@ -173,9 +175,9 @@ MMAppSharePage.prototype = {
 
 								var tokenTime = parseInt(TokenendTime) - parseInt(TokenstartTime);
 								console.log("tokenTime " + tokenTime);
-								var resCode = '00000';
+								var resCode = '000000';
 
-								if(resCode == res.code) {
+								if(resCode === res.code) {
 									var tokenJson = {};
 									tokenJson.token = res.token;
 									tokenJson.userInformation = res.userInformation;
@@ -354,7 +356,7 @@ onClickDonwLoad.prototype = {
 			callback: function callback() {}
 		}]);
 	},
-	popOnlyOnAndroid: function popOnl                                                                                                                             yOnAndroid() {
+	popOnlyOnAndroid: function popOnlyOnAndroid() {
 		dialog.guide2Confirm('选择“在浏览器打开”', [{
 			txt: '我知道了',
 			color: false,
@@ -363,7 +365,7 @@ onClickDonwLoad.prototype = {
 	},
 	popInstallImmediately: function popInstallImmediately() {
 		var that = this;
-		dialog.guide3Confirm('抱歉，订购失败', '安装MM应用商场手机客户端后，可以获得更丰富的内容，更高速、更稳定的下载服务。', [{
+		dialog.guide3Confirm('抱歉，订购失败', '安装MM应用商场，可以获得更丰富的内容，更高速、更稳定的下载服务。', [{
 			txt: '关闭',
 			color: false,
 			callback: function callback() {}
@@ -423,9 +425,10 @@ onClickDonwLoad.prototype = {
 		var moblie;
 		var code;
 		var $getBtn;
+		var ruleLink = baseUrlApi + '/s.do?requestid=zndxzh_rule';
 		var obj = {
 			title: '温馨提示',
-			mes: '0元5GB/月定向流量，任性下应用！现在免费领取0元套餐，获得连续6个月每月5G定向流量，到期自动取消。'
+			mes: '0元5GB/月定向流量，任性下应用！现在免费领取0元套餐，获得连续6个月每月5G定向流量，到期自动取消。<br><a href="' + ruleLink + '" class="goto-detail">查看详细活动说明></a>'
 		};
 		dialog.loginConfirm(obj, [{
 			txt: '免费领取',
@@ -809,6 +812,7 @@ onClickDonwLoad.prototype = {
 	 ** cha 替换的字符串
 	 */
 	plusXing: function plusXing(num, frontLen, endLen, cha) {
+		var num = num || "";
 		var str = num.toString();
 		var len = str.length - frontLen - endLen;
 		var xing = '';

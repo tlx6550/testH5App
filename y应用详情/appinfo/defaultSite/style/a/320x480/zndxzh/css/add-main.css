@@ -224,9 +224,8 @@ body {
 }
 
 .app-introduce {
-	margin-bottom: 1.87rem;
 	padding: .3rem .2rem .32rem .2rem;
-	
+	padding-bottom: 2rem;
 	font-size: .28rem;
 	line-height: .42rem;
 	color: #333333;
@@ -262,4 +261,18 @@ body {
 .bottom-app-label p {
 	margin:auto; width:70%; 
 	line-height:2;
+}
+.login-by-num-wrap .el-input .code-input{
+  width: 3.2rem;
+}
+.login-by-num-wrap .btn {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: 2.2rem;
+}
+.m-confirm-guide-3-mask .app{
+	width: 1.33rem;
+	height: 1.33rem;
 }
