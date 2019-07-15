@@ -1,15 +1,14 @@
 // var baseUrl = 'http://221.179.8.170:8080/s.do';
 //var baseUrlApi = 'http://221.179.8.170:8080'; //准现网查询接口
 //var baseUrlApi = 'http://211.139.191.144:12634'; //测试网查询接口
-var vConsole = new VConsole();
-//var Promise = window.Promise;
-var baseUrlApi = 'http://localhost:3000'; //测试网查询接口
+//var vConsole = new VConsole();
+var baseUrlApi = ''; //测试网查询接口
+
 var interfaceUrl = '/s.do';
 var request = axios.create({
 	baseURL: baseUrlApi,
 	timeout: 5000
 });
-
 var userAgentFun = window.YDUI.util.userAgent;
 var userAgent = userAgentFun();
 var storage = window.localStorage;
@@ -18,41 +17,198 @@ var GOODSID = $('#goodsid').text()
 /* 普通确认框 */
 
 var dialog = window.YDUI.dialog; // 访问分享页/外投页
-
+var slider = "";
+var block = "";
+var fillColor = "";
+var luckNum = "0";
 function MMAppSharePage(options) {
 	this.goodsid = GOODSID
 	this.mobile = '';
 	this.channelId = 5410527503;
 	this.queryFreePlan = 'queryFreePlan';
 	this.subscribeFreePlan = 'subscribeFreePlan'; //订购接口
-	this.channel = 'C10000010527';//分配的渠道号
-	this.authentInterFaceUrl = 'http://localhost:3000'; //授权测试
+
+	this.channel = 'C10000010527'; //分配的渠道号
+
+	this.authentInterFaceUrl = ''; //授权测试
 
 	this.AllFreeFlag = 'AllFreeFlag'; // 业务开关
 
-	this.send_code = 'send_code', //验证码
-		// 获取免流业务开关状态
-		this.initState = function() {
-			var that = this;
-			var state = false;
-			// 下载失败不首先默认下载mm
-//			mm.set('downloadmm', 0);
-//			mm.init({
-//				showtitle:false
-//			});
-			var dfd = $.Deferred();
-			request.get(interfaceUrl, {
-				params: {
-					requestid: that.AllFreeFlag
-				}
-			}).then(function(res) {
-				//console.log(res.data.flag)
-				state = res.data.flag;
-				dfd.resolve(state);
-			});
-			return dfd;
-		}; //  this.authentInterFaceUrl = 'http://221.179.8.170:8080' //授权测试准现网
+	this.send_code = 'allfreeSend_code'; //验证码
+	// 获取免流业务开关状态
+
+	this.initState = function() {
+		var that = this;
+		var state = false;
+		var dfd = $.Deferred();
+		request.get(interfaceUrl, {
+			params: {
+				requestid: that.AllFreeFlag
+			}
+		}).then(function(res) {
+			//console.log(res.data.flag)
+			state = res.data.flag;
+			dfd.resolve(state);
+		});
+		return dfd;
+	}; //  this.authentInterFaceUrl = 'http://221.179.8.170:8080' //授权测试准现网
+
 }
+function emitResult(x) {
+        console.log("x坐标是：" + x);
+        var val = $('.tel-input').val();
+            $.post("/s.do?requestid=allfree_huakuai&ordinate_x="+x+"&msisdn="+val, function(data, status) {
+                if(status == "success") {
+                    console.log(data);
+                    var hret = Trim(data);
+                    if(hret == "true") {
+                        $(".fill-color").css("background-color", "#d2e9fe");
+                        $(".slider").css("background-image", "url(/defaultSite/images/a/320x480/onenewmembersystem/icon-check-success.png)");
+                        /* ajax 成功发送验证码后调用【start】 */
+                            YDUI.dialog.loading.open('发送中');
+                            setTimeout(function () {
+                                YDUI.dialog.loading.close();
+                                $('#J_GetCode').sendCode('start');
+                                YDUI.dialog.toast('已发送', 'success', 500);
+                                $(".slide-container").hide();  
+                                resetSlide();
+                            }, 200);   
+
+                        }else{
+                        $(".fill-color").css("background-color", '#fbe0e1');
+                        $(".fill-color").css("border-color", "#fd3939");
+                        $(".slider").css("background-image", "url(/defaultSite/images/a/320x480/onenewmembersystem/icon-check-error.png)");
+                        setTimeout(function(){
+                            refreshIcon();
+                        },2000);
+                    }
+                }
+            });
+        luckNum = parseInt(luckNum)+1;
+    }
+    /*$(".refreshIcon").click(function() {
+      refreshIcon();
+    });*/
+
+    // 弹窗关闭
+    $('.icon-back').click(function() {
+      $('.slide-container').hide();
+    });
+
+        function resetSlideImg(slideImg,blockImg,initBlockPosi){
+        var initImgWidth = 574;
+        var slideBgWidth = $(".slide-bg").width();
+        var radioImg = slideBgWidth / initImgWidth;
+        $(".slide-bg").attr("src", slideImg);
+        $(".slide-block").attr("src", blockImg);
+        $(".slide-block").css("top", initBlockPosi[1] * radioImg);
+    }
+    function Trim(str){ 
+         return str.replace(/(^\s*)|(\s*$)/g, ""); 
+    }
+    function moveBlock(initBlockPosi, slideImg, blockImg) {
+      var initImgWidth = 574;
+      $(".slide-container").show();
+      var slideWidth = $(".slider").width();
+      var slideBarWidth = $(".sliderContainer").width();
+      var canMoveWidth = slideBarWidth - slideWidth / 2;
+
+      var slideBgWidth = $(".slide-bg").width();
+      var blockImgWidth = $(".slide-block").width();
+      var canMoveWidth2 = slideBarWidth - blockImgWidth;
+      var radioMov = canMoveWidth2 / canMoveWidth;
+
+      slider = $(".slider")[0];
+      block = $(".slide-block")[0];
+      fillColor = $('.fill-color')[0];
+
+      //原始图片与页面图片的比例
+      var radioImg = slideBgWidth / initImgWidth;
+      $(".slide-bg").attr("src", slideImg);
+      $(".slide-block").attr("src", blockImg);
+      $(".slide-block").css("top", initBlockPosi[1] * radioImg);
+
+      var originX, originY, startTime, isTouchStart = false
+
+      slider.addEventListener('touchstart', function(e) {
+        originX = e.targetTouches[0].pageX, originY = e.targetTouches[0].pageY;
+        startTime = e.timeStamp;
+
+        var posi = parseFloat($(".slide-block").css("left")) / radioImg;
+        console.log('开始拖动:');
+        console.log("X坐标:" + posi);
+        $(".slide-loading").hide();
+        isTouchStart = true
+      })
+
+      document.addEventListener('touchmove', function(e) {
+        if(!isTouchStart) return false
+        const moveX = e.targetTouches[0].pageX - originX
+        const moveY = e.targetTouches[0].pageY - originY
+        if(moveX < 0 || moveX > canMoveWidth) return false
+        slider.style.left = moveX + 'px'
+        fillColor.style.width = moveX + 'px'
+        block.style.left = moveX * radioMov + 'px'
+      })
+
+      document.addEventListener('touchend', function(e) {
+        if(isTouchStart) {
+          const endX = e.changedTouches[0].clientX;
+          const timeStamp = ((e.timeStamp - startTime) / 1000).toFixed(2);
+          var posi = parseFloat($(".slide-block").css("left")) / radioImg
+          console.log('')
+          console.log('拖动结束:');
+          console.log("X坐标:" + posi);
+          console.log("时间:" + timeStamp + "秒");
+          emitResult(parseInt(posi));
+        }
+        isTouchStart = false;
+      })
+    }
+    /*请求验证码*/
+    function qqyzm(){
+    	console.log(444444);
+        var val = $('.tel-input').val();
+        $.post("/s.do?requestid=member_Jigsaw_Component&msisdn="+val,function(data,status){
+            if(status=="success"){
+                var datas = data.split('|');
+                console.log(datas);
+                var initBlockPosi = [0, datas[0]];//坐标
+                var slideImg = "data:img/png;base64,"+datas[1];//背景图
+                var blockImg = "data:img/png;base64,"+datas[2];//滑块图
+                if (luckNum=="0") {
+                    moveBlock(initBlockPosi, slideImg, blockImg);
+                }else{
+                    resetSlideImg(slideImg, blockImg,initBlockPosi);
+                    $(".slide-container").show();
+                }
+            }
+        });
+    }
+    /*刷新验证码*/
+    function refreshIcon(){
+        var val = $('.tel-input').val();
+        $.post("/s.do?requestid=member_Jigsaw_Component&msisdn="+val,function(data,status){
+            if(status=="success"){
+                var datas = data.split('|');
+                var initBlockPosi = [0, datas[0]];//坐标
+                var slideImg = "data:img/png;base64,"+datas[1];//背景图
+                var blockImg = "data:img/png;base64,"+datas[2];//滑块图
+                resetSlideImg(slideImg, blockImg,initBlockPosi);
+                resetSlide();
+            }
+        });
+    }
+    //重置滑块
+    function resetSlide() {
+        $(".fill-color").css("background-color", '#d2e9fe');
+        $(".fill-color").css("border-color", "#0073e7");
+        $(".fill-color").css("width", "0");
+        $(".slider").css("background-image", "");
+        $(".slider").css("left", "0");
+        $(".slide-block").css("left", "0");
+        $(".slide-loading").show();
+    }
 
 MMAppSharePage.prototype = {
 	//业务下线-状态1  不提示免流
@@ -94,7 +250,7 @@ MMAppSharePage.prototype = {
 					break;
 
 				case 1:
-					//已办理
+					//已办理且有余量
 					if(isLeft) {
 						that.onLineBusiness();
 					}
@@ -132,7 +288,7 @@ MMAppSharePage.prototype = {
 		dialog.loading.open('加载中...');
 		var that = this;
 		var dfd = $.Deferred();
-		var preSign = YDRZ.getSign("000185", "1.2");
+		var preSign = YDRZ.getSign("300011879751", "1.2");
 		var sign = null;
 		var RSAstartTime = Date.parse(new Date()); //获取当前时间
 		setTimeout(function(){
@@ -160,15 +316,15 @@ MMAppSharePage.prototype = {
 								//请求的参数
 								version: '1.2',
 								//接口版本号 （必填）
-								appId: '000185',
+								appId: '300011879751',
 								//应用Id （必填）
 								sign: sign,
 								//RSA加密后的sign（必填）
 								openType: '1',
 								//移动取号接口填写1,三网取号接口填写0 （必填，联调时必须填写为1）
-								expandParams: 'phoneNum=15112395842',
+								expandParams: '',
 								//扩展参数  格式：参数名=值  多个时使用 | 分割（选填，联调环境只能模拟取号，联调时需填写phoneNum=188185*****手机号可以随便填写，生产可不填）
-								isTest: '0' //是否启用测试线地址（传0时为启用不为0或者不传时为不启用）
+								isTest: '' //是否启用测试线地址（传0时为启用不为0或者不传时为不启用）
 
 							},
 							success: function success(res) {
@@ -178,6 +334,7 @@ MMAppSharePage.prototype = {
 								var tokenTime = parseInt(TokenendTime) - parseInt(TokenstartTime);
 								console.log("tokenTime " + tokenTime);
 								var resCode = '000000';
+
 								if(resCode === res.code) {
 									var tokenJson = {};
 									tokenJson.token = res.token;
@@ -187,16 +344,17 @@ MMAppSharePage.prototype = {
 									$.ajax({
 										dataType: "json",
 										method: "POST",
-										url: that.authentInterFaceUrl + "/s.do?requestid=getAuthent",
-										data: tokenJson,
 										timeout:5000,
+										url: that.authentInterFaceUrl + "/s.do?requestid=getAuthent&RequestID=allfree_index_v1",
+										data: tokenJson,
 										success: function success(data) {
 											dialog.loading.close();
 											/* 移除loading */
 
 											var datas = JSON.stringify(data);
 											var jsonObj = eval('(' + datas + ')');
-											console.log('取号结果=' + data);
+											console.log('取号结果=');
+											console.log(data);
 											dfd.resolve(jsonObj);
 										}
 									});
@@ -242,8 +400,7 @@ mmApp.initState().then(function(getState) {
 			//取号失败
 			mmApp.onLineBusiness();
 			console.log(e);
-		} 
-
+		}
 	} else {
 		// 下线
 		mmApp.offBusiness();
@@ -257,6 +414,9 @@ function onClickDonwLoad() {
 onClickDonwLoad.prototype = mmApp;
 onClickDonwLoad.prototype.constructor = onClickDonwLoad;
 onClickDonwLoad.prototype = {
+	//	initState:function(){
+	//		 MMAppSharePage.prototype.initState.apply(this, arguments);
+	//	},
 	getOrderByUserInfo: function getOrderByUserInfo() {
 		var that = this;
 		request.get(interfaceUrl, {
@@ -281,9 +441,6 @@ onClickDonwLoad.prototype = {
 
 				case 1:
 					//已办理
-					//					if(isLeft) {
-					//						that.mainDownProgress()
-					//					}
 					that.mainDownProgress();
 					console.log('state=' + state);
 					break;
@@ -329,30 +486,26 @@ onClickDonwLoad.prototype = {
 		}
 	},
 	h5CallApp: function h5CallApp() {
-		var that = this; //		
+		var that = this; // https://github.com/suanmei/callapp-lib
 		var option = {
 			scheme: {
 				protocol: 'mm'
 			},
 			timeout: 3000
-		}; 
+		};
 		var goodsid = that.goodsid
 		var lib = new CallApp(option)
-		//把那个s.do改成t.do就可以了 解决下载任务添加不了的问题
-		var downloadUri = 'http://odp.mmarket.com/t.do?requestid=app_order&goodsid='+goodsid+'&payMode=1'
+		var downloadUri = 'http://odp.mmarket.com/s.do?requestid=app_order&goodsid='+goodsid+'&payMode=1'
 		var encodeURI = encodeURIComponent(downloadUri)
 		var mmPath = 'downloadmanager?url='+encodeURI
-     	try {
-			lib.open({
-				path: mmPath,
-				///通过mmscheme 唤起下载（mm进程被杀掉也可以）
-				callback: function () {
-					that.downLoadLocalApp();
-				}
-			});
-		} catch(e) {
-			console.log(e);
-		}
+		var lib = new CallApp(option);
+		lib.open({
+			path: mmPath,
+			//通过mmscheme 唤起下载（mm进程被杀掉也可以）
+			callback: function callback() {
+				that.downLoadLocalApp();
+			}
+		});
 	},
 	popOnlyOnWeb: function popOnlyOnWeb() {
 		dialog.guide1Confirm('选择“在浏览器打开”', [{
@@ -362,7 +515,7 @@ onClickDonwLoad.prototype = {
 		}]);
 	},
 	popOnlyOnAndroid: function popOnlyOnAndroid() {
-		dialog.guide2Confirm('选择“在浏览器打开”后开始下载', [{
+		dialog.guide2Confirm('选择“在浏览器打开”', [{
 			txt: '我知道了',
 			color: false,
 			callback: function callback() {}
@@ -370,7 +523,7 @@ onClickDonwLoad.prototype = {
 	},
 	popInstallImmediately: function popInstallImmediately() {
 		var that = this;
-		dialog.guide3Confirm('抱歉，订购失败', '安装MM应用商场客户端，可以获得更丰富的内容，更高速、更稳定的下载服务。', [{
+		dialog.guide3Confirm('抱歉，订购失败', '安装MM应用商场，可以获得更丰富的内容，更高速、更稳定的下载服务。', [{
 			txt: '关闭',
 			color: false,
 			callback: function callback() {}
@@ -402,10 +555,10 @@ onClickDonwLoad.prototype = {
 	downLoadLocalApp: function downLoadLocalApp() {
 		var that = this;
 		var ar = errorArguments.a;
-		var br = errorArguments.b; //	      window.location.href = baseUrlApi + "/s.do?requestid=jump302&cid="+ar+"&channelid="+br;
-		window.location.href = 'http://221.179.8.170:8080' + "/s.do?requestid=jump302&cid=" + ar + "&channelid=" + br;
+		var br = errorArguments.b;
+		window.location.href = baseUrlApi + "/s.do?requestid=jump302&cid=" + ar + "&channelid=" + br;
 		setTimeout(function() {
-			that.popInstallImmediately();
+				that.popInstallImmediately();
 		}, 100);
 	},
 	//请求订购状态
@@ -526,9 +679,9 @@ onClickDonwLoad.prototype = {
 			checkCode = that.checkCode(code);
 		}); // 获取验证码逻辑
 
-		var $getCode = $('#J_GetCode');
+		
 		/* 定义参数 */
-
+		var $getCode = $('#J_GetCode');
 		$getCode.sendCode({
 			disClass: 'btn-disabled',
 			secs: 60,
@@ -548,6 +701,7 @@ onClickDonwLoad.prototype = {
 		var ruleLink = baseUrlApi + '/s.do?requestid=zndxzh_rule';
 		var obj = {
 			title: '温馨提示',
+			phoneNum: phone,
 			mes: '0元5GB/月定向流量，任性下应用！现在免费领取0元套餐，获得连续6个月每月5G定向流量，到期自动取消。<br><a href="' + ruleLink + '" class="goto-detail">查看详细活动说明></a>'
 		};
 		dialog.getPhoneConfirm(obj, [{
@@ -760,19 +914,9 @@ onClickDonwLoad.prototype = {
 	getRandomCode: function getRandomCode(phone, $getCode) {
 		var that = this;
 		var tag = that.checkMobile(phone);
-
 		if(tag) {
-			YDUI.dialog.loading.open('发送中');
-			$.ajax({
-				type: "GET",
-				async: false,
-				url: baseUrlApi + "/s.do?requestid=send_code&msisdn=" + phone,
-				success: function success(data) {
-					YDUI.dialog.loading.close();
-					$getCode.sendCode('start');
-					YDUI.dialog.toast('已发送', 'success', 500);
-				}
-			});
+			qqyzm();
+			/**/
 		}
 	},
 	//end fun
