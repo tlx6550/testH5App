@@ -1,56 +1,679 @@
-.home-page{
-   .banner{
-  position: relative;
-  font-size: 0;
-  .rule-icon{
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: .2rem;
-    margin-right: .1rem;
-    width: .28rem;
-    height: .28rem;
-  }
-  .info-text{
-    vertical-align: middle;
-  }
-  img.banner{
-    display: inline-block;
-    height: 5.53rem;
-    width: 100%;
-  }
-  .lklq-btn{
-    position: absolute;
-    left: 50%;
-    bottom: .25rem;
-    transform: translate3d(-50%,0,0);
-    font-size: .24rem;
-    color:#fff;
-    &.share-page{
-      bottom: -0.205rem;
-      width: 5.47rem;
-      height: 1.03rem;
-      font-size: 0;
-      background: url(../img/ljlq-btn.png)no-repeat;
-      background-size: 100% 100%;
+.home-bg {
+    background-color: #6289f8;
+}
+
+.home-page {
+    .dingxiang-bao{
+        position: fixed;
+        z-index: 99;
+        right: 0;
+        bottom: .5rem;
+        width: 1.9rem;
+        height: 1.47rem;
+        font-size: 0;
+        background: url(../img/dingxiang-bao-btn.png)no-repeat;
+        background-size: 100% 100%;
     }
-  }
-  .rule-tag{
-    display: flex;
-    align-items: center;
-    position: absolute;
-    z-index: 9;
-    right: 0;
-    top:.25rem;
-    width: 1.18rem;
-    height: .48rem;
-    color:#fff;
-    font-size: .24rem;
-    border-top-left-radius: .2rem;
-    border-bottom-left-radius: .2rem;
-    background-color: #2e79bb;
-  }
-  .prize-tag{
-    top:.8rem;
-  }
-} 
+    .banner {
+        position: relative;
+        font-size: 0;
+        .rule-icon {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: .2rem;
+            margin-right: .1rem;
+            width: .28rem;
+            height: .28rem;
+        }
+        .info-text {
+            vertical-align: middle;
+        }
+        img.banner {
+            display: inline-block;
+            height: 7.33rem;
+            width: 100%;
+        }
+        .lklq-btn {
+            position: absolute;
+            left: 50%;
+            bottom: 1rem;
+            transform: translate3d(-50%, 0, 0);
+            font-size: .2rem;
+            color: #fff;
+            background-color: #441a0a;
+            padding: .1rem .3rem;
+            border-radius: .2rem;
+            &.share-page {
+                bottom: -0.205rem;
+                width: 5.47rem;
+                height: 1.03rem;
+                font-size: 0;
+                background: url(../img/ljlq-btn.png)no-repeat;
+                background-size: 100% 100%;
+            }
+        }
+        .rule-tag {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            z-index: 9;
+            right: 0;
+            top: .25rem;
+            width: 1.18rem;
+            height: .48rem;
+            color: #000;
+            font-size: .24rem;
+            border-top-left-radius: .2rem;
+            border-bottom-left-radius: .2rem;
+            background:-webkit-linear-gradient(top, #fffef8, #ffe286);;
+        }
+        .prize-tag {
+            top: 1rem;
+        }
+    }
+    .app-down-list-wrap {
+        .list-1 {
+            position: relative;
+            background: url(../img/downapp-list-1.png)no-repeat;
+            background-size: 100% 100%;
+            height: 1.64rem;
+            .btn-baoxiang {
+                position: absolute;
+                background: url(../img/baoxiang.png)no-repeat;
+                background-size: 100% 100%;
+                top:-0.7rem;
+                width: 2.81rem;
+                height: 1.24rem;
+                line-height: 1.24rem;
+                left:50%;
+                transform: translateX(-50%);
+                color: #fff;
+                text-align: center;
+                font-size: .42rem;
+            }
+        }
+        .list-2 {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            padding-top: .2rem;
+            background: url(../img/downapp-list-2.png)no-repeat;
+            background-size: 100% 100%;
+            height: 1.46rem;
+            .app-box{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 4.16rem;
+                padding:.2rem;
+                .info{
+                    display: flex;
+                    align-items: center;
+                    .deital{
+                        margin-left: .1rem;
+                    }
+                    .title{
+                        font-size: .24rem;
+                        color:#333333;
+                    }
+                    .sub{
+                        font-size: .2rem;
+                        color:#999999;
+                    }
+                }
+                .item{
+                  &.btn{
+                      padding:0;
+                      font-size: .24rem;
+                      width: .9rem;
+                      color:#fff;
+                      background: -webkit-linear-gradient(top, #59bdfe, #329fec);;
+                  }  
+                }
+                .icon{
+                    width: .7rem;
+                    height: .7rem;
+                }
+            }
+        }
+        .list-3 {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            background: url(../img/downapp-list-3.png)no-repeat;
+            background-size: 100% 100%;
+            height: 1.27rem;
+            .app-box{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 4.16rem;
+                padding:.2rem;
+                .info{
+                    display: flex;
+                    align-items: center;
+                    .deital{
+                        margin-left: .1rem;
+                    }
+                    .title{
+                        font-size: .24rem;
+                        color:#333333;
+                    }
+                    .sub{
+                        font-size: .2rem;
+                        color:#999999;
+                    }
+                }
+                .item{
+                  &.btn{
+                      padding:0;
+                      font-size: .24rem;
+                      width: .83rem;
+                      color:#fff;
+                      background: -webkit-linear-gradient(top, #59bdfe, #329fec);;
+                  }  
+                }
+                .icon{
+                    width: .7rem;
+                    height: .7rem;
+                }
+            }
+        }
+        .list-4 {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            background: url(../img/downapp-list-4.png)no-repeat;
+            background-size: 100% 100%;
+            height: 1.78rem;
+            .app-box{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 4.16rem;
+                padding:0 .2rem 0 .2rem;
+                height: 1.4rem;
+                .info{
+                    display: flex;
+                    align-items: center;
+                    .deital{
+                        margin-left: .1rem;
+                    }
+                    .title{
+                        font-size: .24rem;
+                        color:#333333;
+                    }
+                    .sub{
+                        font-size: .2rem;
+                        color:#999999;
+                    }
+                }
+                .item{
+                  &.btn{
+                      padding:0;
+                      font-size: .24rem;
+                      width: .83rem;
+                      color:#fff;
+                      background: -webkit-linear-gradient(top, #59bdfe, #329fec);;
+                  }  
+                }
+                .icon{
+                    width: .7rem;
+                    height: .7rem;
+                }
+            }
+        }
+        .list-5{
+            position: relative;
+            background: url(../img/downapp-list-5.png)no-repeat;
+            background-size: 100% 100%;
+            height: 1.32rem;
+            .more-power-btn{
+                position: absolute;
+                left: 50%;
+                top:-.4rem;
+                transform: translateX(-50%);
+                background: url(../img/more-power.png)no-repeat;
+                background-size: 100% 100%;
+                height: .66rem;
+                width: 2.82rem;
+            }
+        }
+    }
+    .app-zone-wrap{
+        .list-1{
+            background: url(../img/app-zone-list-1.png)no-repeat;
+            background-size: 100% 100%;
+            height: 1.63rem;
+        }
+        .list-2{
+            background: url(../img/app-zone-bg-1.png)no-repeat;
+            background-size: 100% 100%;
+            height: 7.89rem;
+            .apps-wrap{
+                position: relative;
+            }
+            .change-btn{
+                position: absolute;
+                background: url(../img/app-zone-chang-btn-1.png)no-repeat;
+                background-size: 100% 100%;
+                width: 1.4rem;
+                height: 1.4rem;
+                left:50%;
+                transform: translateX(-50%);
+                top:3.9rem;
+                color:#fff;
+                font-size: .28rem;
+                text-align: center;
+                line-height: 1.4rem;
+            }
+            .person{
+                position: absolute;
+                background: url(../img/app-zone-person-1.png)no-repeat;
+                background-size: 100% 100%;
+                width: 1.96rem;
+                height: 2.55rem;
+                left:50%;
+                transform: translateX(-50%);
+                top:5.4rem;
+            }
+            .app-name{
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                .icon{
+                    width: 1.08rem;
+                    height: 1.08rem;
+                    border-radius: .2rem;
+                }
+                .name{
+                    margin:.05rem 0;
+                    font-size: .2rem;
+                    color:#fff;
+                }
+                .btn-down{
+                    font-size: .2rem;
+                    color:#fff;
+                    width: 1.01rem;
+                    height: .46rem;
+                    overflow: hidden;
+                    text-align: center;
+                    line-height: .46rem;
+                    background: url(../img/app-zone-chang-btn-2.png)no-repeat;
+                background-size: 100% 100%;
+                }
+            }
+            .app-name-list-1{
+               left:50%;
+               transform: translateX(-50%);
+               top:1.6rem;
+            }
+            .app-name-list-2{
+                left:5.3rem;
+                transform: translateX(-50%);
+                top:2.2rem;
+             }
+             .app-name-list-3{
+                left:5rem;
+                transform: translateX(-50%);
+                top:4.5rem;
+             }
+             .app-name-list-4{
+                left:2.22rem;
+                transform: translateX(-50%);
+                top:4.5rem;
+             }
+            .app-name-list-5{
+                left:2rem;
+                transform: translateX(-50%);
+                top:2.2rem;
+             }
+        }
+        .list-3{
+            background: url(../img/app-zone-bg-3.png)no-repeat;
+            background-size: 100% 100%;
+            height: 8.39rem;
+            .apps-wrap{
+                position: relative;
+                top: .45rem;
+            }
+            .change-btn{
+                position: absolute;
+                background: url(../img/app-zone-chang-btn-1.png)no-repeat;
+                background-size: 100% 100%;
+                width: 1.4rem;
+                height: 1.4rem;
+                left:50%;
+                transform: translateX(-50%);
+                top:3.9rem;
+                color:#fff;
+                font-size: .28rem;
+                text-align: center;
+                line-height: 1.4rem;
+            }
+            .person{
+                position: absolute;
+                background: url(../img/app-zone-person-1.png)no-repeat;
+                background-size: 100% 100%;
+                width: 1.96rem;
+                height: 2.55rem;
+                left:50%;
+                transform: translateX(-50%);
+                top:5.4rem;
+            }
+            .app-name{
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                .icon{
+                    width: 1.08rem;
+                    height: 1.08rem;
+                    border-radius: .2rem;
+                }
+                .name{
+                    margin:.1rem 0;
+                    font-size: .2rem;
+                    color:#fff;
+                }
+                .btn-down{
+                    font-size: .2rem;
+                    color:#fff;
+                    width: 1.01rem;
+                    height: .46rem;
+                    overflow: hidden;
+                    text-align: center;
+                    line-height: .46rem;
+                    background: url(../img/app-zone-chang-btn-2.png)no-repeat;
+                background-size: 100% 100%;
+                }
+            }
+            .app-name-list-1{
+               left:50%;
+               transform: translateX(-50%);
+               top:1.6rem;
+            }
+            .app-name-list-2{
+                left:5.3rem;
+                transform: translateX(-50%);
+                top:2.2rem;
+             }
+             .app-name-list-3{
+                left:5rem;
+                transform: translateX(-50%);
+                top:4.5rem;
+             }
+             .app-name-list-4{
+                left:2.22rem;
+                transform: translateX(-50%);
+                top:4.5rem;
+             }
+            .app-name-list-5{
+                left:2rem;
+                transform: translateX(-50%);
+                top:2.2rem;
+             }
+        }
+        .list-4{
+            background: url(../img/app-zone-bg-4.png)no-repeat;
+            background-size: 100% 100%;
+            height: 8.78rem;
+            .apps-wrap{
+                position: relative;
+                top: .62rem;
+            }
+            .change-btn{
+                position: absolute;
+                background: url(../img/app-zone-chang-btn-1.png)no-repeat;
+                background-size: 100% 100%;
+                width: 1.4rem;
+                height: 1.4rem;
+                left:50%;
+                transform: translateX(-50%);
+                top:3.9rem;
+                color:#fff;
+                font-size: .28rem;
+                text-align: center;
+                line-height: 1.4rem;
+            }
+            .person{
+                position: absolute;
+                background: url(../img/app-zone-person-1.png)no-repeat;
+                background-size: 100% 100%;
+                width: 1.96rem;
+                height: 2.55rem;
+                left:50%;
+                transform: translateX(-50%);
+                top:5.4rem;
+            }
+            .app-name{
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                .icon{
+                    width: 1.08rem;
+                    height: 1.08rem;
+                    border-radius: .2rem;
+                }
+                .name{
+                    margin:.1rem 0;
+                    font-size: .2rem;
+                    color:#fff;
+                }
+                .btn-down{
+                    font-size: .2rem;
+                    color:#fff;
+                    width: 1.01rem;
+                    height: .46rem;
+                    overflow: hidden;
+                    text-align: center;
+                    line-height: .46rem;
+                    background: url(../img/app-zone-chang-btn-2.png)no-repeat;
+                background-size: 100% 100%;
+                }
+            }
+            .app-name-list-1{
+               left:50%;
+               transform: translateX(-50%);
+               top:1.6rem;
+            }
+            .app-name-list-2{
+                left:5.3rem;
+                transform: translateX(-50%);
+                top:2.2rem;
+             }
+             .app-name-list-3{
+                left:5rem;
+                transform: translateX(-50%);
+                top:4.5rem;
+             }
+             .app-name-list-4{
+                left:2.22rem;
+                transform: translateX(-50%);
+                top:4.5rem;
+             }
+            .app-name-list-5{
+                left:2rem;
+                transform: translateX(-50%);
+                top:2.2rem;
+             }
+        }
+        .list-5{
+            background: url(../img/app-zone-bg-5.png)no-repeat;
+            background-size: 100% 100%;
+            height: 8.35rem;
+            .apps-wrap{
+                position: relative;
+                top: .5rem;
+            }
+            .change-btn{
+                position: absolute;
+                background: url(../img/app-zone-chang-btn-1.png)no-repeat;
+                background-size: 100% 100%;
+                width: 1.4rem;
+                height: 1.4rem;
+                left:50%;
+                transform: translateX(-50%);
+                top:3.9rem;
+                color:#fff;
+                font-size: .28rem;
+                text-align: center;
+                line-height: 1.4rem;
+            }
+            .person{
+                position: absolute;
+                background: url(../img/app-zone-person-1.png)no-repeat;
+                background-size: 100% 100%;
+                width: 1.96rem;
+                height: 2.55rem;
+                left:50%;
+                transform: translateX(-50%);
+                top:5.4rem;
+            }
+            .app-name{
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                .icon{
+                    width: 1.08rem;
+                    height: 1.08rem;
+                    border-radius: .2rem;
+                }
+                .name{
+                    margin:.1rem 0;
+                    font-size: .2rem;
+                    color:#fff;
+                }
+                .btn-down{
+                    font-size: .2rem;
+                    color:#fff;
+                    width: 1.01rem;
+                    height: .46rem;
+                    overflow: hidden;
+                    text-align: center;
+                    line-height: .46rem;
+                    background: url(../img/app-zone-chang-btn-2.png)no-repeat;
+                background-size: 100% 100%;
+                }
+            }
+            .app-name-list-1{
+               left:50%;
+               transform: translateX(-50%);
+               top:1.6rem;
+            }
+            .app-name-list-2{
+                left:5.3rem;
+                transform: translateX(-50%);
+                top:2.2rem;
+             }
+             .app-name-list-3{
+                left:5rem;
+                transform: translateX(-50%);
+                top:4.5rem;
+             }
+             .app-name-list-4{
+                left:2.22rem;
+                transform: translateX(-50%);
+                top:4.5rem;
+             }
+            .app-name-list-5{
+                left:2rem;
+                transform: translateX(-50%);
+                top:2.2rem;
+             }
+        }
+        .list-6{
+            background: url(../img/app-zone-bg-6.png)no-repeat;
+            background-size: 100% 100%;
+            height: 9.77rem;
+            .apps-wrap{
+                position: relative;
+                top: .5rem;
+            }
+            .change-btn{
+                position: absolute;
+                background: url(../img/app-zone-chang-btn-1.png)no-repeat;
+                background-size: 100% 100%;
+                width: 1.4rem;
+                height: 1.4rem;
+                left:50%;
+                transform: translateX(-50%);
+                top:3.9rem;
+                color:#fff;
+                font-size: .28rem;
+                text-align: center;
+                line-height: 1.4rem;
+            }
+            .person{
+                position: absolute;
+                background: url(../img/app-zone-person-1.png)no-repeat;
+                background-size: 100% 100%;
+                width: 1.96rem;
+                height: 2.55rem;
+                left:50%;
+                transform: translateX(-50%);
+                top:5.4rem;
+            }
+            .app-name{
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                .icon{
+                    width: 1.08rem;
+                    height: 1.08rem;
+                    border-radius: .2rem;
+                }
+                .name{
+                    margin:.1rem 0;
+                    font-size: .2rem;
+                    color:#fff;
+                }
+                .btn-down{
+                    font-size: .2rem;
+                    color:#fff;
+                    width: 1.01rem;
+                    height: .46rem;
+                    overflow: hidden;
+                    text-align: center;
+                    line-height: .46rem;
+                    background: url(../img/app-zone-chang-btn-2.png)no-repeat;
+                background-size: 100% 100%;
+                }
+            }
+            .app-name-list-1{
+               left:50%;
+               transform: translateX(-50%);
+               top:1.6rem;
+            }
+            .app-name-list-2{
+                left:5.3rem;
+                transform: translateX(-50%);
+                top:2.2rem;
+             }
+             .app-name-list-3{
+                left:5rem;
+                transform: translateX(-50%);
+                top:4.5rem;
+             }
+             .app-name-list-4{
+                left:2.22rem;
+                transform: translateX(-50%);
+                top:4.5rem;
+             }
+            .app-name-list-5{
+                left:2rem;
+                transform: translateX(-50%);
+                top:2.2rem;
+             }
+        }
+    }
 }
