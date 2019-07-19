@@ -81,17 +81,17 @@ import '../js/mmapp.js'; */
     // tabl逻辑
     var $header = $('.tab-header');
     var headers = Array.prototype.slice.call(document.querySelectorAll('.tab-header div'));
-    var mySwiper = new Swiper('.out-webview-container', {
-        observer: true,// 修改swiper自己或子元素时，自动初始化swiper
-        observeParents: true,// 修改swiper的父元素时，自动初始化swiper
-        onSlideChangeEnd: function (swiper) {
-            // 切换结束时，告诉我现在是第几个slide
-            var index = swiper.activeIndex;
-            $header.children('div').removeClass('active');
-            $header.children('div').eq(index).addClass('active');
-        }
-    });
-    var innerBannerSwiper = new Swiper('.swiper-container', {
+//  var mySwiper = new Swiper('.out-webview-container', {
+//      observer: true,// 修改swiper自己或子元素时，自动初始化swiper
+//      observeParents: true,// 修改swiper的父元素时，自动初始化swiper
+//      onSlideChangeEnd: function (swiper) {
+//          // 切换结束时，告诉我现在是第几个slide
+//          var index = swiper.activeIndex;
+//          $header.children('div').removeClass('active');
+//          $header.children('div').eq(index).addClass('active');
+//      }
+//  });
+    var innerBannerSwiper = new Swiper('.inner-swiper', {
         loop: true,
         autoplay : 14000,
         autoplayDisableOnInteraction : false,
@@ -123,7 +123,7 @@ import '../js/mmapp.js'; */
             var index = i;
             $header.children('div').removeClass('active');
             $header.children('div').eq(index).addClass('active');
-            mySwiper.slideTo(index);
+//          mySwiper.slideTo(index);
         });
     });
     !function initIframH(){
