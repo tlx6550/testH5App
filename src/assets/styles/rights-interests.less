@@ -1,5 +1,6 @@
-.rights-interests-page{
-  .dingxiang-bao{
+.rights-interests-page {
+       background-color: #133c87;
+    .dingxiang-bao {
         position: fixed;
         z-index: 99;
         right: 0;
@@ -61,10 +62,95 @@
             font-size: .24rem;
             border-top-left-radius: .2rem;
             border-bottom-left-radius: .2rem;
-            background:-webkit-linear-gradient(top, #fffef8, #ffe286);;
+            background: -webkit-linear-gradient(top, #fffef8, #ffe286);
+            ;
         }
         .prize-tag {
             top: 1rem;
         }
+    }
+    .banner-2 {
+        width: 100%;
+        height: 3.32rem;
+        font-size: 0;
+        background: url(../img/rights-interests-page-banne-2.png)no-repeat;
+        background-size: 100% 100%;
+    }
+    .app-list-wrap {
+        .wrap-1 {
+             background-color: #133c87;
+            width: 5.84rem;
+            height: 9.4rem;
+            margin: 0 auto;
+            margin-top: -3.32rem;
+            background: url(../img/rights-interests-page-list-bg.png)no-repeat;
+            background-size: 100% 100%;
+            padding:.45rem;
+        }
+        .wrap-2 {
+            height: 8.4rem;
+            overflow-y: auto;
+            border-radius: .13rem;
+             background-color: #fff;
+        }
+        .wrap-3 {
+            border-radius: .11rem;
+            border: .11rem solid #1a51ae;
+        }
+        .wrap-4 {
+            border-radius: .1rem;
+            background-color: #fff;
+        }
+        .list {
+            padding: 0 .2rem;
+            .app-box {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 .4rem;
+                height: 1.4rem;
+                background-color: #fff;
+                border-bottom: 1px solid #c9c9c9;
+                .info {
+                    display: flex;
+                    align-items: center;
+                    .deital {
+                        margin-left: .1rem;
+                    }
+                    .title {
+                        font-size: .24rem;
+                        color: #333333;
+                    }
+                    .sub {
+                        font-size: .2rem;
+                        color: #999999;
+                    }
+                }
+                .item {
+                    &.btn {
+                        padding: 0 .25rem;
+                        font-size: .24rem;
+                        color: #fff;
+                        background: -webkit-linear-gradient(top, #59bdfe, #329fec);
+                    }
+                    &.has {
+                        background: -webkit-linear-gradient(top, #d6d6d6, #c0c1c0);
+                    }
+                    &.active {
+                        background: -webkit-linear-gradient(top, #ffbd4c, #f79b27);
+                    }
+                }
+                .icon {
+                    width: .7rem;
+                    height: .7rem;
+                }
+            }
+        }
+    }
+    .footer{
+        width: 100%;
+        height: 1.51rem;
+        background: url(../img/rights-interests-page-footer.png)no-repeat;
+        background-size: 100% 100%;
     }
 }

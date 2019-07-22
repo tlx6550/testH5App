@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+		<title>
+			MM铁杆粉丝福利
+		</title>
+	</head>
+
+	<body>
+		<div class="address-page">
+			<div class="page-top"></div>
+			<div class="address-wrap">
+				<form action="">
+					<div class="box">
+						<div class="lable item">
+							收货人
+						</div>
+						<div class="item input-wrap">
+							<input placeholder="请输入收货人姓名" type="text" />
+						</div>
+					</div>
+					<div class="box">
+						<div class="lable item">
+							手机号码
+						</div>
+						<div class="item input-wrap">
+							<input placeholder="请输入手机号码" type="text" maxlength="11" oninput="value=value.replace(/[^\d]/g,'')" />
+						</div>
+					</div>
+					<div class="box">
+						<div class="lable item">
+							所在地区
+						</div>
+						<div class="item input-wrap address-wrap-input">
+							<img src="assets/img/arrow-right.png" alt="" class="icon" />
+							<input  readonly id="J_Address" placeholder="请输入收货人" type="text" />
+						</div>
+					</div>
+					<div class="box">
+						<div class="lable item">
+							详细地址
+						</div>
+						<div class="item input-wrap">
+							<input placeholder="道路、门牌号、楼栋号、单元室" type="text" />
+						</div>
+					</div>
+				</form>
+
+			</div>
+			<div class="submit-btn">
+				保存
+			</div>
+			<div class="content-wrap">
+				<div class="content">
+					说明：
+					<br /> 请正确填写收货地址，信息一经保存无法更改。若用户未在活动期间内填写收货地址、联系人、手机号码等有效信息，则视为放弃领奖。如因信息未填写或信息填写错误等用户自身原因导致奖品无法送达的，则视为领奖无效，不做补偿处理。
+				</div>
+			</div>
+
+		</div>
+	</body>
+
+</html>

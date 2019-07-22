@@ -71,9 +71,14 @@ const config = {
     // 左边是chuncks名称，右边是入口地址
     entry: {
         'index': './js/index.js',
-        'myPrize': './js/myPrize.js',
-        'rules': './js/rules.js',
+        'myPrize': './js/index.js',
+        'rules': './js/index.js',
         'share': './js/index.js',
+        'rule-page': './js/index.js',
+        'share-page': './js/index.js',
+        'rights-interests': './js/index.js',
+        'address-page': './js/index.js',
+        'introduce-page': './js/index.js',
     },
     output: {
         filename: isDev ? '[name].js' : '[name].js',
@@ -128,14 +133,14 @@ const config = {
                                     path: postcssConfig,
                                 },
                                 sourceMap: isDev ? 'inline' : false
-                               
+
                             }
                         },
                         {
                             loader: 'less-loader',
                             options: {
                                 sourceMap: isDev
-                               
+
                             },
 
                         }
@@ -196,12 +201,21 @@ const config = {
             template: './index.html',
             filename: 'index.html'
         }),
+        new HtmlWebpackPlugin({
+            chunks: ['rule-page'],
+            template: './rule-page.html',
+            filename: 'rule-page.html'
+        }),
+        new HtmlWebpackPlugin({
+            chunks: ['share-page'],
+            template: './share-page.html',
+            filename: 'share-page.html'
+        }),
        new HtmlWebpackPlugin({
             chunks: ['myPrize'],
             template: './myPrize.html',
             filename: 'myPrize.html'
-        }
-        ),
+        }),
         new HtmlWebpackPlugin({
                 chunks: ['rules'],
                 template: './rules.html',
@@ -212,6 +226,24 @@ const config = {
                 chunks: ['share'],
                 template: './share.html',
                 filename: 'share.html'
+            }
+        ),
+         new HtmlWebpackPlugin({
+                chunks: ['rights-interests'],
+                template: './rights-interests.html',
+                filename: 'rights-interests.html'
+            }
+        ),
+         new HtmlWebpackPlugin({
+                chunks: ['address-page'],
+                template: './address-page.html',
+                filename: 'address-page.html'
+            }
+        ),
+         new HtmlWebpackPlugin({
+                chunks: ['introduce-page'],
+                template: './introduce-page.html',
+                filename: 'introduce-page.html'
             }
         ),
         new LodashModuleReplacementPlugin,
