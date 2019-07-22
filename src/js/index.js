@@ -24,35 +24,48 @@ import '../components/dialog/dialog.js';
 
     /* 普通确认框 */
     var dialog = window.YDUI.dialog;
-    // title 没有就不传
-    // dialog.confirm('', '您已成功提交MM任我装流浪包订购申请，成功受理信息请以中国移动下发短信为准，目前由于订购用户较多，短信可能有延时，请耐心等待。', [
-    //     {
-    //         txt: '确定',
-    //         color: false, /* false:黑色  true:绿色 或 使用颜色值 */
-    //         callback: function () {
-    //             dialog.toast('你点了取消', 'none', 1000);
-    //         }
-    //     }
-    //
-    // ]);
-    // setTimeout(function(){
+//     dialog.confirm('温馨提示', '恭喜您，获得<br>XXXXXXX~<div class="tip-text">＊请及时填写，以免错失奖品！</div>', [
+//         {
+//             txt: '确定',
+//             color: false, /* false:黑色  true:绿色 或 使用颜色值 */
+//             callback: function () {
+//                 dialog.toast('你点了取消', 'none', 1000);
+//             }
+//         }
+//    
+//     ]);
+
+//参数是4个
+//     dialog.orderConfirm('温馨提示','13417586550', '<a href="" class="rule-link">权益规则详情 ></a>', [
+//         {
+//             txt: '免费领取',
+//             color: false, 
+//             callback: function () {
+//                 dialog.toast('免费领取', 'none', 1000);
+//             }
+//         },
+//          {
+//             txt: '关闭',
+//             color: false, 
+//             callback: function () {
+//                 dialog.toast('你点了取消', 'none', 1000);
+//             }
+//         }
+//    
+//     ]);
+      // setTimeout(function(){
     //     $('#YDUI_CONFRIM').remove();
     // },5000)
-//  dialog.simpleConfirm('领取免流量包、下载MM应用商场', '快来帮好友获得视频会员卡吧',function () {
+    
+    
+//  dialog.shareConfirm(function () {
 //      $('#YDUI_CONFRIM').remove();
 //  });
-    $('.lklq-btn').click(function () {
-        dialog.confirm('', '抱歉，因网络原因<br/>您本次订购出现错误，请重新领取。', [
-            {
-                txt: '确定',
-                color: false, /* false:黑色  true:绿色 或 使用颜色值 */
-                callback: function () {
-                    dialog.toast('你点了取消', 'none', 1000);
-                }
-            }
 
-        ]);
-    });
+
+//  dialog.downAppConfirm(function () {
+//      $('#YDUI_CONFRIM').remove();
+//  });
     // 获取验证码逻辑
     var $getCode = $('#J_GetCode');
 
