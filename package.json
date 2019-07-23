@@ -51,6 +51,8 @@
     "webpack-dev-server": "2.9.4"
   },
   "dependencies": {
+    "@better-scroll/core": "^2.0.0-alpha.20",
+    "@better-scroll/pull-up": "^2.0.0-alpha.20",
     "jquery": "^3.3.1",
     "lodash": "^4.17.4",
     "reset.scss": "^1.0.0",

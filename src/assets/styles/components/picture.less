@@ -1,0 +1,126 @@
+.slide-container{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 9;
+    .mark {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+    }
+    .content {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        padding: 0 0.35rem;
+        background-color: #fff;
+        width: 5.74rem;
+        padding-bottom: 1rem;
+        .title-tip {
+            font-size: 0.24rem;
+            color: #666666;
+            line-height: 0.85rem;
+            text-align: left;
+        }
+    }
+    .captcha {
+        width: 100%;
+        height: 3rem;
+        overflow: hidden;
+        position: relative;
+        .slide-bg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .slide-block {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0.55rem;
+            height: 0.52rem;
+            display: block;
+        }
+    }
+    .slide-msg{
+        position: absolute;
+        bottom: 0;
+        width:100%;
+        height: 0.64rem;
+        line-height: 0.64rem;
+        font-size: 0.28rem;
+        overflow: hidden;
+        background: rgba(0,0,0,0.5);
+        color: #f3f3f3;
+        height: 0;
+        transition: height 0.25s;
+        &.success{
+            color: #b5ff83;
+            height: 0.64rem;
+        }
+        &.error{
+            height: 0.64rem;
+            color: #ff643a;
+        }
+    }
+    .sliderContainer {
+        margin-top: 0.4rem;
+        position: relative;
+        text-align: center;
+        width: 100%;
+        height: 0.25rem;
+        line-height: 0.25rem;
+        background: #e4e4e4;
+        color: #45494c;
+        border: none;
+        border-radius: 0.12rem;
+        font-size: 0.24rem;
+        .slider {
+            position: absolute;
+            top: -0.275rem;
+            left: 0;
+            width: 1.22rem;
+            height: 0.8rem;
+            font-size: 0.24rem;
+            .sliderIcon {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                margin: 0 auto;
+                margin-left: -0.25rem;
+                background: url(../../img/icon-slide.png) no-repeat;
+                background-size: 100% 100%;
+                cursor: pointer;
+                transition: background .2s linear;
+            }
+        }
+    }
+    .refreshIcon {
+        position: absolute;
+        right: 1rem;
+        bottom: 0.2rem;
+        width: 0.36rem;
+        height: 0.36rem;
+        background: url(../../img/icon-fresh.png) no-repeat;
+        background-size: 100%;
+        background-position: center center;
+        z-index: 1;
+    }
+    .canvas-close {
+        width: 0.38rem;
+        height: 0.38rem;
+        position: absolute;
+        right: 0.38rem;
+        bottom: 0.2rem;
+        background: url(../../img/icon-close.png) no-repeat;
+        background-size: 100%;
+        z-index: 1;
+    }
+}
