@@ -56,3 +56,42 @@ import '../js/mmapp.js'; */
 }(window);
 
 
+
+    !function () {
+
+        // 根据实际情况自定义获取数据方法
+        var page = 1, pageSize = 10;
+        var loadMore = function (callback) {
+        	setInterval(function(){
+        		setTimeout(function () {
+                        typeof callback == 'function' && callback();
+                    }, 1000);
+        	},2000)
+           
+        };
+
+        $('#J_List').infiniteScroll({
+            binder: '#J_List',
+            pageSize: pageSize,
+            initLoad: true,
+            loadingHtml: '<div>加载中...</div>',
+            loadListFn: function () {
+                var def = $.Deferred();
+
+                loadMore(function () {
+
+                    var html = '<div>888888</div>'
+                    $('#J_ListContent').append(html);
+					var listArr = [
+					{a:'<div>888888</div>'},
+					{a:'<div>888888</div>'}
+					]
+                    def.resolve(listArr);
+
+                    ++page;
+                });
+
+                return def.promise();
+            }
+        });
+    }();
