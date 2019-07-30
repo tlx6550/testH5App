@@ -89,6 +89,28 @@ import '../components/dialog/dialog.js';
         $(this).val(ret.provance + ' ' + ret.city + ' ' + ret.area);
     });
  }()
+ 
+ $('.chest-close').click(function(){
+ 	$(this).addClass("shake");
+    var that=this;
+    this.addEventListener("webkitAnimationEnd", function(){
+      
+      $(that).closest(".open-has").addClass("opened");
+      setTimeout(function(){
+        $(that).removeClass("show");
+        $(that).closest(".mod-chest").find(".chest-open").addClass("show");
+        $(".chest-open").addClass("blur");
+        fadeOutlist()
+      },200)
+    }, false);
+ })
+ function fadeOutlist(){
+ 	$('.gift-wrap').show()
+ 	$('.fade-one').addClass('animated  fadeOutUpBig1');
+ 	$('.fade-two').addClass('animated  fadeOutUpBig2');
+ 	$('.fade-three').addClass('animated  fadeOutUpBig3');
+ 	$('.fade-four').addClass('animated  fadeOutUpBig4');
+ }
 }(window);
 
 
