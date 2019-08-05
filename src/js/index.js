@@ -37,6 +37,26 @@ import '../components/dialog/dialog.js';
 //    
 //     ]);
 
+
+       dialog.confirm('温馨提示', '恭喜您，获得<br>XXXXXXX~<div class="tip-text">＊请及时填写，以免错失奖品！</div>', [
+           {
+               txt: '取消',
+               color: false, /* false:黑色  true:绿色 或 使用颜色值 */
+               callback: function () {
+                   dialog.toast('你点了取消', 'none', 1000);
+               }
+           },
+           {
+               txt: '升级',
+               color: false, /* false:黑色  true:绿色 或 使用颜色值 */
+               callback: function () {
+                   dialog.toast('你点了取消', 'none', 1000);
+               }
+           }
+      
+       ]);
+
+
 //参数是4个
 //     dialog.orderConfirm('温馨提示','13417586550', '<a href="" class="rule-link">权益规则详情 ></a>', [
 //         {
