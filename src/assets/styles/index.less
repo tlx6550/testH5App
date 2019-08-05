@@ -121,9 +121,58 @@
       width: 3.67rem;
       height: .73rem;
     }
+    .zw-rotary {
+    position: relative;
+    top:0.7rem;
+    margin: 0 auto;
+    width: 6.58rem;
+    height: 6.58rem;
+    .zp-shadow{
+      display: inline-block;
+      position: absolute;
+      left:50%;
+      bottom: -0.2rem;
+      transform: translate(-50%,0);
+      width: 100%;
+    }
+  }
+
+  .zw-rotary-dial {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    perspective: 1000;
+    -webkit-transition-delay: .2s;
+    transition-delay: .2s;
+    -webkit-transition-property: -webkit-transform;
+    transition-property: -webkit-transform;
+    transition-property: transform;
+    transition-property: transform, -webkit-transform;
+    transition-property: transform, -webkit-transform;
+    -webkit-transition-timing-function: cubic-besizer(0.43, 1.18, 0.53, 0.36);
+    transition-timing-function: cubic-besizer(0.43, 1.18, 0.53, 0.36);
+    -webkit-transition-duration: 2s;
+    transition-duration: 2s;
+    img{
+      width: 100%;
+    }
+  }
+
+  .zw-rotary-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1.82rem;
+    height: 2.43rem;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(-50%, -50%, 0);
+    img{
+      width: 100%;
+    }
+  }
 }
 .main-settion{
-    margin-bottom: .5rem;
+    margin: .5rem 0;
      padding:0 .2rem;
   .card-pannel{
    
