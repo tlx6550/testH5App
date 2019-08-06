@@ -317,7 +317,7 @@ import $ from '../../assets/js/jquery.min.js';
                 if (!val.txt) {
                     $btn = $('<a href="javascript:;" class="' + 'confirm-btn hide-btn ' + (val.color ? 'primary' : 'default') + '">' + (val.txt || '') + '</a>');
                 } else {
-                    $btn = $('<a href="javascript:;" class="' + 'confirm-btn ' + (val.color ? 'primary' : 'default') + '">' + (val.txt || '') + '</a>');
+                    $btn = $('<a href="javascript:;" class="' + 'confirm-btn ' + (val.color ? 'primary' : 'default ') + (val.txt.indexOf('取消')>-1 ? 'cancel' : '') + '">' + (val.txt || '') + '</a>');
                 }
 
             } else if (typeof val.color == 'string') {

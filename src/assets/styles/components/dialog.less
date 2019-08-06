@@ -27,10 +27,11 @@
   }
 }
 .m-confirm {
+  padding-top: 0.4rem;
   width: 85%;
   background-color: #fff;
   border-radius: .2rem;
-  font-size: 15px;
+  font-size: .28rem;
   -webkit-animation: zoomIn .15s ease forwards;
   animation: zoomIn .15s ease forwards;
   &.simple{
@@ -78,12 +79,11 @@
 }
 .confirm-bd {
   position: relative;
-  margin-top: .1rem;
+ padding: .3rem .8rem;
   text-align: center;
-  padding: 0 20px;
-  font-size: 14px;
-  color: #888;
-  line-height: 20px;
+  font-size: .28rem;
+  color: #666;
+  line-height: .5rem;
   word-break: break-all;
   &:after{
     content: '';
@@ -99,7 +99,9 @@
     -webkit-transform-origin: 0 0;
     transform-origin: 0 0;
   }
-  
+  .look-me{
+      color:#ff9900;
+  }
 }
 .confirm-bd-simple{
   position: relative;
@@ -112,7 +114,7 @@
 .confirm-ft {
   position: relative;
   line-height: 40px;
-  margin-top: 14px;
+  margin-top: .35rem;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -121,7 +123,9 @@
   padding-bottom: .3rem;
   padding-top: .1rem;
 }
-
+.confirm-ft > a.confirm-btn.default {
+    color: #fff;
+}
 .confirm-ft > a {
   position: relative;
   text-align: center;
@@ -130,25 +134,29 @@
   width: 2rem;
   height: .6rem;
   line-height: .6rem;
+  margin: 0 .2rem;
   background: #22beff;
   border-radius: .2rem;
   color:#fff;
+  &.cancel{
+      color:#666666 !important;
+      border:1px solid #ccc;
+      background: #fff;
+  }
 }
-confirm-ft > a.confirm-btn.default {
-    color: #fff;
-}
+
 .confirm-ft > a:not(:last-child):after {
-  content: '';
-  position: absolute;
-  z-index: 0;
-  top: 0;
-  right: 0;
-  height: 100%;
-  border-right: 1px solid #D9D9D9;
-  -webkit-transform: scaleX(0.5);
-  transform: scaleX(0.5);
-  -webkit-transform-origin: 100% 0;
-  transform-origin: 100% 0;
+//content: '';
+//position: absolute;
+//z-index: 0;
+//top: 0;
+//right: 0;
+//height: 100%;
+//border-right: 1px solid #D9D9D9;
+//-webkit-transform: scaleX(0.5);
+//transform: scaleX(0.5);
+//-webkit-transform-origin: 100% 0;
+//transform-origin: 100% 0;
 }
 .confirm-ft > a.confirm-btn.default {
   color: #fff;
