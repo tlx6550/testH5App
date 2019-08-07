@@ -1,33 +1,66 @@
-.rule-page{
-  .page-top{
-    width: 100%;
-    height: 5.19rem;
-    background: url(../img/top3.png);
-    background-size:100% 100%;
-  }
-  .page-content{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 15.54rem;
-    background: url(../img/content3.png);
-    background-size: 100% 100%;
-    padding-top: 0.2rem;
-    box-sizing: border-box;
-    .rule-tips{
-      width: 3.9rem;
-      height: 0.76rem;
-      margin-bottom: 0.5rem;
+.rule-page {
+    &.home-bg {
+        background-color: #08478f;
     }
-    ul{
-      width: 80%;
-      list-style: none;
-      font-size: 0.24rem;
-      color: #fff;
+    .page-top {
+        width: 100%;
+        height: 5.19rem;
+        background: url(../img/top3.png);
+        background-size: 100% 100%;
     }
-    li{
-      margin-top: 0.05rem;
+    .page-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: 3rem;
+        background: url(../img/content3.png);
+        background-size: 100% 100%;
+        padding-top: 0.2rem;
+        box-sizing: border-box;
+        .rule-tips {
+            width: 3.9rem;
+            height: 0.76rem;
+            margin-bottom: 0.5rem;
+        }
     }
-  }
+    .content-text {
+        background-color: #08478f;
+        ul {
+            position: relative;
+            top: -1.5rem;
+            width: 80%;
+            margin: 0 auto;
+            list-style: none;
+            font-size: 0.24rem;
+            color: #fff;
+        }
+        li {
+            margin-top: 0.05rem;
+        }
+        .look-me {
+            font-size: .3rem;
+            color: #ffff00;
+        }
+        .prize-introduce {
+            margin-top: .4rem;
+            border-collapse: collapse;
+            border: 1px solid #8cdeff;
+            text-align: center;
+            tr {
+                background-color: #043875;
+            }
+            td {
+                border: 1px solid #8cdeff;
+                padding: .3rem;
+            }
+            .head {
+                background-color: #0b59b0;
+                height: .55rem;
+            }
+            .lable {
+                width: 1.75rem;
+            }
+        }
+    }
 }
