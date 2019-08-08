@@ -457,6 +457,32 @@ import $ from '../../assets/js/jquery.min.js';
         })($dom);
         $body.append($dom);
     };
+    dialog.androidConfirm = function (callback) {
+        var ID = 'YDUI_CONFRIM';
+
+        $('#' + ID).remove();
+
+       
+       var $dom = $('' +
+            '<div class="mask-black-dialog simple" id="' + ID + '">' +
+            '   <div class="m-confirm android">' +
+            '       <div class="confirm-hd">' +
+            '<strong class="confirm-title simple"></strong></div>' +
+            '       <div class="confirm-bd-simple"></div>' +
+            '   </div>' +
+            '</div>');
+        // 禁止滚动屏幕【移动端】
+        ydui.util.pageScroll.lock();
+        (function ($dom) {
+            $dom.on('click', function (e) {
+                e.stopPropagation();
+                if(typeof callback === "function"){
+                    callback()
+                } 
+            });
+        })($dom);
+        $body.append($dom);
+    };
     dialog.downAppConfirm = function (callback) {
         var ID = 'YDUI_CONFRIM';
 
