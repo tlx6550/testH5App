@@ -1,7 +1,7 @@
 .home-bg {
     background-color: #133b87;
 }
-
+@pannelW:81.11%;
 @black1: #333;
 @black2: #999999;
 @raduis: .1rem;
@@ -109,7 +109,7 @@
         margin: .5rem auto;
         .pannel {
             position: relative;
-            width: 5.84rem;
+            width: @pannelW;
             height: 5.98rem;
             background: url(../img/2193-app-hebao-pannel-2.png)no-repeat;
             background-size: 100% 100%;
@@ -190,7 +190,7 @@
                 display: flex;
                 align-items: center;
                 position: relative;
-                width: 5.54rem;
+                width: @pannelW;
                 height: 1.08rem;
                 background: url(../img/2193-phone-bg.png)no-repeat;
                 background-size: 100% 100%;
@@ -212,7 +212,7 @@
         }
         .pannel {
             position: relative;
-            width: 5.54rem;
+            width: @pannelW;
             height: 1.08rem;
             background: url(../img/2193-phone-input-bg.png)no-repeat;
             background-size: 100% 100%;
@@ -238,10 +238,9 @@
             }
         }
         .notice-tip {
-            position: relative;
+            width: 81.11%;
+            margin:0 auto;
             margin-top: .2rem;
-            left: 50%;
-            transform: translateX(-38%);
             font-size: .24rem;
             .title {
                 color: #f4e001;
@@ -256,7 +255,7 @@
         //       margin-top: -0.6rem;
         .pannel {
             position: relative;
-            width: 5.84rem;
+            width: @pannelW;
             height: 5.14rem;
             font-size: 0;
             background: url(../img/2193-app-down-pannel.png)no-repeat;
@@ -333,7 +332,7 @@
         }
         .pannel {
             position: relative;
-            width: 5.84rem;
+            width: @pannelW;
             height: 5.98rem;
             font-size: 0;
             background: url(../img/2193-app-hebao-pannel.png)no-repeat;
@@ -367,7 +366,7 @@
             background-size: 100% 100%;
         }
         .pannle {
-            width: 5.84rem;
+            width: @pannelW;
             height: 8.38rem;
             font-size: 0;
             background: url(../img/2193-home-liucheng.png)no-repeat;
@@ -377,7 +376,7 @@
     }
     .rule-wrap {
         position: relative;
-        width: 5.84rem;
+        width: @pannelW;
         margin: .5rem auto;
         margin-top: 1rem;
         color: #fff;
@@ -386,7 +385,7 @@
             left: 50%;
             top: -0.5rem;
             transform: translateX(-50%);
-            width: 5.58rem;
+            width: @pannelW;
             height: 1.13rem;
             font-size: 0.28rem;
             text-align: center;

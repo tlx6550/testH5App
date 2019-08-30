@@ -32,6 +32,7 @@
 		} else if(clientW<320){
 			clientW=320;
 		}
+		
 		docEle.style.fontSize = clientW / ratio + "px";
         window.FONTSIZE =  clientW / ratio
 	};
