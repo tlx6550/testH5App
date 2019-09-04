@@ -50,10 +50,55 @@ import '../components/dialog/dialog.js';
 //	dialog.shareConfirm(function() {
 //		$('#YDUI_CONFRIM').remove();
 //	});
+//	dialog.stepConfirm(function() {
+//	$('#YDUI_CONFRIM').remove();
+//	});
+	
+	     dialog.stepConfirm('温馨提示', '', [
+	         {
+	             txt: '确定',
+	             color: false, 
+	             callback: function () {
+	                 dialog.toast('你点了取消', 'none', 1000);
+	             }
+	         }
+	    
+	     ]);
+
 	// dialog.androidConfirm(function () {
 	//      $('#YDUI_CONFRIM').remove();
 	//  });
+       
+	     function getCode(){
+	     	dialog.getCode('', [
+	         {
+	             txt: '验证',
+	             color: false, 
+	             stay:true,
+	             callback: function () {
+	                 dialog.toast('你点了验证', 'none', 1000);
+	             }
+	         }
+	    
+	     ]);
+	     
+	     var $getCode = $('#J_GetCode');
+		/* 定义参数 */
 
+		$getCode.sendCode({
+			disClass: 'btn-disabled',
+			secs: 60,
+			run: false,
+			runStr: '{%s}秒后重新获取',
+			resetStr: '重新获取验证码'
+		});
+		$getCode.on('click', function() {
+			dialog.toast('获取验证码', 'none', 1000);
+			$getCode.sendCode('start')
+		});
+	     
+	     }
+	     //getCode()
 	//收货地址
 	! function initAddress() {
 		var $address = $('#J_Address');
@@ -96,6 +141,11 @@ import '../components/dialog/dialog.js';
 	}
 }(window);
 
+  try{
+  	
+  }catch(e){
+  	//TODO handle the exception
+  }
 //var obj = {
 //	code: xxxxxx,
 //	msg: '错误提示/或者成功提示/文案提示',

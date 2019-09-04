@@ -59,7 +59,7 @@
             color: #333333;
         }
     }
-    &.down-app-confirm{
+    &.down-app-confirm {
         background: url(../../img/downAppConfirm-pop-bg.png)no-repeat;
         background-size: 100% 100%;
         width: 100%;
@@ -93,6 +93,118 @@
         height: 4.19rem;
     }
 }
+.m-confirm.setp-m-confirm{
+    height: 6rem;
+}
+.confirm-bd.m-step-confirm-bd {
+    margin-left:1.2rem;
+    margin-top: 0.7rem;
+    background: url(../../img/step-show-pop-bg.png)no-repeat;
+    background-size: 100% 100%;
+    width: 4.32rem;
+    height: 1.89rem;
+}
+
+.get-phone-confirm {
+    position: relative;
+    .close-icon {
+        position: absolute;
+        right: .38rem;
+        top: .38rem;
+        font-size: 0;
+        background: url(../../img/close-false.png)no-repeat;
+        background-size: 100% 100%;
+        width: .38rem;
+        height: .38rem;
+    }
+    .login-by-num-wrap .el-input {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -moz-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        margin-bottom: .2rem;
+        width: 100%;
+    }
+    .login-by-num-wrap .btn {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 auto;
+        -ms-flex: 0 0 auto;
+        flex: 0 0 auto;
+        width: 2.2rem;
+    }
+    .btn {
+        padding: 0;
+    }
+    .el-input .el-input-inner {
+        -webkit-appearance: none;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #dcdfe6;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        color: #606266;
+        display: block;
+        font-size: inherit;
+        height: .68rem;
+        line-height: .68rem;
+        outline: none;
+        padding: 0 .1rem;
+        border-radius: .1rem;
+        -webkit-transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+        -o-transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+        transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+        width: 100%;
+        margin-right: .18rem
+    }
+    .confirm-bd {
+        margin-top: 1rem;
+        padding: 0 1rem;
+        text-align: left;
+        .login-by-num-wrap .el-input .code-input {
+            width: 2.6rem;
+        }
+    }
+    .phone-title {
+        color: #333;
+        font-weight: bold;
+    }
+    .phone-num {
+        font-size: .4rem;
+    }
+    .goto-detail {
+        display: block;
+        padding: .25rem 0;
+        border-bottom: 1px dashed #cccccc;
+        color: #23beff;
+    }
+    //.confirm-ft{
+    //  position: static;
+    //  padding: .2rem 0.3rem 0 .3rem;
+    //  flex-direction: column;
+    //  a.default{
+    //    flex: 1;
+    //    margin:0 0 .2rem 0;
+    //    width: 100%;
+    //    background: #23beff;
+    //  }
+    //  a.reject-cancel-btn{
+    //    background: none;
+    //    color:#828282 !important;
+    //  }
+    //  a.has-get-btn {
+    //    background: none;
+    //    color:#ff8102 !important;
+    //    border:1px solid #cacaca;
+    //  }
+    //}
+}
 
 .m-alert {
     -webkit-animation: zoomIn .15s ease forwards;
@@ -125,7 +237,7 @@
 }
 
 .confirm-bd {
-   position: relative;
+    position: relative;
     text-align: left;
     padding: 0 1.2rem;
     padding-top: 0.7rem;
