@@ -54,16 +54,16 @@ import '../components/dialog/dialog.js';
 //	$('#YDUI_CONFRIM').remove();
 //	});
 	
-	     dialog.stepConfirm('温馨提示', '', [
-	         {
-	             txt: '确定',
-	             color: false, 
-	             callback: function () {
-	                 dialog.toast('你点了取消', 'none', 1000);
-	             }
-	         }
-	    
-	     ]);
+//	     dialog.stepConfirm('温馨提示', '', [
+//	         {
+//	             txt: '确定',
+//	             color: false, 
+//	             callback: function () {
+//	                 dialog.toast('你点了取消', 'none', 1000);
+//	             }
+//	         }
+//	    
+//	     ]);
 
 	// dialog.androidConfirm(function () {
 	//      $('#YDUI_CONFRIM').remove();
@@ -77,6 +77,11 @@ import '../components/dialog/dialog.js';
 	             stay:true,
 	             callback: function () {
 	                 dialog.toast('你点了验证', 'none', 1000);
+	                 $(".el-input-inner").blur();
+	                 window.YDUI.util.pageScroll.unlock();
+	                 setTimeout(function(){
+	                 	$('#YDUI_CONFRIM').remove()
+	                 },1500)
 	             }
 	         }
 	    
@@ -96,9 +101,9 @@ import '../components/dialog/dialog.js';
 			dialog.toast('获取验证码', 'none', 1000);
 			$getCode.sendCode('start')
 		});
-	     
+	      $(".el-input-inner").focus();
 	     }
-	     //getCode()
+	     getCode()
 	//收货地址
 	! function initAddress() {
 		var $address = $('#J_Address');
