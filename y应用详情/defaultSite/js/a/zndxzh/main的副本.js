@@ -1,15 +1,9 @@
 // var baseUrl = 'http://221.179.8.170:8080/s.do';
 //var baseUrlApi = 'http://221.179.8.170:8080'; //准现网查询接口
 //var baseUrlApi = 'http://211.139.191.144:12634'; //测试网查询接口
-var vConsole = new VConsole();
-var baseUrlApi = 'http://localhost:3000'; //测试网查询接口
-mm.set('downloadmm', 0)
-mm.init({
-			showtitle:false
-		});
+//var vConsole = new VConsole();
+var baseUrlApi = ''; //测试网查询接口
 
-//var channelid = "5410093632";
-//mm.set('channelid',channelid);
 var interfaceUrl = '/s.do';
 var request = axios.create({
 	baseURL: baseUrlApi,
@@ -19,38 +13,206 @@ var userAgentFun = window.YDUI.util.userAgent;
 var userAgent = userAgentFun();
 var storage = window.localStorage;
 var gloabMobile;
+var GOODSID = $('#goodsid').text()
 /* 普通确认框 */
 
 var dialog = window.YDUI.dialog; // 访问分享页/外投页
-
+var slider = "";
+var block = "";
+var fillColor = "";
+var luckNum = "0";
 function MMAppSharePage(options) {
+	this.goodsid = GOODSID
 	this.mobile = '';
 	this.channelId = 5410527503;
 	this.queryFreePlan = 'queryFreePlan';
 	this.subscribeFreePlan = 'subscribeFreePlan'; //订购接口
-	this.channel = 'C10000010527';//分配的渠道号
-	this.authentInterFaceUrl = 'http://localhost:3000'; //授权测试
+
+	this.channel = 'C10000010527'; //分配的渠道号
+
+	this.authentInterFaceUrl = ''; //授权测试
 
 	this.AllFreeFlag = 'AllFreeFlag'; // 业务开关
 
-	this.send_code = 'send_code', //验证码
-		// 获取免流业务开关状态
-		this.initState = function() {
-			var that = this;
-			var state = false;
-			var dfd = $.Deferred();
-			request.get(interfaceUrl, {
-				params: {
-					requestid: that.AllFreeFlag
-				}
-			}).then(function(res) {
-				//console.log(res.data.flag)
-				state = res.data.flag;
-				dfd.resolve(state);
-			});
-			return dfd;
-		}; //  this.authentInterFaceUrl = 'http://221.179.8.170:8080' //授权测试准现网
+	this.send_code = 'allfreeSend_code'; //验证码
+	// 获取免流业务开关状态
+
+	this.initState = function() {
+		var that = this;
+		var state = false;
+		var dfd = $.Deferred();
+		//2019-9-27 需求变更 免流业务下线
+//		request.get(interfaceUrl, {
+//			params: {
+//				requestid: that.AllFreeFlag
+//			}
+//		}).then(function(res) {
+//			//console.log(res.data.flag)
+//			state = res.data.flag;
+//			dfd.resolve(state);
+//		});
+		setTimeout(function(){
+			dfd.resolve(false)
+		},20)
+		return dfd;
+	}; //  this.authentInterFaceUrl = 'http://221.179.8.170:8080' //授权测试准现网
+
 }
+function emitResult(x) {
+        console.log("x坐标是：" + x);
+        var val = $('.tel-input').val();
+            $.post("/s.do?requestid=allfree_huakuai&ordinate_x="+x+"&msisdn="+val, function(data, status) {
+                if(status == "success") {
+                    console.log(data);
+                    var hret = Trim(data);
+                    if(hret == "true") {
+                        $(".fill-color").css("background-color", "#d2e9fe");
+                        $(".slider").css("background-image", "url(/defaultSite/images/a/320x480/onenewmembersystem/icon-check-success.png)");
+                        /* ajax 成功发送验证码后调用【start】 */
+                            YDUI.dialog.loading.open('发送中');
+                            setTimeout(function () {
+                                YDUI.dialog.loading.close();
+                                $('#J_GetCode').sendCode('start');
+                                YDUI.dialog.toast('已发送', 'success', 500);
+                                $(".slide-container").hide();  
+                                resetSlide();
+                            }, 200);   
+
+                        }else{
+                        $(".fill-color").css("background-color", '#fbe0e1');
+                        $(".fill-color").css("border-color", "#fd3939");
+                        $(".slider").css("background-image", "url(/defaultSite/images/a/320x480/onenewmembersystem/icon-check-error.png)");
+                        setTimeout(function(){
+                            refreshIcon();
+                        },2000);
+                    }
+                }
+            });
+        luckNum = parseInt(luckNum)+1;
+    }
+    /*$(".refreshIcon").click(function() {
+      refreshIcon();
+    });*/
+
+    // 弹窗关闭
+    $('.icon-back').click(function() {
+      $('.slide-container').hide();
+    });
+
+        function resetSlideImg(slideImg,blockImg,initBlockPosi){
+        var initImgWidth = 574;
+        var slideBgWidth = $(".slide-bg").width();
+        var radioImg = slideBgWidth / initImgWidth;
+        $(".slide-bg").attr("src", slideImg);
+        $(".slide-block").attr("src", blockImg);
+        $(".slide-block").css("top", initBlockPosi[1] * radioImg);
+    }
+    function Trim(str){ 
+         return str.replace(/(^\s*)|(\s*$)/g, ""); 
+    }
+    function moveBlock(initBlockPosi, slideImg, blockImg) {
+      var initImgWidth = 574;
+      $(".slide-container").show();
+      var slideWidth = $(".slider").width();
+      var slideBarWidth = $(".sliderContainer").width();
+      var canMoveWidth = slideBarWidth - slideWidth / 2;
+
+      var slideBgWidth = $(".slide-bg").width();
+      var blockImgWidth = $(".slide-block").width();
+      var canMoveWidth2 = slideBarWidth - blockImgWidth;
+      var radioMov = canMoveWidth2 / canMoveWidth;
+
+      slider = $(".slider")[0];
+      block = $(".slide-block")[0];
+      fillColor = $('.fill-color')[0];
+
+      //原始图片与页面图片的比例
+      var radioImg = slideBgWidth / initImgWidth;
+      $(".slide-bg").attr("src", slideImg);
+      $(".slide-block").attr("src", blockImg);
+      $(".slide-block").css("top", initBlockPosi[1] * radioImg);
+
+      var originX, originY, startTime, isTouchStart = false
+
+      slider.addEventListener('touchstart', function(e) {
+        originX = e.targetTouches[0].pageX, originY = e.targetTouches[0].pageY;
+        startTime = e.timeStamp;
+
+        var posi = parseFloat($(".slide-block").css("left")) / radioImg;
+        console.log('开始拖动:');
+        console.log("X坐标:" + posi);
+        $(".slide-loading").hide();
+        isTouchStart = true
+      })
+
+      document.addEventListener('touchmove', function(e) {
+        if(!isTouchStart) return false
+        const moveX = e.targetTouches[0].pageX - originX
+        const moveY = e.targetTouches[0].pageY - originY
+        if(moveX < 0 || moveX > canMoveWidth) return false
+        slider.style.left = moveX + 'px'
+        fillColor.style.width = moveX + 'px'
+        block.style.left = moveX * radioMov + 'px'
+      })
+
+      document.addEventListener('touchend', function(e) {
+        if(isTouchStart) {
+          const endX = e.changedTouches[0].clientX;
+          const timeStamp = ((e.timeStamp - startTime) / 1000).toFixed(2);
+          var posi = parseFloat($(".slide-block").css("left")) / radioImg
+          console.log('')
+          console.log('拖动结束:');
+          console.log("X坐标:" + posi);
+          console.log("时间:" + timeStamp + "秒");
+          emitResult(parseInt(posi));
+        }
+        isTouchStart = false;
+      })
+    }
+    /*请求验证码*/
+    function qqyzm(){
+    	console.log(444444);
+        var val = $('.tel-input').val();
+        $.post("/s.do?requestid=member_Jigsaw_Component&msisdn="+val,function(data,status){
+            if(status=="success"){
+                var datas = data.split('|');
+                console.log(datas);
+                var initBlockPosi = [0, datas[0]];//坐标
+                var slideImg = "data:img/png;base64,"+datas[1];//背景图
+                var blockImg = "data:img/png;base64,"+datas[2];//滑块图
+                if (luckNum=="0") {
+                    moveBlock(initBlockPosi, slideImg, blockImg);
+                }else{
+                    resetSlideImg(slideImg, blockImg,initBlockPosi);
+                    $(".slide-container").show();
+                }
+            }
+        });
+    }
+    /*刷新验证码*/
+    function refreshIcon(){
+        var val = $('.tel-input').val();
+        $.post("/s.do?requestid=member_Jigsaw_Component&msisdn="+val,function(data,status){
+            if(status=="success"){
+                var datas = data.split('|');
+                var initBlockPosi = [0, datas[0]];//坐标
+                var slideImg = "data:img/png;base64,"+datas[1];//背景图
+                var blockImg = "data:img/png;base64,"+datas[2];//滑块图
+                resetSlideImg(slideImg, blockImg,initBlockPosi);
+                resetSlide();
+            }
+        });
+    }
+    //重置滑块
+    function resetSlide() {
+        $(".fill-color").css("background-color", '#d2e9fe');
+        $(".fill-color").css("border-color", "#0073e7");
+        $(".fill-color").css("width", "0");
+        $(".slider").css("background-image", "");
+        $(".slider").css("left", "0");
+        $(".slide-block").css("left", "0");
+        $(".slide-loading").show();
+    }
 
 MMAppSharePage.prototype = {
 	//业务下线-状态1  不提示免流
@@ -92,7 +254,7 @@ MMAppSharePage.prototype = {
 					break;
 
 				case 1:
-					//已办理
+					//已办理且有余量
 					if(isLeft) {
 						that.onLineBusiness();
 					}
@@ -130,12 +292,15 @@ MMAppSharePage.prototype = {
 		dialog.loading.open('加载中...');
 		var that = this;
 		var dfd = $.Deferred();
-		var preSign = YDRZ.getSign("000185", "1.2");
+		var preSign = YDRZ.getSign("300011879751", "1.2");
 		var sign = null;
 		var RSAstartTime = Date.parse(new Date()); //获取当前时间
-
+		setTimeout(function(){
+			dialog.loading.close();
+		},1000 * 5)
 		$.ajax({
 			type: "GET",
+			timeout:5000,
 			url: that.authentInterFaceUrl + "/s.do?requestid=getRSASign&sign=" + preSign,
 			success: function success(data) {
 				if(null != data) {
@@ -155,15 +320,15 @@ MMAppSharePage.prototype = {
 								//请求的参数
 								version: '1.2',
 								//接口版本号 （必填）
-								appId: '000185',
+								appId: '300011879751',
 								//应用Id （必填）
 								sign: sign,
 								//RSA加密后的sign（必填）
 								openType: '1',
 								//移动取号接口填写1,三网取号接口填写0 （必填，联调时必须填写为1）
-								expandParams: 'phoneNum=15112395842',
+								expandParams: '',
 								//扩展参数  格式：参数名=值  多个时使用 | 分割（选填，联调环境只能模拟取号，联调时需填写phoneNum=188185*****手机号可以随便填写，生产可不填）
-								isTest: '0' //是否启用测试线地址（传0时为启用不为0或者不传时为不启用）
+								isTest: '' //是否启用测试线地址（传0时为启用不为0或者不传时为不启用）
 
 							},
 							success: function success(res) {
@@ -172,8 +337,9 @@ MMAppSharePage.prototype = {
 
 								var tokenTime = parseInt(TokenendTime) - parseInt(TokenstartTime);
 								console.log("tokenTime " + tokenTime);
-								var resCode = 00000;
-								if(resCode == res.code) {
+								var resCode = '000000';
+
+								if(resCode === res.code) {
 									var tokenJson = {};
 									tokenJson.token = res.token;
 									tokenJson.userInformation = res.userInformation;
@@ -182,7 +348,8 @@ MMAppSharePage.prototype = {
 									$.ajax({
 										dataType: "json",
 										method: "POST",
-										url: that.authentInterFaceUrl + "/s.do?requestid=getAuthent",
+										timeout:5000,
+										url: that.authentInterFaceUrl + "/s.do?requestid=getAuthent&RequestID=allfree_index_v1",
 										data: tokenJson,
 										success: function success(data) {
 											dialog.loading.close();
@@ -190,7 +357,8 @@ MMAppSharePage.prototype = {
 
 											var datas = JSON.stringify(data);
 											var jsonObj = eval('(' + datas + ')');
-											console.log('取号结果=' + data);
+											console.log('取号结果=');
+											console.log(data);
 											dfd.resolve(jsonObj);
 										}
 									});
@@ -236,12 +404,7 @@ mmApp.initState().then(function(getState) {
 			//取号失败
 			mmApp.onLineBusiness();
 			console.log(e);
-		} //		var mobile = 15112395842
-		//		setTimeout(function() {
-		//			gloabMobile = 13417586550;
-		//			mmApp.getOrderByUserInfo(gloabMobile)
-		//		}, 300)
-
+		}
 	} else {
 		// 下线
 		mmApp.offBusiness();
@@ -255,6 +418,9 @@ function onClickDonwLoad() {
 onClickDonwLoad.prototype = mmApp;
 onClickDonwLoad.prototype.constructor = onClickDonwLoad;
 onClickDonwLoad.prototype = {
+	//	initState:function(){
+	//		 MMAppSharePage.prototype.initState.apply(this, arguments);
+	//	},
 	getOrderByUserInfo: function getOrderByUserInfo() {
 		var that = this;
 		request.get(interfaceUrl, {
@@ -279,9 +445,6 @@ onClickDonwLoad.prototype = {
 
 				case 1:
 					//已办理
-					//					if(isLeft) {
-					//						that.mainDownProgress()
-					//					}
 					that.mainDownProgress();
 					console.log('state=' + state);
 					break;
@@ -327,60 +490,26 @@ onClickDonwLoad.prototype = {
 		}
 	},
 	h5CallApp: function h5CallApp() {
-		var that = this; //		
-		//window.location.href='mm://downloadmanager?contentids='
-		// https://github.com/suanmei/callapp-lib
-//mm.batchDownload("/300002784578/300002457498")
-	//mm.download(mmDowloadArguments.a,mmDowloadArguments.b, mmDowloadArguments.c);
-//<iframe src="sinaweibo://qrcode">
-//var id = mmDowloadArguments.a
-//var $iframe = $('' +
-//          '<iframe style="display:none;" src="mm://downloadmanager?contentids=">');
-//var $body = $(window.document.body);
-// $body.append($iframe);
-//mm.batchDownload('300011857013');
-//mm.error(function() {
-//			var ar = errorArguments.a;
-//			var br = errorArguments.b; //	      window.location.href = baseUrlApi + "/s.do?requestid=jump302&cid="+ar+"&channelid="+br;
-//			console.log('进入error事件')
-//			console.log(mm)
-//			window.location.href = 'http://221.179.8.170:8080' + "/s.do?requestid=jump302&cid=" + ar + "&channelid=" + br;
-//			setTimeout(function() {
-//				that.popInstallImmediately();
-//			}, 300);
-//		});
+		var that = this; // https://github.com/suanmei/callapp-lib
 		var option = {
 			scheme: {
 				protocol: 'mm'
 			},
 			timeout: 3000
-		}; //	   mm.download(mmDowloadArguments.a,mmDowloadArguments.b, mmDowloadArguments.c);
-
+		};
+		var goodsid = that.goodsid
+		var lib = new CallApp(option)
+		var downloadUri = 'http://odp.mmarket.com/t.do?requestid=app_order&goodsid='+goodsid+'&payMode=1'
+		var encodeURI = encodeURIComponent(downloadUri)
+		var mmPath = 'downloadmanager?url='+encodeURI
 		var lib = new CallApp(option);
-		var contentId = mmDowloadArguments.a
-		var downloadUri = 'http://odp.mmarket.com/t.do?requestid=app_order&goodsid=999100007101377100001804714300002575008&payMode=1'
-		var  ddd = encodeURIComponent(downloadUri)
-		var download2 = 'mm://downloadmanager?url='+ddd
-		var  path = 'downloadmanager?url='+ddd
-//var $iframe = $('' +
-//          '<iframe style="display:none;" src="'+download2+'">');
-//var $body = $(window.document.body);
-// $body.append($iframe);
-		try {
-			lib.open({
-				path: path,
-				//唤起mm 首页
-				callback: function () {
-					that.downLoadLocalApp();
-				}
-			});
-		} catch(e) {
-			console.log(e);
-		}
-//setTimeout(function(){
-//	that.downLoadLocalApp();
-//},3000)
-		//that.downLoadLocalApp();
+		lib.open({
+			path: mmPath,
+			//通过mmscheme 唤起下载（mm进程被杀掉也可以）
+			callback: function callback() {
+				that.downLoadLocalApp();
+			}
+		});
 	},
 	popOnlyOnWeb: function popOnlyOnWeb() {
 		dialog.guide1Confirm('选择“在浏览器打开”', [{
@@ -390,7 +519,7 @@ onClickDonwLoad.prototype = {
 		}]);
 	},
 	popOnlyOnAndroid: function popOnlyOnAndroid() {
-		dialog.guide2Confirm('选择“在浏览器打开”后开始下载', [{
+		dialog.guide2Confirm('选择“在浏览器打开”', [{
 			txt: '我知道了',
 			color: false,
 			callback: function callback() {}
@@ -398,7 +527,7 @@ onClickDonwLoad.prototype = {
 	},
 	popInstallImmediately: function popInstallImmediately() {
 		var that = this;
-		dialog.guide3Confirm('抱歉，订购失败', '安装MM应用商场客户端，可以获得更丰富的内容，更高速、更稳定的下载服务。', [{
+		dialog.guide3Confirm('抱歉，订购失败', '安装MM应用商场，可以获得更丰富的内容，更高速、更稳定的下载服务。', [{
 			txt: '关闭',
 			color: false,
 			callback: function callback() {}
@@ -419,23 +548,22 @@ onClickDonwLoad.prototype = {
 		})
 	},
 	downLoadMMApp: function downLoadMMApp() {
-		window.location.href = 'http://ota.fr18.mmarket.com:38080/rs/res1/mmclient/MM_online_channel_5210527624.apk';
+		console.log("渠道号为:"+channel);
+		if(!channel){
+			window.location.href = 'http://ota.fr18.mmarket.com:38080/rs/res1/mmclient/MM_online_channel_5410203518.apk'
+		}else{
+			window.location.href = 'http://ota.fr18.mmarket.com:38080/rs/res1/mmclient/MM_online_channel_'+channel+'.apk'
+		}
 	},
 	//下载本页应用
 	downLoadLocalApp: function downLoadLocalApp() {
 		var that = this;
-		mm.download(300002784578)
-		//mm.download(mmDowloadArguments.a, mmDowloadArguments.b, mmDowloadArguments.c);
-		mm.error(function() {
-			var ar = errorArguments.a;
-			var br = errorArguments.b; //	      window.location.href = baseUrlApi + "/s.do?requestid=jump302&cid="+ar+"&channelid="+br;
-			console.log('进入error事件')
-			console.log(mm)
-			window.location.href = 'http://221.179.8.170:8080' + "/s.do?requestid=jump302&cid=" + ar + "&channelid=" + br;
-			setTimeout(function() {
+		var ar = errorArguments.a;
+		var br = errorArguments.b;
+		window.location.href = baseUrlApi + "/s.do?requestid=jump302&cid=" + ar + "&channelid=" + br;
+		setTimeout(function() {
 				that.popInstallImmediately();
-			}, 300);
-		});
+		}, 100);
 	},
 	//请求订购状态
 	getOrderState: function getOrderState() {
@@ -464,9 +592,10 @@ onClickDonwLoad.prototype = {
 		var moblie;
 		var code;
 		var $getBtn;
+		var ruleLink = baseUrlApi + '/s.do?requestid=zndxzh_rule';
 		var obj = {
 			title: '温馨提示',
-			mes: '0元5GB/月定向流量，任性下应用！现在免费领取0元套餐，获得连续6个月每月5G定向流量，到期自动取消。'
+			mes: '0元5GB/月定向流量，任性下应用！现在免费领取0元套餐，获得连续6个月每月5G定向流量，到期自动取消。<br><a href="' + ruleLink + '" class="goto-detail">查看详细活动说明></a>'
 		};
 		dialog.loginConfirm(obj, [{
 			txt: '免费领取',
@@ -554,9 +683,9 @@ onClickDonwLoad.prototype = {
 			checkCode = that.checkCode(code);
 		}); // 获取验证码逻辑
 
-		var $getCode = $('#J_GetCode');
+		
 		/* 定义参数 */
-
+		var $getCode = $('#J_GetCode');
 		$getCode.sendCode({
 			disClass: 'btn-disabled',
 			secs: 60,
@@ -573,10 +702,11 @@ onClickDonwLoad.prototype = {
 	popState1_2: function popState1_2() {
 		var that = this;
 		var phone = that.plusXing(gloabMobile, 3, 4, '*');
+		var ruleLink = baseUrlApi + '/s.do?requestid=zndxzh_rule';
 		var obj = {
 			title: '温馨提示',
 			phoneNum: phone,
-			mes: '0元5GB/月定向流量，任性下应用！现在免费领取0元套餐，获得连续6个月每月5G定向流量，到期自动取消。<br><a href="www.baidu.com" class="goto-detail">查看详细活动说明></a>'
+			mes: '0元5GB/月定向流量，任性下应用！现在免费领取0元套餐，获得连续6个月每月5G定向流量，到期自动取消。<br><a href="' + ruleLink + '" class="goto-detail">查看详细活动说明></a>'
 		};
 		dialog.getPhoneConfirm(obj, [{
 			txt: '免费领取',
@@ -788,19 +918,9 @@ onClickDonwLoad.prototype = {
 	getRandomCode: function getRandomCode(phone, $getCode) {
 		var that = this;
 		var tag = that.checkMobile(phone);
-
 		if(tag) {
-			YDUI.dialog.loading.open('发送中');
-			$.ajax({
-				type: "GET",
-				async: false,
-				url: baseUrlApi + "/s.do?requestid=send_code&msisdn=" + phone,
-				success: function success(data) {
-					YDUI.dialog.loading.close();
-					$getCode.sendCode('start');
-					YDUI.dialog.toast('已发送', 'success', 500);
-				}
-			});
+			qqyzm();
+			/**/
 		}
 	},
 	//end fun
@@ -849,6 +969,7 @@ onClickDonwLoad.prototype = {
 	 ** cha 替换的字符串
 	 */
 	plusXing: function plusXing(num, frontLen, endLen, cha) {
+		var num = num || "";
 		var str = num.toString();
 		var len = str.length - frontLen - endLen;
 		var xing = '';

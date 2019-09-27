@@ -1,6 +1,7 @@
 // var baseUrl = 'http://221.179.8.170:8080/s.do';
 //var baseUrlApi = 'http://221.179.8.170:8080'; //准现网查询接口
 //var baseUrlApi = 'http://211.139.191.144:12634'; //测试网查询接口
+//http://221.179.8.170:8080/s.do?requestid=zndxzh&channelid=5410453499&cid=300002575008&gid=300002575008
 var vConsole = new VConsole();
 //var Promise = window.Promise;
 var baseUrlApi = 'http://localhost:3000'; //测试网查询接口
