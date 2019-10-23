@@ -118,3 +118,17 @@
   height: 100%;
   background-image: linear-gradient(to right, @color 50%, transparent 50%);
 }
+// flex布局
+.flex(@justify-content: center, @align-items: center) {
+  display: flex;
+  justify-content: @justify-content;
+  align-items: @align-items;
+}
+
+// 默认按照父元素的剧中
+.positionCenter(@position: absolute) {
+  position: @position;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
