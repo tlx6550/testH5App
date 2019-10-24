@@ -1,3 +1,4 @@
+import $ from './jquery.min.js';
 (function(win, designW) {
 	var doc = win.document;
 	var docEle = doc.documentElement;
@@ -33,6 +34,7 @@
 			clientW=320;
 		}
 		docEle.style.fontSize = clientW / ratio + "px";
-        window.FONTSIZE =  clientW / ratio
+		window.FONTSIZE =  clientW / ratio
+		$('html').attr("fs",window.FONTSIZE)
 	};
 })(window,1080);//750为设计稿宽度px值,根据实际设计稿大小对应设置
