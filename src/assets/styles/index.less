@@ -1,7 +1,13 @@
 @import "./home.less";
+@gray:#f2f2f2;
 .home-bg{
+  margin:0;
   background:rgba(12,47,175,1);
   padding:0 .32rem;
+  &.more{
+    background: @gray;
+    padding:0;
+  }
 }
 .linear{
   &::before{
@@ -27,15 +33,38 @@
     
   }
 }
+@keyframes bounceIn{
+  from, 50%, 100% {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+  0%{
+    opacity: 0;
+  }
+  50%{
+    opacity: 0.5;
+  }
+  100%{
+    opacity: 1.0;
+  }
+}
+.top-video{
+  // object-fit:fill;
+  -webkit-appearance: none;
+}
 .card-list-wrap{
   .card-item{
     position: relative;
     width:100%;
     &.vedio{
       border-radius:0;
-      background-color: aqua;
+      background-color: #0c2faf;
       margin:0 auto;
       height:5.71rem;
+    }
+    &.vedio-animate{
+      transition:all 1s;
+      animation:bounceIn .6s;
     }
     margin-top: .49rem;
     background-color: #051E77;
@@ -54,8 +83,17 @@
   padding:.49rem .34rem .83rem .34rem;
   background-color: #051E77;
   border-radius:.23rem;
-  
   box-shadow:inset 0px 0.4rem .3rem -0.4rem #fff;
+  &.more{
+    box-shadow:none;
+    background: @gray;
+    margin-top: 0;
+    padding: 0 .65rem;
+    padding-top: 0;
+    &::after{
+      display: none;
+    }
+  }
   .header{
     .flex();
     justify-content: space-between;
@@ -73,6 +111,7 @@
     font-size: .51rem;
     color:#fff;
     .more{
+      display: block;
       font-size: .36rem;
     }
     .arrow{
@@ -165,6 +204,10 @@
     background-color: #fff;
     .inner-wrap{
       padding-top: .2rem;
+    }
+    .ifram{
+      overflow: hidden;
+      
     }
   }
 }

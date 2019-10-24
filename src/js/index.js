@@ -12,12 +12,21 @@ import '../components/dialog/dialog.js';
 import '../js/mmapp.js'; */
 
 window.onload = function(){
-    !function initIfram() {
-        var hobj = $('.ifram').data()
-        var fs = $('html').attr("fs")
-        $('.ifram').css('height',hobj.h*fs +'px')
-     }();
-}
+    !function init() {
+        var hobj = $('.ifram').data();
+        var video = $('.top-video').data();
+        try {
+            var fs = $('html').attr('fs');
+            $('.top-video').css('height',video.h*fs +'px');
+            $('.top-video').css('width',video.w*fs +'px');
+            $('.ifram').css('height',hobj.h*fs +'px');
+        } catch (error) {
+            
+        }
+       
+       
+    }();
+};
 
 
 

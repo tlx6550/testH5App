@@ -71,8 +71,7 @@ const config = {
     // 左边是chuncks名称，右边是入口地址
     entry: {
         'index': './js/index.js',
-        'myPrize': './js/myPrize.js',
-        'rules': './js/rules.js',
+        'more': './js/index.js',
     },
     output: {
         filename: isDev ? '[name].js' : '[name].js',
@@ -196,16 +195,10 @@ const config = {
             filename: 'index.html'
         }),
        new HtmlWebpackPlugin({
-            chunks: ['myPrize'],
-            template: './myPrize.html',
-            filename: 'myPrize.html'
+            chunks: ['more'],
+            template: './more.html',
+            filename: 'more.html'
         }
-        ),
-        new HtmlWebpackPlugin({
-                chunks: ['rules'],
-                template: './rules.html',
-                filename: 'rules.html'
-            }
         ),
         new LodashModuleReplacementPlugin,
         new CopyWebpackPlugin([
