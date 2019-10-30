@@ -26,6 +26,17 @@ window.onload = function(){
        
        
     }();
+    !function gotoDeatail(){
+    	$('.card-item').click(function(e){
+    		e.stopPropagation()
+    		var noTarget = $(e.target)
+    		var tag = noTarget.hasClass('js-label')
+    		if(!tag){
+    			var url = $(this).data('url')
+    			window.location.href = url
+    		}
+    	})
+    }()
 };
 
 
