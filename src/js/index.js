@@ -27,16 +27,26 @@ window.onload = function(){
        
     }();
     !function gotoDeatail(){
-    	$('.card-item').click(function(e){
-    		e.stopPropagation()
-    		var noTarget = $(e.target)
-    		var tag = noTarget.hasClass('js-label')
-    		if(!tag){
-    			var url = $(this).data('url')
-    			window.location.href = url
+    	$('.linear').click(function(e){
+    		e.stopPropagation();
+    		e.preventDefault();
+    		var noTarget = $(e.target);
+    		var tagA = noTarget.children().text() ==='直接玩'
+    		var tag = noTarget.text() ==='直接玩';
+    		var flag = tagA || tag
+    		var urld = noTarget.parent().attr('href') 
+    		var urla = noTarget.attr('href') 
+    		var urlhref = urld?urld:urla
+    		if(!flag){
+    			//卡片详情跳转
+    			var cardurl = $(this).data('url');
+    			window.location.href = cardurl;
+    		}else{
+    			window.location.href = urlhref;
     		}
-    	})
-    }()
+    	});
+    }();
+
 };
 
 
