@@ -11,33 +11,31 @@ import '../components/dialog/dialog.js';
 /* import '../js/mmdl.js';
 import '../js/mmapp.js'; */
 
-window.onload = function(){
-    !function init() {
-        var hobj = $('.ifram').data();
-        var video = $('.top-video').data();
-        try {
-            var fs = $('html').attr('fs');
-            $('.top-video').css('height',video.h*fs +'px');
-            $('.top-video').css('width',video.w*fs +'px');
-            $('.ifram').css('height',hobj.h*fs +'px');
-        } catch (error) {
-            
-        }
-       
-       
-    }();
-    !function gotoDeatail(){
-    	$('.card-item').click(function(e){
-    		e.stopPropagation()
-    		var noTarget = $(e.target)
-    		var tag = noTarget.hasClass('js-label')
-    		if(!tag){
-    			var url = $(this).data('url')
-    			window.location.href = url
-    		}
-    	})
-    }()
+window.onload = function() {
+	function initIframH() {
+		var hobj = $('.pop-ifram').data();
+		try {
+			var fs = $('html').attr('fs');
+			$('.pop-ifram').css('height', hobj.h * fs + 'px');
+		} catch(error) {
+
+		}
+
+	}
+	! function gotoDeatail() {
+		$('.card-item').click(function(e) {
+			e.stopPropagation()
+			var noTarget = $(e.target)
+			var tag = noTarget.hasClass('js-label')
+			if(!tag) {
+				var url = $(this).data('url')
+				window.location.href = url
+			}
+		})
+	}()
+	var popLayer = window.YDUI.dialog
+	function showPopLayer(url,cb){
+		popLayer.popLayer(url, cb);
+	}
+	showPopLayer('more.html',function(){})
 };
-
-
-
