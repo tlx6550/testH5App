@@ -37,13 +37,13 @@ window.onload = function(){
 //  		}
 //  	})
 //  }()
-var popLayer = window.YDUI.dialog
-popLayer.confirm('ada','adfasdf',function(){console.log(11)})
-window.YDUI.util.loadJS('https://cdn.bootcss.com/vConsole/3.3.4/vconsole.min.js',function(){
-	var vConsole = new VConsole();
-    console.log('Hello world');
+// var popLayer = window.YDUI.dialog
+// popLayer.confirm('ada','adfasdf',function(){console.log(11)})
+// window.YDUI.util.loadJS('https://cdn.bootcss.com/vConsole/3.3.4/vconsole.min.js',function(){
+// 	var vConsole = new VConsole();
+//     console.log('Hello world');
  
-})
+// })
 };
 
 

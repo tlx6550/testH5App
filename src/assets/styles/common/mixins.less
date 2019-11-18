@@ -132,3 +132,10 @@
   left: 50%;
   transform: translate3d(-50%, -50%, 0);
 }
+.diyBg(@url,@width,@height){
+  width: @width;
+  height: @height;
+  background-image:url("@{url}");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}

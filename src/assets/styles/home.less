@@ -1,6 +1,107 @@
+@import "./common/variables.less";
 @import "./common/mixins.less";
 a {
 	text-decoration:none;
 	out-line: none;
 	color: #fff;
+}
+@gray:#f2f2f2;
+.home-bg{
+  margin:0;
+  background:@c-theme;
+}
+.setion-top{
+  .banner{
+    height: 518px;
+    .banner-bg{
+      width: 100%;
+      height: 518px;
+    }
+  }
+}
+.setion-middle{
+  padding:@spacing-ssm * 7;
+}
+.setion-item{
+  position: relative;
+  .title{
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    transform: translateX(-50%);
+    top:-100px;
+    .bg-wrap{
+      .diyBg("../../../assets/img/m666_H_pannel-title-bg.png",300px,102px);
+    }
+    .txt{
+      font-size: @font-sm;
+      color:@c-bg;
+    }
+  }
+  
+}
+.pannel{
+  position: relative;
+  border-radius: @radius-xm;
+  overflow: hidden;
+  
+  .header{
+    position: relative;
+    background: @c-primary;
+    height: 75px;
+    border-bottom: 1px solid black;
+    &.decorate-icon{
+      position: relative;
+      &::before{
+        position: absolute;
+        top:10px;
+        left: 10px;
+        content: "";
+        .diyBg("../../../assets/img/m666_H_pannel-title-left-icon.png",40px,32px);
+      }
+      &::after{
+        position: absolute;
+        bottom:0;
+        top:10px;
+        right: 10px;
+        content: "";
+        .diyBg("../../../assets/img/m666_H_pannel-title-right-icon.png",40px,32px);
+      }
+    }
+    .sub-icon{
+      position: absolute;
+      top: 50%;
+      left: 20px;
+      transform: translateY(-50%);
+      .diyBg("../../../assets/img/m666_H_pannel-xing-icon.png",67px,59px);
+    }
+  }
+  .content-body{
+    min-height: 400px;
+    background: @c-primary-2
+  }
+}
+
+.linear{
+  &::before{
+    position: absolute;
+    z-index: 2;
+    top:0;
+    left: 0;
+    height:40%;
+    width: 100%;
+    content: "";
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(2, 0, 0, 0.7)), to(rgba(113, 108, 108, 0)));
+    
+  }
+  &::after{
+    position: absolute;
+    z-index: 1;
+    bottom:0;
+    left: 0;
+    height:40%;
+    width: 100%;
+    content: "";
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(113, 108, 108, 0)), to(rgba(2, 0, 0, 0.7)));
+  }
 }
