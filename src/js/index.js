@@ -12,39 +12,5 @@ import '../components/dialog/dialog.js';
 import '../js/mmapp.js'; */
 
 window.onload = function(){
-//  !function init() {
-//      var hobj = $('.ifram').data();
-//      var video = $('.top-video').data();
-//      try {
-//          var fs = $('html').attr('fs');
-//          $('.top-video').css('height',video.h*fs +'px');
-//          $('.top-video').css('width',video.w*fs +'px');
-//          $('.ifram').css('height',hobj.h*fs +'px');
-//      } catch (error) {
-//          
-//      }
-//     
-//     
-//  }();
-//  !function gotoDeatail(){
-//  	$('.card-item').click(function(e){
-//  		e.stopPropagation()
-//  		var noTarget = $(e.target)
-//  		var tag = noTarget.hasClass('js-label')
-//  		if(!tag){
-//  			var url = $(this).data('url')
-//  			window.location.href = url
-//  		}
-//  	})
-//  }()
-// var popLayer = window.YDUI.dialog
-// popLayer.confirm('ada','adfasdf',function(){console.log(11)})
-// window.YDUI.util.loadJS('https://cdn.bootcss.com/vConsole/3.3.4/vconsole.min.js',function(){
-// 	var vConsole = new VConsole();
-//     console.log('Hello world');
- 
-// })
+
 };
-
-
-
