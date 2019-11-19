@@ -6,7 +6,11 @@
     background-color: @color * @opacity;
   }
 }
-
+.tap-color2(@color, @opacity: .9) {
+  &:active {
+   color: @color * @opacity;
+  }
+}
 // 遮罩层
 // -----------------------------------------------------------------------------
 .mask(@bgcolor: rgba(0, 0, 0, .4), @z-index: @base-zindex * 1500) {
