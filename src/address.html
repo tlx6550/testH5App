@@ -15,13 +15,13 @@
 			<div class="cell-item under-line">
 				<div class="cell-left">收货人:</div>
 				<div class="cell-right">
-					<input type="text" class="cell-input" placeholder="请填写姓名" autocomplete="off">
+					<input name="username" required type="text" class="cell-input" placeholder="请填写姓名" autocomplete="off">
 				</div>
 			</div>
 			<div class="cell-item">
 				<div class="cell-left">联系电话:</div>
 				<div class="cell-right">
-					<input type="text" class="cell-input" placeholder="请填写联系电话" autocomplete="off">
+					<input  name="tel" required type="text" maxlength="11" class="cell-input" placeholder="请填写联系电话" autocomplete="off">
 				</div>
 			</div>
 			<a class="cell-item under-line" id="J_Address" href="javascript:;">
@@ -32,7 +32,7 @@
 			<div class="cell-item">
 				<div class="cell-left">详细地址:</div>
 				<div class="cell-right">
-					<input type="text" class="cell-input" placeholder="如道路、门牌号、小区、楼栋号、
+					<input  name="adress" required maxlength="30" type="text" class="cell-input" placeholder="如道路、门牌号、小区、楼栋号、
 						单元室等" autocomplete="off">
 				</div>
 			</div>

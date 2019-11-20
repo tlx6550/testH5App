@@ -14,17 +14,17 @@ a {
   .setion-top{
     position: relative;
     .nav-icon{
-      display: flex;
-      align-items: center;
       display: inline-block;
       position: absolute;
-      right: -20px;
+      right: 0;
       top:50px;
-      width: 150px;
+      width: 120px;
       height: 48px;
       line-height: 48px;
       background-color: rgba(31, 2, 121, 0.72);
       border-radius: @radius-sm * 3;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
       font-size: 0;
       white-space: nowrap;
       &.prize{
@@ -43,6 +43,8 @@ a {
     }
     .banner{
       height: 518px;
+      width: 100%;
+      overflow: hidden;
       .banner-bg{
         width: 100%;
         height: 518px;
@@ -164,7 +166,8 @@ a {
         }
       }
       .time-wrap{
-        display: inline-block;
+        display: flex;
+        align-items: center;
         margin:@spacing-xm 0 @spacing-xm @spacing-xm;
         border-radius: @radius-sm * 3;
         font-size: 0;
