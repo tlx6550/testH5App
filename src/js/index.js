@@ -194,83 +194,176 @@ window.onload = function () {
     	this.options = $.extend({}, KillGoods.DEFAULTS, options || {});
     }
     KillGoods.DEFAULTS = {
-    	nowTime:Date.parse(new Date()),// 当前时间
+        speed:100,// 间隔多少秒刷新时间 
     	beginTime:12,// 哪个时间点的场次
-    	beforeCallback:null, // 未开始的回调
+        beforeCallback:null, // 未开始的回调
+        doCallback:null, // 正在进行时的回调
+        endCallback:null, // 结束的回调
     	tagBefore:false, // 当前时间是否在设定时间之前
     	tagNow:false,// 当前时间是否等于设定时间
-    	tagAfter:false,// 当前时间是否在设定时间之后
-    	endTime:17
-    	
+        tagAfter:false,// 当前时间是否在设定时间之后
+        tagNextEnd:false,// 该秒杀时间段是否结束了
+        endTime:18,
+        timeGap:{},// 距离活动时间开始集合
+        timeEndGap:{}// 距离活动结束时间集合
     };
     KillGoods.prototype.init = function(){
-    	// 判断当前日期是否是周六
+        var speed = this.options.speed;
+        var that = this;
+        this.initPage();
+        setInterval(function(){
+            that.initPage();
+        },speed * 1000);
+    };
+    KillGoods.prototype.initPage = function(){
+        var that = this;
+        // 判断当前日期是否是周六
     	var today = dayjs().day();
     	// if(today!==6)return
     	// 获取当前时间
-    	this.getTagByTime();
+    	that.getTagByTime();
     	// 判断当前时间距离场次设定时间
         // 1.如果还没开始，设置文案 倒计时
-        if(this.options.tagBefore){
-            this.beforeSet();
+        if(that.options.tagBefore){
+            that.beforeSet();
             return;
         }
         // 2.如果开始，设置文案和倒计时
-        if(this.options.tagAfter){
-            this.rightNowSet();
+        if(that.options.tagAfter || that.options.tagNow){
+            that.rightNowSet();
             return;
         }
         // 3.如果结束，设置文案和倒计时
-        if(this.options.tagAfter){
-            this.endSet();
+        if(that.options.tagNextEnd){
+            that.endSet();
             return;
         }
     };
     KillGoods.prototype.getTagByTime = function(){
         var beginTime = this.options.beginTime;
-        var sBeginDate = dayjs().year() + '-' + (dayjs().month()+1) +'-' +dayjs().date() + '-' + beginTime;
-        var daySet = dayjs(sBeginDate).format('YYYY-MM-DD-HH-mm-ss');
+        var sBeginDate = dayjs().year() + '/' + (dayjs().month()+1) +'/' +dayjs().date() + ' ' + beginTime + ':00:00';
+        var now = new Date();
+        var end = new Date(sBeginDate);
+        var obj = this.caculate(end,now);
+        var seconds = obj.seconds;
+        this.timeGap = obj;
+        if(seconds===0){
+            this.options.tagNow = true;
+            this.options.tagNow = false;
+            this.options.tagAfter = false;
+        }
+        if(seconds > 0){
+            this.options.tagBefore = true;
+            this.options.tagNow = false;
+            this.options.tagAfter = false;
+        }
+        if(seconds < 0){
+            this.options.tagAfter = true;
+            this.options.tagNow = false;
+            this.options.tagNow = false;
+        }
+
+        var endTime = this.options.endTime;
+        var sEndTimeDate = dayjs().year() + '/' + (dayjs().month()+1) +'/' +dayjs().date() + ' ' + endTime + ':00:00';
+        var nextEnd = new Date(sEndTimeDate);
+        var nextObj = this.caculate(nextEnd,now);
+        var nextSecond = nextObj.seconds;
+        this.timeEndGap = nextObj;
+        if(nextSecond<0){
+            this.tagNextEnd = true;
+        }
         
-        var dayNow = dayjs("2019-11-21-12-04"); 
-        const date11 = dayjs(sBeginDate)
-         const date1 = dayjs(dayNow); // now
-         const date2 = dayjs(date11); // set
-         console.log('ddd=', date1.diff(date2));
-
-          // var tagBefore = set.isBefore(now);
-        // ;
-    	// var tagNow = set.isSame(now); 
-    	// var tagAfter= set.isAfter(now); 
-
-        // this.options.tagBefore = tagBefore;
-        // this.options.tagNow = tagNow;
-        // this.options.tagAfter = tagAfter;
-
-    	// console.log('tagBefore=',tagBefore); 
-    	// console.log('tagNow=',tagNow); 
-        // console.log('tagAfter=',this.options.tagAfter); 
-        
-        // var endTime = this.options.endTime; // 标识距离下一场是否结束
-        // var isOverSet = dayjs(new Date(dayjs().year(), dayjs().month()+ 1, dayjs().date() ,endTime));
-        // var tagIsOver= now.isAfter(isOverSet);  // 当前时间（20） 在 设置结束时间 19 之后 说明已经结束
-        // console.log('tagIsOver=',tagIsOver); 
-        // var is = dayjs.isDayjs(set);
-        // alert(is)
-
-        // const date1 = dayjs('2019-11-21-12-19'); // now
-        // const date2 = dayjs('2019-11-21-12-12'); // set
-        // date1.diff(date2); // 20214000000
-        // console.log('ddd=', date1.diff(date2));
     };
     KillGoods.prototype.beforeSet = function(){
-    	
+        var callback = this.options.beforeCallback;
+        typeof callback == 'function' && callback();
+    };
+    // 时间差
+    KillGoods.prototype.caculate = function(end,now){
+    	var date1= end;    // 结束时间
+        var date2= now;    // 开始
+        var date3=date1.getTime()-date2.getTime(); // 时间差秒
+        // 计算出相差天数
+        var days=Math.floor(date3/(24*3600*1000));
+
+        // 计算出小时数
+        var leave1=date3%(24*3600*1000)  ;  // 计算天数后剩余的毫秒数
+        var hours=Math.floor(leave1/(3600*1000));
+
+        // 计算相差分钟数
+        var leave2=leave1%(3600*1000);        // 计算小时数后剩余的毫秒数
+        var minutes=Math.floor(leave2/(60*1000));
+        // 计算相差秒数
+        var leave3=leave2%(60*1000) ;     // 计算分钟数后剩余的毫秒数
+        var seconds=Math.round(leave3/1000);
+        console.log('时间差' + days + '天' + hours + '时' + minutes + '分' + seconds + '秒');
+        var obj = {
+            days:days<10?'0'+days:days,
+            hours:hours<10?'0'+hours:hours,
+            minutes:minutes<10?'0'+minutes:minutes,
+            seconds:seconds<10?'0'+seconds:seconds
+        };
+        return obj;
     };
     KillGoods.prototype.rightNowSet = function(){
-    	
+        var callback = this.options.doCallback;
+        typeof callback == 'function' && callback();
     };
     KillGoods.prototype.endSet = function(){
-    	
+        this.options.timeEndGap = {
+            days:0,
+            hours:'00',
+            minutes:'00',
+            seconds:'00'
+        };
+        var callback = this.options.endCallback;
+        typeof callback == 'function' && callback();
     };
-    var kill = new KillGoods();
-    kill.init();
+    // 秒杀活动时间轮训时间动态显示
+    KillGoods.prototype.getPrizeByLeftTime = function(obj,$targetObj){
+        $targetObj.h.text(obj.hours);
+        $targetObj.m.text(obj.minutes);
+        $targetObj.s.text(obj.seconds);
+    };
+   
+    var AbeforeCallback =  function AbeforeCallback (){
+        $('.12-time').addClass('not-beigin');
+        $('.12-time').find('.time-title').text('12点场距开始');
+
+        var setingTimeObj = Akill.timeGap;
+        Akill.getPrizeByLeftTime(setingTimeObj,$targetObj12);
+
+        var $listBtn =  $('.12-time').children('.card-list').find('.btn')
+        console.log($listBtn)
+        $listBtn.each(function(i){
+           var dataTag = $(this).data('isleft')
+           if(dataTag===0){
+                console.log($(this).data('isleft'))
+                $(this).text('已抢完').addClass('disable')
+            }else if(dataTag===1){
+                $(this).text('马上抢').removeClass('disable')
+           }
+          });
+    };
+    var AdoCallback =  function AdoCallback (){
+        $('.12-time').removeClass('not-beigin');
+        $('.12-time').find('.time-title').text('12点场距结束');
+        var setingTimeObj = Akill.timeEndGap;
+        Akill.getPrizeByLeftTime(setingTimeObj,$targetObj12);
+    };
+    var AendCallback = function AendCallback (){
+        $('.12-time').addClass('not-beigin');
+        $('.12-time').find('.time-title').text('12点场结束');
+        var setingTimeObj = Akill.timeEndGap;
+        Akill.getPrizeByLeftTime(setingTimeObj,$targetObj12);
+    };
+    var AkillOptions = {
+        beforeCallback:AbeforeCallback,
+        doCallback:AdoCallback,
+        AendCallback:AendCallback
+    };
+    var Akill = new KillGoods(AkillOptions);
+    Akill.init();
+
+  
 };
