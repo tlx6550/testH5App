@@ -191,35 +191,44 @@ window.onload = function () {
     }
     
     function KillGoods(options){
+        this.timer = null;
     	this.options = $.extend({}, KillGoods.DEFAULTS, options || {});
     }
     KillGoods.DEFAULTS = {
-        speed:100,// 间隔多少秒刷新时间 
-    	beginTime:12,// 哪个时间点的场次
+        speed:1,// 间隔多少秒刷新时间 
+        site:12,// 场次 用于回调函数的钩子 和下面的开始时间相关联
+        beginTime:12,// 哪个时间点的场次
+        $listBtn:null,
+        $targetObj:null,// 时间动态变化jq集合
         beforeCallback:null, // 未开始的回调
         doCallback:null, // 正在进行时的回调
         endCallback:null, // 结束的回调
+        notTodayCallback:null,// 不是当天的回调
     	tagBefore:false, // 当前时间是否在设定时间之前
     	tagNow:false,// 当前时间是否等于设定时间
         tagAfter:false,// 当前时间是否在设定时间之后
         tagNextEnd:false,// 该秒杀时间段是否结束了
-        endTime:18,
+        endTime:16,
         timeGap:{},// 距离活动时间开始集合
         timeEndGap:{}// 距离活动结束时间集合
     };
     KillGoods.prototype.init = function(){
         var speed = this.options.speed;
         var that = this;
+        // 判断当前日期是否是周六
+       var dayjs = this.getDate();
+    	var today = dayjs.weekDay;
+        if(today!==6){
+            that.isNotTody(today);
+            return;
+        }
         this.initPage();
-        setInterval(function(){
+        this.timer = setInterval(function(){
             that.initPage();
         },speed * 1000);
     };
     KillGoods.prototype.initPage = function(){
         var that = this;
-        // 判断当前日期是否是周六
-    	var today = dayjs().day();
-    	// if(today!==6)return
     	// 获取当前时间
     	that.getTagByTime();
     	// 判断当前时间距离场次设定时间
@@ -229,7 +238,7 @@ window.onload = function () {
             return;
         }
         // 2.如果开始，设置文案和倒计时
-        if(that.options.tagAfter || that.options.tagNow){
+        if((that.options.tagAfter || that.options.tagNow) && !that.options.tagNextEnd) {
             that.rightNowSet();
             return;
         }
@@ -239,9 +248,32 @@ window.onload = function () {
             return;
         }
     };
+    KillGoods.prototype.getDate = function(){
+        var date = new Date();
+        var seperator1 = '-';
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        var weekDay = date.getDay()
+        if (month >= 1 && month <= 9) {
+            month = '0' + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = '0' + strDate;
+        }
+        var currentdate = year + seperator1 + month + seperator1 + strDate;
+        var obj = {
+            y:year,
+            m:month,
+            d:strDate,
+            weekDay:weekDay
+        };
+        return obj;
+    };
     KillGoods.prototype.getTagByTime = function(){
+        var dayjs = this.getDate();
         var beginTime = this.options.beginTime;
-        var sBeginDate = dayjs().year() + '/' + (dayjs().month()+1) +'/' +dayjs().date() + ' ' + beginTime + ':00:00';
+        var sBeginDate = dayjs.y + '/' + dayjs.m +'/' +dayjs.d + ' ' + beginTime + ':00:00';
         var now = new Date();
         var end = new Date(sBeginDate);
         var obj = this.caculate(end,now);
@@ -262,21 +294,21 @@ window.onload = function () {
             this.options.tagNow = false;
             this.options.tagNow = false;
         }
-
         var endTime = this.options.endTime;
-        var sEndTimeDate = dayjs().year() + '/' + (dayjs().month()+1) +'/' +dayjs().date() + ' ' + endTime + ':00:00';
+        var sEndTimeDate = dayjs.y + '/' + dayjs.m +'/' +dayjs.d + ' ' + endTime + ':00:00';
         var nextEnd = new Date(sEndTimeDate);
         var nextObj = this.caculate(nextEnd,now);
         var nextSecond = nextObj.seconds;
         this.timeEndGap = nextObj;
         if(nextSecond<0){
-            this.tagNextEnd = true;
+            this.options.tagNextEnd = true;
         }
         
     };
     KillGoods.prototype.beforeSet = function(){
         var callback = this.options.beforeCallback;
-        typeof callback == 'function' && callback();
+        var that = this;
+        typeof callback == 'function' && callback(that);
     };
     // 时间差
     KillGoods.prototype.caculate = function(end,now){
@@ -296,74 +328,144 @@ window.onload = function () {
         // 计算相差秒数
         var leave3=leave2%(60*1000) ;     // 计算分钟数后剩余的毫秒数
         var seconds=Math.round(leave3/1000);
-        console.log('时间差' + days + '天' + hours + '时' + minutes + '分' + seconds + '秒');
+        // console.log('时间差' + days + '天' + hours + '时' + minutes + '分' + seconds + '秒');
         var obj = {
-            days:days<10?'0'+days:days,
-            hours:hours<10?'0'+hours:hours,
-            minutes:minutes<10?'0'+minutes:minutes,
-            seconds:seconds<10?'0'+seconds:seconds
+            days:days,
+            hours:hours,
+            minutes:minutes,
+            seconds:seconds
         };
         return obj;
     };
     KillGoods.prototype.rightNowSet = function(){
         var callback = this.options.doCallback;
-        typeof callback == 'function' && callback();
+        var that = this;
+        typeof callback == 'function' && callback(that);
     };
     KillGoods.prototype.endSet = function(){
-        this.options.timeEndGap = {
+        this.timeEndGap = {
             days:0,
-            hours:'00',
-            minutes:'00',
-            seconds:'00'
+            hours:'0',
+            minutes:'0',
+            seconds:'0'
         };
         var callback = this.options.endCallback;
-        typeof callback == 'function' && callback();
+        var that = this;
+        typeof callback == 'function' && callback(that);
+        clearInterval(that.timer);
     };
     // 秒杀活动时间轮训时间动态显示
     KillGoods.prototype.getPrizeByLeftTime = function(obj,$targetObj){
-        $targetObj.h.text(obj.hours);
-        $targetObj.m.text(obj.minutes);
-        $targetObj.s.text(obj.seconds);
+        var h = obj.hours<10?'0'+obj.hours:obj.hours;
+        var m = obj.minutes<10?'0'+obj.minutes:obj.minutes;
+        var s = obj.seconds<10?'0'+obj.seconds:obj.seconds;
+        $targetObj.h.text(h);
+        $targetObj.m.text(m);
+        $targetObj.s.text(s);
     };
-   
-    var AbeforeCallback =  function AbeforeCallback (){
-        $('.12-time').addClass('not-beigin');
-        $('.12-time').find('.time-title').text('12点场距开始');
 
-        var setingTimeObj = Akill.timeGap;
-        Akill.getPrizeByLeftTime(setingTimeObj,$targetObj12);
-
-        var $listBtn =  $('.12-time').children('.card-list').find('.btn')
-        console.log($listBtn)
+    // 当按钮状态发生更新如data-isleft 更改
+    KillGoods.prototype.updateBtnList = function(site){
+        var selector = '.'+site+'-time';
+        this.options.$listBtn = selector.children('.card-list').find('.btn');
+    };
+    // 不是当天日期
+    KillGoods.prototype.isNotTody = function(today){
+        var callback = this.options.notTodayCallback;
+        var that = this;
+        typeof callback == 'function' && callback(that,today);
+    };
+    var AbeforeCallback =  function AbeforeCallback (me){
+        var site = me.options.site;
+        var selector = '.'+site+'-time';
+        var $listBtn = me.options.$listBtn;
+        var $targetObj = me.options.$targetObj;
+        $(selector).addClass('not-beigin');
+        $(selector).find('.time-title').text(site+'点场距开始');
+        var setingTimeObj = me.timeGap;
+        me.getPrizeByLeftTime(setingTimeObj,$targetObj);
         $listBtn.each(function(i){
-           var dataTag = $(this).data('isleft')
-           if(dataTag===0){
-                console.log($(this).data('isleft'))
-                $(this).text('已抢完').addClass('disable')
+            $(this).text('即将开抢').addClass('no-beigin');
+        });
+    };
+    var AdoCallback =  function AdoCallback (me){
+        var site = me.options.site;
+        var selector = '.'+site+'-time';
+        var $listBtn = me.options.$listBtn;
+        var $targetObj = me.options.$targetObj;
+        $(selector).removeClass('not-beigin');
+        $(selector).find('.time-title').text(site+'点场距结束');
+        var setingTimeObj = me.timeEndGap;
+        me.getPrizeByLeftTime(setingTimeObj,$targetObj);
+        $listBtn.each(function(i){
+            var dataTag = $(this).data('isleft');
+            if(dataTag===0){
+                console.log($(this).data('isleft'));
+                $(this).text('已抢完').addClass('disable');
             }else if(dataTag===1){
-                $(this).text('马上抢').removeClass('disable')
-           }
-          });
+                $(this).text('马上抢').removeClass('disable');
+            }
+        });
     };
-    var AdoCallback =  function AdoCallback (){
-        $('.12-time').removeClass('not-beigin');
-        $('.12-time').find('.time-title').text('12点场距结束');
-        var setingTimeObj = Akill.timeEndGap;
-        Akill.getPrizeByLeftTime(setingTimeObj,$targetObj12);
+    var AendCallback = function AendCallback (me){
+        var site = me.options.site;
+        var selector = '.'+site+'-time';
+        var $listBtn = me.options.$listBtn;
+        var $targetObj = me.options.$targetObj;
+        $(selector).addClass('not-beigin');
+        $(selector).find('.time-title').text(site+'点场结束');
+        var setingTimeObj = me.timeEndGap;
+        me.getPrizeByLeftTime(setingTimeObj,$targetObj);
+        $listBtn.each(function(i){
+            $(this).text('已结束').addClass('not-beigin disable');
+        });
     };
-    var AendCallback = function AendCallback (){
-        $('.12-time').addClass('not-beigin');
-        $('.12-time').find('.time-title').text('12点场结束');
-        var setingTimeObj = Akill.timeEndGap;
-        Akill.getPrizeByLeftTime(setingTimeObj,$targetObj12);
+    var notTodayCallback = function isNotTody(me,today){
+        debugger
+        var $listBtnA = $('.12-time').children('.card-list').find('.btn');
+        var $listBtnB = $('.19-time').children('.card-list').find('.btn');
+        if(today<6&&today>0){
+            $listBtnA.each(function(i){
+                $(this).text('即将开枪').addClass('not-beigin disable');
+            });
+            $listBtnB.each(function(i){
+                $(this).text('即将开枪').addClass('not-beigin disable');
+            });
+            // 活动未开始
+            dialog.notBeigin('',
+                '<div class="share-on-web not-beigin"><span>活动未开始</span></div>',
+                []);
+        }else if(today==0){
+            // 活动结束
+            dialog.notBeigin('',
+                '<div class="share-on-web not-beigin"><span>活动已结束</span></div>',
+                []);
+        }
+        
     };
     var AkillOptions = {
         beforeCallback:AbeforeCallback,
         doCallback:AdoCallback,
-        AendCallback:AendCallback
+        endCallback:AendCallback,
+        notTodayCallback:notTodayCallback,
+        site:12,// 12点场 （不一定是12点开始，只是个钩子）
+        $listBtn:$('.12-time').children('.card-list').find('.btn'),// 按钮jq对象集合
+        $targetObj: $targetObj12
     };
     var Akill = new KillGoods(AkillOptions);
     Akill.init();
-
-  
+    
+    var BkillOptions = {
+        beginTime:19,
+        endTime:24,
+        beforeCallback:AbeforeCallback,
+        doCallback:AdoCallback,
+        endCallback:AendCallback,
+        notTodayCallback:notTodayCallback,
+        site:19,// 19点场 （不一定是19点开始，只是个钩子）
+        $listBtn:$('.19-time').children('.card-list').find('.btn'),// 按钮jq对象集合
+        $targetObj: $targetObj19
+    };
+    var Bkill = new KillGoods(BkillOptions);
+    Bkill.init();
 };

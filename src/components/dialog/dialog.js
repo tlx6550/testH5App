@@ -1213,7 +1213,26 @@ import $ from '../../assets/js/jquery.min.js';
         }
         return format;
     };
-
+    util.dayjs = function (){
+        var date = new Date();
+        var seperator1 = "-";
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = year + seperator1 + month + seperator1 + strDate;
+        var obj = {
+            y:year,
+            m:month,
+            d:strDate
+        }
+        return obj;
+    }
     /**
      * js倒计时
      * @param format 时间格式 {%d}天{%h}时{%m}分{%s}秒{%f}毫秒
