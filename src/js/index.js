@@ -192,6 +192,7 @@ window.onload = function () {
     
     function KillGoods(options){
         this.timer = null;
+        this.todayTimer = true;
     	this.options = $.extend({}, KillGoods.DEFAULTS, options || {});
     }
     KillGoods.DEFAULTS = {
@@ -208,7 +209,7 @@ window.onload = function () {
     	tagNow:false,// 当前时间是否等于设定时间
         tagAfter:false,// 当前时间是否在设定时间之后
         tagNextEnd:false,// 该秒杀时间段是否结束了
-        endTime:16,
+        endTime:19,
         timeGap:{},// 距离活动时间开始集合
         timeEndGap:{}// 距离活动结束时间集合
     };
@@ -216,15 +217,26 @@ window.onload = function () {
         var speed = this.options.speed;
         var that = this;
         // 判断当前日期是否是周六
-       var dayjs = this.getDate();
-    	var today = dayjs.weekDay;
+        var dayjs = this.getDate();
+        var today = dayjs.weekDay;
         if(today!==6){
+            this.todayTimer = false;
             that.isNotTody(today);
-            return;
         }
-        this.initPage();
-        this.timer = setInterval(function(){
-            that.initPage();
+        // 进入当天时间判断轮训
+        that.todayTimer = setInterval(function(){
+            var dayjs = that.getDate();
+            var today = dayjs.weekDay;
+            if(today!==6){
+                return;
+            }else{
+                that.initPage();
+                that.timer = setInterval(function(){
+                    that.initPage();
+                    console.log(3);
+                },speed * 1000);
+                clearInterval(that.todayTimer);
+            }
         },speed * 1000);
     };
     KillGoods.prototype.initPage = function(){
@@ -254,7 +266,7 @@ window.onload = function () {
         var year = date.getFullYear();
         var month = date.getMonth() + 1;
         var strDate = date.getDate();
-        var weekDay = date.getDay()
+        var weekDay = date.getDay();
         if (month >= 1 && month <= 9) {
             month = '0' + month;
         }
@@ -373,7 +385,10 @@ window.onload = function () {
     KillGoods.prototype.isNotTody = function(today){
         var callback = this.options.notTodayCallback;
         var that = this;
-        typeof callback == 'function' && callback(that,today);
+        if(!that.todayTimer){
+            typeof callback == 'function' && callback(that,today);
+        }
+        
     };
     var AbeforeCallback =  function AbeforeCallback (me){
         var site = me.options.site;
@@ -421,7 +436,6 @@ window.onload = function () {
         });
     };
     var notTodayCallback = function isNotTody(me,today){
-        debugger
         var $listBtnA = $('.12-time').children('.card-list').find('.btn');
         var $listBtnB = $('.19-time').children('.card-list').find('.btn');
         if(today<6&&today>0){
@@ -441,7 +455,6 @@ window.onload = function () {
                 '<div class="share-on-web not-beigin"><span>活动已结束</span></div>',
                 []);
         }
-        
     };
     var AkillOptions = {
         beforeCallback:AbeforeCallback,
