@@ -70,6 +70,7 @@ window.onload = function () {
     
     !function sumitAddress(){
         $('.sumitAddress').click(function(e){
+        	e.stop
             var value = {
                 username:$('input[name="username"]').val(),
                 tel:$('input[name="tel"]').val(),
@@ -267,6 +268,7 @@ window.onload = function () {
         var month = date.getMonth() + 1;
         var strDate = date.getDate();
         var weekDay = date.getDay();
+        var Hour = date.getHours()
         if (month >= 1 && month <= 9) {
             month = '0' + month;
         }
@@ -278,7 +280,8 @@ window.onload = function () {
             y:year,
             m:month,
             d:strDate,
-            weekDay:weekDay
+            weekDay:weekDay,
+            Hour:Hour
         };
         return obj;
     };
@@ -481,4 +484,22 @@ window.onload = function () {
     };
     var Bkill = new KillGoods(BkillOptions);
     Bkill.init();
+
+
+    function bettewBTime (min,max){
+        var date = new Date();
+        var hour = date.getHours;
+        var flag = false
+        if(hour>=min && hour<=max) flag = true
+        return flag
+    }
+    setInterval(function(){
+      var tag = bettewBTime(0,6)
+      if(tag){
+          //your fun
+          console.log(tag)
+      }else{
+          console.log(tag)
+      }
+    },1000)
 };
