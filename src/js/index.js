@@ -293,7 +293,7 @@ window.onload = function () {
         this.timeGap = obj;
         if(seconds===0){
             this.options.tagNow = true;
-            this.options.tagNow = false;
+            this.options.tagBefore = false;
             this.options.tagAfter = false;
         }
         if(seconds > 0){
@@ -304,7 +304,7 @@ window.onload = function () {
         if(seconds < 0){
             this.options.tagAfter = true;
             this.options.tagNow = false;
-            this.options.tagNow = false;
+            this.options.tagBefore = false;
         }
         var endTime = this.options.endTime;
         var sEndTimeDate = dayjs.y + '/' + dayjs.m +'/' +dayjs.d + ' ' + endTime + ':00:00';
