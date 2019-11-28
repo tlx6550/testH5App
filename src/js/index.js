@@ -59,7 +59,22 @@ window.onload = function () {
     //         '</div>',
     //         []);
     // }();
-	
+    
+    // 提升活跃值
+    // 微信打开提示
+    !function popOnIncreaseActive(){
+        dialog.increaseActive('','',
+            [
+                {
+                    txt: '确定',
+                    callback: function () {
+                        dialog.toast('你点了确定', 'none', 1000);
+                    }
+                }
+            ]);
+    }();
+
+
     // 活动未开始
     // !function popOnNoBeigin(){
     //     dialog.notBeigin('',
@@ -70,7 +85,7 @@ window.onload = function () {
     
     !function sumitAddress(){
         $('.sumitAddress').click(function(e){
-        	e.stop
+        	e.stop;
             var value = {
                 username:$('input[name="username"]').val(),
                 tel:$('input[name="tel"]').val(),
@@ -268,7 +283,7 @@ window.onload = function () {
         var month = date.getMonth() + 1;
         var strDate = date.getDate();
         var weekDay = date.getDay();
-        var Hour = date.getHours()
+        var Hour = date.getHours();
         if (month >= 1 && month <= 9) {
             month = '0' + month;
         }
@@ -449,9 +464,9 @@ window.onload = function () {
                 $(this).text('即将开枪').addClass('not-beigin disable');
             });
             // 活动未开始
-            dialog.notBeigin('',
-                '<div class="share-on-web not-beigin"><span>活动未开始</span></div>',
-                []);
+            // dialog.notBeigin('',
+            //     '<div class="share-on-web not-beigin"><span>活动未开始</span></div>',
+            //     []);
         }else if(today==0){
             // 活动结束
             dialog.notBeigin('',
@@ -489,17 +504,17 @@ window.onload = function () {
     function bettewBTime (min,max){
         var date = new Date();
         var hour = date.getHours;
-        var flag = false
-        if(hour>=min && hour<=max) flag = true
-        return flag
+        var flag = false;
+        if(hour>=min && hour<=max) flag = true;
+        return flag;
     }
     setInterval(function(){
-      var tag = bettewBTime(0,6)
-      if(tag){
-          //your fun
-          console.log(tag)
-      }else{
-          console.log(tag)
-      }
-    },1000)
+        var tag = bettewBTime(0,6);
+        if(tag){
+            // your fun
+            console.log(tag);
+        }else{
+            console.log(tag);
+        }
+    },1000);
 };
