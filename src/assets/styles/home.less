@@ -56,6 +56,10 @@ a {
     padding:@spacing-ssm * 7;
     margin-top: 60px;
   }
+  .app-list-section{
+    background: white;
+    margin-bottom: @spacing-xm;
+  }
   .setion-item{
     position: relative;
     .title{
@@ -91,7 +95,40 @@ a {
         color:@c-bg;
       }
     }
-    
+    .list{
+     display: flex;
+     align-items: center;
+     border-bottom: 1px dotted @c-border;
+     &:last-child{
+       border:none;
+     }
+     .app-icon{
+      width: 1.2rem;
+      height: 1.2rem;
+      margin-right: 0.2rem;
+      .sub{
+        width: 1.2rem;
+        height: 1.2rem;
+      }
+     }
+     .app-info{
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       width: 100%;
+       .app-title{
+        color:@c-title;
+       }
+      p{
+        color:@c-title;
+        font-size: 0.28rem;
+        padding: 0;
+      }
+      .foucus{
+        color: @c-mark;
+      }
+    }
+    }
   }
   .right-hand-icon{
     position: relative;
@@ -204,17 +241,21 @@ a {
       }
       .card-list{
         padding:0 @spacing-xm;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+       
+        .swiper-slide{
+          display: flex;
+          //flex-wrap: wrap;
+           justify-content: center;
+        }
         .item-box{
           display: flex;
           align-items: center;
           justify-content: center;
           flex-direction: column;
           background-color:@c-primary;
-          flex: 0 0 176px;
-          width: 176px;
+          flex: 1;
+          // flex: 0 0 176px;
+          // width: 176px;
           box-sizing: content-box;
           margin-right:  @spacing-xm;
           margin-bottom:  @spacing-xm;
@@ -222,7 +263,7 @@ a {
           border:2px solid #3d2172;
           border-radius: @radius-sm;
           &:nth-of-type(3n){
-            margin-right: 0;
+           // margin-right: 0;
           }
           .app-icon{
             width: 88px;
@@ -240,12 +281,12 @@ a {
             color:black;
             font-size: @font-sm;
             line-height: 40px;
-            .diyBg("../../../assets/img/m666_H_pannel-msq-btn.png",150px,40px);
+            .diyBg("../../../assets/img/m666_H_pannel-msq-btn.png",120px,40px);
              &.disable{
-              .diyBg("../../../assets/img/m666_H_pannel-yqw-btn.png",150px,40px);
+              .diyBg("../../../assets/img/m666_H_pannel-yqw-btn.png",120px,40px);
             }
             &.no-beigin{
-              .diyBg("../../../assets/img/m666_H_pannel-nobegin-btn.png",150px,40px); 
+              .diyBg("../../../assets/img/m666_H_pannel-nobegin-btn.png",120px,40px); 
             }
           }
         }
