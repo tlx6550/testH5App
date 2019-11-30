@@ -524,7 +524,7 @@ window.onload = function () {
        //autoplay: 3000,
         centeredSlides: true,
         initialSlide: 0,
-        slidesPerView: 1.2,
+        slidesPerView: 1.1,
         paginationClickable: true,
         spaceBetween: 10,
         observer: true,//修改swiper自己或子元素时，自动初始化swiper
