@@ -6,6 +6,9 @@
 //import '../assets/js/flexible.js';
 import FusionAuthentication from '../components/FusionAuthentication.js';
 window.onload = function () {
-    var au = new FusionAuthentication({a:'adad'})
+    var au = new FusionAuthentication({a:'adad','initCallBack':function(me){
+    	console.log('me,',me)
+    }})
     au.init()
+    
 }
