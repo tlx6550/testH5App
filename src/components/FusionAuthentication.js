@@ -17,7 +17,7 @@ export default class FusionAuthentication extends http {
 			cmpassporUrl: 'https://www.cmpassport.com/NumberAbility/jssdk_vlm/jssdk.min.js'
 		}
 		this.baseUrl = 'http://localhost:7300/mock/5de22d06808f421eb4aa48d7/au'
-		this.initBaseUrl = 'https://10.1.5.192:28443/web/tnc/client'
+		this.initBaseUrl = 'https://10.1.5.192:28443'
 		let YDRZ = null;
 		this.options = this._deepClone(options, setiings);
 
@@ -38,6 +38,7 @@ export default class FusionAuthentication extends http {
 		try {
 			//获取上游appId
 			const res = await this.getUpAppId()
+			debugger
 			if(res.data.code == 200) {
 				upAPPId = res.data.data.id
 				//获取预签名
@@ -64,8 +65,7 @@ export default class FusionAuthentication extends http {
 
 	//获取上游appid
 	getUpAppId() {
-	  const obj={
-			"MsgReq": {
+	  const MsgReq={
 				"MsgHeader": {
 					"MsgType": "xxReq",
 					"Version": "1.0",//1
@@ -84,8 +84,8 @@ export default class FusionAuthentication extends http {
 
 				}
 			}
-		}
-		return axios.post(this.initBaseUrl + '/web/tnc/client')
+	  return axios.post('/web/tnc/client/threeFuse/config4appid',{MsgReq})
+		//return axios.post('/web/tnc/client/threeFuse/config4appid',data:obj)
 	}
 	//获取准签名preSign
 	getPreSign(appId) {
