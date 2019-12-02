@@ -175,7 +175,7 @@ const config = {
         // 开发环境跨域问题https://blog.csdn.net/qq_39083004/article/details/80860675
         proxy: {
             '**': {
-                target:'https://api.douban.com',
+                target:'https://10.1.5.192:28443',
                 changeOrigin: true,
                 secure: false,
             }
