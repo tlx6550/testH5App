@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name='viewport' content='width=device-width, initial-scale=1.0' />
 	<title>
-		免流办理
+			SIM消息推送页面
 	</title>
 	<script type="text/javascript">
 		var apps1 = [];
@@ -68,65 +68,39 @@
 		</div>
 
 	</div>
-<div class="app-card-box">
-			<div class="app-info">
-				<div class="icon-logo">
-					<img src="./assets/img/1.png">
-				</div>
-				<div class="text-info">
-					<div class="name">MM应用商场</div>
-					<div class="sub-title">更安全 更懂你</div>
-				</div>
+	<div class="app-card-box">
+		<div class="app-info">
+			<div class="icon-logo">
+				<img src="./assets/img/1.png">
 			</div>
-			<div class="btn-wrap">
-				<div data-id="com.aspire.mm" class="js-item" onclick="downloadApp('300000863435')">
-					<div class="download-btn js-button ignore-pressed">
-						<div class="btn-text js-label">下载</div>
-						<div class="btn-wrapper">
-							<div class="btn-percent js-progress"></div>
-						</div>
+			<div class="text-info">
+				<div class="name">MM应用商场</div>
+				<div class="sub-title">更安全 更懂你</div>
+			</div>
+		</div>
+		<div class="btn-wrap">
+			<div data-id="com.aspire.mm" class="js-item" onclick="downloadApp('300000863435')">
+				<div class="download-btn js-button ignore-pressed">
+					<div class="btn-text js-label">下载</div>
+					<div class="btn-wrapper">
+						<div class="btn-percent js-progress"></div>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 	<div class="user-section">
-		<div class="el-input">
-			<input type="number" autocomplete="off" placeholder=手机号码 " class="el-input-inner tel-input ">
-			<button type="button " class="btn btn-warning" id="J_GetCode">获取验证码</button>
-		</div>
-		<div class="el-input ">
-		   <div style="display: none; " class="tel-yanzheng error ">请输入正确的移动号码！</div>
-		</div>
-		<div class="el-input ">
-			<input type="text " autocomplete="off " placeholder=短信验证码 " class="el-input-inner yanzheng-code" />
-		</div> 
-		<!--<div class="el-input phone-wrap">
-			<span class="phone ">
-				手机号码
-			</span>
-			<div class="phone-number ">
-				138****3859
-				<div class="renzheng">
-					中国移动认证
-				</div>
-			</div>
-			<span class="qiehuan ">
-				切换
-			</span>
-			<!-- <span class="renzheng ">
-				中国移动认证
-			</span> -->
-		</div>
+	</div>
 
-		<div class=bt-wrap>
-			<button type=button class="btn btn-primary mflq-btn ">免费领取</button>
-		</div>
-		<div class=bt-wrap>
-			<button type=button class="btn btn-danger mflq-btn ">
-				<i class=icon></i>
-				<span>已领取</span>
-			</button>
-		</div>
+	<div class=bt-wrap>
+		<button type=button class="btn btn-primary mflq-btn ">免费领取</button>
+	</div>
+	<div class=bt-wrap>
+		<button type=button class="btn btn-danger mflq-btn ">
+			<i class=icon></i>
+			<span>已领取</span>
+		</button>
+	</div>
 	</div>
 	<div class="tab-settion">
 		<a href="">马上去
@@ -135,7 +109,7 @@
 	<div class="rule-detail">
 		<div class="head">
 			<img class="title-bg" src="./assets/img/title-bg.png">
-			<div class="title">活动说明</div>
+			<div class="title">热门权益应用推荐</div>
 		</div>
 		<div class="content">
 			1、活动时间：即日起-2019年12月31日
@@ -156,6 +130,49 @@
 
 		</div>
 	</div>
+	<div class="rule-detail sim-wrap">
+		<div class="head">
+			<img class="title-bg" src="./assets/img/title-bg.png">
+			<div class="title">热门权益应用推荐</div>
+		</div>
+		<div class="content">
+			<div class="app-list">
+				<div class="item-box">
+					<div class="app-icon">
+						<img src="./assets/img/1.png" alt="">
+					</div>
+					<div class="app-name">
+						王者荣耀
+					</div>
+				</div>
+				<div class="item-box">
+					<div class="app-icon">
+						<img src="./assets/img/1.png" alt="">
+					</div>
+					<div class="app-name">
+						王者荣耀
+					</div>
+				</div>
+				<div class="item-box">
+					<div class="app-icon">
+						<img src="./assets/img/1.png" alt="">
+					</div>
+					<div class="app-name">
+						王者荣耀
+					</div>
+				</div>
+				<div class="item-box">
+					<div class="app-icon">
+						<img src="./assets/img/1.png" alt="">
+					</div>
+					<div class="app-name">
+						王者荣耀
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
 	<div class="rule-detail">
 		<div class="head">
 			<img class="title-bg" src="./assets/img/title-bg.png">
@@ -165,7 +182,8 @@
 			MM任我装免流范围：
 			<br>
 			<br>流量包适用于所有MM自有业务，如MM应用商场、MM头条（飞闻客户端）、必备应用、流量助手、MM导航、MM H5门户等。
-			<br><br> 特别说明：上述产品免流范围不包括未参与活动的搜索，第三方提供的资讯、视频、小说、音乐，广告，第三方网站，京东、淘宝等购物网站等。
+			<br>
+			<br> 特别说明：上述产品免流范围不包括未参与活动的搜索，第三方提供的资讯、视频、小说、音乐，广告，第三方网站，京东、淘宝等购物网站等。
 		</div>
 	</div>
 	<div class="rule-detail">
@@ -174,27 +192,28 @@
 			<div class="title">用户须知</div>
 		</div>
 		<div class="content">
-			1、	活动页面上公布的领取信息仅作参考，在最终时还将对中奖用户按中奖要求进行审核，若审核发现用户不满足领取要求，则取消其领取资格。要求包括但不限于： 
-			<br><br>
-			(一)	用户须在登录状态下参与活动，即在参与活动时MM应用商场有录得用户的登录信息。
-			<br><br>
-			(二)	用户不得通过非正常行为作弊参与活动，非正常行为包括但不限于： 
-			<br><br>
-			a)	多个手机号码使用同一台手机终端操作参与活动，即多号码对应同一手机IMEI码。
-			<br><br>
-			b)	使用非手机终端操作参与活动，即用户无对应IMEI码记录或IMEI码异常。
-			<br><br>
-			c)	通过虚拟器产生的虚拟号码、虚拟下载行为等非正常参与行为参与活动
-			<br><br>
-			2、	以下情况将无法获得领取免流包：非中国移动用户号码、GPRS无限量套餐客户、4G随心王套餐客户、多号通的副号、一卡双号副号、家庭服务计划副号等虚拟号码客户、内部员工号码、集团代付/对公托收（如政企动力100行业卡）客户、集团全额统付号码、手机状态异常（停机、销户、欠费等状态）、未更换4G USIM卡及未使用4G的客户。另部分省份可能存在非实名制客户、M-Free卡客户、无线通、随E行、移动总机、固话、商话、公话、快捷通和金卡快捷通及CMWAP20元封顶套餐用户无法享受充值优惠。
-			<br><br>
-			3、	对于本次活动，若用户成功领取免流包，但在活动期内或公告的发放期内未能成功开通该服务，请在活动结束后或发放期到期后的10个工作日内致电10086反馈情况，逾期未反馈者视为自动弃奖，不予重新开通。
-			<br><br>
-			4、	活动期间，如领取用户出现手机号换号、注销等情况导致无法领取免流包，则视为用户自动弃奖，不予重新开通。
-			<br><br>
-			5、	活动内容如有调整或补充，请以活动最新公告为准。 
-			<br><br>
-			6、	免责声明：如因网络攻击、系统故障或其它不可控因素导致活动出错或MM应用商场对活动进行调整或停止的，将在活动规则页面及时告知，MM应用商场无须为此承担赔偿责任和给予补偿。MM应用商场可以视活动情况对活动规则调整或改动，并公布于此，即时生效。
+			1、 活动页面上公布的领取信息仅作参考，在最终时还将对中奖用户按中奖要求进行审核，若审核发现用户不满足领取要求，则取消其领取资格。要求包括但不限于：
+			<br>
+			<br> (一) 用户须在登录状态下参与活动，即在参与活动时MM应用商场有录得用户的登录信息。
+			<br>
+			<br> (二) 用户不得通过非正常行为作弊参与活动，非正常行为包括但不限于：
+			<br>
+			<br> a) 多个手机号码使用同一台手机终端操作参与活动，即多号码对应同一手机IMEI码。
+			<br>
+			<br> b) 使用非手机终端操作参与活动，即用户无对应IMEI码记录或IMEI码异常。
+			<br>
+			<br> c) 通过虚拟器产生的虚拟号码、虚拟下载行为等非正常参与行为参与活动
+			<br>
+			<br> 2、 以下情况将无法获得领取免流包：非中国移动用户号码、GPRS无限量套餐客户、4G随心王套餐客户、多号通的副号、一卡双号副号、家庭服务计划副号等虚拟号码客户、内部员工号码、集团代付/对公托收（如政企动力100行业卡）客户、集团全额统付号码、手机状态异常（停机、销户、欠费等状态）、未更换4G
+			USIM卡及未使用4G的客户。另部分省份可能存在非实名制客户、M-Free卡客户、无线通、随E行、移动总机、固话、商话、公话、快捷通和金卡快捷通及CMWAP20元封顶套餐用户无法享受充值优惠。
+			<br>
+			<br> 3、 对于本次活动，若用户成功领取免流包，但在活动期内或公告的发放期内未能成功开通该服务，请在活动结束后或发放期到期后的10个工作日内致电10086反馈情况，逾期未反馈者视为自动弃奖，不予重新开通。
+			<br>
+			<br> 4、 活动期间，如领取用户出现手机号换号、注销等情况导致无法领取免流包，则视为用户自动弃奖，不予重新开通。
+			<br>
+			<br> 5、 活动内容如有调整或补充，请以活动最新公告为准。
+			<br>
+			<br> 6、 免责声明：如因网络攻击、系统故障或其它不可控因素导致活动出错或MM应用商场对活动进行调整或停止的，将在活动规则页面及时告知，MM应用商场无须为此承担赔偿责任和给予补偿。MM应用商场可以视活动情况对活动规则调整或改动，并公布于此，即时生效。
 
 		</div>
 	</div>

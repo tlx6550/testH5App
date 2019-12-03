@@ -201,12 +201,6 @@ const config = {
             filename: 'myPrize.html'
         }
         ),
-        new HtmlWebpackPlugin({
-                chunks: ['rules'],
-                template: './rules.html',
-                filename: 'rules.html'
-            }
-        ),
         new LodashModuleReplacementPlugin,
         new CopyWebpackPlugin([
             {

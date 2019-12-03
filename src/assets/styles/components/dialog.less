@@ -30,9 +30,33 @@
   width: 85%;
   background-color: #fff;
   border-radius: .2rem;
-  font-size: 15px;
+  overflow: hidden;
   -webkit-animation: zoomIn .15s ease forwards;
   animation: zoomIn .15s ease forwards;
+  &.m-confirm-share{
+    background: url(../../img/sim-pop-web-bg.png) no-repeat;
+    height: 5.09rem;
+    background-size: 100% 100%;
+    .confirm-hd{
+      &:after{
+        border:none;
+      }
+    }
+  }
+  &.m-confirm-android{
+    position: relative;
+    right: -0.7rem;
+    top:-1.8rem;
+    background: url(../../img/sim-pop-andro-bg.png) no-repeat;
+    height: 5.55rem;
+    width: 4.94rem;
+    background-size: 100% 100%;
+    .confirm-hd{
+      &:after{
+        border:none;
+      }
+    }
+  }
 }
 .m-alert {
   -webkit-animation: zoomIn .15s ease forwards;
@@ -44,6 +68,11 @@
 }
 .m-alert .confirm-ft {
   margin-top: 14px;
+}
+.mask-black-dialog-on-web{
+  .confirm-hd{
+    padding-top: 2.1rem;
+  }
 }
 .confirm-hd {
   position: relative;
@@ -68,6 +97,7 @@
 .confirm-hd .confirm-title {
   display: inline-block;
   margin-bottom: .2rem;
+  font-size: .28rem;
   font-weight: normal;
   color: @btn-primary-bg;
   word-break: break-all;
@@ -75,39 +105,45 @@
 .confirm-bd {
   margin-top: .1rem;
   text-align: center;
-  padding: 0 20px;
-  font-size: 14px;
-  color: #888;
+  padding: 0 .2rem;
+  font-size: .28rem;
+  color: #646464;
   line-height: 20px;
   word-break: break-all;
+  .share-on-web{
+    padding-left: .3rem;
+    margin-top: .1rem;
+    font-size: .24rem;
+    text-align: left;
+    .look-me{
+      font-size: .32rem;
+      color:#ff6600;
+    }
+    .down-text{
+      color:black;
+    }
+  }
 }
 
 .confirm-ft {
   position: relative;
   line-height: 40px;
   margin-top: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  justify-content: center;
-  padding-bottom: .4rem;
 }
 
 .confirm-ft > a {
   position: relative;
   text-align: center;
   display: block;
-  flex: 0 1 2rem;
-  width: 2rem;
-  height: .6rem;
-  line-height: .6rem;
-  background: @btn-primary-bg;
-  border-radius: .2rem;
-  color:#fff;
+  height: .9rem;
+  line-height: .9rem;
+  background: #f6f6f6;
+  color:black;
+  border-top:1px solid #b9b9b9;
 }
-confirm-ft > a.confirm-btn.default {
-    color: #fff;
+.confirm-ft > a.confirm-btn {
+  color:#0053a7;
+  font-size: .34rem;
 }
 .confirm-ft > a:not(:last-child):after {
   content: '';
@@ -122,9 +158,7 @@ confirm-ft > a.confirm-btn.default {
   -webkit-transform-origin: 100% 0;
   transform-origin: 100% 0;
 }
-.confirm-ft > a.confirm-btn.default {
-  color: #fff;
-}
+
 .confirm-ft > a.confirm-btn.hide-btn {
   display: none;
 }
