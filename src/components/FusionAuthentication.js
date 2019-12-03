@@ -38,7 +38,7 @@ export default class FusionAuthentication extends http {
 		try {
 			//获取上游appId
 			const res = await this.getUpAppId()
-			debugger
+			//debugger
 			if(res.data.code == 200) {
 				upAPPId = res.data.data.id
 				//获取预签名
@@ -65,26 +65,31 @@ export default class FusionAuthentication extends http {
 
 	//获取上游appid
 	getUpAppId() {
-	  const MsgReq={
-				"MsgHeader": {
-					"MsgType": "xxReq",
-					"Version": "1.0",//1
-					"appId":'',//1 本系统为业务应用分配的AppId
-					"sdkVersion":"",//0 SDK版本号标
-					"appType":'',//0  调用app类型标识 100: SDK ，默认,
-				},
-				"MsgBody": {
-					"systemTime": "201611041006",//1 请求消息发送的系统时间，精确到毫秒，共17位
-					"uaType":'Android',//1 设备类别 1：Android 2: IOS
-					"packageName":'',// 1 Android业务App包名称； IOS对应取 BundleID
-					"clientState":'',// 1 防止重复提交类攻击;服务器原样返回;从客户端角度该值可以标识一次业务请求
-					"ext":'',// 0 预留扩展字段
-					"ua":'',//0 设备型号ua
-					"sign": ''//1 签名字段1.body中的输入参数值（除sign外）参照字母排序拼接，拼接成key=value的字符串形式2.首尾加上appKey值3.最后对上述值取32位大写MD5值
+		const MsgReq = {
+			"MsgHeader": {
+				"MsgType": "xxReq",
+				"Version": "1.0", //1
+				"appId": '', //1 本系统为业务应用分配的AppId
+				"sdkVersion": "", //0 SDK版本号标
+				"appType": '', //0  调用app类型标识 100: SDK ，默认,
+			},
+			"MsgBody": {
+				"systemTime": this._getTimeToMilliseconds(), //1 请求消息发送的系统时间，精确到毫秒，共17位
+				"uaType": 'Android', //1 设备类别 1：Android 2: IOS
+				"packageName": '', // 1 Android业务App包名称； IOS对应取 BundleID
+				"clientState": '', // 1 防止重复提交类攻击;服务器原样返回;从客户端角度该值可以标识一次业务请求
+				"ext": '', // 0 预留扩展字段
+				"ua": '', //0 设备型号ua
+				"sign": '' //1 签名字段1.body中的输入参数值（除sign外）参照字母排序拼接，拼接成key=value的字符串形式2.首尾加上appKey值3.最后对上述值取32位大写MD5值
 
-				}
 			}
-	  return axios.post('/web/tnc/client/threeFuse/config4appid',{MsgReq})
+		}
+		const obj = MsgReq.MsgBody
+		const appKey = 'adsqe12adfsdf1212312'
+		const aa = this._getPostSign(appKey, obj)
+		return axios.post('/web/tnc/client/threeFuse/config4appid', {
+			MsgReq
+		})
 		//return axios.post('/web/tnc/client/threeFuse/config4appid',data:obj)
 	}
 	//获取准签名preSign
@@ -154,5 +159,39 @@ export default class FusionAuthentication extends http {
 				deepObjectMerge(FirstOBJ[key], SecondOBJ[key]) : FirstOBJ[key] = SecondOBJ[key];
 		}
 		return FirstOBJ;
+	}
+	/**
+	 *  获取时间格式 精确到毫秒级别 共 17位
+	 */
+	_getTimeToMilliseconds() { 
+		var myDate = new Date();
+		var moth = myDate.getMonth() + 1
+		var time = myDate.getFullYear() + '' + moth + myDate.getDate() + myDate.getHours() + myDate.getMinutes() + myDate.getSeconds() + myDate.getMilliseconds()
+		return time
+	}
+	/**
+	 *  获取提交签名
+	 */
+	_getPostSign(appKey, obj) { 
+		let arr = []
+		for(let key in obj) {
+			arr.push(key)
+		}
+		arr = arr.sort();
+		let pre = ''
+		const not = '" "'
+		for(let j = 0; j < arr.length; j++) {
+			//存在设置的值且sign不拼接
+			if(arr[j] !== 'sign') {
+				const key = arr[j]
+				const value = obj[key] 
+				if(value){
+					pre = pre + key + '=' + obj[key]
+				}
+			}
+
+		}
+		pre = appKey + pre + appKey
+		return pre
 	}
 }
