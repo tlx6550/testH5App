@@ -1,6 +1,6 @@
-import http from './http';
+import uitil from './uitil';
 const axios = require('axios');
-export default class FusionAuthentication extends http {
+export default class FusionAuthentication extends uitil {
 	constructor(setiings) {
 		super()
 		let options = {
@@ -87,6 +87,7 @@ export default class FusionAuthentication extends http {
 		const obj = MsgReq.MsgBody
 		const appKey = 'adsqe12adfsdf1212312'
 		const aa = this._getPostSign(appKey, obj)
+		debugger
 		return axios.post('/web/tnc/client/threeFuse/config4appid', {
 			MsgReq
 		})
@@ -149,49 +150,5 @@ export default class FusionAuthentication extends http {
 		}
 		script.src = url;
 		document.getElementsByTagName('head')[0].appendChild(script);
-	}
-	/**
-	 *  深度合并对象
-	 */
-	_deepClone(FirstOBJ, SecondOBJ) {
-		for(let key in SecondOBJ) {
-			FirstOBJ[key] = FirstOBJ[key] && FirstOBJ[key].toString() === "[object Object]" ?
-				deepObjectMerge(FirstOBJ[key], SecondOBJ[key]) : FirstOBJ[key] = SecondOBJ[key];
-		}
-		return FirstOBJ;
-	}
-	/**
-	 *  获取时间格式 精确到毫秒级别 共 17位
-	 */
-	_getTimeToMilliseconds() { 
-		var myDate = new Date();
-		var moth = myDate.getMonth() + 1
-		var time = myDate.getFullYear() + '' + moth + myDate.getDate() + myDate.getHours() + myDate.getMinutes() + myDate.getSeconds() + myDate.getMilliseconds()
-		return time
-	}
-	/**
-	 *  获取提交签名
-	 */
-	_getPostSign(appKey, obj) { 
-		let arr = []
-		for(let key in obj) {
-			arr.push(key)
-		}
-		arr = arr.sort();
-		let pre = ''
-		const not = '" "'
-		for(let j = 0; j < arr.length; j++) {
-			//存在设置的值且sign不拼接
-			if(arr[j] !== 'sign') {
-				const key = arr[j]
-				const value = obj[key] 
-				if(value){
-					pre = pre + key + '=' + obj[key]
-				}
-			}
-
-		}
-		pre = appKey + pre + appKey
-		return pre
 	}
 }

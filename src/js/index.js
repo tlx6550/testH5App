@@ -10,5 +10,5 @@ window.onload = function () {
     	console.log('me,',me)
     }})
     au.init()
-    
+    console.log('me,',au)
 }
