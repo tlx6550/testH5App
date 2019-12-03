@@ -32,43 +32,43 @@ import '../js/mmapp.js'; */
     //         }
     //     }
     // ]);
-    //其它浏览器分享
+    // 其它浏览器分享
     // dialog.shareOnWeb('good', 
     // '<div class="share-on-web"><span>1.微信不支持下载，请点击右上角按钮</span></div>'+
     // '<div class="share-on-web"><span>2.在菜单中点击</span><span class="look-me">【在浏览器中打开】</span>'+
     // '</div>', 
     // [ ]);
 
-    //第一次提示
-    dialog.fisrtStep('提示:',
-        '<span>下载应用后，一定要在本活动页面</span>' +
-        '<span class="look-me">【打开】</span>' +
-        '<span>应用，才能获得刮卡机会</span>'
-    );
-    setTimeout(function () {
-        $('#YDUI_CONFRIM').remove();
-        dialog.shareOnWeb('',
-            '<div class="share-on-web"><span>1.微信不支持下载，请点击右上角按钮</span></div>' +
-            '<div class="share-on-web"><span>2.在菜单中点击</span><span class="look-me">【在浏览器中打开】</span>' +
-            '</div>',
-            []);
-        setTimeout(function () {
-            $('#YDUI_CONFRIM').remove();
-        }, 2000)
-    }, 2000)
+    // 第一次提示
+    // dialog.fisrtStep('提示:',
+    //     '<span>下载应用后，一定要在本活动页面</span>' +
+    //     '<span class="look-me">【打开】</span>' +
+    //     '<span>应用，才能获得刮卡机会</span>'
+    // );
+    // setTimeout(function () {
+    //     $('#YDUI_CONFRIM').remove();
+    //     dialog.shareOnWeb('',
+    //         '<div class="share-on-web"><span>1.微信不支持下载，请点击右上角按钮</span></div>' +
+    //         '<div class="share-on-web"><span>2.在菜单中点击</span><span class="look-me">【在浏览器中打开】</span>' +
+    //         '</div>',
+    //         []);
+    //     setTimeout(function () {
+    //         $('#YDUI_CONFRIM').remove();
+    //     }, 2000)
+    // }, 2000)
 
 }(window);
 
 !function (window) {
-    //刮奖结果卡片小猪状态切换、传true表示中奖
+    // 刮奖结果卡片小猪状态切换、传true表示中奖
     function changeResultPigImg(tag){
         if(tag){
-            $('.result-pig').removeClass('result-bad').addClass('result-good')
+            $('.result-pig').removeClass('result-bad').addClass('result-good');
         }else{
-            $('.result-pig').removeClass('result-good').addClass('result-bad')
+            $('.result-pig').removeClass('result-good').addClass('result-bad');
         }
     }
-    //中奖文案修改
+    // 中奖文案修改
     $('.result-text').find('.title').html('刮奖失败，请使用本机<br>手机号码登录MM');
     $('.result-text').find('.info-detail').html('(打开4G蜂窝网络开关)');
     // 初始化刮刮乐
@@ -84,12 +84,12 @@ import '../js/mmapp.js'; */
             // console.log(baseSize);
             // console.log('img=' + img);
             // console.log('baseSize=' + baseSize);
-            var bgImgW = Math.floor(5.6 * baseSize);
-            var bgImgH = Math.floor(1.6 * baseSize);
+            var bgImgW = Math.floor(6.1 * baseSize);
+            var bgImgH = Math.floor(2.97 * baseSize);
             var $hideDom = $('.info-text');
             var lottery = new LotteryCard(document.getElementById('js_lottery'), { // eslint-disable-line
                 size: 20, // 滑动区域大小
-                percent: 90, // 激活百分比到谋个值 就全显示
+                percent: 60, // 激活百分比到谋个值 就全显示
                 resize: true, // canvas的大小是否是可变的
                 cover: img,
                 bgImgH: bgImgH,
@@ -97,6 +97,7 @@ import '../js/mmapp.js'; */
                 hideDom:$hideDom
             });
             lottery.on('start', function () {
+                console.log(1111);
                 lottery.setResult('');
             });
             lottery.on('end', function () {
@@ -108,7 +109,7 @@ import '../js/mmapp.js'; */
     try {
         initGuaGuaLe();
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
    
 }(window);

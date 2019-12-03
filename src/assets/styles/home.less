@@ -1,0 +1,379 @@
+.MMC-2346-home{
+	background: #ff3035;
+		&.rule-home-bg{
+			background-color: #ff3035;
+		}
+
+	
+	.banner {
+		position: relative;
+		font-size: 0;
+		.rule-icon {
+			display: inline-block;
+			vertical-align: middle;
+			margin-left: .2rem;
+			margin-right: .1rem;
+			width: .28rem;
+			height: .28rem;
+		}
+		.info-text {
+			vertical-align: middle;
+		}
+		img.banner {
+			display: inline-block;
+			height: 776px;
+			width: 100%;
+			&.rule-banner-img{
+				position: relative;
+				z-index: 99;
+				height:1075px;  
+			}
+		}
+		.rule-tag {
+			display: flex;
+			align-items: center;
+			position: absolute;
+			z-index: 9;
+			right: 0;
+			top: .25rem;
+			width: 1.18rem;
+			height: .48rem;
+			color: #fff;
+			font-size: .24rem;
+			border-top-left-radius: .2rem;
+			border-bottom-left-radius: .2rem;
+			background-color: #5354548a;
+			&.wai-tou-rule-tag{
+				width: 1.4rem;
+				.info-text{
+					margin-left: .2rem;
+				}
+			}
+		}
+		.prize-tag {
+			top: .8rem;
+		}
+		.app-card-box{
+			position: absolute;
+			left: 50%;
+			bottom: 0.4rem;
+			transform: translateX(-50%);
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			width: 607px;
+			padding: .2rem .25rem;
+			border-radius: .2rem;
+			text-align: center;
+			background: #fff;
+			.app-info{
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			.app-info .icon-logo img {
+				border-radius: .2rem;
+				overflow: hidden;
+				width: 1.36rem;
+				height: 1.36rem;
+			}
+			.app-info .text-info {
+				text-align: left;
+				margin-left: .35rem;
+			}
+			.app-info .text-info .name {
+				font-size: .36rem;
+				color: #333;
+			}
+			.app-info .text-info .sub-title {
+				margin-top: .3rem;
+				font-size: .28rem;
+				color: #999;
+			}
+		}
+	}
+	.second-banner{
+	   width: 100%;
+	   height: 5.85rem;
+	  .set-bg("../../img/mengzhu_02.png");
+	  &.waitou-banner{
+		 position: relative; 
+		 height: 8.64rem;
+		.set-bg("../../img/wai-tou-banner.png");
+		.wai-tou-guagua{
+			position: absolute;
+			left: 50%;
+			transform: translate3d(-50%,0,0);
+			width: 5.94rem;
+			height: 2.08rem;
+			bottom: 1rem;
+			text-align: center;
+			line-height: 2.04rem;
+			.set-bg("../../img/wai-guajiang.png");
+			.text{
+				font-weight: bold;
+				font-size: .36rem;
+				color:#fff;
+			}
+		}
+		.waitou-pig-img{
+			position: absolute;
+			right: .2rem;
+			bottom: .1rem;
+			width:1.67rem;
+			height: 1.48rem;
+		}
+	  }
+	  .step-wrap{
+		  padding:2.8rem .3rem 0 .3rem;
+		  display: flex;
+		  justify-content: center;
+		  .item{
+			  position: relative;
+			  z-index: 9;
+			  flex: 1;
+			  color:#fff;
+			  font-weight: bold;
+			  text-align: center;
+			  img{
+				  position: relative;
+				  z-index: 9;
+				  width: 1.19rem;
+				  height: auto;
+			  }
+			  .title{
+				  font-size: .24rem;
+			  }
+			  .red-title{
+				  color:#dc2b2d;
+			  }
+			  &:before {
+				content: '';
+				width: 90%;
+				border-bottom: 1px dashed #fff;
+				position: absolute;
+				z-index: 1;
+				left: 50%;
+				bottom: 70%;
+				margin-left: 0;
+			}
+			&:last-child:before {
+				width: 0;
+			}
+		  }
+	  }  
+	  .rule-link{
+		  margin-top: .3rem;
+		  margin-right: .8rem;
+		  float: right;
+		  color:#544100;
+		  font-size: .24rem;
+		  border-bottom: 1px solid #544100;
+	  }
+	}
+	.third-banner{
+	   position: relative; 
+	   width: 100%;
+	  .gua-jiang {
+		position: relative;  
+		text-align: center;
+		.canvas-wrap{
+			margin-top: .14rem;
+			padding-top: 20px;
+			position: relative;
+			z-index: 999;
+		}
+		.info-text{
+			position: absolute;
+			top: .6rem;
+			left: 50%;
+			transform: translate(-50%, 0);
+			font-weight: bold;
+			color: #f53e39;
+			font-size: 0.28rem; 
+			&.no-opertunity{
+			width: 610px;
+			height: 300px;
+			top: 18px;
+			 .set-bg('../../img/no-opertunity.png');
+			}
+			&.pre-opertunity{
+				width: 610px;
+				height: 300px;
+				top: 18px;
+				 .set-bg('../../img/pre-get-prieze.png');
+				}
+		  }
+		.result-text {
+			position: absolute;
+			background-color: #fff;
+			.set-bg('../../img/guajiang_no.png');
+			padding:0.48rem 0.3rem 0.38rem 0.3rem;
+			z-index: 99;
+			top: 175px;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 6.6rem;
+			height: 396px;
+			font-size: .26rem;
+			color: #c30;
+			.info{
+				background-color: #f2dab6;
+				display: flex;
+				.result-pig{
+					flex: 0 0 6.04rem;
+					width: 6rem;
+					height: 2.87rem;
+					&.result-good{
+						.set-bg('../../img/do-get-prieze.png');
+					}
+					&.result-bad{
+						.set-bg('../../img/no-get-prieze.png');
+					}
+				}
+				.detail{
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					flex-direction: column;
+					flex: 1;
+					.title{
+						font-weight: bold;
+						color:#f53e3a;
+						font-size: .28rem;
+					}
+					.info-detail{
+						color:#666666;
+						font-size: .24rem;
+					}
+				}
+			}
+		} 
+	  }
+	  .has-opertunity{
+		position: absolute;
+		left: 50%;
+		transform: translate3d(-50%,0,0);
+		bottom: .6rem;
+		text-align: center;
+		font-size: .3rem;
+		color:#a4302c;
+		font-weight: bold;
+		 span{
+			color:#ff4a45;
+		 }
+		}
+	}
+	.rule-setion{
+		margin-top: 50px;
+		background-color: #f7635d;
+		padding: 45px;
+		.title{
+			margin: 0 auto;
+			width: 368px;
+			height: 41px;
+		   .set-bg("../../img/home-rule-title.png");
+		}
+		.content{
+			margin-top: .5rem;
+			font-size: .28rem;
+			color:#666666;
+			background-color: #fff;
+			padding: .6rem .45rem;
+			border-radius: .2rem;
+		}
+	}
+	.app-list-wrap {
+		padding: .2rem .2rem .68rem;
+		.contain {
+			margin: 0 .05rem;
+			.list-title {
+				background: url(../img/app-list-bg.png)no-repeat;
+				background-size: 100% 100%;
+				width: 100%;
+				height: 1.2rem;
+				border-top-right-radius: .1rem;
+				border-top-left-radius: .1rem;
+				.title-box {
+					padding: 0 .2rem;
+					color: #fff;
+					height: 100%;
+					font-size: .3rem;
+				}
+				.sub-title {
+					color: #fad44e;
+					font-size: .24rem;
+				}
+			}
+			.list {
+				position: relative;
+				padding: .3rem .2rem .3rem .35rem;
+				border-bottom: 1px solid #eee;
+				background-color: #fff;
+				.pic-1 {
+					margin-top: .1rem;
+					margin-right: .3rem;
+					float: left;
+					img {
+						width: 1.15rem;
+						height: 1.15rem;
+					}
+				}
+				.app-content {
+					float: left;
+					text-align: left;
+					.title-p {
+						max-width:3rem;
+						word-wrap: normal;
+						-o-text-overflow: ellipsis;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+						overflow: hidden;
+						text-align: justify;
+						font-weight: bold;
+						margin-top: 0;
+						font-size: .36rem;
+						color: #333;
+					}
+					p {
+						margin: .1rem 0;
+						font-size: .24rem;
+						color: #999;
+						max-width:3rem;
+						word-wrap: normal;
+						-o-text-overflow: ellipsis;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+						overflow: hidden;
+						text-align: justify;
+					}
+					.sub-title {
+						color: red;
+					}
+				}
+				.js-button {
+					position: absolute;
+					top: .65rem;
+					right: .22rem;
+					width: 1.58rem;
+					height: .59rem;
+					border: none;
+					border-radius: .2rem;
+				}
+				.js-label {
+					position: relative;
+					z-index: 9;
+					text-align: center;
+					font-size: .28rem;
+					color: #23beff;
+					line-height: .59rem;
+					height: .59rem;
+				}
+				.btn-wrapper {
+					border-width: .03rem;
+				}
+				
+			}
+		}
+	}
+} 
