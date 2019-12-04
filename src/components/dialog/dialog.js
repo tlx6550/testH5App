@@ -30,19 +30,39 @@ import $ from '../../assets/js/jquery.min.js';
         },
 
         pageScroll: function () {
-            var fn = function (e) {
+            var fn = function(e) {
                 e.preventDefault();
                 e.stopPropagation();
             };
             var islock = false;
+            var supportsPassive = false;
 
+            try {
+                var opts = {};
+                Object.defineProperty(opts, 'passive', {
+                    get() {
+                        /* istanbul ignore next */
+                        supportsPassive = true;
+                    }
+                });
+                window.addEventListener('test-passive', null, opts);
+            } catch(e) {}
+
+            var passive = false;
             return {
-                lock: function () {
-                    if (islock) return;
+                lock: function() {
+                    if(islock) return;
                     islock = true;
-                    doc.addEventListener('touchmove', fn);
+                    doc.addEventListener(
+                        'touchmove',
+                        fn,
+                        supportsPassive ? {
+                            capture: false,
+                            passive
+                        } : false
+                    );
                 },
-                unlock: function () {
+                unlock: function() {
                     islock = false;
                     doc.removeEventListener('touchmove', fn);
                 }
@@ -274,7 +294,7 @@ import $ from '../../assets/js/jquery.min.js';
             return;
         }
         var htmlCom;
-        htmlCom = '<div class="m-confirm fisrt-show">'
+        htmlCom = '<div class="m-confirm fisrt-show">';
         var $dom = $('' +
             '<div class="mask-black-dialog mask-black-dialog-first" id="' + ID + '">' +
             htmlCom +
@@ -317,7 +337,7 @@ import $ from '../../assets/js/jquery.min.js';
             }];
         }
         var htmlCom;
-        htmlCom = '<div class="m-confirm m-confirm-share">'
+        htmlCom = '<div class="m-confirm m-confirm-share">';
         var $dom = $('' +
             '<div class="mask-black-dialog" id="' + ID + '">' +
             htmlCom +
@@ -360,7 +380,7 @@ import $ from '../../assets/js/jquery.min.js';
             })(i);
 
             $btnBox.append($btn);
-            $btnBoxWrap.append($btnBox)
+            $btnBoxWrap.append($btnBox);
         });
         $dom.find('.m-confirm').append($btnBoxWrap);
         // 禁止滚动屏幕【移动端】
@@ -394,24 +414,17 @@ import $ from '../../assets/js/jquery.min.js';
         if (typeof opts === 'function') {
             btnArr = [{
                 txt: '取消',
-                color: false
             }, {
                 txt: '确定',
-                color: true,
                 callback: function () {
                     opts && opts();
                 }
             }];
         }
-        var htmlCom;
-        if (title === 'good' || !title) {
-            htmlCom = '<div class="m-confirm">'
-        } else {
-            htmlCom = '<div class="m-confirm m-confirm-sad">'
-        }
+
         var $dom = $('' +
             '<div class="mask-black-dialog" id="' + ID + '">' +
-            htmlCom +
+            '   <div class="m-confirm">' +
             '       <div class="confirm-hd">' +
             '<strong class="confirm-title">' + title + '</strong></div>' +
             '       <div class="confirm-bd">' + mes + '</div>' +
@@ -420,19 +433,14 @@ import $ from '../../assets/js/jquery.min.js';
 
         // 遍历按钮数组
         var $btnBox = $('<div class="confirm-ft"></div>');
-        var $btnBoxWrap = $('<div class="confirm-ft-wrap"></div>');
         $.each(btnArr, function (i, val) {
             var $btn;
-            // 指定按钮颜色
-            if (typeof val.color == 'boolean') {
-                if (val.txt === '取消' || val.txt === '回首页') {
-                    $btn = $('<a href="javascript:;" class="' + 'yd-btn-block yd-btn-danger cancle-btn ' + (val.color ? 'primary' : 'default') + '">' + (val.txt || '') + '</a>');
-                } else {
-                    $btn = $('<a href="javascript:;" class="' + 'yd-btn-block yd-btn-danger ' + (val.color ? 'primary' : 'default') + '">' + (val.txt || '') + '</a>');
-                }
-
-            } else if (typeof val.color == 'string') {
-                $btn = $('<a href="javascript:;" style="color: ' + val.color + '">' + (val.txt || '') + '</a>');
+            if(!val.txt){
+                $btn = $('<a href="javascript:;" class="' + 'confirm-btn hide-btn ' + (val.color ? 'primary' : 'default') + '">' + (val.txt || '') + '</a>');
+            }else if(val.txt=='关闭'){
+                $btn = $('<a href="javascript:;" class="' + 'default close-btn' + '">' + (val.txt || '') + '</a>');
+            } else{
+                $btn = $('<a href="javascript:;" class="' + 'confirm-btn ' + (val.color ? 'primary' : 'default') + '">' + (val.txt || '') + '</a>');
             }
             // 给对应按钮添加点击事件
             (function (p) {
@@ -448,11 +456,9 @@ import $ from '../../assets/js/jquery.min.js';
                     btnArr[p].callback && btnArr[p].callback();
                 });
             })(i);
-
             $btnBox.append($btn);
-            $btnBoxWrap.append($btnBox)
         });
-        $dom.find('.m-confirm').append($btnBoxWrap);
+        $dom.find('.m-confirm').append($btnBox);
         // 禁止滚动屏幕【移动端】
         ydui.util.pageScroll.lock();
 
