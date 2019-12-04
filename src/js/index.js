@@ -109,7 +109,6 @@ import '../js/mmapp.js'; */
                 $('.get-phone-wrap').show()
             },1500)
         })
-        YDUI.dialog.toast('确定', 1222500);
         $('.btn-comfirm').click(function(){
             $('.get-phone-wrap').hide()
             YDUI.dialog.toast('确定', 1500);
