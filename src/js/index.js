@@ -437,7 +437,7 @@ window.onload = function () {
                 console.log($(this).data('isleft'));
                 $(this).text('已抢完').addClass('disable');
             }else if(dataTag===1){
-                $(this).text('马上抢').removeClass('disable');
+                $(this).text('马上抢').removeClass('disable no-beigin');
             }
         });
     };
