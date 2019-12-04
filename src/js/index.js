@@ -104,30 +104,53 @@ import '../js/mmapp.js'; */
             }, 1500);
         });
         $('.icon-btn').click(function(){
-            $('.get-phone-wrap').hide()
+            $('.get-phone-wrap').hide();
             setTimeout(function(){
-                $('.get-phone-wrap').show()
-            },1500)
-        })
+                $('.get-phone-wrap').show();
+            },1500);
+        });
         $('.btn-comfirm').click(function(){
-            $('.get-phone-wrap').hide()
+            $('.get-phone-wrap').hide();
             YDUI.dialog.toast('确定', 1500);
-        })
+        });
     }();
 
 
 
 
-    //抽奖逻辑
-    function(type){
+    // 是否可以抽奖逻辑
+    function initOpernuty(type){
         switch (type) {
-            case 1:
-            //没有机会抽奖
-                $('.gua-jiang').find('.info-text ').
-                break;
-        
-            default:
-                break;
+        case 1:
+            // 没有机会抽奖
+            $('.gua-jiang').find('.info-text').addClass('no-opertunity');
+            break;
+        case 2:
+            // 点击刮奖抽奖
+            $('.gua-jiang').find('.info-text').addClass('pre-opertunity').removeClass('no-opertunity');
+            $('.gua-jiang').find('.info-text').click(function(){
+                $(this).remove();
+            });
+            break;
+        default:
+            break;
+        }
+    }
+    initOpernuty(2);
+    getPrizeOrNot(2);
+    // 是否抽中奖了
+    function getPrizeOrNot(type){
+        switch (type) {
+        case 1:
+        // 没中
+            $('.gua-jiang').find('.result-pig').addClass('result-bad').removeClass('result-good');     
+            break;
+        case 2:
+        // 中了
+            $('.gua-jiang').find('.result-pig').addClass('result-good').removeClass('result-bad');     
+            break;
+        default:
+            break;
         }
     }
 }(window);
