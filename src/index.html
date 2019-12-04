@@ -62,16 +62,16 @@
 				<div class="info-text no-opertunity"></div>
 				<canvas class="m-ui-scratch canvas_lottery" id="js_lottery"></canvas>
 			</div>
-			<div class="result-text">
+			<div class="result-text" style="display:none;">
 				<div class="info">
 					<div class="result-pig result-good result-bad"></div>
 				</div>
 			</div>
 		</div>
-		<div class="has-opertunity">
+		<!-- <div class="has-opertunity">
 			您有
 			<span>1</span>次刮奖机会
-		</div>
+		</div> -->
 	</div>
 	<div class="rule-setion">
 		<div class="title"></div>
@@ -89,13 +89,13 @@
 			<br> 6. 在法律许可范围内，本活动最终解释权归中国互联网公司所有。
 		</div>
 	</div>
-	<div class="get-phone-wrap mask-black-dialog" style="display:none;">
+	<div class="get-phone-wrap mask-black-dialog" style="display:flex;">
 		<div class="container">
 			<div class="icon-btn"></div>
 			<div class="input-group">
 				<div class="item">
 					<i class="icon"></i>
-					<input placeholder="请输入手机号" type="number" class="cell-input">
+					<input placeholder="请输入手机号" name='phone' type="text" maxlength="11" class="cell-input">
 				</div>
 				<div class="tip phone-tip" style="display:none">手机号码不能为空</div>
 				<div class="code-wrap">

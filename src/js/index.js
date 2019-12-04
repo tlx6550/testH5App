@@ -11,10 +11,13 @@ import LotteryCard from '../assets/js/card.js';
 
 /* import '../js/mmdl.js';
 import '../js/mmapp.js'; */
-
+ /* 普通确认框 */
+ var dialog = window.YDUI.dialog;
 !function (window) {
-    /* 普通确认框 */
-    var dialog = window.YDUI.dialog;
+    window.onload = function(){
+        $('.gua-jiang').find('.result-text').show();
+    };
+   
 
     // 其它浏览器分享
     // dialog.shareOnWeb('', 
@@ -26,17 +29,6 @@ import '../js/mmapp.js'; */
 }(window);
 
 !function (window) {
-    // 刮奖结果卡片小猪状态切换、传true表示中奖
-    function changeResultPigImg(tag){
-        if(tag){
-            $('.result-pig').removeClass('result-bad').addClass('result-good');
-        }else{
-            $('.result-pig').removeClass('result-good').addClass('result-bad');
-        }
-    }
-    // 中奖文案修改
-    $('.result-text').find('.title').html('刮奖失败，请使用本机<br>手机号码登录MM');
-    $('.result-text').find('.info-detail').html('(打开4G蜂窝网络开关)');
     // 初始化刮刮乐
     function initGuaGuaLe() {
         var canvas = $('.canvas_lottery')[0];
@@ -103,14 +95,28 @@ import '../js/mmapp.js'; */
             
             }, 1500);
         });
+
         $('.icon-btn').click(function(){
             $('.get-phone-wrap').hide();
-            setTimeout(function(){
-                $('.get-phone-wrap').show();
-            },1500);
+            // setTimeout(function(){
+            //     $('.get-phone-wrap').show();
+            // },1500);
         });
         $('.btn-comfirm').click(function(){
-            $('.get-phone-wrap').hide();
+         
+            var phone =  $('.get-phone-wrap').find('input[name="phone"]').val();
+            if(phone.length===0){
+                dialog.toast('请输入手机号码', 'none', 1000);
+                return false;
+            } 
+            if(phone.length>0){
+                var myreg=/^[1][3,4,5,7,8,9][0-9]{9}$/;
+                if (!myreg.test(phone)){
+                    dialog.toast('请输入正确的手机号码', 'none', 1000);
+                    return false;
+                }
+            }
+            $('.get-phone-wrap').hide();   
             YDUI.dialog.toast('确定', 1500);
         });
     }();
