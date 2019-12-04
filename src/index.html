@@ -41,17 +41,17 @@
 				</div>
 			</div>
 			<script>
-			  apps1[index] = {
-				  packagename: 'com.aspire.mm',
-				  url: 'http://odp.fr18.mmarket.com/t.do?requestid=app_order&payMode=1&goodsid=000x14694430508100000572388300000863435&MD5=792ba1d0dd1b9a7dc9d842c35e91dec1&PID=2370638',
-				  contentId: '300000863435',
-				  price: '0.0',
-				  ver: '10732',
-				  size: '15.4M',
-				  title: 'MM应用商场',
-				  icon: 'http://u5.fr18.mmarket.com:80/rs/res2/21/2019/11/27/a446/648/52648446/logo120x1204861347973-png8.png'
-			  };
-			  index++;
+				apps1[index] = {
+					packagename: 'com.aspire.mm',
+					url: 'http://odp.fr18.mmarket.com/t.do?requestid=app_order&payMode=1&goodsid=000x14694430508100000572388300000863435&MD5=792ba1d0dd1b9a7dc9d842c35e91dec1&PID=2370638',
+					contentId: '300000863435',
+					price: '0.0',
+					ver: '10732',
+					size: '15.4M',
+					title: 'MM应用商场',
+					icon: 'http://u5.fr18.mmarket.com:80/rs/res2/21/2019/11/27/a446/648/52648446/logo120x1204861347973-png8.png'
+				};
+				index++;
 			</script>
 		</div>
 	</div>
@@ -77,16 +77,37 @@
 		<div class="title"></div>
 		<div class="content">
 			1. 活动时间: 2017年9月27日一- 2017年10月8日;
-			<br><br>
-			2. 活动期间，每位钱包金融注册用户每天有3次抽奖机会;
-			<br><br>
-			3. 奖品使用规则在抽奖记录中查看;
-			<br><br>
-			4. 活动结束时间可能因宣传原因临时停止，具体以钱包金融app公示为准;
-			<br><br>
-			5. 活动期间如遇问题，可拨打客服电话:4000908999;
-			<br><br>
-			6. 在法律许可范围内，本活动最终解释权归中国互联网公司所有。
+			<br>
+			<br> 2. 活动期间，每位钱包金融注册用户每天有3次抽奖机会;
+			<br>
+			<br> 3. 奖品使用规则在抽奖记录中查看;
+			<br>
+			<br> 4. 活动结束时间可能因宣传原因临时停止，具体以钱包金融app公示为准;
+			<br>
+			<br> 5. 活动期间如遇问题，可拨打客服电话:4000908999;
+			<br>
+			<br> 6. 在法律许可范围内，本活动最终解释权归中国互联网公司所有。
+		</div>
+	</div>
+	<div class="get-phone-wrap mask-black-dialog">
+		<div class="container">
+			<div class="icon-btn"></div>
+			<div class="input-group">
+				<div class="item">
+					<i class="icon"></i>
+					<input placeholder="请输入手机号" type="number" class="cell-input">
+				</div>
+				<div class="tip phone-tip" style="display:none">手机号码不能为空</div>
+				<div class="code-wrap">
+					<div class="item">
+						<i class="icon code-icon"></i>
+						<input placeholder="请输入验证码" type="text" class="cell-input">
+					</div>
+					<div class="code-btn" id="J_GetCode">获取验证码</div>
+				</div>
+				<div class="tip code-tip" style="display:none">验证码不正确</div>
+			</div>
+			<div class="btn-comfirm">确定</div>
 		</div>
 	</div>
 </body>

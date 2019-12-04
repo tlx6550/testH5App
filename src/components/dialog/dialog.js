@@ -337,11 +337,10 @@ import $ from '../../assets/js/jquery.min.js';
             }];
         }
         var htmlCom;
-        htmlCom = '<div class="m-confirm m-confirm-share">';
+        htmlCom = '<div class="m-confirm m-confirm-share">'
         var $dom = $('' +
-            '<div class="mask-black-dialog" id="' + ID + '">' +
+            '<div class="mask-black-dialog mask-black-dialog-on-web" id="' + ID + '">' +
             htmlCom +
-            '<div class="arrow-wrap"></div>' +
             '       <div class="confirm-hd">' +
             '<strong class="confirm-title">' + title + '</strong></div>' +
             '       <div class="confirm-bd">' + mes + '</div>' +
@@ -380,13 +379,17 @@ import $ from '../../assets/js/jquery.min.js';
             })(i);
 
             $btnBox.append($btn);
-            $btnBoxWrap.append($btnBox);
+            $btnBoxWrap.append($btnBox)
         });
         $dom.find('.m-confirm').append($btnBoxWrap);
         // 禁止滚动屏幕【移动端】
         ydui.util.pageScroll.lock();
 
-        $body.append($dom);
+		$body.append($dom);
+		$body.click(function(){
+			$('#' + ID).remove();
+			 ydui.util.pageScroll.unlock();
+		})
     };
     dialog.confirm = function (title, mes, opts) {
         var ID = 'YDUI_CONFRIM';
@@ -462,7 +465,12 @@ import $ from '../../assets/js/jquery.min.js';
         $dom.find('.m-confirm').append($btnBox);
         // 禁止滚动屏幕【移动端】
         ydui.util.pageScroll.lock();
-
+        $dom.find('.close-btn').on('click',function(e){
+            e.stopPropagation();
+            // 释放页面滚动
+            ydui.util.pageScroll.unlock();
+            $dom.remove();
+        })
         $body.append($dom);
     };
     /**

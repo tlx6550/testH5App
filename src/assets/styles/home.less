@@ -283,6 +283,91 @@
 			border-radius: .2rem;
 		}
 	}
+	.get-phone-wrap{
+		.container{
+			position: relative;
+			font-size: .24rem;
+			padding-top: .3rem;
+			width: 647px;
+			background-color: #fff;
+			border-radius: .2rem;
+			overflow: hidden;
+			-webkit-animation: zoomIn .15s ease forwards;
+			animation: zoomIn .15s ease forwards;
+			.icon-btn{
+				position: absolute;
+				width: 38px;
+				right:35px;
+				height: 38px;
+				background: url(../img/close-icon.jpg)no-repeat;
+				background-size: 100% 100%;
+			}
+			.input-group{
+				padding: .6rem .35rem 0 .35rem;
+			}
+			.item{
+				display: flex;
+				align-items: center;
+				padding: 25px 20px;
+				border:1px solid #dcdcdc;
+				margin-bottom: .3rem;
+			}
+			.cell-input{
+				border: none;
+				background: transparent;
+			}
+			.tip{
+				color:red;
+				margin: .2rem 0;
+			}
+			.code-wrap{
+				display: flex;
+				align-items: center;
+				.item{
+					flex: 1;
+					margin-bottom: 0;
+				}
+				input{
+					width: 1.7rem;
+				}
+				.code-btn{
+					flex: 0 0 220px;
+					width: 220px;
+					margin-left: 10px;
+					padding: 25px 8px;
+					text-align: center;
+					color:#fff;
+					background: -webkit-gradient(linear,0% 0%, 0% 100%, from(#fc9e4e), to(#f37644));
+					&.btn-disabled{
+						background:#CCC
+					}
+				}
+			}
+			.icon{
+				display: block;
+				width: 24px;
+				height: 40px;
+				margin-right: 20px;
+				background: url(../img/phone-icon.png)no-repeat;
+				background-size: 100% 100%;
+				&.code-icon{
+					width: 30px;
+					height: 22px;
+					background: url(../img/rand-code-icon.png)no-repeat;
+					background-size: 100% 100%;
+				}
+			}
+			.btn-comfirm{
+				margin-top: .3rem;
+				border-top: 1px solid #b9b9b9;
+				background-color: #f6f6f6;
+				color:black;
+				padding: 35px;
+				font-size: 34px;
+				text-align: center;
+			}
+		}
+	}
 	.app-list-wrap {
 		padding: .2rem .2rem .68rem;
 		.contain {
