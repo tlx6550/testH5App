@@ -79,7 +79,7 @@ import '../js/mmapp.js'; */
     }
    
 
-
+    // 验证码逻辑
     !function getCode(){
         var $getCode = $('#J_GetCode');
 
@@ -114,6 +114,22 @@ import '../js/mmapp.js'; */
             YDUI.dialog.toast('确定', 1500);
         })
     }();
+
+
+
+
+    //抽奖逻辑
+    function(type){
+        switch (type) {
+            case 1:
+            //没有机会抽奖
+                $('.gua-jiang').find('.info-text ').
+                break;
+        
+            default:
+                break;
+        }
+    }
 }(window);
 
 
