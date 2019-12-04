@@ -16,17 +16,9 @@ import '../js/mmapp.js'; */
     /* 普通确认框 */
     var dialog = window.YDUI.dialog;
     // 弹窗背景表情变化，title传‘sad’是未中奖表情，传good或者不传是高兴表情
-    dialog.confirm('good', '恭喜您，获得<span class="look-me">爱奇艺月卡</span><br><span class="sad-text">去首页看看更多精彩内容吧～</span>', [
-        {
-            txt: '回首页',
-            color: false, /* false:黑色  true:绿色 或 使用颜色值 */
-            callback: function () {
-                dialog.toast('你点了取消', 'none', 1000);
-            }
-        },
+    dialog.confirm('温馨提示', '活动已结束，感谢您的关注~', [
         {
             txt: '确定',
-            color: false, /* false:黑色  true:绿色 或 使用颜色值 */
             callback: function () {
                 dialog.toast('你点了取消', 'none', 1000);
             }

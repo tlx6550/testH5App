@@ -426,6 +426,7 @@ import $ from '../../assets/js/jquery.min.js';
             '<div class="mask-black-dialog" id="' + ID + '">' +
             '   <div class="m-confirm">' +
             '       <div class="confirm-hd">' +
+            '       <i class="close-btn"></i>' +
             '<strong class="confirm-title">' + title + '</strong></div>' +
             '       <div class="confirm-bd">' + mes + '</div>' +
             '   </div>' +
