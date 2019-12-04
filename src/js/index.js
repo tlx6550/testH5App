@@ -11,8 +11,8 @@ import LotteryCard from '../assets/js/card.js';
 
 /* import '../js/mmdl.js';
 import '../js/mmapp.js'; */
- /* 普通确认框 */
- var dialog = window.YDUI.dialog;
+/* 普通确认框 */
+var dialog = window.YDUI.dialog;
 !function (window) {
     window.onload = function(){
         $('.gua-jiang').find('.result-text').show();
@@ -84,7 +84,9 @@ import '../js/mmapp.js'; */
             resetStr: '重新获取验证码'
         });
         $getCode.on('click', function () {
-        /* ajax 成功发送验证码后调用【start】 */
+            checkInputPhone();
+            if(!checkPhone)return;
+            /* ajax 成功发送验证码后调用【start】 */
             YDUI.dialog.loading.open('发送中');
             setTimeout(function(){
             
@@ -102,20 +104,26 @@ import '../js/mmapp.js'; */
             //     $('.get-phone-wrap').show();
             // },1500);
         });
-        $('.btn-comfirm').click(function(){
-         
+        var checkPhone = false;
+        function checkInputPhone(){
             var phone =  $('.get-phone-wrap').find('input[name="phone"]').val();
             if(phone.length===0){
                 dialog.toast('请输入手机号码', 'none', 1000);
-                return false;
+                checkPhone = false;
+                return;
             } 
             if(phone.length>0){
                 var myreg=/^[1][3,4,5,7,8,9][0-9]{9}$/;
                 if (!myreg.test(phone)){
                     dialog.toast('请输入正确的手机号码', 'none', 1000);
-                    return false;
+                    checkPhone = false;
+                    return;
                 }
             }
+        }
+        $('.btn-comfirm').click(function(){
+         
+            
             $('.get-phone-wrap').hide();   
             YDUI.dialog.toast('确定', 1500);
         });
