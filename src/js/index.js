@@ -19,6 +19,14 @@ var dialog = window.YDUI.dialog;
     };
    
 
+    dialog.confirm('温馨提示', '爱的发声的发生大的风水电费',[{
+        txt:'确定',
+        callback:function(){
+            alert(1)
+        }
+    }]);
+
+
     // 其它浏览器分享
     // dialog.shareOnWeb('', 
     // '<div class="share-on-web"><span>1.微信不支持此操作,<span class="look">请点击右上角按钮;</span></span></div>'+
