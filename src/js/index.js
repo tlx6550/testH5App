@@ -39,34 +39,34 @@ import '../js/mmapp.js'; */
     //          }
     //
     //      ]);
-//一般场景打开提示
-    dialog.confirm('温馨提示', '您（13722200947）的订购申请已受理，成功受理以10086短信为准。', [
-        {
-            txt: '去MM应用商场 ',
-            callback: function () {
-                $('#YDUI_CONFRIM').remove();
-            }
-        },
-        {
-            txt: '关闭',
-            callback: function () {
-                $('#YDUI_CONFRIM').remove();
-            }
-        }
-    ]);
-//微信打开提示
-// !function popOnWeixin(){
-//         dialog.shareOnWeb('',
-//             '<div class="share-on-web"><span class="down-text">浏览器打开即可免流下载～</span></div>' +
-// 	        '<div class="share-on-web"><span>请点击右上角按钮</span></div>' +
-// 	        '<div class="share-on-web"><span>选择</span><span class="look-me">【在浏览器中打开】</span>' +
-// 	        '</div>',
-// 	        []);
-// 	}();
-//安卓打开提示
-// !function popOnAndroid(){
-//     dialog.popOnAndroid('','', []);
-// }();
+    // 一般场景打开提示
+    // dialog.confirm('温馨提示', '您（13722200947）的订购申请已受理，成功受理以10086短信为准。', [
+    //     {
+    //         txt: '去MM应用商场 ',
+    //         callback: function () {
+    //             $('#YDUI_CONFRIM').remove();
+    //         }
+    //     },
+    //     {
+    //         txt: '关闭',
+    //         callback: function () {
+    //             $('#YDUI_CONFRIM').remove();
+    //         }
+    //     }
+    // ]);
+    // 微信打开提示
+    // !function popOnWeixin(){
+    //     dialog.shareOnWeb('',
+    //         '<div class="share-on-web"><span class="down-text">浏览器打开即可免流下载～</span></div>' +
+	//         '<div class="share-on-web"><span>请点击右上角按钮</span></div>' +
+	//         '<div class="share-on-web"><span>选择</span><span class="look-me">【在浏览器中打开】</span>' +
+	//         '</div>',
+	//         []);
+    // }();
+    // 安卓打开提示
+    // !function popOnAndroid(){
+    //     dialog.popOnAndroid('','', []);
+    // }();
     $('.mflq-btn').click(function () {
         dialog.confirm('抱歉，订购失败', '抱歉，因网络原因<br/>您本次订购出现错误，请重新领取。', [
             {
@@ -132,6 +132,31 @@ import '../js/mmapp.js'; */
     //     })
 
     // }()
+
+
+    // function downurl(){
+    //     if(userAgent.ios){
+    //         dialog.popOnAndroid('','', []);
+    //         return;
+    //     } else {
+    //         if(userAgent.weixin || userAgent.qq) { // 如果是在微信或者qq内
+    //             dialog.shareOnWeb('',
+    //                 '<div class="share-on-web"><span class="down-text">浏览器打开即可免流下载～</span></div>' +
+    //             '<div class="share-on-web"><span>请点击右上角按钮</span></div>' +
+    //             '<div class="share-on-web"><span>选择</span><span class="look-me">【在浏览器中打开】</span>' +
+    //             '</div>',
+    //                 []);
+    //             return;
+    //         }else{
+    //             lib.open({
+    //                 callback: function callback() {
+    //                     window.location.href = 'http://apk.fr18.mmarket.com/cdn/mmapk/20191128/MM_online_hd.apk?cid=300000863435&gid=000x14363101377100000572388300000863435&MD5=792ba1d0dd1b9a7dc9d842c35e91dec1&PID=2370638&ts=201912051029&tk=D2D8&v=1';
+    //                 }
+    //             });
+    //         }
+            
+    //     }
+    // }
 
 
 }(window);
