@@ -19,12 +19,12 @@ var dialog = window.YDUI.dialog;
     };
    
 
-    dialog.confirm('温馨提示', '爱的发声的发生大的风水电费',[{
-        txt:'确定',
-        callback:function(){
-            alert(1)
-        }
-    }]);
+//  dialog.confirm('温馨提示', '爱的发声的发生大的风水电费',[{
+//      txt:'确定',
+//      callback:function(){
+//          alert(1)
+//      }
+//  }]);
 
 
     // 其它浏览器分享
