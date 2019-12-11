@@ -230,13 +230,14 @@ window.onload = function () {
         timeGap:{},// 距离活动时间开始集合
         timeEndGap:{}// 距离活动结束时间集合
     };
+    var now = 6
     KillGoods.prototype.init = function(){
         var speed = this.options.speed;
         var that = this;
         // 判断当前日期是否是周六
         var dayjs = this.getDate();
         var today = dayjs.weekDay;
-        if(today!==6){
+        if(today!==now){
             this.todayTimer = false;
             that.isNotTody(today);
         }
@@ -244,7 +245,7 @@ window.onload = function () {
         that.todayTimer = setInterval(function(){
             var dayjs = that.getDate();
             var today = dayjs.weekDay;
-            if(today!==6){
+            if(today!==now){
                 return;
             }else{
                 that.initPage();
@@ -309,8 +310,10 @@ window.onload = function () {
         var end = new Date(sBeginDate);
         var obj = this.caculate(end,now);
         var seconds = obj.seconds;
+	    var mins = obj.minutes
+	    var hours = obj.hours
         this.timeGap = obj;
-        if(seconds===0){
+       if(seconds===0 && mins===0 && hours===0){
             this.options.tagNow = true;
             this.options.tagBefore = false;
             this.options.tagAfter = false;
@@ -509,15 +512,15 @@ window.onload = function () {
         if(hour>=min && hour<=max) flag = true;
         return flag;
     }
-    setInterval(function(){
-        var tag = bettewBTime(0,6);
-        if(tag){
-            // your fun
-            console.log(tag);
-        }else{
-            console.log(tag);
-        }
-    },1000);
+//  setInterval(function(){
+//      var tag = bettewBTime(0,6);
+//      if(tag){
+//          // your fun
+//          console.log(tag);
+//      }else{
+//          console.log(tag);
+//      }
+//  },1000);
 
 
     var swiper = new Swiper('.swiper-container', {
